@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jxnn. | Rates & Packages</title>
     
-    <link rel="icon" type="image/png" href="https://i.ibb.co/XZKLXwGD/Screenshot-2026-06-15-at-03-08-31.png">
-    <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/XZKLXwGD/Screenshot-2026-06-15-at-03-08-31.png">
+    <link rel="icon" type="image/png" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f3ac.png">
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -21,7 +20,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Anti-White Border Canvas Fix */
         html {
             background-color: #0a0a0a;
         }
@@ -47,7 +45,7 @@
         }
 
         .rate-container {
-            max-width: 650px;
+            max-width: 700px;
             width: 100%;
             background: rgba(24, 24, 24, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -55,7 +53,6 @@
             -webkit-backdrop-filter: blur(12px);
             border-radius: 24px;
             padding: 40px;
-            text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             margin-bottom: 30px;
         }
@@ -64,7 +61,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding-bottom: 20px;
         }
@@ -91,14 +88,69 @@
             letter-spacing: -0.5px;
         }
 
-        /* 🖼️ Rate Sheet Image Styling */
-        .rate-sheet-media {
+        /* 📊 Premium Pricing Table Layout */
+        .pricing-table-wrapper {
             width: 100%;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            overflow-x: auto;
             margin-bottom: 35px;
-            display: block;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+            background: rgba(15, 15, 15, 0.6);
+        }
+
+        th, td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            color: #ef4444;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        /* Badge Pills for Categories */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-shorts { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+        .badge-yt { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+        .badge-thumb { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); }
+
+        .channel-size {
+            font-weight: 600;
+            color: #e5e7eb;
+        }
+
+        .price-value {
+            font-weight: 700;
+            color: white;
+            font-variant-numeric: tabular-nums;
         }
 
         /* Action Order Button */
@@ -144,10 +196,84 @@
             <h1>Pricing & Packages</h1>
         </div>
 
-        <img src="https://i.ibb.co/XZKLXwGD/Screenshot-2026-06-15-at-03-08-31.png" alt="jxnn Pricing Layout Sheet" class="rate-sheet-media">
+        <div class="pricing-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Channel Size</th>
+                        <th>Content Type</th>
+                        <th>Suggested Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="channel-size">Small (0-10k)</td>
+                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
+                        <td class="price-value">£5 - £15 <span style="font-size:0.8rem; color:#777;">/ vid</span></td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Medium (10k-100k)</td>
+                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
+                        <td class="price-value">£25 - £75 <span style="font-size:0.8rem; color:#777;">/ vid</span></td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Large (100k-500k)</td>
+                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
+                        <td class="price-value">£150 - £400 <span style="font-size:0.8rem; color:#777;">/ vid</span></td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Huge (500k+)</td>
+                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
+                        <td class="price-value">£400 - £1000+</td>
+                    </tr>
 
-        <a class="order-button sound-trigger" href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank">
-            <i class="fa-solid fa-bolt"></i> Order via Discord Ticket
+                    <tr>
+                        <td class="channel-size">Small (0-10k)</td>
+                        <td><span class="badge badge-yt">YouTube Videos</span></td>
+                        <td class="price-value">£50 - £100</td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Medium (10k-100k)</td>
+                        <td><span class="badge badge-yt">YouTube Videos</span></td>
+                        <td class="price-value">£100 - £300</td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Large (100k-500k)</td>
+                        <td><span class="badge badge-yt">YouTube Videos</span></td>
+                        <td class="price-value">£300 - £800</td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Huge (500k+)</td>
+                        <td><span class="badge badge-yt">YouTube Videos</span></td>
+                        <td class="price-value">£800 - £2000+</td>
+                    </tr>
+
+                    <tr>
+                        <td class="channel-size">Small (0-10k)</td>
+                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
+                        <td class="price-value">£10 - £20</td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Medium (10k-100k)</td>
+                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
+                        <td class="price-value">£20 - £40</td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Large (100k-500k)</td>
+                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
+                        <td class="price-value">£40 - £75</td>
+                    </tr>
+                    <tr>
+                        <td class="channel-size">Huge (500k+)</td>
+                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
+                        <td class="price-value">£75 - £150</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a class="order-button sound-trigger" href="https://discord.gg/qgJNMFy3F6" target="_blank">
+            <i class="fa-solid fa-bolt"></i> Open a Ticket to Order
         </a>
     </div>
 
@@ -163,14 +289,11 @@
             element.addEventListener('click', () => {
                 try {
                     clickSound.currentTime = 0;
-                    clickSound.play().catch(err => console.log("Audio waiting for user gesture context."));
-                } catch(e) {
-                    console.log("Audio skipped smoothly:", e);
-                }
+                    clickSound.play().catch(err => console.log("Audio system loaded."));
+                } catch(e) {}
             });
         });
 
-        // Background Scroll Tracking Alignment
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
