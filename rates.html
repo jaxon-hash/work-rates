@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jxnn. | Rates & Packages</title>
     
-    <link rel="icon" type="image/png" href="https://ibb.co/whTpPFMq/favicon.png">
-    <link rel="shortcut icon" type="image/png" href="https://ibb.co/whTpPFMq/favicon.png">
+    <link rel="icon" type="image/png" href="https://replug.link/bf4791d9">
+    <link rel="shortcut icon" type="image/png" href="https://replug.link/bf4791d9">
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -38,6 +38,7 @@
             overflow-x: hidden;
             animation: breatheBackground 12s ease-in-out infinite alternate;
             transition: background-position 0.2s ease-out;
+            position: relative;
         }
 
         @keyframes breatheBackground {
@@ -45,142 +46,185 @@
             100% { background-size: 100% 220%; }
         }
 
-        .rate-container {
-            max-width: 700px;
+        /* Smooth Cinematic On-Load Presentation Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Particle System Styles --- */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -20px;
+            background: rgba(239, 68, 68, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            animation: floatUp var(--speed) linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: var(--opacity); }
+            90% { opacity: var(--opacity); }
+            100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+        }
+
+        .header-card, .rate-card, .back-btn-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Title Block Card */
+        .header-card {
+            max-width: 550px;
             width: 100%;
             background: rgba(24, 24, 24, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 24px;
-            padding: 40px;
+            padding: 30px;
+            text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .header-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 35px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 20px;
-        }
-
-        .back-link {
-            color: #b5b5b5;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .back-link:hover {
-            color: #ef4444;
-            transform: translateX(-2px);
-        }
-
-        h1 {
-            font-size: 1.8rem;
+        .header-card h1 {
+            font-size: 2.2rem;
             font-weight: 700;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
-        /* 📊 Premium Pricing Table Layout */
-        .pricing-table-wrapper {
+        .header-card p {
+            color: #b5b5b5;
+            font-size: 1rem;
+        }
+
+        /* Rates Catalog List Cards */
+        .rate-card {
+            max-width: 550px;
             width: 100%;
-            overflow-x: auto;
-            margin-bottom: 35px;
-            border-radius: 14px;
+            background: rgba(24, 24, 24, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-            background: rgba(15, 15, 15, 0.6);
+        .rate-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        th, td {
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        th {
-            background: rgba(255, 255, 255, 0.03);
-            color: #ef4444;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        tr:last-child td {
+        .rate-row:last-child {
+            padding-bottom: 0;
             border-bottom: none;
         }
 
-        tr:hover td {
-            background: rgba(239, 68, 68, 0.02);
+        .rate-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        /* Badge Pills for Categories */
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge-shorts { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
-        .badge-yt { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
-        .badge-thumb { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); }
-
-        .channel-size {
+        .rate-title {
             font-weight: 600;
-            color: #e5e7eb;
+            font-size: 1.15rem;
+            color: #ffffff;
         }
 
-        .price-value {
+        .rate-desc {
+            font-size: 0.9rem;
+            color: #8a8a8a;
+        }
+
+        .rate-price {
             font-weight: 700;
-            color: white;
-            font-variant-numeric: tabular-nums;
+            font-size: 1.3rem;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 6px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            white-space: nowrap;
         }
 
-        /* Action Order Button */
-        .order-button {
+        /* Back Navigation Area */
+        .back-btn-container {
+            max-width: 550px;
+            width: 100%;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .back-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
             text-decoration: none;
-            background: white;
-            color: black;
-            padding: 18px;
+            background: transparent;
+            color: white;
+            padding: 16px;
             border-radius: 14px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            border: 1px solid #3a3a3a;
             cursor: pointer;
-            border: none;
+            transition: transform 0.2s, background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
 
-        .order-button:hover {
+        .back-button:hover {
             transform: translateY(-2px);
-            opacity: 0.95;
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.7), 0 0 10px rgba(239, 68, 68, 0.4);
+            background: rgba(239, 68, 68, 0.08);
+            border-color: #ef4444;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6), 0 0 10px rgba(239, 68, 68, 0.3);
         }
 
         footer {
-            margin-top: 10px;
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .footer-benefits {
+            color: #7a7a7a;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-copyright {
             color: #555;
             font-size: 0.8rem;
             letter-spacing: 0.5px;
@@ -189,98 +233,59 @@
 </head>
 <body>
 
-    <div class="rate-container">
-        <div class="header-row">
-            <a href="index.html" class="back-link sound-trigger">
-                <i class="fa-solid fa-arrow-left"></i> Back to Main
-            </a>
-            <h1>Pricing & Packages</h1>
-        </div>
+    <div class="particle-container" id="particleContainer"></div>
 
-        <div class="pricing-table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Channel Size</th>
-                        <th>Content Type</th>
-                        <th>Suggested Rate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="channel-size">Small (0-10k)</td>
-                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
-                        <td class="price-value">£5 - £15 <span style="font-size:0.8rem; color:#777;">/ vid</span></td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Medium (10k-100k)</td>
-                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
-                        <td class="price-value">£25 - £75 <span style="font-size:0.8rem; color:#777;">/ vid</span></td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Large (100k-500k)</td>
-                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
-                        <td class="price-value">£150 - £400 <span style="font-size:0.8rem; color:#777;">/ vid</span></td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Huge (500k+)</td>
-                        <td><span class="badge badge-shorts">Tiktok/Shorts</span></td>
-                        <td class="price-value">£400 - £1000+</td>
-                    </tr>
-
-                    <tr>
-                        <td class="channel-size">Small (0-10k)</td>
-                        <td><span class="badge badge-yt">YouTube Videos</span></td>
-                        <td class="price-value">£50 - £100</td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Medium (10k-100k)</td>
-                        <td><span class="badge badge-yt">YouTube Videos</span></td>
-                        <td class="price-value">£100 - £300</td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Large (100k-500k)</td>
-                        <td><span class="badge badge-yt">YouTube Videos</span></td>
-                        <td class="price-value">£300 - £800</td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Huge (500k+)</td>
-                        <td><span class="badge badge-yt">YouTube Videos</span></td>
-                        <td class="price-value">£800 - £2000+</td>
-                    </tr>
-
-                    <tr>
-                        <td class="channel-size">Small (0-10k)</td>
-                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
-                        <td class="price-value">£10 - £20</td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Medium (10k-100k)</td>
-                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
-                        <td class="price-value">£20 - £40</td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Large (100k-500k)</td>
-                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
-                        <td class="price-value">£40 - £75</td>
-                    </tr>
-                    <tr>
-                        <td class="channel-size">Huge (500k+)</td>
-                        <td><span class="badge badge-thumb">Thumbnail Design</span></td>
-                        <td class="price-value">£75 - £150</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <a class="order-button sound-trigger" href="https://discord.gg/qgJNMFy3F6" target="_blank">
-            <i class="fa-solid fa-bolt"></i> Open a Ticket to Order
-        </a>
+    <div class="header-card">
+        <h1>Editing Rates</h1>
+        <p>Fair pricing scaled to your content volume and editing complexity.</p>
     </div>
 
-    <footer>
-        <div>© 2026 jxnn. All rights reserved.</div>
-    </footer>
+    <div class="rate-card">
+        <div class="rate-row">
+            <div class="rate-info">
+                <span class="rate-title">Shorts / TikToks / Reels</span>
+                <span class="rate-desc">Subtitles, sound design, hooks & dynamic pacing.</span>
+            </div>
+            <div class="rate-price">£15 - £30</div>
+        </div>
+
+        <div class="rate-row">
+            <div class="rate-info">
+                <span class="rate-title">Standard YouTube Video</span>
+                <span class="rate-desc">Up to 10-15 mins runtime. Clean cuts, B-Roll, basic graphics.</span>
+            </div>
+            <div class="rate-price">£100 - £150</div>
+        </div>
+
+        <div class="rate-row">
+            <div class="rate-info">
+                <span class="rate-title">Highly Edited / Cinematic Video</span>
+                <span class="rate-desc">Heavy visual effects, advanced audio mixing, story structure.</span>
+            </div>
+            <div class="rate-price">£200+</div>
+        </div>
+
+        <div class="rate-row">
+            <div class="rate-info">
+                <span class="rate-title">Monthly Retainer Deal</span>
+                <span class="rate-desc">Bulk monthly package (e.g. 4 long-form + 10 shorts).</span>
+            </div>
+            <div class="rate-price">Custom Quote</div>
+        </div>
+    </div>
+
+    <div class="back-to-top" id="backToTop" style="display:none;"></div>
+
+    <div class="back-btn-container">
+        <a class="back-button sound-trigger" href="index.html">
+            <i class="fa-solid fa-arrow-left"></i> Back to Hub Portfolio
+        </a>
+        
+        <footer>
+            <div class="footer-benefits">Fast turnaround • Quality edits • Reliable communication</div>
+            <div class="footer-copyright">© 2026 jxnn. All rights reserved.</div>
+        </footer>
+    </div>
 
     <script>
         const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
@@ -290,15 +295,49 @@
             element.addEventListener('click', () => {
                 try {
                     clickSound.currentTime = 0;
-                    clickSound.play().catch(err => console.log("Audio system loaded."));
-                } catch(e) {}
+                    clickSound.play().catch(err => console.log("Audio awaiting gesture trigger."));
+                } catch(e) {
+                    console.log("Audio asset bypassed cleanly:", e);
+                }
             });
         });
 
+        // Background Scroll Tracking Engine
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
         });
+
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            if (!container) return;
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 12;
+                const speed = Math.random() * 8 + 6;
+                const drift = (Math.random() * 60) - 30;
+                const opacity = Math.random() * 0.5 + 0.2;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                
+                particle.style.setProperty('--speed', `${speed}s`);
+                particle.style.setProperty('--drift', `${drift}px`);
+                particle.style.setProperty('--opacity', opacity);
+                particle.style.animationDelay = `${delay}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
     </script>
 </body>
 </html>
