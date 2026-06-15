@@ -46,6 +46,18 @@
             100% { background-size: 100% 220%; }
         }
 
+        /* ✨ Smooth Cinematic On-Load Presentation Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* --- Particle System Styles --- */
         .particle-container {
             position: fixed;
@@ -96,6 +108,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         /* Status Indicator Pill Badge */
@@ -203,6 +216,7 @@
             padding: 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             margin-bottom: 25px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .video-wrapper {
@@ -212,6 +226,7 @@
             overflow: hidden;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
 
         .video-wrapper iframe {
@@ -234,6 +249,7 @@
             padding: 35px 30px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .portfolio-section h2 {
@@ -414,7 +430,7 @@
             </a>
 
             <a class="client-item sound-trigger" href="https://www.youtube.com/@BetaSquad" target="_blank">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-m0W7Hj2071gO091E-nI2hshq27H79_wGA&s" alt="Beta Squad" class="client-avatar">
+                <img src="https://lh3.googleusercontent.com/fife/ALs6j_EkWqE9_N4l6zXQ8-Plo-6R9f8_A" alt="Beta Squad" class="client-avatar">
                 <span>Beta Squad</span>
             </a>
         </div>
