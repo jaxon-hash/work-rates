@@ -4,1317 +4,617 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jxnn. | Professional Video Editor Portfolio</title>
-
+    
+    <link rel="preload" as="image" href="pfp.jpg">
+    
     <link rel="icon" type="image/png" href="https://replug.link/f76fb3d4">
     <link rel="shortcut icon" type="image/png" href="https://replug.link/f76fb3d4">
 
-    <meta name="description" content="Professional Video Editor specialising in high-retention YouTube videos, Shorts and TikTok content.">
+    <meta name="description" content="Professional Video Editor specializing in high-retention TikToks, Shorts, Reels, and cinematic YouTube videos. Let's make your content go viral.">
     <meta property="og:title" content="jxnn. | Portfolio Hub">
-    <meta property="og:description" content="Check out my showreel, trusted clients, and editing packages.">
+    <meta property="og:description" content="Check out my showreel, client catalog, and editing packages. Open a ticket to secure a slot.">
     <meta property="og:image" content="https://replug.link/f76fb3d4">
     <meta property="og:url" content="https://jxnn.store">
     <meta property="og:type" content="website">
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="jxnn. | Portfolio Hub">
-    <meta name="twitter:description" content="Professional video editor.">
+    <meta name="twitter:description" content="Check out my showreel, client catalog, and editing packages.">
     <meta name="twitter:image" content="https://replug.link/f76fb3d4">
-
     <meta name="theme-color" content="#ef4444">
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<style>
-/* ==========================
-   RESET
-========================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    scroll-behavior:smooth;
-}
-
-/* ==========================
-   SELECTION
-========================== */
-
-::selection{
-    background:#ef4444;
-    color:#fff;
-}
-
-::-moz-selection{
-    background:#ef4444;
-    color:#fff;
-}
-
-/* ==========================
-   SCROLLBAR
-========================== */
-
-::-webkit-scrollbar{
-    width:8px;
-}
-
-::-webkit-scrollbar-track{
-    background:#0a0a0a;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#222;
-    border-radius:20px;
-    border:2px solid #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#ef4444;
-}
-
-/* ==========================
-   BODY
-========================== */
-
-html{
-    background:#0a0a0a;
-}
-
-body{
-    background:
-    linear-gradient(
-        180deg,
-        #0a0a0a 0%,
-        #150505 50%,
-        #300505 100%
-    );
-
-    background-size:100% 200%;
-    background-position:var(--scroll-pos,0% 0%);
-
-    color:white;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    min-height:100vh;
-
-    padding:40px 20px;
-
-    overflow-x:hidden;
-
-    animation:breatheBackground 12s ease-in-out infinite alternate;
-
-    transition:background-position .2s ease-out;
-
-    position:relative;
-}
-
-body.reduce-motion *{
-    animation:none !important;
-    transition:none !important;
-}
-
-@keyframes breatheBackground{
-    0%{
-        background-size:100% 180%;
-    }
-
-    100%{
-        background-size:100% 220%;
-    }
-}
-
-@keyframes fadeInUp{
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* ==========================
-   PARTICLES
-========================== */
-
-.particle-container{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:0;
-}
-
-.particle{
-    position:absolute;
-
-    bottom:-20px;
-
-    border-radius:50%;
-
-    background:rgba(239,68,68,.4);
-
-    box-shadow:0 0 10px rgba(239,68,68,.3);
-
-    animation:floatUp var(--speed) linear infinite;
-
-    will-change:transform,opacity;
-}
-
-@keyframes floatUp{
-    0%{
-        transform:translateY(0) translateX(0);
-        opacity:0;
-    }
-
-    10%{
-        opacity:var(--opacity);
-    }
-
-    90%{
-        opacity:var(--opacity);
-    }
-
-    100%{
-        transform:
-            translateY(-110vh)
-            translateX(var(--drift));
-
-        opacity:0;
-    }
-}
-
-/* ==========================
-   SETTINGS BUTTON
-========================== */
-
-.settings-btn{
-    position:fixed;
-    bottom:25px;
-    left:25px;
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(24,24,24,.85);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    color:#b5b5b5;
-
-    cursor:pointer;
-
-    z-index:15;
-
-    transition:transform .2s, color .2s, border-color .2s, box-shadow .2s;
-
-    font-size:1.2rem;
-}
-
-.settings-btn:hover{
-    color:#ef4444;
-    border-color:#ef4444;
-    box-shadow:0 0 15px rgba(239,68,68,.4);
-    transform:translateY(-3px);
-}
-
-/* Settings Modal */
-
-.settings-modal{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.7);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:200;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:opacity .3s, visibility .3s;
-}
-
-.settings-modal.active{
-    opacity:1;
-    visibility:visible;
-}
-
-.settings-panel{
-    background:rgba(24,24,24,.95);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border-radius:24px;
-
-    padding:40px;
-
-    max-width:400px;
-
-    width:90%;
-
-    box-shadow:0 20px 60px rgba(0,0,0,.8);
-
-    animation:slideUp .3s cubic-bezier(.16,1,.3,1) forwards;
-}
-
-@keyframes slideUp{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.settings-panel h2{
-    font-size:1.5rem;
-    font-weight:700;
-    margin-bottom:25px;
-    color:white;
-}
-
-.settings-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:18px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.05);
-}
-
-.settings-item:last-child{
-    border-bottom:none;
-}
-
-.settings-label{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-}
-
-.settings-label .label-text{
-    color:white;
-    font-weight:600;
-    font-size:1rem;
-}
-
-.settings-label .label-desc{
-    color:#8f8f8f;
-    font-size:.85rem;
-}
-
-/* Toggle Switch */
-
-.toggle-switch{
-    position:relative;
-    width:50px;
-    height:28px;
-    background:#3a3a3a;
-    border-radius:30px;
-    cursor:pointer;
-    border:none;
-    padding:0;
-    transition:background .3s;
-}
-
-.toggle-switch.active{
-    background:#4ade80;
-}
-
-.toggle-switch::after{
-    content:'';
-    position:absolute;
-    top:2px;
-    left:2px;
-    width:24px;
-    height:24px;
-    background:white;
-    border-radius:50%;
-    transition:left .3s;
-}
-
-.toggle-switch.active::after{
-    left:24px;
-}
-
-.close-settings{
-    margin-top:30px;
-
-    width:100%;
-
-    padding:12px;
-
-    background:rgba(239,68,68,.1);
-
-    border:1px solid rgba(239,68,68,.2);
-
-    color:#f87171;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:.2s;
-}
-
-.close-settings:hover{
-    background:rgba(239,68,68,.15);
-    border-color:#ef4444;
-}
-
-/* ==========================
-   CARDS
-========================== */
-
-.card,
-.video-section,
-.portfolio-section{
-    position:relative;
-    z-index:1;
-}
-
-.card{
-    max-width:450px;
-    width:100%;
-
-    background:rgba(24,24,24,.75);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:24px;
-
-    padding:40px;
-
-    text-align:center;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.5);
-
-    margin-bottom:25px;
-
-    animation:fadeInUp .6s cubic-bezier(.16,1,.3,1) forwards;
-}
-
-/* ==========================
-   PROFILE IMAGE
-========================== */
-
-.profile-pic{
-    width:120px;
-    height:120px;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    margin-bottom:25px;
-
-    border:3px solid rgba(239,68,68,.35);
-
-    box-shadow:
-        0 0 20px rgba(239,68,68,.4),
-        0 0 40px rgba(239,68,68,.25);
-
-    transition:transform .25s ease;
-}
-
-.profile-pic:hover{
-    transform:scale(1.04);
-}
-
-/* ==========================
-   STATUS
-========================== */
-
-.status-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    background:rgba(34,197,94,.1);
-
-    border:1px solid rgba(34,197,94,.2);
-
-    color:#4ade80;
-
-    font-size:.8rem;
-    font-weight:600;
-
-    letter-spacing:.5px;
-
-    text-transform:uppercase;
-
-    margin-bottom:20px;
-}
-
-.status-dot{
-    width:8px;
-    height:8px;
-
-    background:#22c55e;
-
-    border-radius:50%;
-
-    box-shadow:0 0 10px #22c55e;
-
-    animation:pulseDot 2s infinite;
-}
-
-@keyframes pulseDot{
-    0%{
-        transform:scale(.95);
-        box-shadow:0 0 0 0 rgba(34,197,94,.7);
-    }
-
-    70%{
-        transform:scale(1);
-        box-shadow:0 0 0 6px rgba(34,197,94,0);
-    }
-
-    100%{
-        transform:scale(.95);
-        box-shadow:0 0 0 0 rgba(34,197,94,0);
-    }
-}
-
-/* ==========================
-   TYPOGRAPHY
-========================== */
-
-h1{
-    font-size:2.5rem;
-    font-weight:700;
-
-    letter-spacing:-0.5px;
-
-    margin-bottom:12px;
-}
-
-.tagline{
-    color:#ffffff;
-
-    font-size:1.1rem;
-
-    font-weight:500;
-
-    margin-bottom:18px;
-
-    line-height:1.6;
-}
-
-p{
-    color:#b5b5b5;
-
-    font-size:1.05rem;
-
-    line-height:1.7;
-
-    margin-bottom:30px;
-}
-
-/* ==========================
-   BUTTONS
-========================== */
-
-.button{
-    width:100%;
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-
-    padding:16px;
-
-    text-decoration:none;
-
-    border-radius:14px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    margin-bottom:15px;
-
-    border:1px solid transparent;
-
-    background:white;
-    color:black;
-
-    transition:
-        transform .2s,
-        opacity .2s,
-        border-color .2s,
-        background-color .2s,
-        box-shadow .2s;
-}
-
-.button:hover{
-    transform:translateY(-2px);
-
-    opacity:.95;
-
-    box-shadow:
-        0 0 25px rgba(239,68,68,.7),
-        0 0 10px rgba(239,68,68,.4);
-}
-
-.secondary{
-    background:transparent;
-
-    color:white;
-
-    border:1px solid #3a3a3a;
-}
-
-.secondary:hover{
-    background:rgba(239,68,68,.08);
-
-    border-color:#ef4444;
-
-    box-shadow:
-        0 0 25px rgba(239,68,68,.6),
-        0 0 10px rgba(239,68,68,.3);
-}
-
-.small-note{
-    color:#8f8f8f;
-
-    font-size:.85rem;
-
-    margin-top:-4px;
-    margin-bottom:20px;
-}
-
-.social-row{
-    display:flex;
-    gap:15px;
-    width:100%;
-}
-
-.social-row .button{
-    flex:1;
-}
-
-/* ==========================
-   VIDEO SECTION
-========================== */
-
-.video-section{
-    max-width:450px;
-    width:100%;
-
-    background:rgba(24,24,24,.6);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:24px;
-
-    padding:25px;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.4);
-
-    margin-bottom:25px;
-
-    animation:fadeInUp .8s cubic-bezier(.16,1,.3,1) forwards;
-}
-
-.video-wrapper{
-    position:relative;
-
-    padding-bottom:56.25%;
-
-    height:0;
-
-    overflow:hidden;
-
-    border-radius:14px;
-
-    border:1px solid rgba(255,255,255,.05);
-}
-
-.video-wrapper iframe{
-    position:absolute;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-}
-
-/* ==========================
-   TRUSTED BY
-========================== */
-
-.portfolio-section{
-    max-width:450px;
-    width:100%;
-
-    background:rgba(24,24,24,.6);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:24px;
-
-    padding:35px 30px;
-
-    text-align:center;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.4);
-
-    animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
-}
-
-.portfolio-section h2{
-    font-size:1.1rem;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    margin-bottom:25px;
-
-    color:#e5e7eb;
-}
-
-/* Featured Client */
-
-.featured-client{
-    display:flex;
-    align-items:center;
-    gap:16px;
-
-    text-decoration:none;
-
-    color:white;
-
-    background:rgba(239,68,68,.08);
-
-    border:1px solid rgba(239,68,68,.25);
-
-    border-radius:18px;
-
-    padding:20px;
-
-    margin-bottom:20px;
-
-    transition:.25s;
-}
-
-.featured-client:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 0 25px rgba(239,68,68,.4);
-}
-
-.featured-client img{
-    width:60px;
-    height:60px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-}
-
-.featured-client-text{
-    text-align:left;
-}
-
-.featured-client-text small{
-    color:#9ca3af;
-}
-
-/* Other Clients */
-
-.client-grid{
-    display:grid;
-    gap:15px;
-}
-
-.client-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    padding:14px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    color:#d1d5db;
-
-    background:rgba(255,255,255,.03);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    transition:.25s;
-}
-
-.client-item:hover{
-    transform:translateY(-2px);
-
-    border-color:#ef4444;
-
-    box-shadow:
-        0 0 20px rgba(239,68,68,.3);
-}
-
-.client-avatar{
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-}
-
-/* Footer CTA */
-
-.cta-footer{
-    margin-top:30px;
-
-    color:#d1d5db;
-
-    line-height:1.7;
-}
-
-footer{
-    margin-top:30px;
-
-    text-align:center;
-}
-
-.footer-copyright{
-    color:#666;
-
-    font-size:.85rem;
-
-    margin-top:10px;
-}
-
-/* Toast */
-
-.toast-alert{
-    position:fixed;
-
-    bottom:30px;
-    left:50%;
-
-    transform:translateX(-50%) translateY(100px);
-
-    background:#ef4444;
-
-    color:white;
-
-    padding:12px 24px;
-
-    border-radius:30px;
-
-    font-weight:600;
-
-    opacity:0;
-
-    transition:.3s;
-
-    z-index:100;
-}
-
-.toast-alert.active{
-    opacity:1;
-
-    transform:translateX(-50%) translateY(0);
-}
-
-/* Back To Top */
-
-.back-to-top{
-    position:fixed;
-
-    bottom:25px;
-    right:25px;
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(24,24,24,.85);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    color:#b5b5b5;
-
-    cursor:pointer;
-
-    z-index:10;
-
-    transition:transform .2s, color .2s, border-color .2s, box-shadow .2s;
-}
-
-.back-to-top:hover{
-    color:#ef4444;
-    border-color:#ef4444;
-    box-shadow:0 0 15px rgba(239,68,68,.4);
-    transform:translateY(-3px);
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="particle-container" id="particleContainer"></div>
-
-<div class="toast-alert" id="toastAlert">
-    ✓ Email Address Copied!
-</div>
-
-<!-- Settings Button -->
-<button class="settings-btn" id="settingsBtn" aria-label="Open accessibility settings">
-    <i class="fa-solid fa-gear"></i>
-</button>
-
-<!-- Settings Modal -->
-<div class="settings-modal" id="settingsModal">
-    <div class="settings-panel">
-        <h2>Settings</h2>
-
-        <div class="settings-item">
-            <div class="settings-label">
-                <span class="label-text">Sound Effects</span>
-                <span class="label-desc">Toggle button click sounds</span>
-            </div>
-            <button class="toggle-switch active" id="soundToggle" aria-label="Toggle sound effects"></button>
-        </div>
-
-        <div class="settings-item">
-            <div class="settings-label">
-                <span class="label-text">Reduce Motion</span>
-                <span class="label-desc">Disable animations & effects</span>
-            </div>
-            <button class="toggle-switch" id="motionToggle" aria-label="Toggle reduce motion"></button>
-        </div>
-
-        <button class="close-settings" id="closeSettings">Done</button>
-    </div>
-</div>
-
-<div class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fa-solid fa-arrow-up"></i>
-</div>
-
-<div class="card">
-
-    <img
-        src="https://replug.link/f76fb3d4"
-        alt="jxnn"
-        class="profile-pic">
-
-    <div class="status-badge">
-        <div class="status-dot"></div>
-        Available for Projects
-    </div>
-
-    <h1>jxnn.</h1>
-
-    <div class="tagline">
-        You bring the ideas. I make people watch until the end.
-    </div>
-
-    <p>
-        Video editor specialising in YouTube videos,
-        Shorts and TikTok content.
-    </p>
-
-    <a class="button sound-trigger" href="rates.html">
-        <i class="fa-solid fa-tags"></i>
-        View My Rates
-    </a>
-
-    <div class="small-note">
-        Limited editing slots available each month.
-    </div>
-
-    <button
-        class="button secondary sound-trigger"
-        id="emailBtn"
-        data-email="business.jxnn@gmail.com">
-
-        <i class="fa-solid fa-envelope"></i>
-        Copy Business Email
-    </button>
-
-    <a class="button secondary sound-trigger"
-       href="https://discord.gg/qgJNMFy3F6"
-       target="_blank">
-
-       <i class="fa-brands fa-discord"></i>
-       Join My Discord
-    </a>
-
-    <div class="social-row">
-
-        <a class="button secondary sound-trigger"
-           href="https://instagram.com/jaxongarforth1"
-           target="_blank">
-
-             <i class="fa-brands fa-instagram"></i>
-             Instagram
-         </a>
-
-         <a class="button secondary sound-trigger"
-            href="https://x.com/jxnn122"
-            target="_blank">
-
-             <i class="fa-brands fa-x-twitter"></i>
-             X / Twitter
-         </a>
-
-     </div>
-
-</div>
-
-<div class="video-section">
-
-    <div class="video-wrapper">
-
-        <iframe
-            src="https://www.youtube.com/embed/ggtdj-_FzYA"
-            title="jxnn Editing Showreel"
-            allowfullscreen>
-
-        </iframe>
-
-    </div>
-
-</div>
-
-<div class="portfolio-section">
-
-    <h2>Trusted By</h2>
-
-    <a class="featured-client sound-trigger"
-       href="https://twitch.tv/okharry"
-       target="_blank">
-
-        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png"
-             alt="OkHarry">
-
-        <div class="featured-client-text">
-
-            <strong>⭐ OkHarry</strong><br>
-
-            <small>Featured Creator Client</small>
-
-        </div>
-
-    </a>
-
-    <div class="client-grid">
-
-        <a class="client-item sound-trigger"
-           href="https://www.youtube.com/@BetaSquad"
-           target="_blank">
-
-             <img
-                 src="https://replug.link/db2bf3a8"
-                 alt="Beta Squad"
-                 class="client-avatar">
-
-             <span>Beta Squad</span>
-
-         </a>
-
-     </div>
-
-     <div class="cta-footer">
-
-         Ready to level up your content?
-
-         <br><br>
-
-         Let's work together.
-
-     </div>
-
-     <footer>
-
-         <div class="footer-copyright">
-             © 2026 jxnn. All rights reserved.
-         </div>
-
-     </footer>
-
-</div>
-
-<script>
-
-// ==========================
-// ACCESSIBILITY SETTINGS
-// ==========================
-
-// Check system preference for reduced motion
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// Load settings from localStorage
-function loadSettings() {
-    const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
-    const motionReduced = localStorage.getItem("motionReduced") === "true" || prefersReducedMotion;
-
-    return { soundEnabled, motionReduced };
-}
-
-// Save settings to localStorage
-function saveSettings(soundEnabled, motionReduced) {
-    localStorage.setItem("soundEnabled", soundEnabled);
-    localStorage.setItem("motionReduced", motionReduced);
-}
-
-// Apply settings to page
-function applySettings(soundEnabled, motionReduced) {
-    // Update toggle switch states
-    document.getElementById("soundToggle").classList.toggle("active", soundEnabled);
-    document.getElementById("motionToggle").classList.toggle("active", motionReduced);
-
-    // Apply reduce motion class if needed
-    if (motionReduced) {
-        document.body.classList.add("reduce-motion");
-    } else {
-        document.body.classList.remove("reduce-motion");
-    }
-
-    // Store global state for sound
-    window.soundEnabled = soundEnabled;
-    window.motionReduced = motionReduced;
-}
-
-// Initialize settings on page load
-const { soundEnabled: initialSound, motionReduced: initialMotion } = loadSettings();
-applySettings(initialSound, initialMotion);
-
-// Settings Modal
-const settingsBtn = document.getElementById("settingsBtn");
-const settingsModal = document.getElementById("settingsModal");
-const closeSettings = document.getElementById("closeSettings");
-const soundToggle = document.getElementById("soundToggle");
-const motionToggle = document.getElementById("motionToggle");
-
-settingsBtn.addEventListener("click", () => {
-    settingsModal.classList.add("active");
-});
-
-closeSettings.addEventListener("click", () => {
-    settingsModal.classList.remove("active");
-});
-
-settingsModal.addEventListener("click", (e) => {
-    if (e.target === settingsModal) {
-        settingsModal.classList.remove("active");
-    }
-});
-
-// Sound Toggle
-soundToggle.addEventListener("click", () => {
-    const isNowEnabled = !soundToggle.classList.contains("active");
-    soundToggle.classList.toggle("active");
-    window.soundEnabled = isNowEnabled;
-    saveSettings(isNowEnabled, window.motionReduced);
-});
-
-// Motion Toggle
-motionToggle.addEventListener("click", () => {
-    const isNowEnabled = !motionToggle.classList.contains("active");
-    motionToggle.classList.toggle("active");
-    window.motionReduced = isNowEnabled;
-    applySettings(window.soundEnabled, isNowEnabled);
-    saveSettings(window.soundEnabled, isNowEnabled);
-});
-
-// ==========================
-// SOUND EFFECTS
-// ==========================
-
-const clickSound = new Audio(
-"https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3"
-);
-
-clickSound.volume = 0.4;
-
-document.querySelectorAll(".sound-trigger")
-.forEach(element => {
-
-    element.addEventListener("click", () => {
-
-        if (window.soundEnabled) {
-            clickSound.currentTime = 0;
-            clickSound.play().catch(() => {});
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
 
-    });
+        /* 👑 Premium High-Contrast Text Selection Style */
+        ::selection {
+            background: #ef4444;
+            color: #ffffff;
+        }
+        ::-moz-selection {
+            background: #ef4444;
+            color: #ffffff;
+        }
 
-});
+        /* Scrollbar Design */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222222;
+            border-radius: 20px;
+            border: 2px solid #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ef4444;
+        }
 
-/* ==========================
-   COPY EMAIL
-========================== */
+        html {
+            background-color: #0a0a0a;
+        }
 
-const emailBtn = document.getElementById("emailBtn");
-const toast = document.getElementById("toastAlert");
+        body {
+            background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
+            background-size: 100% 200%;
+            background-position: var(--scroll-pos, 0% 0%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            animation: breatheBackground 12s ease-in-out infinite alternate;
+            transition: background-position 0.2s ease-out;
+            position: relative;
+        }
 
-emailBtn.addEventListener("click", () => {
+        @keyframes breatheBackground {
+            0% { background-size: 100% 180%; }
+            100% { background-size: 100% 220%; }
+        }
 
-    navigator.clipboard.writeText(
-        emailBtn.dataset.email
-    );
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    toast.classList.add("active");
+        /* 🕒 Last Updated Badge Styles */
+        .update-badge {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #a3a3a3;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            z-index: 10;
+        }
 
-    setTimeout(() => {
+        .update-badge i {
+            font-size: 0.8rem;
+            color: #ef4444;
+        }
 
-        toast.classList.remove("active");
+        /* Responsive shift for smaller mobile views so it stays looking sharp */
+        @media (max-width: 480px) {
+            .update-badge {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+            }
+        }
 
-    }, 2500);
+        /* Floating Particle System */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-});
+        .particle {
+            position: absolute;
+            bottom: -20px;
+            background: rgba(239, 68, 68, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            animation: floatUp var(--speed) linear infinite;
+            will-change: transform, opacity;
+        }
 
-/* ==========================
-   BACK TO TOP
-========================== */
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: var(--opacity); }
+            90% { opacity: var(--opacity); }
+            100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+        }
 
-document.getElementById("backToTop")
-.addEventListener("click", () => {
+        .card, .portfolio-section, .video-section {
+            position: relative;
+            z-index: 1;
+        }
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+        /* Profile Picture Styling */
+        .profile-avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
 
-});
+        /* Main Profile Card */
+        .card {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-/* ==========================
-   BACKGROUND SCROLL
-========================== */
+        /* Status Indicator Pill Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-window.addEventListener("scroll", () => {
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulseDot 2s infinite;
+        }
 
-    const percent =
-    (window.scrollY /
-    (document.documentElement.scrollHeight -
-    window.innerHeight)) * 100;
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
 
-    document.body.style.setProperty(
-        "--scroll-pos",
-        `0% ${percent}%`
-    );
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
 
-});
+        .headline-proof {
+            font-size: 0.9rem;
+            color: #ef4444;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-/* ==========================
-   PARTICLES
-========================== */
+        p {
+            color: #b5b5b5;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+        }
 
-const container =
-document.getElementById("particleContainer");
+        /* Buttons Styling */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            text-decoration: none;
+            background: white;
+            color: black;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
 
-for(let i = 0; i < 40; i++){
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.7), 0 0 10px rgba(239, 68, 68, 0.4);
+        }
 
-    const particle =
-    document.createElement("div");
+        .secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid #3a3a3a;
+        }
 
-    particle.classList.add("particle");
+        .secondary:hover {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: #ef4444;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6), 0 0 10px rgba(239, 68, 68, 0.3);
+        }
 
-    particle.style.width =
-    `${Math.random()*5+2}px`;
+        .social-row {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
 
-    particle.style.height =
-    particle.style.width;
+        .social-row .button {
+            flex: 1;
+        }
 
-    particle.style.left =
-    `${Math.random()*100}%`;
+        /* Video Section Container */
+        .video-section {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-    particle.style.setProperty(
-        "--speed",
-        `${Math.random()*8+6}s`
-    );
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Perfect 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-    particle.style.setProperty(
-        "--drift",
-        `${Math.random()*60-30}px`
-    );
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-    particle.style.setProperty(
-        "--opacity",
-        Math.random()*0.5+0.2
-    );
+        /* Clients Showcase Section */
+        .portfolio-section {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-    particle.style.animationDelay =
-    `${Math.random()*12}s`;
+        .portfolio-section h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e5e7eb;
+            margin-bottom: 25px;
+        }
 
-    container.appendChild(particle);
+        .client-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-}
+        .client-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: #d1d5db;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
 
-</script>
+        .client-item:hover {
+            background: rgba(185, 28, 28, 0.15);
+            border-color: #ef4444;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
 
+        .client-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #222;
+        }
+
+        /* Back to Top Navigation Feature */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(24, 24, 24, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b5b5b5;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .back-to-top:hover {
+            color: #ef4444;
+            transform: translateY(-3px);
+            border-color: #ef4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Copy Notification Box */
+        .toast-alert {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #ef4444;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+            z-index: 100;
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast-alert.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .footer-benefits {
+            color: #7a7a7a;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-copyright {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="update-badge">
+        <i class="fa-solid fa-clock-rotate-left"></i> Last updated: June 2026
+    </div>
+
+    <div class="particle-container" id="particleContainer"></div>
+
+    <div class="toast-alert" id="toastAlert">✓ Email Address Copied!</div>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+
+    <div class="card">
+        <img src="pfp.jpg" alt="jxnn" class="profile-avatar">
+
+        <div class="status-badge">
+            <div class="status-dot"></div> Available for Projects
+        </div>
+
+        <h1>jxnn.</h1>
+        <div class="headline-proof">Edited for Beta Squad & OkHarry</div>
+
+        <p>
+            Video Editor specialising in YouTube videos, 
+            Shorts and TikTok content. Let's maximize your retention.
+        </p>
+
+        <a class="button sound-trigger" href="rates.html">
+            <i class="fa-solid fa-tags"></i> View My Rates
+        </a>
+
+        <button class="button secondary sound-trigger" id="emailBtn" data-email="business.jxnn@gmail.com">
+            <i class="fa-solid fa-envelope"></i> Copy Business Email
+        </button>
+
+        <a class="button secondary sound-trigger" href="https://discord.gg/qgJNMFy3F6" target="_blank">
+            <i class="fa-brands fa-discord"></i> Chat on Discord
+        </a>
+
+        <div class="social-row">
+            <a class="button secondary sound-trigger" href="https://instagram.com/jaxongarforth1" target="_blank">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            <a class="button secondary sound-trigger" href="https://x.com/jxnn122" target="_blank">
+                <i class="fa-brands fa-x-twitter"></i> X / Twitter
+            </a>
+        </div>
+    </div>
+
+    <div class="video-section">
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/ggtdj-_FzYA" title="jxnn Editing Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="portfolio-section">
+        <h2>Past Clients & Work</h2>
+        
+        <div class="client-grid">
+            <a class="client-item sound-trigger" href="https://twitch.tv/okharry" target="_blank">
+                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png" alt="OkHarry" class="client-avatar">
+                <span>OkHarry</span>
+            </a>
+
+            <a class="client-item sound-trigger" href="https://www.youtube.com/@BetaSquad" target="_blank">
+                <img src="https://replug.link/db2bf3a8" alt="Beta Squad" class="client-avatar">
+                <span>Beta Squad</span>
+            </a>
+        </div>
+
+        <footer>
+            <div class="footer-benefits">Fast turnaround • Quality edits • Reliable communication</div>
+            <div class="footer-copyright">© 2026 jxnn. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script>
+        const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
+        clickSound.volume = 0.4;
+
+        document.querySelectorAll('.sound-trigger').forEach(element => {
+            element.addEventListener('click', () => {
+                try {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(err => console.log("Audio waiting for explicit user system gesture."));
+                } catch(e) {
+                    console.log("Audio execution bypassed:", e);
+                }
+            });
+        });
+
+        // Background Scroll Tracking Engine
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Email Copy Engine System
+        const emailBtn = document.getElementById('emailBtn');
+        const toastAlert = document.getElementById('toastAlert');
+
+        emailBtn.addEventListener('click', () => {
+            const emailAddress = emailBtn.getAttribute('data-email');
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                toastAlert.classList.add('active');
+                setTimeout(() => {
+                    toastAlert.classList.remove('active');
+                }, 2500);
+            }).catch(err => {
+                console.error("Clipboard architecture block: ", err);
+            });
+        });
+
+        // Battery Saver Responsive Particle Engine
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            if (!container) return;
+            
+            const particleCount = window.innerWidth < 768 ? 15 : 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 12;
+                const speed = Math.random() * 8 + 6;
+                const drift = (Math.random() * 60) - 30;
+                const opacity = Math.random() * 0.5 + 0.2;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                
+                particle.style.setProperty('--speed', `${speed}s`);
+                particle.style.setProperty('--drift', `${drift}px`);
+                particle.style.setProperty('--opacity', opacity);
+                particle.style.animationDelay = `${delay}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
 </body>
 </html>
