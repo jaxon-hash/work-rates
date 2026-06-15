@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jxnn. | Professional Video Editor Portfolio</title>
 
-    <link rel="preload" as="image" href="favicon-2.webp">
+    <link rel="preload" as="image" href="favicon-2.png">
     <link rel="shortcut icon" type="image/png" href="https://replug.link/f76fb3d4">
 
     <meta name="description" content="Professional Video Editor specialising in high-retention YouTube videos, Shorts and TikTok content.">
@@ -516,7 +516,7 @@ p{
 
     border-radius:24px;
 
-    padding:16px; /* Optimized padding spacing inside card container */
+    padding:16px;
 
     box-shadow:0 20px 40px rgba(0,0,0,.4);
 
@@ -534,7 +534,7 @@ p{
 .video-wrapper{
     position:relative;
     width: 100%;
-    aspect-ratio: 16 / 9; /* Modern responsive standard aspect engine math ratio formula */
+    aspect-ratio: 16 / 9;
     overflow:hidden;
     border-radius:14px;
     border:1px solid rgba(255,255,255,.05);
@@ -931,13 +931,10 @@ input:checked + .slider:before {
 
 <div class="card">
 
-   <img
-    src="favicon-2.webp"
-    alt="jxnn"
-    class="profile-pic"
-    width="120"
-    height="120"
-    loading="eager">
+    <img
+        src="https://replug.link/f76fb3d4"
+        alt="jxnn"
+        class="profile-pic">
 
     <div class="status-badge">
         <div class="status-dot"></div>
@@ -1131,7 +1128,6 @@ motionToggle.addEventListener('change', () => {
         document.body.classList.add('reduce-motion');
     } else {
         document.body.classList.remove('reduce-motion');
-        // Restart particle generation loop if disabled dynamically
         if (container.children.length === 0) {
             generateParticles();
         }
@@ -1170,7 +1166,7 @@ const container = document.getElementById("particleContainer");
 
 function generateParticles() {
     if (reduceMotionEnabled) return;
-    container.innerHTML = ''; // Clean slate runtime loop injection safely
+    container.innerHTML = ''; 
     for(let i = 0; i < 40; i++){
         const particle = document.createElement("div");
         particle.classList.add("particle");
