@@ -3,144 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>jxnn. | Video Editor</title>
+<title>Jaxon | Video Editor</title>
 
 <style>
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0f0f0f;
+    background: #0a0a0a;
     color: white;
-}
-
-/* Center hero */
-.hero {
-    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+    padding: 40px;
 }
 
-.hero h1 {
+.container {
+    max-width: 900px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
     font-size: 3rem;
     margin: 0;
 }
 
-.hero p {
+.header p {
     color: #aaa;
-    margin-top: 10px;
 }
 
-/* button */
-.button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 14px 20px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.button:hover {
-    opacity: 0.8;
-}
-
-/* scroll section */
-section {
-    padding: 80px 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    max-width: 600px;
-    width: 100%;
-}
-
-/* card */
 .card {
-    background: #181818;
+    background: #151515;
     border: 1px solid #2a2a2a;
     padding: 25px;
     border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+/* Pricing */
+.price {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+    color: #ccc;
+}
+
+/* Button */
+.button {
+    display: block;
     text-align: center;
-}
-
-.client {
-    margin-top: 15px;
+    background: white;
+    color: black;
     padding: 15px;
-    border: 1px solid #2a2a2a;
     border-radius: 10px;
-    background: #121212;
-}
-
-.client a {
-    color: white;
     text-decoration: none;
     font-weight: bold;
+    margin-top: 15px;
 }
 
-.client a:hover {
-    text-decoration: underline;
+/* Portfolio grid */
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
 }
 
-/* small text */
+.video {
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+}
+
+.video iframe {
+    width: 100%;
+    height: 180px;
+    border: none;
+}
+
 .small {
-    color: #777;
+    color: #888;
     font-size: 0.9rem;
     margin-top: 10px;
+    text-align: center;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <div>
-        <h1>jxnn.</h1>
+<div class="container">
+
+    <div class="header">
+        <h1>Jaxon</h1>
         <p>Video Editor • Shorts • YouTube • TikTok</p>
-
-        <a class="button" href="#work">See My Work</a>
     </div>
-</div>
 
-<!-- WORK SECTION -->
-<section id="work">
-    <div class="container">
+    <!-- PRICING -->
+    <div class="card">
+        <h2>💰 Pricing</h2>
 
-        <div class="card">
-            <h2>🏆 Who I've Worked With</h2>
-            <p class="small">A small selection of creators I’ve edited for</p>
+        <div class="price"><span>Shorts (15–60s)</span><span>£10–£25</span></div>
+        <div class="price"><span>YouTube Edit</span><span>£30–£80</span></div>
+        <div class="price"><span>Rush Delivery</span><span>+50%</span></div>
 
-            <!-- OKHARRY -->
-            <div class="client">
-                <p>Worked with</p>
-                <a href="https://www.youtube.com/@okharry" target="_blank">
-                    OKHarry (YouTube)
-                </a>
+        <a class="button" href="https://discord.com" target="_blank">Contact Me</a>
+    </div>
+
+    <!-- PORTFOLIO -->
+    <div class="card">
+        <h2>🎬 Portfolio</h2>
+
+        <div class="portfolio">
+
+            <!-- YouTube embed -->
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
             </div>
 
-            <div class="small">
-                More creators coming soon...
+            <!-- Add more videos by replacing the link -->
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
             </div>
 
-            <a class="button" href="https://discord.gg/dUQGtpwSe" target="_blank">
-                Contact Me on Discord
-            </a>
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            </div>
+
         </div>
 
+        <div class="small">Replace these links with your actual edits</div>
     </div>
-</section>
+
+</div>
 
 </body>
 </html>
