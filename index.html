@@ -1,620 +1,540 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jxnn. | Professional Video Editor Portfolio</title>
-    
-    <link rel="preload" as="image" href="pfp.jpg">
-    
-    <link rel="icon" type="image/png" href="https://replug.link/f76fb3d4">
-    <link rel="shortcut icon" type="image/png" href="https://replug.link/f76fb3d4">
+/* ==========================
+   VIDEO SECTION
+========================== */
 
-    <meta name="description" content="Professional Video Editor specializing in high-retention TikToks, Shorts, Reels, and cinematic YouTube videos. Let's make your content go viral.">
-    <meta property="og:title" content="jxnn. | Portfolio Hub">
-    <meta property="og:description" content="Check out my showreel, client catalog, and editing packages. Open a ticket to secure a slot.">
-    <meta property="og:image" content="https://replug.link/f76fb3d4">
-    <meta property="og:url" content="https://jxnn.store">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="jxnn. | Portfolio Hub">
-    <meta name="twitter:description" content="Check out my showreel, client catalog, and editing packages.">
-    <meta name="twitter:image" content="https://replug.link/f76fb3d4">
-    <meta name="theme-color" content="#ef4444">
+.video-section{
+    max-width:450px;
+    width:100%;
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    background:rgba(24,24,24,.6);
 
-    <style>
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
-        }
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 
-        /* 👑 Premium High-Contrast Text Selection Style */
-        ::selection {
-            background: #ef4444;
-            color: #ffffff;
-        }
-        ::-moz-selection {
-            background: #ef4444;
-            color: #ffffff;
-        }
+    border:1px solid rgba(255,255,255,.05);
 
-        /* Scrollbar Design */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #222222;
-            border-radius: 20px;
-            border: 2px solid #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ef4444;
-        }
+    border-radius:24px;
 
-        html {
-            background-color: #0a0a0a;
-        }
+    padding:25px;
 
-        body {
-            background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
-            background-size: 100% 200%;
-            background-position: var(--scroll-pos, 0% 0%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 40px 20px;
-            overflow-x: hidden;
-            animation: breatheBackground 12s ease-in-out infinite alternate;
-            transition: background-position 0.2s ease-out;
-            position: relative;
-        }
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
 
-        @keyframes breatheBackground {
-            0% { background-size: 100% 180%; }
-            100% { background-size: 100% 220%; }
-        }
+    margin-bottom:25px;
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    animation:fadeInUp .8s cubic-bezier(.16,1,.3,1) forwards;
+}
 
-        /* 🕒 Last Updated Badge Styles */
-        .update-badge {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: #a3a3a3;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            z-index: 10;
-        }
+.video-wrapper{
+    position:relative;
 
-        .update-badge i {
-            font-size: 0.8rem;
-            color: #ef4444;
-        }
+    padding-bottom:56.25%;
 
-        /* Responsive shift for smaller mobile views so it stays looking sharp */
-        @media (max-width: 480px) {
-            .update-badge {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin-bottom: 20px;
-            }
-        }
+    height:0;
 
-        /* Floating Particle System */
-        .particle-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
+    overflow:hidden;
 
-        .particle {
-            position: absolute;
-            bottom: -20px;
-            background: rgba(239, 68, 68, 0.4);
-            border-radius: 50%;
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
-            animation: floatUp var(--speed) linear infinite;
-            will-change: transform, opacity;
-        }
+    border-radius:14px;
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: var(--opacity); }
-            90% { opacity: var(--opacity); }
-            100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
-        }
+    border:1px solid rgba(255,255,255,.05);
+}
 
-        .card, .portfolio-section, .video-section {
-            position: relative;
-            z-index: 1;
-        }
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
 
-        /* Profile Picture Styling */
-        .profile-avatar {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        }
+    width:100%;
+    height:100%;
+}
 
-        /* Main Profile Card */
-        .card {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(24, 24, 24, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 40px 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+/* ==========================
+   TRUSTED BY
+========================== */
 
-        /* Status Indicator Pill Badge */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            color: #4ade80;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+.portfolio-section{
+    max-width:450px;
+    width:100%;
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #22c55e;
-            animation: pulseDot 2s infinite;
-        }
+    background:rgba(24,24,24,.6);
 
-        @keyframes pulseDot {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-        }
+    border:1px solid rgba(255,255,255,.05);
 
-        .headline-proof {
-            font-size: 0.9rem;
-            color: #ef4444;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+    border-radius:24px;
 
-        p {
-            color: #b5b5b5;
-            line-height: 1.6;
-            margin-bottom: 35px;
-            font-size: 1.05rem;
-        }
+    padding:35px 30px;
 
-        /* Buttons Styling */
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            text-decoration: none;
-            background: white;
-            color: black;
-            padding: 16px;
-            border-radius: 14px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
-            border: 1px solid transparent;
-            cursor: pointer;
-        }
+    text-align:center;
 
-        .button:hover {
-            transform: translateY(-2px);
-            opacity: 0.95;
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.7), 0 0 10px rgba(239, 68, 68, 0.4);
-        }
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
 
-        .secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid #3a3a3a;
-        }
+    animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
+}
 
-        .secondary:hover {
-            background: rgba(239, 68, 68, 0.08);
-            border-color: #ef4444;
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6), 0 0 10px rgba(239, 68, 68, 0.3);
-        }
+.portfolio-section h2{
+    font-size:1.1rem;
 
-        .social-row {
-            display: flex;
-            gap: 15px;
-            width: 100%;
-        }
+    letter-spacing:2px;
 
-        .social-row .button {
-            flex: 1;
-        }
+    text-transform:uppercase;
 
-        /* Video Section Container */
-        .video-section {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(24, 24, 24, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            margin-bottom: 25px;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+    margin-bottom:25px;
 
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* Perfect 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    color:#e5e7eb;
+}
 
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+/* Featured Client */
 
-        /* Clients Showcase Section */
-        .portfolio-section {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(24, 24, 24, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 35px 30px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+.featured-client{
+    display:flex;
+    align-items:center;
+    gap:16px;
 
-        .portfolio-section h2 {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #e5e7eb;
-            margin-bottom: 25px;
-        }
+    text-decoration:none;
 
-        .client-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+    color:white;
 
-        .client-item {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 15px;
-            border-radius: 12px;
-            font-weight: 500;
-            color: #d1d5db;
-            text-decoration: none;
-            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-        }
+    background:rgba(239,68,68,.08);
 
-        .client-item:hover {
-            background: rgba(185, 28, 28, 0.15);
-            border-color: #ef4444;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
-        }
+    border:1px solid rgba(239,68,68,.25);
 
-        .client-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #222;
-        }
+    border-radius:18px;
 
-        /* Back to Top Navigation Feature */
-        .back-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: rgba(24, 24, 24, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #b5b5b5;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: transform 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-        }
+    padding:20px;
 
-        .back-to-top:hover {
-            color: #ef4444;
-            transform: translateY(-3px);
-            border-color: #ef4444;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-        }
+    margin-bottom:20px;
 
-        /* Copy Notification Box */
-        .toast-alert {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #ef4444;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
-            z-index: 100;
-            opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-            pointer-events: none;
-        }
+    transition:.25s;
+}
 
-        .toast-alert.active {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+.featured-client:hover{
+    transform:translateY(-3px);
 
-        footer {
-            margin-top: 35px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            text-align: center;
-        }
+    box-shadow:
+        0 0 25px rgba(239,68,68,.4);
+}
 
-        .footer-benefits {
-            color: #7a7a7a;
-            font-size: 0.85rem;
-            letter-spacing: 0.3px;
-        }
+.featured-client img{
+    width:60px;
+    height:60px;
 
-        .footer-copyright {
-            color: #555;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-        }
-    </style>
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.featured-client-text{
+    text-align:left;
+}
+
+.featured-client-text small{
+    color:#9ca3af;
+}
+
+/* Other Clients */
+
+.client-grid{
+    display:grid;
+    gap:15px;
+}
+
+.client-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#d1d5db;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:.25s;
+}
+
+.client-item:hover{
+    transform:translateY(-2px);
+
+    border-color:#ef4444;
+
+    box-shadow:
+        0 0 20px rgba(239,68,68,.3);
+}
+
+.client-avatar{
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+/* Footer CTA */
+
+.cta-footer{
+    margin-top:30px;
+
+    color:#d1d5db;
+
+    line-height:1.7;
+}
+
+footer{
+    margin-top:30px;
+
+    text-align:center;
+}
+
+.footer-copyright{
+    color:#666;
+
+    font-size:.85rem;
+
+    margin-top:10px;
+}
+
+/* Toast */
+
+.toast-alert{
+    position:fixed;
+
+    bottom:30px;
+    left:50%;
+
+    transform:translateX(-50%) translateY(100px);
+
+    background:#ef4444;
+
+    color:white;
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    opacity:0;
+
+    transition:.3s;
+
+    z-index:100;
+}
+
+.toast-alert.active{
+    opacity:1;
+
+    transform:translateX(-50%) translateY(0);
+}
+
+/* Back To Top */
+
+.back-to-top{
+    position:fixed;
+
+    bottom:25px;
+    right:25px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(24,24,24,.85);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    cursor:pointer;
+
+    z-index:10;
+}
+
+.back-to-top:hover{
+    color:#ef4444;
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="update-badge">
-        <i class="fa-solid fa-clock-rotate-left"></i> Last updated: June 2026
+<div class="particle-container" id="particleContainer"></div>
+
+<div class="toast-alert" id="toastAlert">
+    ✓ Email Address Copied!
+</div>
+
+<div class="back-to-top" id="backToTop">
+    <i class="fa-solid fa-arrow-up"></i>
+</div>
+
+<div class="card">
+
+    <img
+        src="https://replug.link/f76fb3d4"
+        alt="jxnn"
+        class="profile-pic">
+
+    <div class="status-badge">
+        <div class="status-dot"></div>
+        Available for Projects
     </div>
 
-    <div class="particle-container" id="particleContainer"></div>
+    <h1>jxnn.</h1>
 
-    <div class="toast-alert" id="toastAlert">✓ Email Address Copied!</div>
-
-    <div class="back-to-top" id="backToTop">
-        <i class="fa-solid fa-arrow-up"></i>
+    <div class="tagline">
+        You bring the ideas. I make people watch until the end.
     </div>
 
-    <div class="card">
-        <img src="pfp.jpg" alt="jxnn" class="profile-avatar">
+    <p>
+        Video editor specialising in YouTube videos,
+        Shorts and TikTok content.
+    </p>
 
-        <div class="status-badge">
-            <div class="status-dot"></div> Available for Projects
-        </div>
+    <a class="button sound-trigger" href="rates.html">
+        <i class="fa-solid fa-tags"></i>
+        View My Rates
+    </a>
 
-        <h1>jxnn.</h1>
-        <div class="headline-proof">Edited for Beta Squad & OkHarry</div>
+    <div class="small-note">
+        Limited editing slots available each month.
+    </div>
 
-        <p>
-            Video Editor specialising in YouTube videos, 
-            Shorts and TikTok content. Let's maximize your retention.
-        </p>
+    <button
+        class="button secondary sound-trigger"
+        id="emailBtn"
+        data-email="business.jxnn@gmail.com">
 
-        <a class="button sound-trigger" href="rates.html">
-            <i class="fa-solid fa-tags"></i> View My Rates
+        <i class="fa-solid fa-envelope"></i>
+        Copy Business Email
+    </button>
+
+    <a class="button secondary sound-trigger"
+       href="https://discord.gg/qgJNMFy3F6"
+       target="_blank">
+
+       <i class="fa-brands fa-discord"></i>
+       Join My Discord
+    </a>
+
+    <div class="social-row">
+
+        <a class="button secondary sound-trigger"
+           href="https://instagram.com/jaxongarforth1"
+           target="_blank">
+
+            <i class="fa-brands fa-instagram"></i>
+            Instagram
         </a>
 
-        <button class="button secondary sound-trigger" id="emailBtn" data-email="business.jxnn@gmail.com">
-            <i class="fa-solid fa-envelope"></i> Copy Business Email
-        </button>
+        <a class="button secondary sound-trigger"
+           href="https://x.com/jxnn122"
+           target="_blank">
 
-        <a class="button secondary sound-trigger" href="https://discord.gg/qgJNMFy3F6" target="_blank">
-            <i class="fa-brands fa-discord"></i> Chat on Discord
+            <i class="fa-brands fa-x-twitter"></i>
+            X / Twitter
         </a>
 
-        <div class="social-row">
-            <a class="button secondary sound-trigger" href="https://instagram.com/jaxongarforth1" target="_blank">
-                <i class="fa-brands fa-instagram"></i> Instagram
-            </a>
-            <a class="button secondary sound-trigger" href="https://x.com/jxnn122" target="_blank">
-                <i class="fa-brands fa-x-twitter"></i> X / Twitter
-            </a>
-        </div>
     </div>
 
-    <div class="video-section">
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube-nocookie.com/embed/ggtdj-_FzYA" title="jxnn Editing Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
+</div>
+
+<div class="video-section">
+
+    <div class="video-wrapper">
+
+        <iframe
+            src="https://www.youtube.com/embed/ggtdj-_FzYA"
+            allowfullscreen>
+
+        </iframe>
+
     </div>
 
-    <div class="portfolio-section">
-        <h2>Past Clients & Work</h2>
-        
-        <div class="client-grid">
-            <a class="client-item sound-trigger" href="https://twitch.tv/okharry" target="_blank">
-                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png" alt="OkHarry" class="client-avatar">
-                <span>OkHarry</span>
-            </a>
+</div>
 
-            <a class="client-item sound-trigger" href="https://www.youtube.com/@BetaSquad" target="_blank">
-                <img src="https://replug.link/db2bf3a8" alt="Beta Squad" class="client-avatar">
-                <span>Beta Squad</span>
-            </a>
+<div class="portfolio-section">
+
+    <h2>Trusted By</h2>
+
+    <a class="featured-client sound-trigger"
+       href="https://twitch.tv/okharry"
+       target="_blank">
+
+        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png">
+
+        <div class="featured-client-text">
+
+            <strong>⭐ OkHarry</strong><br>
+
+            <small>Featured Creator Client</small>
+
         </div>
 
-        <footer>
-            <div class="footer-benefits">Fast turnaround • Quality edits • Reliable communication</div>
-            <div class="footer-copyright">© 2026 jxnn. All rights reserved.</div>
-        </footer>
+    </a>
+
+    <div class="client-grid">
+
+        <a class="client-item sound-trigger"
+           href="https://www.youtube.com/@BetaSquad"
+           target="_blank">
+
+            <img
+                src="https://replug.link/db2bf3a8"
+                class="client-avatar">
+
+            <span>Beta Squad</span>
+
+        </a>
+
     </div>
 
-    <script>
-        const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
-        clickSound.volume = 0.4;
+    <div class="cta-footer">
 
-        document.querySelectorAll('.sound-trigger').forEach(element => {
-            element.addEventListener('click', () => {
-                try {
-                    clickSound.currentTime = 0;
-                    clickSound.play().catch(err => console.log("Audio waiting for explicit user system gesture."));
-                } catch(e) {
-                    console.log("Audio execution bypassed:", e);
-                }
-            });
-        });
+        Ready to level up your content?
 
-        // Background Scroll Tracking Engine
-        const backToTopBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
-        });
+        <br><br>
 
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        Let's work together.
 
-        // Email Copy Engine System
-        const emailBtn = document.getElementById('emailBtn');
-        const toastAlert = document.getElementById('toastAlert');
+    </div>
 
-        emailBtn.addEventListener('click', () => {
-            const emailAddress = emailBtn.getAttribute('data-email');
-            navigator.clipboard.writeText(emailAddress).then(() => {
-                toastAlert.classList.add('active');
-                setTimeout(() => {
-                    toastAlert.classList.remove('active');
-                }, 2500);
-            }).catch(err => {
-                console.error("Clipboard architecture block: ", err);
-            });
-        });
+    <footer>
 
-        // Battery Saver Responsive Particle Engine
-        function createParticles() {
-            const container = document.getElementById('particleContainer');
-            if (!container) return;
-            
-            const particleCount = window.innerWidth < 768 ? 15 : 40;
+        <div class="footer-copyright">
+            © 2026 jxnn. All rights reserved.
+        </div>
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 5 + 2;
-                const leftPos = Math.random() * 100;
-                const delay = Math.random() * 12;
-                const speed = Math.random() * 8 + 6;
-                const drift = (Math.random() * 60) - 30;
-                const opacity = Math.random() * 0.5 + 0.2;
+    </footer>
 
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${leftPos}%`;
-                
-                particle.style.setProperty('--speed', `${speed}s`);
-                particle.style.setProperty('--drift', `${drift}px`);
-                particle.style.setProperty('--opacity', opacity);
-                particle.style.animationDelay = `${delay}s`;
+</div>
 
-                container.appendChild(particle);
-            }
-        }
+<script>
 
-        createParticles();
-    </script>
+const clickSound = new Audio(
+"https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3"
+);
+
+clickSound.volume = 0.4;
+
+document.querySelectorAll(".sound-trigger")
+.forEach(element => {
+
+    element.addEventListener("click", () => {
+
+        clickSound.currentTime = 0;
+
+        clickSound.play().catch(() => {});
+
+    });
+
+});
+
+/* Copy Email */
+
+const emailBtn = document.getElementById("emailBtn");
+const toast = document.getElementById("toastAlert");
+
+emailBtn.addEventListener("click", () => {
+
+    navigator.clipboard.writeText(
+        emailBtn.dataset.email
+    );
+
+    toast.classList.add("active");
+
+    setTimeout(() => {
+
+        toast.classList.remove("active");
+
+    }, 2500);
+
+});
+
+/* Back To Top */
+
+document.getElementById("backToTop")
+.addEventListener("click", () => {
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+});
+
+/* Background Scroll */
+
+window.addEventListener("scroll", () => {
+
+    const percent =
+    (window.scrollY /
+    (document.documentElement.scrollHeight -
+    window.innerHeight)) * 100;
+
+    document.body.style.setProperty(
+        "--scroll-pos",
+        `0% ${percent}%`
+    );
+
+});
+
+/* Particles */
+
+const container =
+document.getElementById("particleContainer");
+
+for(let i = 0; i < 40; i++){
+
+    const particle =
+    document.createElement("div");
+
+    particle.classList.add("particle");
+
+    particle.style.width =
+    `${Math.random()*5+2}px`;
+
+    particle.style.height =
+    particle.style.width;
+
+    particle.style.left =
+    `${Math.random()*100}%`;
+
+    particle.style.setProperty(
+        "--speed",
+        `${Math.random()*8+6}s`
+    );
+
+    particle.style.setProperty(
+        "--drift",
+        `${Math.random()*60-30}px`
+    );
+
+    particle.style.setProperty(
+        "--opacity",
+        Math.random()*0.5+0.2
+    );
+
+    particle.style.animationDelay =
+    `${Math.random()*12}s`;
+
+    container.appendChild(particle);
+
+}
+
+</script>
+
 </body>
 </html>
