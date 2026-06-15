@@ -223,8 +223,10 @@
 </head>
 <body>
 
+    <!-- Target container for our dynamic floating particles -->
     <div class="particle-container" id="particleContainer"></div>
 
+    <!-- Main Links Card -->
     <div class="card">
         <h1>jxnn.</h1>
 
@@ -255,6 +257,7 @@
         </footer>
     </div>
 
+    <!-- Showcase Section -->
     <div class="portfolio-section">
         <h2>Past Clients & Work</h2>
         
@@ -272,17 +275,20 @@
     </div>
 
     <script>
-        // Preload our audio asset globally so it triggers with zero delay
-        // (Uses a clean, public UI click audio sample)
-        const clickSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav");
-        clickSound.volume = 0.4; // Softened slightly so it isn't jarring to your users
+        // 🛠️ FIXED: Using a reliable public CDN audio source that allows direct web streaming
+        const clickSound = new Audio("https://cdn.jsdelivr.net/gh/IonDen/ion.sound@master/sounds/button_click.mp3");
+        clickSound.volume = 0.5;
 
         // Attach event listeners to all interactive blocks
         document.querySelectorAll('.sound-trigger').forEach(element => {
-            element.addEventListener('click', () => {
-                // Reset track to beginning instantly in case someone multi-clicks rapidly
+            element.addEventListener('click', (e) => {
+                // Instantly reset the audio to start point so fast multi-clicking works flawlessly
                 clickSound.currentTime = 0;
-                clickSound.play();
+                
+                // Play audio and gracefully catch any modern browser restrictions
+                clickSound.play().catch(error => {
+                    console.log("Audio waiting for initial user page gesture:", error);
+                });
             });
         });
 
