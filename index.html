@@ -1,106 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jaxon | Video Editor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaxon | Video Editor</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0a0a0a;
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-.container {
-    max-width: 700px;
-    width: 100%;
-}
+        body {
+            background: #0f0f0f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
+        .card {
+            max-width: 500px;
+            width: 100%;
+            background: #181818;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+        }
 
-.header h1 {
-    font-size: 3rem;
-    margin: 0;
-}
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-.header p {
-    color: #aaa;
-}
+        p {
+            color: #b5b5b5;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-.card {
-    background: #151515;
-    border: 1px solid #2a2a2a;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
+        .button {
+            display: block;
+            width: 100%;
+            text-decoration: none;
+            background: white;
+            color: black;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
 
-h2 {
-    margin-top: 0;
-}
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
 
-.price {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #222;
-    color: #ccc;
-}
+        .secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid #3a3a3a;
+        }
 
-.button {
-    display: block;
-    text-align: center;
-    background: white;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.button:hover {
-    opacity: 0.85;
-}
-
-.small {
-    color: #888;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
-}
-</style>
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
-
-<div class="container">
-
-    <div class="header">
-        <h1>Jaxon</h1>
-        <p>Video Editor • Shorts • YouTube • TikTok</p>
-    </div>
-
     <div class="card">
-        <h2>💰 Pricing</h2>
+        <h1>Jaxon</h1>
 
-        <div class="price"><span>Shorts (15–60s)</span><span>£10–£25</span></div>
-        <div class="price"><span>YouTube Edit</span><span>£30–£80</span></div>
-        <div class="price"><span>Rush Delivery</span><span>+50%</span></div>
+        <p>
+            Video Editor specialising in YouTube videos,
+            Shorts and TikTok content.
+        </p>
 
-        <a class="button" href="https://discord.com" target="_blank">Contact Me</a>
-        <div class="small">Fast delivery • High quality edits • Daily availability</div>
+        <!-- Replace with your rates link -->
+        <a class="button" href="https://yourrateslink.com" target="_blank">
+            View My Rates
+        </a>
+
+        <!-- Replace with your contact link -->
+        <a class="button secondary" href="https://discord.com/users/yourusername" target="_blank">
+            Contact Me
+        </a>
+
+        <footer>
+            Fast turnaround • Quality edits • Reliable communication
+        </footer>
     </div>
-
-</div>
-
 </body>
 </html>
