@@ -44,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Allows users to click buttons through the particles */
+            pointer-events: none;
             z-index: 0;
             overflow: hidden;
         }
@@ -52,7 +52,7 @@
         .particle {
             position: absolute;
             bottom: -20px;
-            background: rgba(239, 68, 68, 0.4); /* Soft transparent red/amber glow */
+            background: rgba(239, 68, 68, 0.4);
             border-radius: 50%;
             pointer-events: none;
             box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
@@ -76,7 +76,6 @@
             }
         }
 
-        /* Elements must stay above the particle background layer */
         .card, .portfolio-section {
             position: relative;
             z-index: 1;
@@ -127,6 +126,7 @@
             margin-bottom: 15px;
             transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s;
             border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .button:hover {
@@ -196,6 +196,7 @@
             color: #d1d5db;
             text-decoration: none;
             transition: background 0.2s, border-color 0.2s, transform 0.2s;
+            cursor: pointer;
         }
 
         .client-item:hover {
@@ -222,10 +223,8 @@
 </head>
 <body>
 
-    <!-- Target container for our dynamic floating particles -->
     <div class="particle-container" id="particleContainer"></div>
 
-    <!-- Main Links Card -->
     <div class="card">
         <h1>jxnn.</h1>
 
@@ -234,19 +233,19 @@
             Shorts and TikTok content.
         </p>
 
-        <a class="button" href="https://ibb.co/XZD7k6g7" target="_blank">
+        <a class="button sound-trigger" href="https://ibb.co/XZD7k6g7" target="_blank">
             <i class="fa-solid fa-tags"></i> View My Rates
         </a>
 
-        <a class="button secondary" href="https://discord.gg/dUQGtpwSe" target="_blank">
+        <a class="button secondary sound-trigger" href="https://discord.gg/dUQGtpwSe" target="_blank">
             <i class="fa-brands fa-discord"></i> Contact Me
         </a>
 
         <div class="social-row">
-            <a class="button secondary" href="https://instagram.com/jaxongarforth1" target="_blank">
+            <a class="button secondary sound-trigger" href="https://instagram.com/jaxongarforth1" target="_blank">
                 <i class="fa-brands fa-instagram"></i> Instagram
             </a>
-            <a class="button secondary" href="https://x.com/jxnn122" target="_blank">
+            <a class="button secondary sound-trigger" href="https://x.com/jxnn122" target="_blank">
                 <i class="fa-brands fa-x-twitter"></i> X / Twitter
             </a>
         </div>
@@ -256,17 +255,16 @@
         </footer>
     </div>
 
-    <!-- Showcase Section -->
     <div class="portfolio-section">
         <h2>Past Clients & Work</h2>
         
         <div class="client-grid">
-            <a class="client-item" href="https://twitch.tv/okharry" target="_blank">
+            <a class="client-item sound-trigger" href="https://www.twitch.tv/okharry" target="_blank">
                 <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png" alt="OkHarry" class="client-avatar">
                 <span>OkHarry</span>
             </a>
 
-            <a class="client-item" href="https://www.youtube.com/@BetaSquad" target="_blank">
+            <a class="client-item sound-trigger" href="https://www.youtube.com/@BetaSquad" target="_blank">
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_keJoAmv1MrHOIplkYaZok_WuOdiHDTBv8Gv4xlmnOrLzk=s900-c-k-c0x00ffffff-no-rj" alt="Beta Squad" class="client-avatar">
                 <span>Beta Squad</span>
             </a>
@@ -274,6 +272,20 @@
     </div>
 
     <script>
+        // Preload our audio asset globally so it triggers with zero delay
+        // (Uses a clean, public UI click audio sample)
+        const clickSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav");
+        clickSound.volume = 0.4; // Softened slightly so it isn't jarring to your users
+
+        // Attach event listeners to all interactive blocks
+        document.querySelectorAll('.sound-trigger').forEach(element => {
+            element.addEventListener('click', () => {
+                // Reset track to beginning instantly in case someone multi-clicks rapidly
+                clickSound.currentTime = 0;
+                clickSound.play();
+            });
+        });
+
         // Background Scroll Tracking Effect
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
@@ -283,25 +295,23 @@
         // Dynamic Floating Particle Generator
         function createParticles() {
             const container = document.getElementById('particleContainer');
-            const particleCount = 40; // Total active ambient particles on screen
+            const particleCount = 40;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Randomize sizes, starting positions, drift amount, opacity levels, and speeds
-                const size = Math.random() * 5 + 2; // 2px to 7px size
-                const leftPos = Math.random() * 100; // Left offset 0% to 100%
-                const delay = Math.random() * 12; // Spread initial spawns smoothly
-                const speed = Math.random() * 8 + 6; // 6s to 14s trip duration
-                const drift = (Math.random() * 60) - 30; // Lateral wave motion
-                const opacity = Math.random() * 0.5 + 0.2; // Opacity variance
+                const size = Math.random() * 5 + 2;
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 12;
+                const speed = Math.random() * 8 + 6;
+                const drift = (Math.random() * 60) - 30;
+                const opacity = Math.random() * 0.5 + 0.2;
 
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${leftPos}%`;
                 
-                // Set custom properties directly into css variables
                 particle.style.setProperty('--speed', `${speed}s`);
                 particle.style.setProperty('--drift', `${drift}px`);
                 particle.style.setProperty('--opacity', opacity);
@@ -311,7 +321,6 @@
             }
         }
 
-        // Initialize particle system on page render
         createParticles();
     </script>
 </body>
