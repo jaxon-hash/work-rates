@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,6 @@
         }
 
         body {
-            /* Smooth background gradient that moves and reacts to scrolling */
             background: linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
             background-size: 100% 200%;
             background-position: var(--scroll-pos, 0% 0%);
@@ -31,12 +29,57 @@
             overflow-x: hidden;
             animation: breatheBackground 12s ease-in-out infinite alternate;
             transition: background-position 0.2s ease-out;
+            position: relative;
         }
 
-        /* Ambient background breathing effect */
         @keyframes breatheBackground {
             0% { background-size: 100% 180%; }
             100% { background-size: 100% 220%; }
+        }
+
+        /* --- Particle System Styles --- */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows users to click buttons through the particles */
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -20px;
+            background: rgba(239, 68, 68, 0.4); /* Soft transparent red/amber glow */
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            animation: floatUp var(--speed) linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: var(--opacity);
+            }
+            90% {
+                opacity: var(--opacity);
+            }
+            100% {
+                transform: translateY(-110vh) translateX(var(--drift));
+                opacity: 0;
+            }
+        }
+
+        /* Elements must stay above the particle background layer */
+        .card, .portfolio-section {
+            position: relative;
+            z-index: 1;
         }
 
         /* Main Profile Container Card */
@@ -91,7 +134,6 @@
             opacity: 0.95;
         }
 
-        /* Secondary Style Button (Discord / Socials) */
         .secondary {
             background: transparent;
             color: white;
@@ -103,7 +145,6 @@
             border-color: #555;
         }
 
-        /* Row setup to split Instagram and X side-by-side */
         .social-row {
             display: flex;
             gap: 15px;
@@ -136,14 +177,12 @@
             margin-bottom: 25px;
         }
 
-        /* Layout for creator items containing image + name */
         .client-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
 
-        /* Interactive client grid items */
         .client-item {
             display: flex;
             align-items: center;
@@ -160,12 +199,11 @@
         }
 
         .client-item:hover {
-            background: rgba(185, 28, 28, 0.15); /* Soft red tint on hover */
+            background: rgba(185, 28, 28, 0.15);
             border-color: rgba(185, 28, 28, 0.3);
             transform: translateY(-2px);
         }
 
-        /* Clean circular layout for small creator logo images */
         .client-avatar {
             width: 32px;
             height: 32px;
@@ -174,7 +212,6 @@
             background: #222;
         }
 
-        /* Footer text styling */
         footer {
             margin-top: 35px;
             color: #666;
@@ -184,6 +221,11 @@
     </style>
 </head>
 <body>
+
+    <!-- Target container for our dynamic floating particles -->
+    <div class="particle-container" id="particleContainer"></div>
+
+    <!-- Main Links Card -->
     <div class="card">
         <h1>jxnn.</h1>
 
@@ -214,6 +256,7 @@
         </footer>
     </div>
 
+    <!-- Showcase Section -->
     <div class="portfolio-section">
         <h2>Past Clients & Work</h2>
         
@@ -231,12 +274,45 @@
     </div>
 
     <script>
+        // Background Scroll Tracking Effect
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
         });
+
+        // Dynamic Floating Particle Generator
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            const particleCount = 40; // Total active ambient particles on screen
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize sizes, starting positions, drift amount, opacity levels, and speeds
+                const size = Math.random() * 5 + 2; // 2px to 7px size
+                const leftPos = Math.random() * 100; // Left offset 0% to 100%
+                const delay = Math.random() * 12; // Spread initial spawns smoothly
+                const speed = Math.random() * 8 + 6; // 6s to 14s trip duration
+                const drift = (Math.random() * 60) - 30; // Lateral wave motion
+                const opacity = Math.random() * 0.5 + 0.2; // Opacity variance
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                
+                // Set custom properties directly into css variables
+                particle.style.setProperty('--speed', `${speed}s`);
+                particle.style.setProperty('--drift', `${drift}px`);
+                particle.style.setProperty('--opacity', opacity);
+                particle.style.animationDelay = `${delay}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize particle system on page render
+        createParticles();
     </script>
 </body>
 </html>
-
-```
