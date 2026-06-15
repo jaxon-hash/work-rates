@@ -1,3 +1,8 @@
+Here is the fully corrected code with both **OkHarry** and **Beta Squad** converted into clickable link buttons (`<a>` tags) that will take visitors straight to their official YouTube channels in a new tab.
+
+I also applied a clean hover lift effect (`transform: translateY(-2px)`) to these items so users immediately know they are interactive.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,7 +147,7 @@
             gap: 15px;
         }
 
-        /* Turned items into clickable blocks */
+        /* Interactive client grid items */
         .client-item {
             display: flex;
             align-items: center;
@@ -154,14 +159,14 @@
             border-radius: 12px;
             font-weight: 500;
             color: #d1d5db;
-            text-decoration: none; /* Removes underline from link text */
+            text-decoration: none;
             transition: background 0.2s, border-color 0.2s, transform 0.2s;
         }
 
         .client-item:hover {
             background: rgba(185, 28, 28, 0.15); /* Soft red tint on hover */
             border-color: rgba(185, 28, 28, 0.3);
-            transform: translateY(-2px); /* Adds a subtle lift on hover */
+            transform: translateY(-2px);
         }
 
         /* Clean circular layout for small creator logo images */
@@ -182,7 +187,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="card">
         <h1>jxnn.</h1>
@@ -205,4 +209,48 @@
                 <i class="fa-brands fa-instagram"></i> Instagram
             </a>
             <a class="button secondary" href="https://x.com/jxnn122" target="_blank">
-                <i class="fa-brands fa-x-twitter">
+                <i class="fa-brands fa-x-twitter"></i> X / Twitter
+            </a>
+        </div>
+
+        <footer>
+            Fast turnaround • Quality edits • Reliable communication
+        </footer>
+    </div>
+
+    <div class="portfolio-section">
+        <h2>Past Clients & Work</h2>
+        
+        <div class="client-grid">
+            <a class="client-item" href="https://www.youtube.com/@OkHarry" target="_blank">
+                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png" alt="OkHarry" class="client-avatar">
+                <span>OkHarry</span>
+            </a>
+
+            <a class="client-item" href="https://www.youtube.com/@BetaSquad" target="_blank">
+                <img src="https://yt3.googleusercontent.com/ytc/AIdro_keJoAmv1MrHOIplkYaZok_WuOdiHDTBv8Gv4xlmnOrLzk=s900-c-k-c0x00ffffff-no-rj" alt="Beta Squad" class="client-avatar">
+                <span>Beta Squad</span>
+            </a>
+
+            <a class="client-item" href="#" target="_blank">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop" alt="Channel Name" class="client-avatar">
+                <span>Channel 3</span>
+            </a>
+
+            <a class="client-item" href="#" target="_blank">
+                <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=100&auto=format&fit=crop" alt="TikTok Brand" class="client-avatar">
+                <span>Brand 4</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+        });
+    </script>
+</body>
+</html>
+
+```
