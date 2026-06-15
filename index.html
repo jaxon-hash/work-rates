@@ -115,6 +115,11 @@ body{
     position:relative;
 }
 
+body.reduce-motion *{
+    animation:none !important;
+    transition:none !important;
+}
+
 @keyframes breatheBackground{
     0%{
         background-size:100% 180%;
@@ -193,6 +198,206 @@ body{
 
         opacity:0;
     }
+}
+
+/* ==========================
+   SETTINGS BUTTON
+========================== */
+
+.settings-btn{
+    position:fixed;
+    bottom:25px;
+    left:25px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(24,24,24,.85);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    color:#b5b5b5;
+
+    cursor:pointer;
+
+    z-index:15;
+
+    transition:transform .2s, color .2s, border-color .2s, box-shadow .2s;
+
+    font-size:1.2rem;
+}
+
+.settings-btn:hover{
+    color:#ef4444;
+    border-color:#ef4444;
+    box-shadow:0 0 15px rgba(239,68,68,.4);
+    transform:translateY(-3px);
+}
+
+/* Settings Modal */
+
+.settings-modal{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.7);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:200;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity .3s, visibility .3s;
+}
+
+.settings-modal.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.settings-panel{
+    background:rgba(24,24,24,.95);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border-radius:24px;
+
+    padding:40px;
+
+    max-width:400px;
+
+    width:90%;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.8);
+
+    animation:slideUp .3s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.settings-panel h2{
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:25px;
+    color:white;
+}
+
+.settings-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:18px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.settings-item:last-child{
+    border-bottom:none;
+}
+
+.settings-label{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.settings-label .label-text{
+    color:white;
+    font-weight:600;
+    font-size:1rem;
+}
+
+.settings-label .label-desc{
+    color:#8f8f8f;
+    font-size:.85rem;
+}
+
+/* Toggle Switch */
+
+.toggle-switch{
+    position:relative;
+    width:50px;
+    height:28px;
+    background:#3a3a3a;
+    border-radius:30px;
+    cursor:pointer;
+    border:none;
+    padding:0;
+    transition:background .3s;
+}
+
+.toggle-switch.active{
+    background:#4ade80;
+}
+
+.toggle-switch::after{
+    content:'';
+    position:absolute;
+    top:2px;
+    left:2px;
+    width:24px;
+    height:24px;
+    background:white;
+    border-radius:50%;
+    transition:left .3s;
+}
+
+.toggle-switch.active::after{
+    left:24px;
+}
+
+.close-settings{
+    margin-top:30px;
+
+    width:100%;
+
+    padding:12px;
+
+    background:rgba(239,68,68,.1);
+
+    border:1px solid rgba(239,68,68,.2);
+
+    color:#f87171;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.close-settings:hover{
+    background:rgba(239,68,68,.15);
+    border-color:#ef4444;
 }
 
 /* ==========================
@@ -697,13 +902,20 @@ footer{
 
     border:1px solid rgba(255,255,255,.1);
 
+    color:#b5b5b5;
+
     cursor:pointer;
 
     z-index:10;
+
+    transition:transform .2s, color .2s, border-color .2s, box-shadow .2s;
 }
 
 .back-to-top:hover{
     color:#ef4444;
+    border-color:#ef4444;
+    box-shadow:0 0 15px rgba(239,68,68,.4);
+    transform:translateY(-3px);
 }
 
 </style>
@@ -717,7 +929,37 @@ footer{
     ✓ Email Address Copied!
 </div>
 
-<div class="back-to-top" id="backToTop">
+<!-- Settings Button -->
+<button class="settings-btn" id="settingsBtn" aria-label="Open accessibility settings">
+    <i class="fa-solid fa-gear"></i>
+</button>
+
+<!-- Settings Modal -->
+<div class="settings-modal" id="settingsModal">
+    <div class="settings-panel">
+        <h2>Settings</h2>
+
+        <div class="settings-item">
+            <div class="settings-label">
+                <span class="label-text">Sound Effects</span>
+                <span class="label-desc">Toggle button click sounds</span>
+            </div>
+            <button class="toggle-switch active" id="soundToggle" aria-label="Toggle sound effects"></button>
+        </div>
+
+        <div class="settings-item">
+            <div class="settings-label">
+                <span class="label-text">Reduce Motion</span>
+                <span class="label-desc">Disable animations & effects</span>
+            </div>
+            <button class="toggle-switch" id="motionToggle" aria-label="Toggle reduce motion"></button>
+        </div>
+
+        <button class="close-settings" id="closeSettings">Done</button>
+    </div>
+</div>
+
+<div class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fa-solid fa-arrow-up"></i>
 </div>
 
@@ -776,19 +1018,19 @@ footer{
            href="https://instagram.com/jaxongarforth1"
            target="_blank">
 
-            <i class="fa-brands fa-instagram"></i>
-            Instagram
-        </a>
+             <i class="fa-brands fa-instagram"></i>
+             Instagram
+         </a>
 
-        <a class="button secondary sound-trigger"
-           href="https://x.com/jxnn122"
-           target="_blank">
+         <a class="button secondary sound-trigger"
+            href="https://x.com/jxnn122"
+            target="_blank">
 
-            <i class="fa-brands fa-x-twitter"></i>
-            X / Twitter
-        </a>
+             <i class="fa-brands fa-x-twitter"></i>
+             X / Twitter
+         </a>
 
-    </div>
+     </div>
 
 </div>
 
@@ -798,6 +1040,7 @@ footer{
 
         <iframe
             src="https://www.youtube.com/embed/ggtdj-_FzYA"
+            title="jxnn Editing Showreel"
             allowfullscreen>
 
         </iframe>
@@ -814,7 +1057,8 @@ footer{
        href="https://twitch.tv/okharry"
        target="_blank">
 
-        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png">
+        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png"
+             alt="OkHarry">
 
         <div class="featured-client-text">
 
@@ -832,37 +1076,123 @@ footer{
            href="https://www.youtube.com/@BetaSquad"
            target="_blank">
 
-            <img
-                src="https://replug.link/db2bf3a8"
-                class="client-avatar">
+             <img
+                 src="https://replug.link/db2bf3a8"
+                 alt="Beta Squad"
+                 class="client-avatar">
 
-            <span>Beta Squad</span>
+             <span>Beta Squad</span>
 
-        </a>
+         </a>
 
-    </div>
+     </div>
 
-    <div class="cta-footer">
+     <div class="cta-footer">
 
-        Ready to level up your content?
+         Ready to level up your content?
 
-        <br><br>
+         <br><br>
 
-        Let's work together.
+         Let's work together.
 
-    </div>
+     </div>
 
-    <footer>
+     <footer>
 
-        <div class="footer-copyright">
-            © 2026 jxnn. All rights reserved.
-        </div>
+         <div class="footer-copyright">
+             © 2026 jxnn. All rights reserved.
+         </div>
 
-    </footer>
+     </footer>
 
 </div>
 
 <script>
+
+// ==========================
+// ACCESSIBILITY SETTINGS
+// ==========================
+
+// Check system preference for reduced motion
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Load settings from localStorage
+function loadSettings() {
+    const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
+    const motionReduced = localStorage.getItem("motionReduced") === "true" || prefersReducedMotion;
+
+    return { soundEnabled, motionReduced };
+}
+
+// Save settings to localStorage
+function saveSettings(soundEnabled, motionReduced) {
+    localStorage.setItem("soundEnabled", soundEnabled);
+    localStorage.setItem("motionReduced", motionReduced);
+}
+
+// Apply settings to page
+function applySettings(soundEnabled, motionReduced) {
+    // Update toggle switch states
+    document.getElementById("soundToggle").classList.toggle("active", soundEnabled);
+    document.getElementById("motionToggle").classList.toggle("active", motionReduced);
+
+    // Apply reduce motion class if needed
+    if (motionReduced) {
+        document.body.classList.add("reduce-motion");
+    } else {
+        document.body.classList.remove("reduce-motion");
+    }
+
+    // Store global state for sound
+    window.soundEnabled = soundEnabled;
+    window.motionReduced = motionReduced;
+}
+
+// Initialize settings on page load
+const { soundEnabled: initialSound, motionReduced: initialMotion } = loadSettings();
+applySettings(initialSound, initialMotion);
+
+// Settings Modal
+const settingsBtn = document.getElementById("settingsBtn");
+const settingsModal = document.getElementById("settingsModal");
+const closeSettings = document.getElementById("closeSettings");
+const soundToggle = document.getElementById("soundToggle");
+const motionToggle = document.getElementById("motionToggle");
+
+settingsBtn.addEventListener("click", () => {
+    settingsModal.classList.add("active");
+});
+
+closeSettings.addEventListener("click", () => {
+    settingsModal.classList.remove("active");
+});
+
+settingsModal.addEventListener("click", (e) => {
+    if (e.target === settingsModal) {
+        settingsModal.classList.remove("active");
+    }
+});
+
+// Sound Toggle
+soundToggle.addEventListener("click", () => {
+    const isNowEnabled = !soundToggle.classList.contains("active");
+    soundToggle.classList.toggle("active");
+    window.soundEnabled = isNowEnabled;
+    saveSettings(isNowEnabled, window.motionReduced);
+});
+
+// Motion Toggle
+motionToggle.addEventListener("click", () => {
+    const isNowEnabled = !motionToggle.classList.contains("active");
+    motionToggle.classList.toggle("active");
+    window.motionReduced = isNowEnabled;
+    applySettings(window.soundEnabled, isNowEnabled);
+    saveSettings(window.soundEnabled, isNowEnabled);
+});
+
+// ==========================
+// SOUND EFFECTS
+// ==========================
 
 const clickSound = new Audio(
 "https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3"
@@ -875,15 +1205,18 @@ document.querySelectorAll(".sound-trigger")
 
     element.addEventListener("click", () => {
 
-        clickSound.currentTime = 0;
-
-        clickSound.play().catch(() => {});
+        if (window.soundEnabled) {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(() => {});
+        }
 
     });
 
 });
 
-/* Copy Email */
+/* ==========================
+   COPY EMAIL
+========================== */
 
 const emailBtn = document.getElementById("emailBtn");
 const toast = document.getElementById("toastAlert");
@@ -904,7 +1237,9 @@ emailBtn.addEventListener("click", () => {
 
 });
 
-/* Back To Top */
+/* ==========================
+   BACK TO TOP
+========================== */
 
 document.getElementById("backToTop")
 .addEventListener("click", () => {
@@ -916,7 +1251,9 @@ document.getElementById("backToTop")
 
 });
 
-/* Background Scroll */
+/* ==========================
+   BACKGROUND SCROLL
+========================== */
 
 window.addEventListener("scroll", () => {
 
@@ -932,7 +1269,9 @@ window.addEventListener("scroll", () => {
 
 });
 
-/* Particles */
+/* ==========================
+   PARTICLES
+========================== */
 
 const container =
 document.getElementById("particleContainer");
