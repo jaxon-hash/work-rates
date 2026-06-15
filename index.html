@@ -28,7 +28,6 @@
         body {
             background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
             background-size: 100% 200%;
-            /* 💡 Fix 1: Eliminate background color flash before scroll engine triggers */
             background-position: var(--scroll-pos, 0% 0%);
             color: white;
             display: flex;
@@ -45,18 +44,6 @@
         @keyframes breatheBackground {
             0% { background-size: 100% 180%; }
             100% { background-size: 100% 220%; }
-        }
-
-        /* ✨ Fix 2: Smooth Cinematic On-Load Presentation Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* --- Particle System Styles --- */
@@ -109,7 +96,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         /* Status Indicator Pill Badge */
@@ -217,7 +203,6 @@
             padding: 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             margin-bottom: 25px;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .video-wrapper {
@@ -227,8 +212,6 @@
             overflow: hidden;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            /* 📱 Fix 3: Forces iOS devices to honor the wrapper's rounded corners */
-            -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
 
         .video-wrapper iframe {
@@ -251,7 +234,6 @@
             padding: 35px 30px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .portfolio-section h2 {
@@ -432,4 +414,89 @@
             </a>
 
             <a class="client-item sound-trigger" href="https://www.youtube.com/@BetaSquad" target="_blank">
-                <img src="https://yt3.googleusercontent.com/ytc/AIdro_mN-bfevscWnt58q8R0ZpA0Z-U2vX-Kx7W3P
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-m0W7Hj2071gO091E-nI2hshq27H79_wGA&s" alt="Beta Squad" class="client-avatar">
+                <span>Beta Squad</span>
+            </a>
+        </div>
+
+        <footer>
+            <div class="footer-benefits">Fast turnaround • Quality edits • Reliable communication</div>
+            <div class="footer-copyright">© 2026 jxnn. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <script>
+        const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
+        clickSound.volume = 0.4;
+
+        document.querySelectorAll('.sound-trigger').forEach(element => {
+            element.addEventListener('click', () => {
+                try {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(err => console.log("Audio awaiting gesture trigger."));
+                } catch(e) {
+                    console.log("Audio asset bypassed cleanly:", e);
+                }
+            });
+        });
+
+        // Background Scroll Tracking Engine
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Email Copy Engine System
+        const emailBtn = document.getElementById('emailBtn');
+        const toastAlert = document.getElementById('toastAlert');
+
+        emailBtn.addEventListener('click', () => {
+            const emailAddress = emailBtn.getAttribute('data-email');
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                toastAlert.classList.add('active');
+                setTimeout(() => {
+                    toastAlert.classList.remove('active');
+                }, 2500);
+            }).catch(err => {
+                console.error("Clipboard target missed: ", err);
+            });
+        });
+
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            if (!container) return;
+            const particleCount = 40;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 12;
+                const speed = Math.random() * 8 + 6;
+                const drift = (Math.random() * 60) - 30;
+                const opacity = Math.random() * 0.5 + 0.2;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                
+                particle.style.setProperty('--speed', `${speed}s`);
+                particle.style.setProperty('--drift', `${drift}px`);
+                particle.style.setProperty('--opacity', opacity);
+                particle.style.animationDelay = `${delay}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+</body>
+</html>
