@@ -500,7 +500,7 @@ p{
 }
 
 /* ==========================
-   VIDEO SECTION
+   VIDEO SECTION (FIXED CROPPING)
 ========================== */
 
 .video-section{
@@ -516,26 +516,27 @@ p{
 
     border-radius:24px;
 
-    padding:25px;
+    padding:16px; /* Optimized padding spacing inside card container */
 
     box-shadow:0 20px 40px rgba(0,0,0,.4);
 
     margin-bottom:25px;
 
     animation:fadeInUp .8s cubic-bezier(.16,1,.3,1) forwards;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.video-section:hover {
+    transform: translateY(-2px);
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
 .video-wrapper{
     position:relative;
-
-    padding-bottom:56.25%;
-
-    height:0;
-
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Modern responsive standard aspect engine math ratio formula */
     overflow:hidden;
-
     border-radius:14px;
-
     border:1px solid rgba(255,255,255,.05);
 }
 
@@ -543,9 +544,9 @@ p{
     position:absolute;
     top:0;
     left:0;
-
     width:100%;
     height:100%;
+    border: 0;
 }
 
 /* ==========================
