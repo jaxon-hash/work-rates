@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jxnn. | video editor</title>
+    <title>jxnn. | Video Editor</title>
     <!-- Font Awesome Kit for clean, modern social logos -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -18,24 +18,40 @@
         }
 
         body {
-            background: #0f0f0f;
+            /* Smooth background animation that moves and reacts to scrolling */
+            background: linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
+            background-size: 100% 200%;
+            background-position: var(--scroll-pos, 0% 0%);
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            animation: breatheBackground 12s ease-in-out infinite alternate;
+            transition: background-position 0.2s ease-out;
         }
 
-        /* Profile Container Card */
+        /* Ambient background breathing effect */
+        @keyframes breatheBackground {
+            0% { background-size: 100% 180%; }
+            100% { background-size: 100% 220%; }
+        }
+
+        /* Main Profile Container Card */
         .card {
             max-width: 450px;
             width: 100%;
-            background: #181818;
-            border: 1px solid #2a2a2a;
+            background: rgba(24, 24, 24, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 24px;
             padding: 50px 40px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
         }
 
         h1 {
@@ -57,7 +73,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* Space between logo and text */
+            gap: 10px;
             width: 100%;
             text-decoration: none;
             background: white;
@@ -83,7 +99,7 @@
         }
 
         .secondary:hover {
-            background: #222;
+            background: rgba(255, 255, 255, 0.05);
             border-color: #555;
         }
 
@@ -98,6 +114,50 @@
             flex: 1;
         }
 
+        /* --- NEW: Clients Section --- */
+        .portfolio-section {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .portfolio-section h2 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        /* Layout for creator names/logos */
+        .client-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .client-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: #d1d5db;
+            transition: background 0.2s;
+        }
+
+        .client-item:hover {
+            background: rgba(185, 28, 28, 0.15); /* Soft red tint on hover */
+            border-color: rgba(185, 28, 28, 0.3);
+        }
+
         /* Footer text styling */
         footer {
             margin-top: 35px;
@@ -109,8 +169,9 @@
 </head>
 
 <body>
+    <!-- Main Links Card -->
     <div class="card">
-        <h1>jxnn</h1>
+        <h1>jxnn.</h1>
 
         <p>
             Video Editor specialising in YouTube videos, 
@@ -119,7 +180,7 @@
 
         <!-- Main Rates Button -->
         <a class="button" href="https://ibb.co/XZD7k6g7" target="_blank">
-            View My Rates
+            <i class="fa-solid fa-tags"></i> View My Rates
         </a>
 
         <!-- Main Discord Contact Button -->
@@ -141,5 +202,27 @@
             Fast turnaround • Quality edits • Reliable communication
         </footer>
     </div>
+
+    <!-- Showcase Section (Who you've done work for) -->
+    <div class="portfolio-section">
+        <h2>Past Clients & Work</h2>
+        
+        <div class="client-grid">
+            <!-- Replace these placeholder names with your actual clients/creators -->
+            <div class="client-item">Creator A</div>
+            <div class="client-item">Creator B</div>
+            <div class="client-item">Channel Name</div>
+            <div class="client-item">TikTok Brand</div>
+        </div>
+    </div>
+
+    <!-- Scroll tracking script to pull the red gradient up -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            // Moves the gradient position vertically based on scroll depth
+            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+        });
+    </script>
 </body>
 </html>
