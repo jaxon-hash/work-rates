@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Lost in the Cut | jxnn.</title>
+    
+    <link rel="icon" type="image/png" href="https://replug.link/f76fb3d4">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            background-color: #0a0a0a;
+            overflow: hidden;
+        }
+
+        body {
+            background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
+            background-size: 100% 100%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* --- Particle System Styles --- */
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            bottom: -20px;
+            background: rgba(239, 68, 68, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            animation: floatUp var(--speed) linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: var(--opacity); }
+            90% { opacity: var(--opacity); }
+            100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+        }
+
+        /* --- Error Card Layout --- */
+        .error-card {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 45px 30px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-code {
+            font-size: 6rem;
+            font-weight: 900;
+            color: #ef4444;
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: #b5b5b5;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* Home Navigation Action Button */
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            text-decoration: none;
+            background: white;
+            color: black;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6), 0 0 10px rgba(239, 68, 68, 0.3);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="particle-container" id="particleContainer"></div>
+
+    <div class="error-card">
+        <div class="error-code">404</div>
+        <h1>Lost in the Cut?</h1>
+        <p>The timeline timeline snapped or this page got edited out entirely. Let's get you back to safety.</p>
+        
+        <a class="home-button sound-trigger" href="index.html">
+            <i class="fa-solid fa-house"></i> Back to Portfolio Hub
+        </a>
+
+        <footer>© 2026 jxnn. All rights reserved.</footer>
+    </div>
+
+    <script>
+        // Implements your global button sound feedback logic
+        const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
+        clickSound.volume = 0.4;
+
+        document.querySelectorAll('.sound-trigger').forEach(element => {
+            element.addEventListener('click', () => {
+                try {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(err => console.log("Audio waiting for interaction."));
+                } catch(e) {}
+            });
+        });
+
+        // Dynamic Upward Particle Engine
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            if (!container) return;
+            const particleCount = 35;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 8;
+                const speed = Math.random() * 8 + 6;
+                const drift = (Math.random() * 60) - 30;
+                const opacity = Math.random() * 0.5 + 0.2;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                
+                particle.style.setProperty('--speed', `${speed}s`);
+                particle.style.setProperty('--drift', `${drift}px`);
+                particle.style.setProperty('--opacity', opacity);
+                particle.style.animationDelay = `${delay}s`;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+</body>
+</html>
