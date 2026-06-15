@@ -18,7 +18,7 @@
         }
 
         body {
-            /* Smooth background animation that moves and reacts to scrolling */
+            /* Smooth background gradient that moves and reacts to scrolling */
             background: linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
             background-size: 100% 200%;
             background-position: var(--scroll-pos, 0% 0%);
@@ -114,7 +114,7 @@
             flex: 1;
         }
 
-        /* --- NEW: Clients Section --- */
+        /* --- Clients Showcase Section --- */
         .portfolio-section {
             max-width: 450px;
             width: 100%;
@@ -129,14 +129,14 @@
         }
 
         .portfolio-section h2 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #e5e7eb;
             margin-bottom: 25px;
         }
 
-        /* Layout for creator names/logos */
+        /* Layout for creator items containing image + name */
         .client-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -144,18 +144,31 @@
         }
 
         .client-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px 10px;
+            padding: 12px 15px;
             border-radius: 12px;
             font-weight: 500;
             color: #d1d5db;
-            transition: background 0.2s;
+            transition: background 0.2s, border-color 0.2s;
         }
 
         .client-item:hover {
             background: rgba(185, 28, 28, 0.15); /* Soft red tint on hover */
             border-color: rgba(185, 28, 28, 0.3);
+        }
+
+        /* Clean circular layout for small creator logo images */
+        .client-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #222;
         }
 
         /* Footer text styling */
@@ -208,19 +221,36 @@
         <h2>Past Clients & Work</h2>
         
         <div class="client-grid">
-            <!-- Replace these placeholder names with your actual clients/creators -->
-            <div class="client-item">Creator A</div>
-            <div class="client-item">Creator B</div>
-            <div class="client-item">Channel Name</div>
-            <div class="client-item">TikTok Brand</div>
+            <!-- Creator 1 (Demo Image Linked) -->
+            <div class="client-item">
+                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png" alt="OkHarry" class="client-avatar">
+                <span>OkHarry</span>
+            </div>
+
+            <!-- Creator 2 (Demo Image Linked) -->
+            <div class="client-item">
+                <img src="https://yt3.googleusercontent.com/ytc/AIdro_keJoAmv1MrHOIplkYaZok_WuOdiHDTBv8Gv4xlmnOrLzk=s900-c-k-c0x00ffffff-no-rj"Beta Squad" class="client-avatar">
+                <span>Beta Squad</span>
+            </div>
+
+            <!-- Creator 3 -->
+            <div class="client-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop" alt="Channel Name" class="client-avatar">
+                <span>Channel 3</span>
+            </div>
+
+            <!-- Creator 4 -->
+            <div class="client-item">
+                <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=100&auto=format&fit=crop" alt="TikTok Brand" class="client-avatar">
+                <span>Brand 4</span>
+            </div>
         </div>
     </div>
 
-    <!-- Scroll tracking script to pull the red gradient up -->
+    <!-- Scroll tracking script to pull the red gradient up dynamically -->
     <script>
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            // Moves the gradient position vertically based on scroll depth
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
         });
     </script>
