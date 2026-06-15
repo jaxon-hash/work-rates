@@ -1,149 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jaxon | Video Editor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jxnn | Video Editing</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0a0a0a;
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-}
+        body {
+            background-color: #0f0f11;
+            color: #f3f4f6;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-.container {
-    max-width: 900px;
-    width: 100%;
-}
+        /* Header / Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #fff;
+        }
 
-.header h1 {
-    font-size: 3rem;
-    margin: 0;
-}
+        /* Hero Section */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-.header p {
-    color: #aaa;
-}
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fff, #a3a3a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.card {
-    background: #151515;
-    border: 1px solid #2a2a2a;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
 
-h2 {
-    margin-top: 0;
-}
+        /* Services Grid */
+        .services {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-/* Pricing */
-.price {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #222;
-    color: #ccc;
-}
+        .service-card {
+            background: #18181c;
+            border: 1px solid #27272a;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            min-width: 160px;
+            flex: 1;
+            max-width: 220px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
 
-/* Button */
-.button {
-    display: block;
-    text-align: center;
-    background: white;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-}
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #52525b;
+        }
 
-/* Portfolio grid */
-.portfolio {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
 
-.video {
-    background: #111;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #2a2a2a;
-}
+        /* Contact Button */
+        .cta-btn {
+            display: inline-block;
+            background-color: #fff;
+            color: #000;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: opacity 0.2s, transform 0.2s;
+        }
 
-.video iframe {
-    width: 100%;
-    height: 180px;
-    border: none;
-}
+        .cta-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
 
-.small {
-    color: #888;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
-}
-</style>
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #52525b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .services { flex-direction: column; align-items: center; }
+            .service-card { width: 100%; max-width: 300px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+    <header>
+        <div class="logo">jxnn</div>
+    </header>
 
-    <div class="header">
-        <h1>Jaxon</h1>
-        <p>Video Editor • Shorts • YouTube • TikTok</p>
-    </div>
-
-    <!-- PRICING -->
-    <div class="card">
-        <h2>💰 Pricing</h2>
-
-        <div class="price"><span>Shorts (15–60s)</span><span>£10–£25</span></div>
-        <div class="price"><span>YouTube Edit</span><span>£30–£80</span></div>
-        <div class="price"><span>Rush Delivery</span><span>+50%</span></div>
-
-        <a class="button" href="https://discord.com" target="_blank">Contact Me</a>
-    </div>
-
-    <!-- PORTFOLIO -->
-    <div class="card">
-        <h2>🎬 Portfolio</h2>
-
-        <div class="portfolio">
-
-            <!-- YouTube embed -->
-            <div class="video">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    <main>
+        <h1>High-level video editing for creators.</h1>
+        <p class="subtitle">I turn raw footage into engaging, retention-focused content designed to grow your audience.</p>
+        
+        <div class="services">
+            <div class="service-card">
+                <h3>YouTube</h3>
             </div>
-
-            <!-- Add more videos by replacing the link -->
-            <div class="video">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            <div class="service-card">
+                <h3>Shorts</h3>
             </div>
-
-            <div class="video">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            <div class="service-card">
+                <h3>TikToks</h3>
             </div>
-
         </div>
 
-        <div class="small">Replace these links with your actual edits</div>
-    </div>
+        <a href="mailto:youremail@example.com" class="cta-btn">Get In Touch</a>
+    </main>
 
-</div>
+    <footer>
+        <p>&copy; 2026 jxnn. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
