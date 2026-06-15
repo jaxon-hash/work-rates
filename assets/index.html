@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jxnn. | Professional Video Editor Portfolio</title>
+
+    <link rel="preload" as="image" href="favicon-2.webp">
+    <link rel="shortcut icon" type="image/webp" href="https://replug.link/f76fb3d4">
+
+    <meta name="description" content="Professional Video Editor specialising in high-retention YouTube videos, Shorts and TikTok content.">
+    <meta property="og:title" content="jxnn. | Portfolio Hub">
+    <meta property="og:description" content="Check out my showreel, trusted clients, and editing packages.">
+    <meta property="og:image" content="https://replug.link/f76fb3d4">
+    <meta property="og:url" content="https://jxnn.store">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="jxnn. | Portfolio Hub">
+    <meta name="twitter:description" content="Professional video editor.">
+    <meta name="twitter:image" content="https://replug.link/f76fb3d4">
+
+    <meta name="theme-color" content="#ef4444">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+/* ==========================
+   RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    scroll-behavior:smooth;
+}
+
+/* ==========================
+   SELECTION
+========================== */
+
+::selection{
+    background:#ef4444;
+    color:#fff;
+}
+
+::-moz-selection{
+    background:#ef4444;
+    color:#fff;
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0a0a0a;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#222;
+    border-radius:20px;
+    border:2px solid #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#ef4444;
+}
+
+/* ==========================
+   BODY
+========================== */
+
+html{
+    background:#0a0a0a;
+}
+
+body{
+    background:
+    linear-gradient(
+        180deg,
+        #0a0a0a 0%,
+        #150505 50%,
+        #300505 100%
+    );
+
+    background-size:100% 200%;
+    background-position:var(--scroll-pos,0% 0%);
+
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:40px 20px;
+
+    overflow-x:hidden;
+
+    animation:breatheBackground 12s ease-in-out infinite alternate;
+
+    transition:background-position .2s ease-out;
+
+    position:relative;
+}
+
+@keyframes breatheBackground{
+    0%{
+        background-size:100% 180%;
+    }
+
+    100%{
+        background-size:100% 220%;
+    }
+}
+
+@keyframes fadeInUp{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ==========================
+   PERFORMANCE / REDUCE MOTION MODIFIERS
+========================== */
+
+body.reduce-motion {
+    animation: none !important;
+    background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 100%) !important;
+    background-size: 100% 100% !important;
+    background-position: top center !important;
+    transition: none !important;
+}
+
+body.reduce-motion *,
+body.reduce-motion ::-webkit-scrollbar-thumb {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+
+body.reduce-motion .particle-container {
+    display: none !important;
+}
+
+/* ==========================
+   LAST UPDATED BADGE
+========================== */
+
+.update-badge{
+    position:absolute;
+    top:25px;
+    right:25px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    color:#a3a3a3;
+    padding:6px 12px;
+    border-radius:12px;
+    font-size:.75rem;
+    font-weight:500;
+    letter-spacing:.3px;
+    z-index:10;
+}
+
+.update-badge i{
+    font-size:.8rem;
+    color:#ef4444;
+}
+
+@media(max-width:480px){
+    .update-badge{
+        position:relative;
+        top:auto;
+        right:auto;
+        margin-bottom:20px;
+    }
+}
+
+/* ==========================
+   PARTICLES
+========================== */
+
+.particle-container{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.particle{
+    position:absolute;
+
+    bottom:-20px;
+
+    border-radius:50%;
+
+    background:rgba(239,68,68,.4);
+
+    box-shadow:0 0 10px rgba(239,68,68,.3);
+
+    animation:floatUp var(--speed) linear infinite;
+
+    will-change:transform,opacity;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) translateX(0);
+        opacity:0;
+    }
+
+    10%{
+        opacity:var(--opacity);
+    }
+
+    90%{
+        opacity:var(--opacity);
+    }
+
+    100%{
+        transform:
+            translateY(-110vh)
+            translateX(var(--drift));
+
+        opacity:0;
+    }
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.card,
+.video-section,
+.portfolio-section{
+    position:relative;
+    z-index:1;
+}
+
+.card{
+    max-width:450px;
+    width:100%;
+
+    background:rgba(24,24,24,.75);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:40px;
+
+    text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.5);
+
+    margin-bottom:25px;
+
+    animation:fadeInUp .6s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+/* ==========================
+   PROFILE IMAGE
+========================== */
+
+.profile-pic{
+    width:120px;
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    margin-bottom:25px;
+
+    border:3px solid rgba(239,68,68,.35);
+
+    box-shadow:
+        0 0 20px rgba(239,68,68,.4),
+        0 0 40px rgba(239,68,68,.25);
+
+    transition:transform .25s ease;
+}
+
+.profile-pic:hover{
+    transform:scale(1.04);
+}
+
+/* ==========================
+   STATUS
+========================== */
+
+.status-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    background:rgba(34,197,94,.1);
+
+    border:1px solid rgba(34,197,94,.2);
+
+    color:#4ade80;
+
+    font-size:.8rem;
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:20px;
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+
+    background:#22c55e;
+
+    border-radius:50%;
+
+    box-shadow:0 0 10px #22c55e;
+
+    animation:pulseDot 2s infinite;
+}
+
+@keyframes pulseDot{
+    0%{
+        transform:scale(.95);
+        box-shadow:0 0 0 0 rgba(34,197,94,.7);
+    }
+
+    70%{
+        transform:scale(1);
+        box-shadow:0 0 0 6px rgba(34,197,94,0);
+    }
+
+    100%{
+        transform:scale(.95);
+        box-shadow:0 0 0 0 rgba(34,197,94,0);
+    }
+}
+
+/* ==========================
+   TYPOGRAPHY
+========================== */
+
+h1{
+    font-size:2.5rem;
+    font-weight:700;
+
+    letter-spacing:-0.5px;
+
+    margin-bottom:12px;
+}
+
+.tagline{
+    color:#ffffff;
+
+    font-size:1.1rem;
+
+    font-weight:500;
+
+    margin-bottom:18px;
+
+    line-height:1.6;
+}
+
+p{
+    color:#b5b5b5;
+
+    font-size:1.05rem;
+
+    line-height:1.7;
+
+    margin-bottom:30px;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.button{
+    width:100%;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    padding:16px;
+
+    text-decoration:none;
+
+    border-radius:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    margin-bottom:15px;
+
+    border:1px solid transparent;
+
+    background:white;
+    color:black;
+
+    transition:
+        transform .2s,
+        opacity .2s,
+        border-color .2s,
+        background-color .2s,
+        box-shadow .2s;
+}
+
+.button:hover{
+    transform:translateY(-2px);
+
+    opacity:.95;
+
+    box-shadow:
+        0 0 25px rgba(239,68,68,.7),
+        0 0 10px rgba(239,68,68,.4);
+}
+
+.secondary{
+    background:transparent;
+
+    color:white;
+
+    border:1px solid #3a3a3a;
+}
+
+.secondary:hover{
+    background:rgba(239,68,68,.08);
+
+    border-color:#ef4444;
+
+    box-shadow:
+        0 0 25px rgba(239,68,68,.6),
+        0 0 10px rgba(239,68,68,.3);
+}
+
+.small-note{
+    color:#8f8f8f;
+
+    font-size:.85rem;
+
+    margin-top:-4px;
+    margin-bottom:20px;
+}
+
+.social-row{
+    display:flex;
+    gap:15px;
+    width:100%;
+}
+
+.social-row .button{
+    flex:1;
+}
+
+/* ==========================
+   VIDEO SECTION (FIXED CROPPING)
+========================== */
+
+.video-section{
+    max-width:450px;
+    width:100%;
+
+    background:rgba(24,24,24,.6);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:24px;
+
+    padding:16px;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+
+    margin-bottom:25px;
+
+    animation:fadeInUp .8s cubic-bezier(.16,1,.3,1) forwards;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.video-section:hover {
+    transform: translateY(-2px);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.video-wrapper{
+    position:relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow:hidden;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border: 0;
+}
+
+/* ==========================
+   TRUSTED BY
+========================== */
+
+.portfolio-section{
+    max-width:450px;
+    width:100%;
+
+    background:rgba(24,24,24,.6);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:24px;
+
+    padding:35px 30px;
+
+    text-align:center;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+
+    animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.portfolio-section h2{
+    font-size:1.1rem;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:25px;
+
+    color:#e5e7eb;
+}
+
+/* Featured Client */
+
+.featured-client{
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:rgba(239,68,68,.08);
+
+    border:1px solid rgba(239,68,68,.25);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    transition:.25s;
+}
+
+.featured-client:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 25px rgba(239,68,68,.4);
+}
+
+.featured-client img{
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.featured-client-text{
+    text-align:left;
+}
+
+.featured-client-text small{
+    color:#9ca3af;
+}
+
+/* Other Clients */
+
+.client-grid{
+    display:grid;
+    gap:15px;
+}
+
+.client-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#d1d5db;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:.25s;
+}
+
+.client-item:hover{
+    transform:translateY(-2px);
+
+    border-color:#ef4444;
+
+    box-shadow:
+        0 0 20px rgba(239,68,68,.3);
+}
+
+.client-avatar{
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+/* Footer CTA */
+
+.cta-footer{
+    margin-top:30px;
+
+    color:#d1d5db;
+
+    line-height:1.7;
+}
+
+footer{
+    margin-top:30px;
+
+    text-align:center;
+}
+
+.footer-copyright{
+    color:#666;
+
+    font-size:.85rem;
+
+    margin-top:10px;
+}
+
+/* Toast */
+
+.toast-alert{
+    position:fixed;
+
+    bottom:30px;
+    left:50%;
+
+    transform:translateX(-50%) translateY(100px);
+
+    background:#ef4444;
+
+    color:white;
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    opacity:0;
+
+    transition:.3s;
+
+    z-index:100;
+}
+
+.toast-alert.active{
+    opacity:1;
+
+    transform:translateX(-50%) translateY(0);
+}
+
+/* Back To Top & Settings Controls Menu Architecture */
+
+.bottom-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 99;
+}
+
+.back-to-top,
+.settings-toggle-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(24, 24, 24, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: transform .2s, color .2s, border-color .2s;
+}
+
+.back-to-top:hover,
+.settings-toggle-btn:hover,
+.settings-toggle-btn.active {
+    color: #ef4444;
+    border-color: #ef4444;
+    transform: scale(1.05);
+}
+
+.settings-menu {
+    position: absolute;
+    bottom: 120px;
+    right: 0;
+    width: 240px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+}
+
+.settings-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.settings-menu h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8f8f8f;
+    margin-bottom: 4px;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.setting-desc {
+    font-size: 0.72rem;
+    color: #8f8f8f;
+}
+
+/* Custom Minimalist Toggle Switches */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .2s ease;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .2s ease;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #ef4444;
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="update-badge">
+    <i class="fa-solid fa-clock-rotate-left"></i> Last updated: June 2026
+</div>
+
+<div class="particle-container" id="particleContainer"></div>
+
+<div class="toast-alert" id="toastAlert">
+    ✓ Email Address Copied!
+</div>
+
+<div class="bottom-controls">
+    
+    <div class="settings-menu" id="settingsMenu">
+        <h3>Control Center</h3>
+        
+        <div class="setting-row">
+            <div class="setting-info">
+                <span class="setting-label">Sound Effects</span>
+                <span class="setting-desc">UI Button click feedback</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="soundToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting-row">
+            <div class="setting-info">
+                <span class="setting-label">Reduce Motion</span>
+                <span class="setting-desc">Stops particles & animations</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="motionToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <button class="settings-toggle-btn" id="settingsToggleBtn" title="Open Settings Dashboard">
+        <i class="fa-solid fa-gear"></i>
+    </button>
+
+    <div class="back-to-top" id="backToTop" title="Scroll To Top Element">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+</div>
+
+<div class="card">
+
+    <img
+        src="profile.webp"
+        alt="jxnn"
+        class="profile-pic">
+
+    <div class="status-badge">
+        <div class="status-dot"></div>
+        Available for Projects
+    </div>
+
+    <h1>jxnn.</h1>
+
+    <div class="tagline">
+        You bring the ideas. I make people watch until the end.
+    </div>
+
+    <p>
+        Video editor specialising in YouTube videos,
+        Shorts and TikTok content.
+    </p>
+
+    <a class="button sound-trigger" href="rates.html">
+        <i class="fa-solid fa-tags"></i>
+        View My Rates
+    </a>
+
+    <div class="small-note">
+        Limited editing slots available each month.
+    </div>
+
+    <button
+        class="button secondary sound-trigger"
+        id="emailBtn"
+        data-email="business.jxnn@gmail.com">
+
+        <i class="fa-solid fa-envelope"></i>
+        Copy Business Email
+    </button>
+
+    <a class="button secondary sound-trigger"
+       href="https://discord.gg/qgJNMFy3F6"
+       target="_blank">
+
+       <i class="fa-brands fa-discord"></i>
+       Join My Discord
+    </a>
+
+    <div class="social-row">
+
+        <a class="button secondary sound-trigger"
+           href="https://instagram.com/jaxongarforth1"
+           target="_blank">
+
+            <i class="fa-brands fa-instagram"></i>
+            Instagram
+        </a>
+
+        <a class="button secondary sound-trigger"
+           href="https://x.com/jxnn122"
+           target="_blank">
+
+            <i class="fa-brands fa-x-twitter"></i>
+            X / Twitter
+        </a>
+
+    </div>
+
+</div>
+
+<div class="video-section">
+
+    <div class="video-wrapper">
+
+        <iframe
+            src="https://www.youtube.com/embed/ggtdj-_FzYA"
+            allowfullscreen>
+
+        </iframe>
+
+    </div>
+
+</div>
+
+<div class="portfolio-section">
+
+    <h2>Trusted By</h2>
+
+    <a class="featured-client sound-trigger"
+       href="https://twitch.tv/okharry"
+       target="_blank">
+
+        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a6a4dfdb-5f34-4331-8796-bcae505aa8e6-profile_image-300x300.png">
+
+        <div class="featured-client-text">
+
+            <strong>⭐ OkHarry</strong><br>
+
+            <small>Featured Creator Client</small>
+
+        </div>
+
+    </a>
+
+    <div class="client-grid">
+
+        <a class="client-item sound-trigger"
+           href="https://www.youtube.com/@BetaSquad"
+           target="_blank">
+
+            <img
+                src="https://replug.link/db2bf3a8"
+                class="client-avatar">
+
+            <span>Beta Squad</span>
+
+        </a>
+
+    </div>
+
+    <div class="cta-footer">
+
+        Ready to level up your content?
+
+        <br><br>
+
+        Let's work together.
+
+    </div>
+
+    <footer>
+
+        <div class="footer-copyright">
+            © 2026 jxnn. All rights reserved.
+        </div>
+
+    </footer>
+
+</div>
+
+<script>
+// Preference Management Engine
+let soundEffectsEnabled = localStorage.getItem('soundFX') !== 'false';
+let reduceMotionEnabled = localStorage.getItem('reduceMotion') === 'true';
+
+const soundToggle = document.getElementById('soundToggle');
+const motionToggle = document.getElementById('motionToggle');
+
+soundToggle.checked = soundEffectsEnabled;
+motionToggle.checked = reduceMotionEnabled;
+
+if (reduceMotionEnabled) {
+    document.body.classList.add('reduce-motion');
+}
+
+// Audio System Architecture Setup
+const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
+clickSound.volume = 0.4;
+
+document.querySelectorAll(".sound-trigger").forEach(element => {
+    element.addEventListener("click", () => {
+        if (!soundEffectsEnabled) return;
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {});
+    });
+});
+
+/* Settings Dropdown Panel Engine Toggle */
+const settingsToggleBtn = document.getElementById('settingsToggleBtn');
+const settingsMenu = document.getElementById('settingsMenu');
+
+settingsToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsMenu.classList.toggle('open');
+    settingsToggleBtn.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!settingsMenu.contains(e.target) && e.target !== settingsToggleBtn) {
+        settingsMenu.classList.remove('open');
+        settingsToggleBtn.classList.remove('active');
+    }
+});
+
+// Sound Settings Switch Handler Action Listener
+soundToggle.addEventListener('change', () => {
+    soundEffectsEnabled = soundToggle.checked;
+    localStorage.setItem('soundFX', soundEffectsEnabled);
+});
+
+// Motion Settings Performance Switch Handler Action Listener
+motionToggle.addEventListener('change', () => {
+    reduceMotionEnabled = motionToggle.checked;
+    localStorage.setItem('reduceMotion', reduceMotionEnabled);
+    if (reduceMotionEnabled) {
+        document.body.classList.add('reduce-motion');
+    } else {
+        document.body.classList.remove('reduce-motion');
+        if (container.children.length === 0) {
+            generateParticles();
+        }
+    }
+});
+
+/* Copy Email */
+const emailBtn = document.getElementById("emailBtn");
+const toast = document.getElementById("toastAlert");
+
+emailBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(emailBtn.dataset.email);
+    toast.classList.add("active");
+    setTimeout(() => {
+        toast.classList.remove("active");
+    }, 2500);
+});
+
+/* Back To Top */
+document.getElementById("backToTop").addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: reduceMotionEnabled ? "auto" : "smooth"
+    });
+});
+
+/* Background Scroll Gradient Position Track Engine */
+window.addEventListener("scroll", () => {
+    if (reduceMotionEnabled) return;
+    const percent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.body.style.setProperty("--scroll-pos", `0% ${percent}%`);
+});
+
+/* Particle Generator Production Core Matrix */
+const container = document.getElementById("particleContainer");
+
+function generateParticles() {
+    if (reduceMotionEnabled) return;
+    container.innerHTML = ''; 
+    for(let i = 0; i < 40; i++){
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.width = `${Math.random()*5+2}px`;
+        particle.style.height = particle.style.width;
+        particle.style.left = `${Math.random()*100}%`;
+
+        particle.style.setProperty("--speed", `${Math.random()*8+6}s`);
+        particle.style.setProperty("--drift", `${Math.random()*60-30}px`);
+        particle.style.setProperty("--opacity", Math.random()*0.5+0.2);
+        particle.style.animationDelay = `${Math.random()*12}s`;
+
+        container.appendChild(particle);
+    }
+}
+
+generateParticles();
+</script>
+
+</body>
+</html>
