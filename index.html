@@ -21,13 +21,11 @@
             scroll-behavior: smooth;
         }
 
-        /* 🛠️ FIXED: Forces the absolute base canvas background to black to hide over-scroll white bits */
         html {
             background-color: #0a0a0a;
         }
 
         body {
-            /* 🛠️ FIXED: Added solid black foundation behind the gradient */
             background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
             background-size: 100% 200%;
             background-position: var(--scroll-pos, 0% 0%);
@@ -140,10 +138,11 @@
             cursor: pointer;
         }
 
+        /* 🔴 BRIGHT NEON RED GLOW FOR MAIN WHITE BUTTON */
         .button:hover {
             transform: translateY(-2px);
             opacity: 0.95;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.7), 0 0 10px rgba(239, 68, 68, 0.4);
         }
 
         .secondary {
@@ -152,10 +151,11 @@
             border: 1px solid #3a3a3a;
         }
 
+        /* 🔴 INTENSE NEON RED GLOW FOR TRANSPARENT BUTTONS */
         .secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(239, 68, 68, 0.5);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.08);
+            border-color: #ef4444;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6), 0 0 10px rgba(239, 68, 68, 0.3);
         }
 
         .social-row {
@@ -212,11 +212,12 @@
             cursor: pointer;
         }
 
+        /* 🔴 NEON GLOW FOR CLIENT BLOCKS */
         .client-item:hover {
             background: rgba(185, 28, 28, 0.15);
-            border-color: rgba(185, 28, 28, 0.4);
+            border-color: #ef4444;
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(185, 28, 28, 0.25);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
         }
 
         .client-avatar {
@@ -227,7 +228,7 @@
             background: #222;
         }
 
-        /* --- New UI Features --- */
+        /* --- UI Features --- */
         .back-to-top {
             position: fixed;
             bottom: 25px;
@@ -243,20 +244,17 @@
             justify-content: center;
             cursor: pointer;
             z-index: 10;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s, transform 0.2s, color 0.2s;
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
+            /* 🛠️ FIXED: Forces the button to stay visible permanently */
+            opacity: 1 !important;
+            visibility: visible !important;
+            transition: transform 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
 
         .back-to-top:hover {
             color: #ef4444;
             transform: translateY(-3px);
-            border-color: rgba(239, 68, 68, 0.4);
+            border-color: #ef4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
         }
 
         /* Clipboard Pop-up Alert */
@@ -379,17 +377,11 @@
             });
         });
 
-        // Background Scroll Tracking Effect & Back To Top Visibility Toggle
+        // Background Scroll Tracking Effect
         const backToTopBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
-            
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
         });
 
         backToTopBtn.addEventListener('click', () => {
