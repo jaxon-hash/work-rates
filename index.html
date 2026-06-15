@@ -124,4 +124,76 @@
             border-radius: 14px;
             font-weight: 600;
             margin-bottom: 15px;
-            transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s
+            transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        .secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid #3a3a3a;
+        }
+
+        .secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #555;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .social-row .button {
+            flex: 1;
+        }
+
+        /* --- Clients Showcase Section --- */
+        .portfolio-section {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(24, 24, 24, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .portfolio-section h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        .client-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .client-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: #d1d5db;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+            cursor
