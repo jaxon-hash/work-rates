@@ -18,10 +18,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* 🛠️ FIXED: Forces the absolute base canvas background to black to hide over-scroll white bits */
+        html {
+            background-color: #0a0a0a;
         }
 
         body {
-            background: linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
+            /* 🛠️ FIXED: Added solid black foundation behind the gradient */
+            background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
             background-size: 100% 200%;
             background-position: var(--scroll-pos, 0% 0%);
             color: white;
@@ -128,7 +135,7 @@
             border-radius: 14px;
             font-weight: 600;
             margin-bottom: 15px;
-            transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s;
+            transition: transform 0.2s, opacity 0.2s, border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
             border: 1px solid transparent;
             cursor: pointer;
         }
@@ -136,6 +143,7 @@
         .button:hover {
             transform: translateY(-2px);
             opacity: 0.95;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
         .secondary {
@@ -146,7 +154,8 @@
 
         .secondary:hover {
             background: rgba(255, 255, 255, 0.05);
-            border-color: #555;
+            border-color: rgba(239, 68, 68, 0.5);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
         }
 
         .social-row {
@@ -199,14 +208,15 @@
             font-weight: 500;
             color: #d1d5db;
             text-decoration: none;
-            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
         }
 
         .client-item:hover {
             background: rgba(185, 28, 28, 0.15);
-            border-color: rgba(185, 28, 28, 0.3);
+            border-color: rgba(185, 28, 28, 0.4);
             transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(185, 28, 28, 0.25);
         }
 
         .client-avatar {
@@ -215,6 +225,62 @@
             border-radius: 50%;
             object-fit: cover;
             background: #222;
+        }
+
+        /* --- New UI Features --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(24, 24, 24, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b5b5b5;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.2s, color 0.2s;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            color: #ef4444;
+            transform: translateY(-3px);
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        /* Clipboard Pop-up Alert */
+        .toast-alert {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #ef4444;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+            z-index: 100;
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast-alert.active {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         footer {
@@ -241,6 +307,12 @@
 
     <div class="particle-container" id="particleContainer"></div>
 
+    <div class="toast-alert" id="toastAlert">✓ Email Address Copied!</div>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+
     <div class="card">
         <h1>jxnn.</h1>
 
@@ -252,6 +324,10 @@
         <a class="button sound-trigger" href="https://ibb.co/XZD7k6g7" target="_blank">
             <i class="fa-solid fa-tags"></i> View My Rates
         </a>
+
+        <button class="button secondary sound-trigger" id="emailBtn" data-email="business.jxnn@gmail.com">
+            <i class="fa-solid fa-envelope"></i> Copy Business Email
+        </button>
 
         <a class="button secondary sound-trigger" href="https://discord.gg/dUQGtpwSe" target="_blank">
             <i class="fa-brands fa-discord"></i> Contact Me
@@ -303,9 +379,37 @@
             });
         });
 
+        // Background Scroll Tracking Effect & Back To Top Visibility Toggle
+        const backToTopBtn = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+            
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Email Copy Engine + Alert Popup System
+        const emailBtn = document.getElementById('emailBtn');
+        const toastAlert = document.getElementById('toastAlert');
+
+        emailBtn.addEventListener('click', () => {
+            const emailAddress = emailBtn.getAttribute('data-email');
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                toastAlert.classList.add('active');
+                setTimeout(() => {
+                    toastAlert.classList.remove('active');
+                }, 2500);
+            }).catch(err => {
+                console.error("Could not copy text: ", err);
+            });
         });
 
         function createParticles() {
