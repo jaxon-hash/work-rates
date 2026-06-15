@@ -24,8 +24,7 @@
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
 /* ==========================
@@ -134,6 +133,67 @@ body{
     to{
         opacity:1;
         transform:translateY(0);
+    }
+}
+
+/* ==========================
+   PERFORMANCE / REDUCE MOTION MODIFIERS
+========================== */
+
+body.reduce-motion {
+    animation: none !important;
+    background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 100%) !important;
+    background-size: 100% 100% !important;
+    background-position: top center !important;
+    transition: none !important;
+}
+
+body.reduce-motion *,
+body.reduce-motion ::-webkit-scrollbar-thumb {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+
+body.reduce-motion .particle-container {
+    display: none !important;
+}
+
+/* ==========================
+   LAST UPDATED BADGE
+========================== */
+
+.update-badge{
+    position:absolute;
+    top:25px;
+    right:25px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    color:#a3a3a3;
+    padding:6px 12px;
+    border-radius:12px;
+    font-size:.75rem;
+    font-weight:500;
+    letter-spacing:.3px;
+    z-index:10;
+}
+
+.update-badge i{
+    font-size:.8rem;
+    color:#ef4444;
+}
+
+@media(max-width:480px){
+    .update-badge{
+        position:relative;
+        top:auto;
+        right:auto;
+        margin-bottom:20px;
     }
 }
 
@@ -676,34 +736,144 @@ footer{
     transform:translateX(-50%) translateY(0);
 }
 
-/* Back To Top */
+/* Back To Top & Settings Controls Menu Architecture */
 
-.back-to-top{
-    position:fixed;
-
-    bottom:25px;
-    right:25px;
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(24,24,24,.85);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    cursor:pointer;
-
-    z-index:10;
+.bottom-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 99;
 }
 
-.back-to-top:hover{
-    color:#ef4444;
+.back-to-top,
+.settings-toggle-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(24, 24, 24, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: transform .2s, color .2s, border-color .2s;
+}
+
+.back-to-top:hover,
+.settings-toggle-btn:hover,
+.settings-toggle-btn.active {
+    color: #ef4444;
+    border-color: #ef4444;
+    transform: scale(1.05);
+}
+
+.settings-menu {
+    position: absolute;
+    bottom: 120px;
+    right: 0;
+    width: 240px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+}
+
+.settings-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.settings-menu h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8f8f8f;
+    margin-bottom: 4px;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.setting-desc {
+    font-size: 0.72rem;
+    color: #8f8f8f;
+}
+
+/* Custom Minimalist Toggle Switches */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .2s ease;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .2s ease;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #ef4444;
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
 }
 
 </style>
@@ -711,14 +881,51 @@ footer{
 
 <body>
 
+<div class="update-badge">
+    <i class="fa-solid fa-clock-rotate-left"></i> Last updated: June 2026
+</div>
+
 <div class="particle-container" id="particleContainer"></div>
 
 <div class="toast-alert" id="toastAlert">
     ✓ Email Address Copied!
 </div>
 
-<div class="back-to-top" id="backToTop">
-    <i class="fa-solid fa-arrow-up"></i>
+<div class="bottom-controls">
+    
+    <div class="settings-menu" id="settingsMenu">
+        <h3>Control Center</h3>
+        
+        <div class="setting-row">
+            <div class="setting-info">
+                <span class="setting-label">Sound Effects</span>
+                <span class="setting-desc">UI Button click feedback</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="soundToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting-row">
+            <div class="setting-info">
+                <span class="setting-label">Reduce Motion</span>
+                <span class="setting-desc">Stops particles & animations</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="motionToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <button class="settings-toggle-btn" id="settingsToggleBtn" title="Open Settings Dashboard">
+        <i class="fa-solid fa-gear"></i>
+    </button>
+
+    <div class="back-to-top" id="backToTop" title="Scroll To Top Element">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
 </div>
 
 <div class="card">
@@ -863,118 +1070,120 @@ footer{
 </div>
 
 <script>
+// Preference Management Engine
+let soundEffectsEnabled = localStorage.getItem('soundFX') !== 'false';
+let reduceMotionEnabled = localStorage.getItem('reduceMotion') === 'true';
 
-const clickSound = new Audio(
-"https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3"
-);
+const soundToggle = document.getElementById('soundToggle');
+const motionToggle = document.getElementById('motionToggle');
 
+soundToggle.checked = soundEffectsEnabled;
+motionToggle.checked = reduceMotionEnabled;
+
+if (reduceMotionEnabled) {
+    document.body.classList.add('reduce-motion');
+}
+
+// Audio System Architecture Setup
+const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
 clickSound.volume = 0.4;
 
-document.querySelectorAll(".sound-trigger")
-.forEach(element => {
-
+document.querySelectorAll(".sound-trigger").forEach(element => {
     element.addEventListener("click", () => {
-
+        if (!soundEffectsEnabled) return;
         clickSound.currentTime = 0;
-
         clickSound.play().catch(() => {});
-
     });
+});
 
+/* Settings Dropdown Panel Engine Toggle */
+const settingsToggleBtn = document.getElementById('settingsToggleBtn');
+const settingsMenu = document.getElementById('settingsMenu');
+
+settingsToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsMenu.classList.toggle('open');
+    settingsToggleBtn.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!settingsMenu.contains(e.target) && e.target !== settingsToggleBtn) {
+        settingsMenu.classList.remove('open');
+        settingsToggleBtn.classList.remove('active');
+    }
+});
+
+// Sound Settings Switch Handler Action Listener
+soundToggle.addEventListener('change', () => {
+    soundEffectsEnabled = soundToggle.checked;
+    localStorage.setItem('soundFX', soundEffectsEnabled);
+});
+
+// Motion Settings Performance Switch Handler Action Listener
+motionToggle.addEventListener('change', () => {
+    reduceMotionEnabled = motionToggle.checked;
+    localStorage.setItem('reduceMotion', reduceMotionEnabled);
+    if (reduceMotionEnabled) {
+        document.body.classList.add('reduce-motion');
+    } else {
+        document.body.classList.remove('reduce-motion');
+        // Restart particle generation loop if disabled dynamically
+        if (container.children.length === 0) {
+            generateParticles();
+        }
+    }
 });
 
 /* Copy Email */
-
 const emailBtn = document.getElementById("emailBtn");
 const toast = document.getElementById("toastAlert");
 
 emailBtn.addEventListener("click", () => {
-
-    navigator.clipboard.writeText(
-        emailBtn.dataset.email
-    );
-
+    navigator.clipboard.writeText(emailBtn.dataset.email);
     toast.classList.add("active");
-
     setTimeout(() => {
-
         toast.classList.remove("active");
-
     }, 2500);
-
 });
 
 /* Back To Top */
-
-document.getElementById("backToTop")
-.addEventListener("click", () => {
-
+document.getElementById("backToTop").addEventListener("click", () => {
     window.scrollTo({
-        top:0,
-        behavior:"smooth"
+        top: 0,
+        behavior: reduceMotionEnabled ? "auto" : "smooth"
     });
-
 });
 
-/* Background Scroll */
-
+/* Background Scroll Gradient Position Track Engine */
 window.addEventListener("scroll", () => {
-
-    const percent =
-    (window.scrollY /
-    (document.documentElement.scrollHeight -
-    window.innerHeight)) * 100;
-
-    document.body.style.setProperty(
-        "--scroll-pos",
-        `0% ${percent}%`
-    );
-
+    if (reduceMotionEnabled) return;
+    const percent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.body.style.setProperty("--scroll-pos", `0% ${percent}%`);
 });
 
-/* Particles */
+/* Particle Generator Production Core Matrix */
+const container = document.getElementById("particleContainer");
 
-const container =
-document.getElementById("particleContainer");
+function generateParticles() {
+    if (reduceMotionEnabled) return;
+    container.innerHTML = ''; // Clean slate runtime loop injection safely
+    for(let i = 0; i < 40; i++){
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.width = `${Math.random()*5+2}px`;
+        particle.style.height = particle.style.width;
+        particle.style.left = `${Math.random()*100}%`;
 
-for(let i = 0; i < 40; i++){
+        particle.style.setProperty("--speed", `${Math.random()*8+6}s`);
+        particle.style.setProperty("--drift", `${Math.random()*60-30}px`);
+        particle.style.setProperty("--opacity", Math.random()*0.5+0.2);
+        particle.style.animationDelay = `${Math.random()*12}s`;
 
-    const particle =
-    document.createElement("div");
-
-    particle.classList.add("particle");
-
-    particle.style.width =
-    `${Math.random()*5+2}px`;
-
-    particle.style.height =
-    particle.style.width;
-
-    particle.style.left =
-    `${Math.random()*100}%`;
-
-    particle.style.setProperty(
-        "--speed",
-        `${Math.random()*8+6}s`
-    );
-
-    particle.style.setProperty(
-        "--drift",
-        `${Math.random()*60-30}px`
-    );
-
-    particle.style.setProperty(
-        "--opacity",
-        Math.random()*0.5+0.2
-    );
-
-    particle.style.animationDelay =
-    `${Math.random()*12}s`;
-
-    container.appendChild(particle);
-
+        container.appendChild(particle);
+    }
 }
 
+generateParticles();
 </script>
 
 </body>
