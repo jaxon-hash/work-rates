@@ -89,10 +89,24 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 24px;
-            padding: 50px 40px;
+            padding: 40px 40px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ✨ Added: Avatar Image Layout Frame */
+        .avatar-frame {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
 
         /* Status Indicator Pill Badge */
@@ -188,7 +202,7 @@
             flex: 1;
         }
 
-        /* 🎬 NEW: Video Embed Container Frame Section */
+        /* 🎬 Video Embed Container Frame Section */
         .video-section {
             max-width: 450px;
             width: 100%;
@@ -204,7 +218,7 @@
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* Perfect 16:9 Cinema Widescreen aspect ratio */
+            padding-bottom: 56.25%; /* Perfect 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
             border-radius: 14px;
@@ -366,6 +380,8 @@
             <div class="status-dot"></div> Available for Projects
         </div>
 
+        <img src="https://ibb.co/Q33NP072/robin.jpeg" alt="jxnn." class="avatar-frame">
+
         <h1>jxnn.</h1>
 
         <p>
@@ -397,7 +413,7 @@
 
     <div class="video-section">
         <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/watch?v=ggtdj-_FzYA&t=470s" title="jxnn Editing Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/ggtdj-_FzYA" title="jxnn Editing Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
     </div>
 
