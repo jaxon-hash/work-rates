@@ -35,18 +35,6 @@
             position: relative;
         }
 
-        /* --- Reduce Motion (OS-level accessibility preference) --- */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-
-            .particle-container {
-                display: none !important;
-            }
-        }
-
         /* --- Particle System Styles --- */
         .particle-container {
             position: absolute;
@@ -172,12 +160,8 @@
     </div>
 
     <script>
-        // Respect OS-level "Reduce Motion" accessibility preference automatically
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
         // Dynamic Upward Particle Engine
         function createParticles() {
-            if (reduceMotion) return;
             const container = document.getElementById('particleContainer');
             if (!container) return;
             const particleCount = 35;

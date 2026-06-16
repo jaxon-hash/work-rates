@@ -82,13 +82,6 @@
             transition: background-position 0.2s ease-out;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-
         @keyframes breatheBackground {
             0% { background-size: 100% 180%; }
             100% { background-size: 100% 220%; }
@@ -99,7 +92,7 @@
         ========================== */
 
         .rate-container {
-            max-width: 700px;
+            max-width: min(95%, 850px);
             width: 100%;
             background: rgba(24, 24, 24, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -415,22 +408,13 @@
     </footer>
 
     <script>
-
-    // Respect OS-level "Reduce Motion" accessibility preference automatically
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     /* ==========================
        BACK TO TOP
     ========================== */
 
     document.getElementById("backToTop")
     .addEventListener("click", () => {
-
-        window.scrollTo({
-            top:0,
-            behavior: reduceMotion ? "auto" : "smooth"
-        });
-
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     /* ==========================
@@ -438,11 +422,12 @@
     ========================== */
 
     window.addEventListener('scroll', () => {
-        if (reduceMotion) return;
-        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollHeight > 0) {
+            const scrollPercent = (window.scrollY / scrollHeight) * 100;
+            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+        }
     });
-
     </script>
 </body>
 </html>

@@ -135,31 +135,6 @@ body{
 }
 
 /* ==========================
-   PERFORMANCE / REDUCE MOTION MODIFIERS
-========================== */
-
-@media (prefers-reduced-motion: reduce) {
-    body {
-        animation: none !important;
-        background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 100%) !important;
-        background-size: 100% 100% !important;
-        background-position: top center !important;
-        transition: none !important;
-    }
-
-    body *,
-    body ::-webkit-scrollbar-thumb {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-    }
-
-    .particle-container {
-        display: none !important;
-    }
-}
-
-/* ==========================
    LAST UPDATED BADGE
 ========================== */
 
@@ -219,22 +194,22 @@ body{
 .particle{
     position:absolute;
 
-    bottom:-20px;
+    left:-50px;
 
     border-radius:50%;
 
     background:rgba(239,68,68,.4);
 
-    box-shadow:0 0 10px rgba(239,68,68,.3);
+    box-shadow:0 0 15px rgba(239,68,68,.3);
 
-    animation:floatUp var(--speed) linear infinite;
+    animation:driftAcross var(--speed) linear infinite;
 
     will-change:transform,opacity;
 }
 
-@keyframes floatUp{
+@keyframes driftAcross{
     0%{
-        transform:translateY(0) translateX(0);
+        transform:translateX(0) translateY(0);
         opacity:0;
     }
 
@@ -248,8 +223,8 @@ body{
 
     100%{
         transform:
-            translateY(-110vh)
-            translateX(var(--drift));
+            translateX(110vw)
+            translateY(var(--y-drift));
 
         opacity:0;
     }
@@ -267,7 +242,7 @@ body{
 }
 
 .card{
-    max-width:450px;
+    max-width: clamp(350px, 90%, 650px);
     width:100%;
 
     background:rgba(24,24,24,.75);
@@ -504,7 +479,7 @@ p{
 ========================== */
 
 .video-section{
-    max-width:450px;
+    max-width: clamp(350px, 90%, 650px);
     width:100%;
 
     background:rgba(24,24,24,.6);
@@ -554,7 +529,7 @@ p{
 ========================== */
 
 .portfolio-section{
-    max-width:450px;
+    max-width: clamp(350px, 90%, 650px);
     width:100%;
 
     background:rgba(24,24,24,.6);
@@ -842,14 +817,13 @@ footer{
        Join My Discord
     </a>
 
-    <button
-        class="button secondary"
-        id="discordBtn"
-        data-discord="jxnn">
+    <a class="button secondary"
+       href="https://discord.com/users/1258876319102537799"
+       target="_blank">
 
         <i class="fa-brands fa-discord"></i>
         DM Me (jxnn)
-    </button>
+    </a>
 
     <div class="social-row">
 
@@ -951,12 +925,8 @@ footer{
 </div>
 
 <script>
-// Respect OS-level "Reduce Motion" accessibility preference automatically
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* Copy Email / Discord Username */
+/* Copy Email */
 const emailBtn = document.getElementById("emailBtn");
-const discordBtn = document.getElementById("discordBtn");
 const toast = document.getElementById("toastAlert");
 
 function showToast(message) {
@@ -972,41 +942,33 @@ emailBtn.addEventListener("click", () => {
     showToast("✓ Email Address Copied!");
 });
 
-discordBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(discordBtn.dataset.discord);
-    showToast("✓ Discord Username Copied!");
-});
-
 /* Back To Top */
 document.getElementById("backToTop").addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: reduceMotion ? "auto" : "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 /* Background Scroll Gradient Position Track Engine */
 window.addEventListener("scroll", () => {
-    if (reduceMotion) return;
-    const percent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    document.body.style.setProperty("--scroll-pos", `0% ${percent}%`);
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight > 0) {
+        const percent = (window.scrollY / scrollHeight) * 100;
+        document.body.style.setProperty("--scroll-pos", `0% ${percent}%`);
+    }
 });
 
-/* Particle Generator Production Core Matrix */
 const container = document.getElementById("particleContainer");
-
 function generateParticles() {
-    if (reduceMotion) return;
     container.innerHTML = '';
     for(let i = 0; i < 40; i++){
         const particle = document.createElement("div");
         particle.classList.add("particle");
-        particle.style.width = `${Math.random()*5+2}px`;
-        particle.style.height = particle.style.width;
-        particle.style.left = `${Math.random()*100}%`;
+        const size = Math.random()*5+2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.top = `${Math.random()*110 - 5}%`;
 
-        particle.style.setProperty("--speed", `${Math.random()*8+6}s`);
-        particle.style.setProperty("--drift", `${Math.random()*60-30}px`);
+        particle.style.setProperty("--speed", `${Math.random()*10+8}s`);
+        particle.style.setProperty("--y-drift", `${Math.random()*200-100}px`);
         particle.style.setProperty("--opacity", Math.random()*0.5+0.2);
         particle.style.animationDelay = `${Math.random()*12}s`;
 
