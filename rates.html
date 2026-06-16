@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" href="assets/profile.jpg">
     <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -553,6 +552,7 @@
             </div>
             <div class="info-item">
                 <i class="fa-solid fa-calendar-check"></i>
+                <!-- Update this date manually when rates change -->
                 <span><strong>Last Updated:</strong> <span id="lastUpdated">June 15, 2026</span></span>
             </div>
         </div>
@@ -651,18 +651,18 @@
     // Check system preference for reduced motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Load settings from localStorage
+    // Load settings from localStorage (shared keys with index.html / 404.html)
     function loadSettings() {
-        const soundEnabled = localStorage.getItem("soundEnabled") !== "false";
-        const motionReduced = localStorage.getItem("motionReduced") === "true" || prefersReducedMotion;
+        const soundEnabled = localStorage.getItem("soundFX") !== "false";
+        const motionReduced = localStorage.getItem("reduceMotion") === "true" || prefersReducedMotion;
 
         return { soundEnabled, motionReduced };
     }
 
-    // Save settings to localStorage
+    // Save settings to localStorage (shared keys with index.html / 404.html)
     function saveSettings(soundEnabled, motionReduced) {
-        localStorage.setItem("soundEnabled", soundEnabled);
-        localStorage.setItem("motionReduced", motionReduced);
+        localStorage.setItem("soundFX", soundEnabled);
+        localStorage.setItem("reduceMotion", motionReduced);
     }
 
     // Apply settings to page
@@ -763,15 +763,6 @@
         const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
     });
-
-    /* ==========================
-       LAST UPDATED DATE
-    ========================== */
-
-    // Format: "June 15, 2026" - Update this date when rates change
-    // You can also use JavaScript to auto-generate it from the last commit date if desired
-    const lastUpdatedDate = "June 15, 2026";
-    document.getElementById("lastUpdated").textContent = lastUpdatedDate;
 
     </script>
 </body>

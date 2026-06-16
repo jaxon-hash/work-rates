@@ -7,7 +7,6 @@
     
     <link rel="icon" type="image/png" href="assets/favicon.jpg">
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
@@ -34,6 +33,17 @@
             align-items: center;
             padding: 20px;
             position: relative;
+        }
+
+        /* --- Reduce Motion (synced with index.html / rates.html settings) --- */
+        body.reduce-motion *,
+        body.reduce-motion .particle-container {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        body.reduce-motion .particle-container {
+            display: none !important;
         }
 
         /* --- Particle System Styles --- */
@@ -151,7 +161,7 @@
     <div class="error-card">
         <div class="error-code">404</div>
         <h1>Lost in the Cut?</h1>
-        <p>The timeline timeline snapped or this page got edited out entirely. Let's get you back to safety.</p>
+        <p>The timeline snapped or this page got edited out entirely. Let's get you back to safety.</p>
         
         <a class="home-button sound-trigger" href="index.html">
             <i class="fa-solid fa-house"></i> Back to Portfolio Hub
@@ -161,12 +171,22 @@
     </div>
 
     <script>
+        // Reduce Motion preference (shared keys with index.html / rates.html)
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const reduceMotionEnabled = localStorage.getItem("reduceMotion") === "true" || prefersReducedMotion;
+        const soundEffectsEnabled = localStorage.getItem("soundFX") !== "false";
+
+        if (reduceMotionEnabled) {
+            document.body.classList.add("reduce-motion");
+        }
+
         // Implements your global button sound feedback logic
         const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
         clickSound.volume = 0.4;
 
         document.querySelectorAll('.sound-trigger').forEach(element => {
             element.addEventListener('click', () => {
+                if (!soundEffectsEnabled) return;
                 try {
                     clickSound.currentTime = 0;
                     clickSound.play().catch(err => console.log("Audio waiting for interaction."));
@@ -176,6 +196,7 @@
 
         // Dynamic Upward Particle Engine
         function createParticles() {
+            if (reduceMotionEnabled) return;
             const container = document.getElementById('particleContainer');
             if (!container) return;
             const particleCount = 35;
