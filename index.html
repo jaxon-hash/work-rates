@@ -610,6 +610,66 @@ p{
     animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
 }
 
+.process-section{
+    max-width: min(95%, 1200px);
+    width:100%;
+    background:rgba(24,24,24,.6);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:24px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+    margin-bottom:25px;
+    animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.process-section h2{
+    font-size:1.1rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:30px;
+    color:#e5e7eb;
+}
+
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:20px;
+}
+
+.process-step{
+    padding:30px 20px;
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:18px;
+    transition:transform .3s ease, border-color .3s ease;
+}
+
+.process-step:hover{
+    transform:translateY(-5px);
+    border-color:rgba(239,68,68,.4);
+}
+
+.process-step i{
+    font-size:2rem;
+    color:#ef4444;
+    margin-bottom:20px;
+}
+
+.process-step h3{
+    font-size:1.1rem;
+    margin-bottom:10px;
+    color:#fff;
+}
+
+.process-step p{
+    font-size:.9rem;
+    margin-bottom:0;
+    line-height:1.5;
+}
+
 .portfolio-section h2{
     font-size:1.1rem;
 
@@ -872,9 +932,6 @@ footer{
 <nav class="navbar">
     <div class="nav-content">
         <a href="./" class="nav-logo">jxnn.</a>
-        <a href="rates.html" class="nav-link">
-            <i class="fa-solid fa-tags"></i> View Rates
-        </a>
     </div>
 </nav>
 
@@ -990,6 +1047,32 @@ footer{
 
     </div>
 
+</div>
+
+<div class="process-section">
+    <h2>The Workflow</h2>
+    <div class="process-grid">
+        <div class="process-step">
+            <i class="fa-solid fa-comments"></i>
+            <h3>1. Vision</h3>
+            <p>We discuss your goals, style, and references to ensure we're on the same page.</p>
+        </div>
+        <div class="process-step">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <h3>2. The Edit</h3>
+            <p>I craft the story, focus on retention, and add that professional "pop" to your footage.</p>
+        </div>
+        <div class="process-step">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h3>3. Review</h3>
+            <p>You review the first cut. We tweak and polish until it's exactly what you envisioned.</p>
+        </div>
+        <div class="process-step">
+            <i class="fa-solid fa-rocket"></i>
+            <h3>4. Delivery</h3>
+            <p>Receive your high-quality export ready for upload across all platforms.</p>
+        </div>
+    </div>
 </div>
 
 <div class="portfolio-section">
