@@ -925,6 +925,12 @@ footer{
 </div>
 
 <script>
+/* Clean URL (Removes index.html from address bar) */
+if (window.location.pathname.endsWith('index.html')) {
+    const cleanUrl = window.location.pathname.replace('index.html', '');
+    window.history.replaceState(null, null, cleanUrl || '/');
+}
+
 /* Copy Email */
 const emailBtn = document.getElementById("emailBtn");
 const toast = document.getElementById("toastAlert");
