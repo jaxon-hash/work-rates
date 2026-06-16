@@ -124,7 +124,14 @@
     <nav class="navbar">
         <div class="nav-content">
             <a href="./" class="nav-logo">jxnn.</a>
-            <a href="./" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to Main</a>
+            <div style="display: flex; gap: 8px;">
+                <a href="faq.html" class="nav-link">
+                    <i class="fa-solid fa-circle-question"></i> FAQ
+                </a>
+                <a href="./" class="nav-link">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Main
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -182,6 +189,19 @@
         }
         window.addEventListener('scroll', updateBackground);
         updateBackground();
+
+        /* Navbar Hide/Show on Scroll */
+        let lastScrollY = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 150) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScrollY = window.scrollY;
+        });
+
 
         /* Particles */
         const container = document.getElementById("particleContainer");
