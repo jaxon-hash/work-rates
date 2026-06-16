@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jxnn. | Terms of Service</title>
+    
+    <link rel="icon" type="image/png" href="assets/profile.jpg">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        ::selection { background: #ef4444; color: #fff; }
+
+        html {
+            min-height: 100%;
+            background: #0a0a0a;
+            background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
+            background-size: 100% 220%;
+            background-position: var(--scroll-pos, 0% 0%);
+            background-attachment: fixed;
+            animation: breatheBackground 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes breatheBackground {
+            0% { background-size: 100% 180%; }
+            100% { background-size: 100% 220%; }
+        }
+
+        body {
+            min-height: 100%;
+            background: transparent;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 20px 40px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -1.5px; }
+
+        .nav-link {
+            color: #a3a3a3; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px; border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.2s;
+        }
+
+        .nav-link:hover { color: #fff; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); }
+
+        .content-container {
+            max-width: min(95%, 800px);
+            width: 100%;
+            background: rgba(24, 24, 24, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 30px; }
+        h2 { font-size: 1.4rem; color: #ef4444; margin: 25px 0 10px 0; }
+        p { color: #b5b5b5; line-height: 1.6; margin-bottom: 15px; }
+        ul { margin-bottom: 15px; padding-left: 20px; color: #b5b5b5; }
+        li { margin-bottom: 8px; }
+
+        .loader-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a0a0a;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000;
+            transition: 0.6s;
+        }
+        .loader-wrapper.fade-out { opacity: 0; visibility: hidden; }
+        .loader-logo { font-size: 3.5rem; font-weight: 900; color: #fff; animation: loaderText 2s infinite; }
+        @keyframes loaderText { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+
+        .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; left: -50px; border-radius: 50%; background: rgba(239, 68, 68, 0.4); animation: drift var(--speed) linear infinite; }
+        @keyframes drift { 0% { transform: translateX(0); opacity: 0; } 10%, 90% { opacity: var(--opacity); } 100% { transform: translateX(110vw) translateY(var(--y-drift)); opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-logo">jxnn.</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="./" class="nav-logo">jxnn.</a>
+            <a href="./" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to Main</a>
+        </div>
+    </nav>
+
+    <div class="particle-container" id="particleContainer"></div>
+
+    <div class="content-container">
+        <h1>Terms of Service</h1>
+        <p>Last Updated: June 2026</p>
+
+        <h2>1. Services</h2>
+        <p>jxnn. provides professional video editing services, including but not limited to YouTube videos, Shorts, TikTok content, and thumbnail design.</p>
+
+        <h2>2. Payments & Deposits</h2>
+        <ul>
+            <li>A 50% non-refundable deposit is required to secure your slot for new clients.</li>
+            <li>The remaining balance is due upon approval of the final edit and before the watermark-free file is delivered.</li>
+            <li>Payments are accepted via the methods discussed during the briefing (e.g., PayPal, Bank Transfer).</li>
+        </ul>
+
+        <h2>3. Revisions</h2>
+        <p>I offer 2 rounds of minor revisions per project. Additional revisions or major changes to the original brief after editing has begun may incur extra fees.</p>
+
+        <h2>4. Turnaround Time</h2>
+        <p>Turnaround times are estimates and may vary based on project complexity and current workload. I will communicate any potential delays as early as possible.</p>
+
+        <h2>5. Content Rights</h2>
+        <p>Once full payment is received, you own the rights to the final edited video. I reserve the right to use portions of the work in my portfolio or showreel unless a non-disclosure agreement (NDA) is signed beforehand.</p>
+
+        <h2>6. Communication</h2>
+        <p>Primary communication should happen via Discord or Email to ensure all project details and feedback are tracked properly.</p>
+    </div>
+
+    <footer style="margin-top: 30px; color: #666; font-size: 0.85rem; text-align: center;">
+        © 2026 jxnn. All rights reserved.
+    </footer>
+
+    <script>
+        /* Loader */
+        window.addEventListener("load", () => {
+            setTimeout(() => document.getElementById("loader").classList.add("fade-out"), 400);
+        });
+
+        /* Clean URL */
+        if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('tos.html')) {
+            window.history.replaceState(null, null, window.location.pathname.replace('tos.html', 'tos'));
+        }
+
+        /* Scroll Background */
+        function updateBackground() {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollHeight > 0) {
+                const percent = (window.scrollY / scrollHeight) * 100;
+                document.documentElement.style.setProperty('--scroll-pos', `0% ${percent}%`);
+            }
+        }
+        window.addEventListener('scroll', updateBackground);
+        updateBackground();
+
+        /* Particles */
+        const container = document.getElementById("particleContainer");
+        function generateParticles() {
+            for(let i = 0; i < 30; i++){
+                const p = document.createElement("div");
+                p.className = "particle";
+                const size = Math.random()*5+2;
+                p.style.width = p.style.height = `${size}px`;
+                p.style.top = `${Math.random()*110 - 5}%`;
+                p.style.setProperty("--speed", `${Math.random()*10+8}s`);
+                p.style.setProperty("--y-drift", `${Math.random()*200-100}px`);
+                p.style.setProperty("--opacity", Math.random()*0.5+0.2);
+                p.style.animationDelay = `${Math.random()*12}s`;
+                container.appendChild(p);
+            }
+        }
+        generateParticles();
+    </script>
+</body>
+</html>
