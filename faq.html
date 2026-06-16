@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jxnn. | FAQ</title>
+    
+    <link rel="icon" type="image/png" href="assets/profile.jpg">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        ::selection { background: #ef4444; color: #fff; }
+
+        html {
+            min-height: 100%;
+            background: #0a0a0a;
+            background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
+            background-size: 100% 220%;
+            background-position: var(--scroll-pos, 0% 0%);
+            background-attachment: fixed;
+            animation: breatheBackground 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes breatheBackground {
+            0% { background-size: 100% 180%; }
+            100% { background-size: 100% 220%; }
+        }
+
+        body {
+            min-height: 100%;
+            background: transparent;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 20px 40px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -1.5px; }
+
+        .nav-link {
+            color: #a3a3a3;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        /* CONTAINER */
+        .faq-container {
+            max-width: min(95%, 800px);
+            width: 100%;
+            background: rgba(24, 24, 24, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; letter-spacing: -0.5px; }
+
+        .faq-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .faq-question {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-question i { color: #ef4444; font-size: 1rem; }
+
+        .faq-answer {
+            font-size: 1rem;
+            color: #b5b5b5;
+            line-height: 1.6;
+        }
+
+        /* LOADER */
+        .loader-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a0a0a;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+        }
+
+        .loader-wrapper.fade-out { opacity: 0; visibility: hidden; }
+        .loader-logo { font-size: 3.5rem; font-weight: 900; color: #fff; letter-spacing: -2px; margin-bottom: 10px; animation: loaderText 2s ease-in-out infinite; text-align: center; }
+        .loader-bar { width: 60px; height: 3px; background: #ef4444; margin: 0 auto; border-radius: 10px; box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); animation: loaderBar 1.5s infinite ease-in-out; }
+
+        @keyframes loaderText { 0%, 100% { opacity: 0.8; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
+        @keyframes loaderBar { 0% { width: 0; opacity: 0; } 50% { width: 80px; opacity: 1; } 100% { width: 0; opacity: 0; } }
+
+        /* PARTICLES */
+        .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; left: -50px; border-radius: 50%; background: rgba(239, 68, 68, 0.4); box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); animation: driftAcross var(--speed) linear infinite; will-change: transform, opacity; }
+        @keyframes driftAcross { 0% { transform: translateX(0) translateY(0); opacity: 0; } 10% { opacity: var(--opacity); } 90% { opacity: var(--opacity); } 100% { transform: translateX(110vw) translateY(var(--y-drift)); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div class="loader-wrapper" id="loader">
+        <div>
+            <div class="loader-logo">jxnn.</div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="./" class="nav-logo">jxnn.</a>
+            <a href="./" class="nav-link">
+                <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+        </div>
+    </nav>
+
+    <div class="particle-container" id="particleContainer"></div>
+
+    <div class="faq-container">
+        <h1>Frequently Asked Questions</h1>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <i class="fa-solid fa-clock"></i>
+                What is your average turnaround time?
+            </div>
+            <div class="faq-answer">
+                Standard edits typically take 2-5 business days depending on complexity. Shorts and TikToks are usually delivered within 24-48 hours.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <i class="fa-solid fa-laptop-code"></i>
+                What software do you use for editing?
+            </div>
+            <div class="faq-answer">
+                I primarily use Adobe Premiere Pro for the main assembly and After Effects for advanced motion graphics and visual effects.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <i class="fa-solid fa-rotate-left"></i>
+                How many revisions do I get?
+            </div>
+            <div class="faq-answer">
+                I offer 2 rounds of minor revisions for free to ensure the final product matches your vision perfectly.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <i class="fa-solid fa-file-import"></i>
+                How should I send my footage?
+            </div>
+            <div class="faq-answer">
+                You can send files via Google Drive, WeTransfer, or Dropbox. Please ensure the link is set to "Anyone with the link can view/download."
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <i class="fa-solid fa-credit-card"></i>
+                How do payments work?
+            </div>
+            <div class="faq-answer">
+                I usually require a 50% deposit upfront for new clients, with the remaining balance due upon final approval of the edit.
+            </div>
+        </div>
+    </div>
+
+    <footer style="margin-top: 30px; color: #666; font-size: 0.85rem; text-align: center;">
+        © 2026 jxnn. All rights reserved.
+    </footer>
+
+    <script>
+        /* Page Loader */
+        const loader = document.getElementById("loader");
+        const hideLoader = () => { setTimeout(() => loader.classList.add("fade-out"), 400); };
+        window.addEventListener("load", hideLoader);
+        if (document.readyState === "complete") hideLoader();
+
+        /* Clean URL */
+        if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('faq.html')) {
+            const cleanUrl = window.location.pathname.replace('faq.html', 'faq');
+            window.history.replaceState(null, null, cleanUrl);
+        }
+
+        /* Navbar Scroll */
+        let lastScrollY = window.scrollY;
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        /* Background Scroll */
+        function updateBackground() {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollHeight > 0) {
+                const scrollPercent = (window.scrollY / scrollHeight) * 100;
+                document.documentElement.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+            }
+        }
+        window.addEventListener('scroll', updateBackground);
+        updateBackground();
+
+        /* Particles */
+        const container = document.getElementById("particleContainer");
+        function generateParticles() {
+            container.innerHTML = '';
+            for(let i = 0; i < 30; i++){
+                const particle = document.createElement("div");
+                particle.classList.add("particle");
+                const size = Math.random()*5+2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.top = `${Math.random()*110 - 5}%`;
+                particle.style.setProperty("--speed", `${Math.random()*10+8}s`);
+                particle.style.setProperty("--y-drift", `${Math.random()*200-100}px`);
+                particle.style.setProperty("--opacity", Math.random()*0.5+0.2);
+                particle.style.animationDelay = `${Math.random()*12}s`;
+                container.appendChild(particle);
+            }
+        }
+        generateParticles();
+    </script>
+</body>
+</html>

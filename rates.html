@@ -178,7 +178,7 @@
             letter-spacing: -1.5px;
         }
 
-        .nav-back {
+        .nav-link, .nav-back {
             color: #a3a3a3;
             text-decoration: none;
             font-weight: 600;
@@ -193,7 +193,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .nav-back:hover {
+        .nav-link:hover, .nav-back:hover {
             color: #fff;
             background: rgba(239, 68, 68, 0.1);
             border-color: rgba(239, 68, 68, 0.2);
@@ -463,9 +463,14 @@
     <nav class="navbar">
         <div class="nav-content">
             <a href="./" class="nav-logo">jxnn.</a>
-            <a href="./" class="nav-back">
-                <i class="fa-solid fa-arrow-left"></i> Back to Main
-            </a>
+            <div style="display: flex; gap: 8px;">
+                <a href="faq.html" class="nav-link">
+                    <i class="fa-solid fa-circle-question"></i> FAQ
+                </a>
+                <a href="./" class="nav-back">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Main
+                </a>
+            </div>
         </div>
     </nav>
 
