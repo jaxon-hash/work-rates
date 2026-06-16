@@ -22,34 +22,6 @@
 
         ::selection { background: #ef4444; color: #fff; }
 
-        /* ==========================
-           CUSTOM CURSOR
-        ========================== */
-        @media (pointer: fine) {
-            * { cursor: none !important; }
-            .cursor-dot, .cursor-outline {
-                pointer-events: none;
-                position: fixed;
-                top: 0; left: 0;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                z-index: 10001;
-                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-                opacity: 1;
-            }
-            .cursor-dot {
-                width: 6px;
-                height: 6px;
-                background-color: #ef4444;
-            }
-            .cursor-outline {
-                width: 30px;
-                height: 30px;
-                border: 2px solid rgba(239, 68, 68, 0.5);
-            }
-            .cursor-hover { transform: translate(-50%, -50%) scale(1.5); background-color: rgba(239, 68, 68, 0.1); }
-        }
-
         html {
             min-height: 100%;
             background: #0a0a0a;
@@ -201,9 +173,6 @@
     </style>
 </head>
 <body>
-
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
 
     <div class="loader-wrapper" id="loader">
         <div>
