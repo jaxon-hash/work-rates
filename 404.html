@@ -54,14 +54,14 @@
             border-radius: 50%;
             pointer-events: none;
             box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
-            animation: floatUp var(--speed) linear infinite;
+            animation: driftAcross404 var(--speed) linear infinite;
         }
 
-        @keyframes floatUp {
+        @keyframes driftAcross404 {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
             10% { opacity: var(--opacity); }
             90% { opacity: var(--opacity); }
-            100% { transform: translateY(-110vh) translateX(var(--drift)); opacity: 0; }
+            100% { transform: translateX(110vw) translateY(var(--y-drift)); opacity: 0; }
         }
 
         /* --- Error Card Layout --- */
