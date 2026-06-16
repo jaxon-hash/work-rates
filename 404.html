@@ -249,6 +249,11 @@
     </div>
 
     <script>
+        /* Clean URL for 404 Page */
+        if (window.location.protocol !== 'file:') {
+            window.history.replaceState(null, null, '/404');
+        }
+
         /* Page Loader */
         window.addEventListener("load", () => {
             const loader = document.getElementById("loader");

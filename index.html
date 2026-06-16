@@ -107,6 +107,7 @@ body{
 
     animation:breatheBackground 12s ease-in-out infinite alternate;
 
+    background-attachment: fixed;
     transition:background-position .2s ease-out;
 
     position:relative;
@@ -260,6 +261,7 @@ body::before {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     z-index: 1000;
     padding: 15px 0;
+    transition: transform 0.3s ease;
 }
 
 .nav-content {
@@ -1073,6 +1075,19 @@ if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('i
     const cleanUrl = window.location.pathname.replace('index.html', '');
     window.history.replaceState(null, null, cleanUrl || '/');
 }
+
+/* Navbar Hide/Show on Scroll */
+let lastScrollY = window.scrollY;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > lastScrollY && window.scrollY > 150) {
+        navbar.style.transform = 'translateY(-100%)';
+    } else {
+        navbar.style.transform = 'translateY(0)';
+    }
+    lastScrollY = window.scrollY;
+});
 
 /* Copy Email */
 const emailBtn = document.getElementById("emailBtn");

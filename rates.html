@@ -78,6 +78,7 @@
             min-height: 100vh;
             padding: 100px 20px 40px;
             overflow-x: hidden;
+            background-attachment: fixed;
             animation: breatheBackground 12s ease-in-out infinite alternate;
             transition: background-position 0.2s ease-out;
         }
@@ -155,6 +156,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
             padding: 15px 0;
+            transition: transform 0.3s ease;
         }
 
         .nav-content {
@@ -574,6 +576,19 @@
         const cleanUrl = window.location.pathname.replace('rates.html', 'rates');
         window.history.replaceState(null, null, cleanUrl);
     }
+
+    /* Navbar Hide/Show on Scroll */
+    let lastScrollY = window.scrollY;
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY && window.scrollY > 150) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        lastScrollY = window.scrollY;
+    });
 
     /* ==========================
        BACK TO TOP
