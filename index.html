@@ -77,11 +77,12 @@
    BODY
 ========================== */
 
-html{
-    background:#0a0a0a;
+html, body{
+    min-height: 100%;
+    background: #0a0a0a;
 }
 
-body{
+html {
     background:
     linear-gradient(
         180deg,
@@ -90,26 +91,20 @@ body{
         #4a0a0a 100%
     );
 
-    background-size:100% 200%;
+    background-size:100% 220%;
     background-position:var(--scroll-pos,0% 0%);
+    animation:breatheBackground 12s ease-in-out infinite alternate;
+    background-attachment: fixed;
+    transition:background-position .2s ease-out;
+}
 
+body{
     color:white;
-
     display:flex;
     flex-direction:column;
     align-items:center;
-
-    min-height:100vh;
-
     padding:100px 20px 40px;
-
     overflow-x:hidden;
-
-    animation:breatheBackground 12s ease-in-out infinite alternate;
-
-    background-attachment: fixed;
-    transition:background-position .2s ease-out;
-
     position:relative;
 }
 
@@ -1110,13 +1105,16 @@ document.getElementById("backToTop").addEventListener("click", () => {
 });
 
 /* Background Scroll Gradient Position Track Engine */
-window.addEventListener("scroll", () => {
+function updateBackground() {
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (scrollHeight > 0) {
         const percent = (window.scrollY / scrollHeight) * 100;
-        document.body.style.setProperty("--scroll-pos", `0% ${percent}%`);
+        document.documentElement.style.setProperty("--scroll-pos", `0% ${percent}%`);
     }
-});
+}
+
+window.addEventListener("scroll", updateBackground);
+updateBackground(); // Initialize immediately on load
 
 const container = document.getElementById("particleContainer");
 function generateParticles() {
