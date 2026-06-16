@@ -525,6 +525,12 @@
     </footer>
 
     <script>
+    /* Clean URL (Displays /rates instead of /rates.html) */
+    if (window.location.pathname.endsWith('rates.html')) {
+        const cleanUrl = window.location.pathname.replace('rates.html', 'rates');
+        window.history.replaceState(null, null, cleanUrl);
+    }
+
     /* Page Loader */
     window.addEventListener("load", () => {
         const loader = document.getElementById("loader");
