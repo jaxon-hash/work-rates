@@ -24,6 +24,32 @@
         }
 
         /* ==========================
+           CUSTOM CURSOR
+        ========================== */
+        @media (pointer: fine) {
+            * { cursor: none !important; }
+            .cursor-dot, .cursor-outline {
+                pointer-events: none;
+                position: fixed;
+                top: 0; left: 0;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                z-index: 10001;
+                transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            }
+            .cursor-dot {
+                width: 6px;
+                height: 6px;
+                background-color: #ef4444;
+            }
+            .cursor-outline {
+                width: 30px;
+                height: 30px;
+                border: 2px solid rgba(239, 68, 68, 0.5);
+            }
+        }
+
+        /* ==========================
            SELECTION
         ========================== */
 
@@ -378,6 +404,9 @@
 </head>
 <body>
 
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
     <nav class="navbar">
         <div class="nav-content">
             <a href="./" class="nav-logo">jxnn.</a>
@@ -535,6 +564,32 @@
         }
         lastScrollY = window.scrollY;
     });
+
+    /* ==========================
+       CUSTOM CURSOR LOGIC
+    ========================== */
+    const cursorDot = document.querySelector("[data-cursor-dot]");
+    const cursorOutline = document.querySelector("[data-cursor-outline]");
+
+    if (cursorDot && cursorOutline) {
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        document.addEventListener("mousedown", () => cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)");
+        document.addEventListener("mouseup", () => cursorOutline.style.transform = "translate(-50%, -50%) scale(1)");
+        document.addEventListener("mouseout", () => { cursorDot.style.opacity = "0"; cursorOutline.style.opacity = "0"; });
+        document.addEventListener("mouseover", () => { cursorDot.style.opacity = "1"; cursorOutline.style.opacity = "1"; });
+    }
 
     /* ==========================
        PARTICLE ENGINE
