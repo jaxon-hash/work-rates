@@ -63,13 +63,10 @@
            BODY
         ========================== */
 
-        html, body {
-            min-height: 100%;
-            background: #0a0a0a;
-        }
-
         html {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
+            min-height: 100%;
+            background: #0a0a0a; /* Fallback base color */
+            background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
             background-size: 100% 220%;
             background-position: var(--scroll-pos, 0% 0%);
             background-attachment: fixed;
@@ -78,6 +75,8 @@
         }
 
         body {
+            min-height: 100%;
+            background: transparent;
             color: white;
             display: flex;
             flex-direction: column;
