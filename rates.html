@@ -76,7 +76,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 100px 20px 40px;
             overflow-x: hidden;
             animation: breatheBackground 12s ease-in-out infinite alternate;
             transition: background-position 0.2s ease-out;
@@ -141,6 +141,62 @@
         }
 
         /* ==========================
+           NAVIGATION
+        ========================== */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -1.5px;
+        }
+
+        .nav-back {
+            color: #a3a3a3;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-back:hover {
+            color: #fff;
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.2);
+            transform: translateX(-2px);
+        }
+
+        /* ==========================
            RATE CONTAINER
         ========================== */
 
@@ -159,35 +215,11 @@
             margin-bottom: 30px;
         }
 
-        .header-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 35px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 20px;
-        }
-
-        .back-link {
-            color: #b5b5b5;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .back-link:hover {
-            color: #ef4444;
-            transform: translateX(-2px);
-        }
-
         h1 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             letter-spacing: -0.5px;
+            margin-bottom: 30px;
         }
 
         /* Info Bar */
@@ -412,6 +444,15 @@
         </div>
     </div>
 
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="./" class="nav-logo">jxnn.</a>
+            <a href="./" class="nav-back">
+                <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </a>
+        </div>
+    </nav>
+
     <div class="particle-container" id="particleContainer"></div>
 
     <div class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -419,12 +460,7 @@
     </div>
 
     <div class="rate-container">
-        <div class="header-row">
-            <a href="./" class="back-link">
-                <i class="fa-solid fa-arrow-left"></i> Back to Main
-            </a>
-            <h1>Pricing & Packages</h1>
-        </div>
+        <h1>Pricing & Packages</h1>
 
         <!-- Info Bar -->
         <div class="info-bar">
