@@ -138,23 +138,25 @@ body{
    PERFORMANCE / REDUCE MOTION MODIFIERS
 ========================== */
 
-body.reduce-motion {
-    animation: none !important;
-    background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 100%) !important;
-    background-size: 100% 100% !important;
-    background-position: top center !important;
-    transition: none !important;
-}
+@media (prefers-reduced-motion: reduce) {
+    body {
+        animation: none !important;
+        background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 100%) !important;
+        background-size: 100% 100% !important;
+        background-position: top center !important;
+        transition: none !important;
+    }
 
-body.reduce-motion *,
-body.reduce-motion ::-webkit-scrollbar-thumb {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-}
+    body *,
+    body ::-webkit-scrollbar-thumb {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
 
-body.reduce-motion .particle-container {
-    display: none !important;
+    .particle-container {
+        display: none !important;
+    }
 }
 
 /* ==========================
@@ -735,7 +737,7 @@ footer{
     transform:translateX(-50%) translateY(0);
 }
 
-/* Back To Top & Settings Controls Menu Architecture */
+/* Back To Top */
 
 .bottom-controls {
     position: fixed;
@@ -747,8 +749,7 @@ footer{
     z-index: 99;
 }
 
-.back-to-top,
-.settings-toggle-btn {
+.back-to-top {
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -762,117 +763,10 @@ footer{
     transition: transform .2s, color .2s, border-color .2s;
 }
 
-.back-to-top:hover,
-.settings-toggle-btn:hover,
-.settings-toggle-btn.active {
+.back-to-top:hover {
     color: #ef4444;
     border-color: #ef4444;
     transform: scale(1.05);
-}
-
-.settings-menu {
-    position: absolute;
-    bottom: 120px;
-    right: 0;
-    width: 240px;
-    background: rgba(20, 20, 20, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    opacity: 0;
-    transform: translateY(15px);
-    pointer-events: none;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
-}
-
-.settings-menu.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-}
-
-.settings-menu h3 {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #8f8f8f;
-    margin-bottom: 4px;
-}
-
-.setting-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.setting-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.setting-label {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #fff;
-}
-
-.setting-desc {
-    font-size: 0.72rem;
-    color: #8f8f8f;
-}
-
-/* Custom Minimalist Toggle Switches */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 38px;
-    height: 22px;
-    flex-shrink: 0;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #333;
-    transition: .2s ease;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .2s ease;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #ef4444;
-}
-
-input:checked + .slider:before {
-    transform: translateX(16px);
 }
 
 </style>
@@ -891,37 +785,6 @@ input:checked + .slider:before {
 </div>
 
 <div class="bottom-controls">
-    
-    <div class="settings-menu" id="settingsMenu">
-        <h3>Control Center</h3>
-        
-        <div class="setting-row">
-            <div class="setting-info">
-                <span class="setting-label">Sound Effects</span>
-                <span class="setting-desc">UI Button click feedback</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="soundToggle">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="setting-row">
-            <div class="setting-info">
-                <span class="setting-label">Reduce Motion</span>
-                <span class="setting-desc">Stops particles & animations</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="motionToggle">
-                <span class="slider"></span>
-            </label>
-        </div>
-    </div>
-
-    <button class="settings-toggle-btn" id="settingsToggleBtn" title="Open Settings Dashboard">
-        <i class="fa-solid fa-gear"></i>
-    </button>
-
     <div class="back-to-top" id="backToTop" title="Scroll To Top Element">
         <i class="fa-solid fa-arrow-up"></i>
     </div>
@@ -953,7 +816,7 @@ input:checked + .slider:before {
         Shorts and TikTok content.
     </p>
 
-    <a class="button sound-trigger" href="rates.html">
+    <a class="button" href="rates.html">
         <i class="fa-solid fa-tags"></i>
         View My Rates
     </a>
@@ -963,7 +826,7 @@ input:checked + .slider:before {
     </div>
 
     <button
-        class="button secondary sound-trigger"
+        class="button secondary"
         id="emailBtn"
         data-email="business.jxnn@gmail.com">
 
@@ -971,7 +834,7 @@ input:checked + .slider:before {
         Copy Business Email
     </button>
 
-    <a class="button secondary sound-trigger"
+    <a class="button secondary"
        href="https://discord.gg/qgJNMFy3F6"
        target="_blank">
 
@@ -979,9 +842,18 @@ input:checked + .slider:before {
        Join My Discord
     </a>
 
+    <button
+        class="button secondary"
+        id="discordBtn"
+        data-discord="jxnn">
+
+        <i class="fa-brands fa-discord"></i>
+        DM Me (jxnn)
+    </button>
+
     <div class="social-row">
 
-        <a class="button secondary sound-trigger"
+        <a class="button secondary"
            href="https://instagram.com/jaxongarforth1"
            target="_blank">
 
@@ -989,7 +861,7 @@ input:checked + .slider:before {
             Instagram
         </a>
 
-        <a class="button secondary sound-trigger"
+        <a class="button secondary"
            href="https://x.com/jxnn122"
            target="_blank">
 
@@ -1021,7 +893,7 @@ input:checked + .slider:before {
 
     <h2>Trusted By</h2>
 
-    <a class="featured-client sound-trigger"
+    <a class="featured-client"
        href="https://twitch.tv/okharry"
        target="_blank">
 
@@ -1039,7 +911,7 @@ input:checked + .slider:before {
 
     <div class="client-grid">
 
-        <a class="client-item sound-trigger"
+        <a class="client-item"
            href="https://www.youtube.com/@BetaSquad"
            target="_blank">
 
@@ -1079,92 +951,43 @@ input:checked + .slider:before {
 </div>
 
 <script>
-// Preference Management Engine
-let soundEffectsEnabled = localStorage.getItem('soundFX') !== 'false';
-let reduceMotionEnabled = localStorage.getItem('reduceMotion') === 'true';
+// Respect OS-level "Reduce Motion" accessibility preference automatically
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const soundToggle = document.getElementById('soundToggle');
-const motionToggle = document.getElementById('motionToggle');
-
-soundToggle.checked = soundEffectsEnabled;
-motionToggle.checked = reduceMotionEnabled;
-
-if (reduceMotionEnabled) {
-    document.body.classList.add('reduce-motion');
-}
-
-// Audio System Architecture Setup
-const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
-clickSound.volume = 0.4;
-
-document.querySelectorAll(".sound-trigger").forEach(element => {
-    element.addEventListener("click", () => {
-        if (!soundEffectsEnabled) return;
-        clickSound.currentTime = 0;
-        clickSound.play().catch(() => {});
-    });
-});
-
-/* Settings Dropdown Panel Engine Toggle */
-const settingsToggleBtn = document.getElementById('settingsToggleBtn');
-const settingsMenu = document.getElementById('settingsMenu');
-
-settingsToggleBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    settingsMenu.classList.toggle('open');
-    settingsToggleBtn.classList.toggle('active');
-});
-
-document.addEventListener('click', (e) => {
-    if (!settingsMenu.contains(e.target) && e.target !== settingsToggleBtn) {
-        settingsMenu.classList.remove('open');
-        settingsToggleBtn.classList.remove('active');
-    }
-});
-
-// Sound Settings Switch Handler Action Listener
-soundToggle.addEventListener('change', () => {
-    soundEffectsEnabled = soundToggle.checked;
-    localStorage.setItem('soundFX', soundEffectsEnabled);
-});
-
-// Motion Settings Performance Switch Handler Action Listener
-motionToggle.addEventListener('change', () => {
-    reduceMotionEnabled = motionToggle.checked;
-    localStorage.setItem('reduceMotion', reduceMotionEnabled);
-    if (reduceMotionEnabled) {
-        document.body.classList.add('reduce-motion');
-    } else {
-        document.body.classList.remove('reduce-motion');
-        if (container.children.length === 0) {
-            generateParticles();
-        }
-    }
-});
-
-/* Copy Email */
+/* Copy Email / Discord Username */
 const emailBtn = document.getElementById("emailBtn");
+const discordBtn = document.getElementById("discordBtn");
 const toast = document.getElementById("toastAlert");
 
-emailBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(emailBtn.dataset.email);
+function showToast(message) {
+    toast.textContent = message;
     toast.classList.add("active");
     setTimeout(() => {
         toast.classList.remove("active");
     }, 2500);
+}
+
+emailBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(emailBtn.dataset.email);
+    showToast("✓ Email Address Copied!");
+});
+
+discordBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText(discordBtn.dataset.discord);
+    showToast("✓ Discord Username Copied!");
 });
 
 /* Back To Top */
 document.getElementById("backToTop").addEventListener("click", () => {
     window.scrollTo({
         top: 0,
-        behavior: reduceMotionEnabled ? "auto" : "smooth"
+        behavior: reduceMotion ? "auto" : "smooth"
     });
 });
 
 /* Background Scroll Gradient Position Track Engine */
 window.addEventListener("scroll", () => {
-    if (reduceMotionEnabled) return;
+    if (reduceMotion) return;
     const percent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
     document.body.style.setProperty("--scroll-pos", `0% ${percent}%`);
 });
@@ -1173,8 +996,8 @@ window.addEventListener("scroll", () => {
 const container = document.getElementById("particleContainer");
 
 function generateParticles() {
-    if (reduceMotionEnabled) return;
-    container.innerHTML = ''; 
+    if (reduceMotion) return;
+    container.innerHTML = '';
     for(let i = 0; i < 40; i++){
         const particle = document.createElement("div");
         particle.classList.add("particle");

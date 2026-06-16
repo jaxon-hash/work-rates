@@ -35,15 +35,16 @@
             position: relative;
         }
 
-        /* --- Reduce Motion (synced with index.html / rates.html settings) --- */
-        body.reduce-motion *,
-        body.reduce-motion .particle-container {
-            animation: none !important;
-            transition: none !important;
-        }
+        /* --- Reduce Motion (OS-level accessibility preference) --- */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
 
-        body.reduce-motion .particle-container {
-            display: none !important;
+            .particle-container {
+                display: none !important;
+            }
         }
 
         /* --- Particle System Styles --- */
@@ -163,7 +164,7 @@
         <h1>Lost in the Cut?</h1>
         <p>The timeline snapped or this page got edited out entirely. Let's get you back to safety.</p>
         
-        <a class="home-button sound-trigger" href="index.html">
+        <a class="home-button" href="index.html">
             <i class="fa-solid fa-house"></i> Back to Portfolio Hub
         </a>
 
@@ -171,32 +172,12 @@
     </div>
 
     <script>
-        // Reduce Motion preference (shared keys with index.html / rates.html)
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const reduceMotionEnabled = localStorage.getItem("reduceMotion") === "true" || prefersReducedMotion;
-        const soundEffectsEnabled = localStorage.getItem("soundFX") !== "false";
-
-        if (reduceMotionEnabled) {
-            document.body.classList.add("reduce-motion");
-        }
-
-        // Implements your global button sound feedback logic
-        const clickSound = new Audio("https://cdnjs.cloudflare.com/ajax/libs/ion-sound/3.0.7/sounds/button_click.mp3");
-        clickSound.volume = 0.4;
-
-        document.querySelectorAll('.sound-trigger').forEach(element => {
-            element.addEventListener('click', () => {
-                if (!soundEffectsEnabled) return;
-                try {
-                    clickSound.currentTime = 0;
-                    clickSound.play().catch(err => console.log("Audio waiting for interaction."));
-                } catch(e) {}
-            });
-        });
+        // Respect OS-level "Reduce Motion" accessibility preference automatically
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         // Dynamic Upward Particle Engine
         function createParticles() {
-            if (reduceMotionEnabled) return;
+            if (reduceMotion) return;
             const container = document.getElementById('particleContainer');
             if (!container) return;
             const particleCount = 35;
