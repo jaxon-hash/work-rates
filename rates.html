@@ -88,11 +88,51 @@
         }
 
         /* ==========================
+           PARTICLES
+        ========================== */
+
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            left: -50px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+            animation: driftAcross var(--speed) linear infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes driftAcross {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 0;
+            }
+            10% { opacity: var(--opacity); }
+            90% { opacity: var(--opacity); }
+            100% {
+                transform: translateX(110vw) translateY(var(--y-drift));
+                opacity: 0;
+            }
+        }
+
+        /* ==========================
            RATE CONTAINER
         ========================== */
 
         .rate-container {
-            max-width: min(95%, 850px);
+            position: relative;
+            z-index: 1;
+            max-width: min(95%, 1000px);
             width: 100%;
             background: rgba(24, 24, 24, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -297,6 +337,8 @@
 </head>
 <body>
 
+    <div class="particle-container" id="particleContainer"></div>
+
     <div class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fa-solid fa-arrow-up"></i>
     </div>
@@ -428,6 +470,29 @@
             document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
         }
     });
+
+    /* ==========================
+       PARTICLE ENGINE
+    ========================== */
+
+    const container = document.getElementById("particleContainer");
+    function generateParticles() {
+        container.innerHTML = '';
+        for(let i = 0; i < 40; i++){
+            const particle = document.createElement("div");
+            particle.classList.add("particle");
+            const size = Math.random()*5+2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.top = `${Math.random()*110 - 5}%`;
+            particle.style.setProperty("--speed", `${Math.random()*10+8}s`);
+            particle.style.setProperty("--y-drift", `${Math.random()*200-100}px`);
+            particle.style.setProperty("--opacity", Math.random()*0.5+0.2);
+            particle.style.animationDelay = `${Math.random()*12}s`;
+            container.appendChild(particle);
+        }
+    }
+    generateParticles();
     </script>
 </body>
 </html>
