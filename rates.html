@@ -561,19 +561,19 @@
     </footer>
 
     <script>
-    /* Clean URL (Displays /rates instead of /rates.html) */
-    if (window.location.pathname.endsWith('rates.html')) {
+    /* Page Loader - Executed first */
+    const loader = document.getElementById("loader");
+    const hideLoader = () => {
+        setTimeout(() => loader.classList.add("fade-out"), 400);
+    };
+    window.addEventListener("load", hideLoader);
+    if (document.readyState === "complete") hideLoader();
+
+    /* Clean URL (Displays /rates instead of /rates.html) - Protected for local testing */
+    if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('rates.html')) {
         const cleanUrl = window.location.pathname.replace('rates.html', 'rates');
         window.history.replaceState(null, null, cleanUrl);
     }
-
-    /* Page Loader */
-    window.addEventListener("load", () => {
-        const loader = document.getElementById("loader");
-        setTimeout(() => {
-            loader.classList.add("fade-out");
-        }, 400);
-    });
 
     /* ==========================
        BACK TO TOP

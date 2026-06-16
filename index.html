@@ -101,7 +101,7 @@ body{
 
     min-height:100vh;
 
-    padding:40px 20px;
+    padding:100px 20px 40px;
 
     overflow-x:hidden;
 
@@ -155,7 +155,7 @@ body::before {
 
 .update-badge{
     position:absolute;
-    top:25px;
+    top:110px;
     right:25px;
     display:inline-flex;
     align-items:center;
@@ -243,6 +243,61 @@ body::before {
 
         opacity:0;
     }
+}
+
+/* ==========================
+   NAVIGATION
+========================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -1.5px;
+}
+
+.nav-link {
+    color: #a3a3a3;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-link:hover {
+    color: #fff;
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
 /* ==========================
@@ -820,6 +875,15 @@ footer{
     </div>
 </div>
 
+<nav class="navbar">
+    <div class="nav-content">
+        <a href="./" class="nav-logo">jxnn.</a>
+        <a href="rates.html" class="nav-link">
+            <i class="fa-solid fa-tags"></i> View Rates
+        </a>
+    </div>
+</nav>
+
 <div class="update-badge">
     <i class="fa-solid fa-clock-rotate-left"></i> Last updated: June 2026
 </div>
@@ -996,16 +1060,16 @@ footer{
 </div>
 
 <script>
-/* Page Loader */
-window.addEventListener("load", () => {
-    const loader = document.getElementById("loader");
-    setTimeout(() => {
-        loader.classList.add("fade-out");
-    }, 400);
-});
+/* Page Loader - Executed first to ensure it fades out even if other scripts fail */
+const loader = document.getElementById("loader");
+const hideLoader = () => {
+    setTimeout(() => loader.classList.add("fade-out"), 400);
+};
+window.addEventListener("load", hideLoader);
+if (document.readyState === "complete") hideLoader();
 
-/* Clean URL (Removes index.html from address bar) */
-if (window.location.pathname.endsWith('index.html')) {
+/* Clean URL (Removes index.html from address bar) - Protected for local testing */
+if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('index.html')) {
     const cleanUrl = window.location.pathname.replace('index.html', '');
     window.history.replaceState(null, null, cleanUrl || '/');
 }
