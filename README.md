@@ -15,6 +15,7 @@ Plain HTML/CSS/JS — no build step, no dependencies. Open any `.html` file dire
 | `index.html` | Main landing page (links, socials, showreel, clients) |
 | `rates.html` | Pricing / packages page |
 | `404.html` | Custom not-found page |
+| `pull.command` | Mac automation script to pull latest changes |
 | `assets/` | Images (profile pic, client logos, etc.) |
 | `CNAME` | Custom domain config for GitHub Pages |
 
