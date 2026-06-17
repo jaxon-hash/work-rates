@@ -64,22 +64,41 @@
         ========================== */
 
         html {
-            background-color: #0a0a0a;
+            min-height: 100%;
+            background: #0a0a0a;
+            background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
+            background-size: 100% 220%;
+            background-position: var(--scroll-pos, 0% 0%);
+            animation: breatheBackground 12s ease-in-out infinite alternate;
+            background-attachment: fixed;
+            transition: background-position .2s ease-out;
         }
 
         body {
-            background: #0a0a0a linear-gradient(180deg, #0a0a0a 0%, #150505 50%, #300505 100%);
-            background-size: 100% 200%;
-            background-position: var(--scroll-pos, 0% 0%);
+            min-height: 100%;
+            background: transparent;
             color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
             padding: 100px 20px 40px;
             overflow-x: hidden;
-            animation: breatheBackground 12s ease-in-out infinite alternate;
-            transition: background-position 0.2s ease-out;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* ==========================
