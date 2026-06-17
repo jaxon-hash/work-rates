@@ -4,14 +4,15 @@ Personal landing page / link-in-bio for video editing services.
 
 **Live site:** https://jxnn.store
 
-## Stack
+## 🚀 Stack
 
-Plain HTML/CSS/JS — no build step, no dependencies. Open any `.html` file directly in a browser to preview.
+- **Tech:** Plain HTML, CSS, and Vanilla JavaScript.
+- **Tooling:** No build step, no dependencies, no frameworks.
 
-## Structure
+## 📁 Structure
 
 | File | Purpose |
-|---|---|
+| :--- | :--- |
 | `index.html` | Main landing page (links, socials, showreel, clients) |
 | `rates.html` | Pricing / packages page |
 | `404.html` | Custom not-found page |
@@ -19,13 +20,18 @@ Plain HTML/CSS/JS — no build step, no dependencies. Open any `.html` file dire
 | `assets/` | Images (profile pic, client logos, etc.) |
 | `CNAME` | Custom domain config for GitHub Pages |
 
-## Deploy
+## 🛠 Local Development
+
+Since there is no build step, you can open any `.html` file directly in a browser to preview changes. For the best experience (and to avoid potential path issues), using a local server like VS Code's **Live Server** is recommended.
+
+## 🚢 Deploy
 
 Hosted on **GitHub Pages**. Any push to `main` auto-deploys to jxnn.store — no manual build/release step.
 
-This repo also has a local `post-commit` git hook that auto-pushes to `origin/main` right after every commit, so the workflow locally is just:
+### Automated Workflow
+This repo uses a local `post-commit` Git hook that automatically pushes to `origin/main` immediately after every commit.
 
-```
+```bash
 git add .
 git commit -m "..."
 ```
