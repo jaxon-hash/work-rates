@@ -323,46 +323,6 @@
         <footer>© 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a></footer>
     </div>
 
-    <script>
-        /* Clean URL for 404 Page */
-        if (window.location.protocol !== 'file:') {
-            window.history.replaceState(null, null, '/404');
-        }
-
-        /* Page Loader */
-        window.addEventListener("load", () => {
-            const loader = document.getElementById("loader");
-            setTimeout(() => {
-                loader.classList.add("fade-out");
-            }, 400);
-        });
-
-        // Dynamic Upward Particle Engine
-        function createParticles() {
-            const container = document.getElementById('particleContainer');
-            if (!container) return;
-            const particleCount = 35;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.top = `${Math.random() * 110 - 5}%`;
-                particle.style.left = `-50px`;
-
-                particle.style.setProperty('--speed', `${Math.random() * 10 + 8}s`);
-                particle.style.setProperty('--y-drift', `${Math.random() * 200 - 100}px`);
-                particle.style.setProperty('--opacity', Math.random() * 0.5 + 0.2);
-                particle.style.animationDelay = `${Math.random() * 12}s`;
-
-                container.appendChild(particle);
-            }
-        }
-
-        createParticles();
-    </script>
+    <script src="shared.js"></script>
 </body>
 </html>

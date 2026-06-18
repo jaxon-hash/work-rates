@@ -39,12 +39,6 @@
             100% { background-size: 100% 105%; }
         }
 
-
-        @keyframes breatheBackground {
-            0% { background-size: 100% 100%; }
-            100% { background-size: 100% 105%; }
-        }
-
         body {
             min-height: 100%;
             background: transparent;
@@ -209,63 +203,11 @@
         © 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved.
     </footer>
 
+    <script src="shared.js"></script>
     <script>
-        /* Loader */
-        window.addEventListener("load", () => {
-            setTimeout(() => document.getElementById("loader").classList.add("fade-out"), 400);
-        });
-
-        /* Clean URL */
-        if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('tos.html')) {
-            window.history.replaceState(null, null, window.location.pathname.replace('tos.html', 'tos'));
-        }
-
-        /* Scroll Background */
-        function updateBackground() {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollHeight > 0) {
-                const percent = (window.scrollY / scrollHeight) * 100;
-                document.documentElement.style.setProperty('--scroll-pos', `0% ${percent}%`);
-            }
-        }
-        window.addEventListener('scroll', updateBackground);
-        updateBackground();
-
-        /* Navbar Hide/Show on Scroll */
-        let lastScrollY = window.scrollY;
-        const navbar = document.querySelector('.navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 150) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
-            lastScrollY = window.scrollY;
-        });
-
-        /* Back To Top */
         document.getElementById("backToTop").addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-
-        /* Particles */
-        const container = document.getElementById("particleContainer");
-        function generateParticles() {
-            for(let i = 0; i < 30; i++){
-                const p = document.createElement("div");
-                p.className = "particle";
-                const size = Math.random()*5+2;
-                p.style.width = p.style.height = `${size}px`;
-                p.style.top = `${Math.random()*110 - 5}%`;
-                p.style.setProperty("--speed", `${Math.random()*10+8}s`);
-                p.style.setProperty("--y-drift", `${Math.random()*200-100}px`);
-                p.style.setProperty("--opacity", Math.random()*0.5+0.2);
-                p.style.animationDelay = `${Math.random()*12}s`;
-                container.appendChild(p);
-            }
-        }
-        generateParticles();
     </script>
-    <script src="shared.js"></script>
 </body>
 </html>

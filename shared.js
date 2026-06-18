@@ -42,19 +42,6 @@ if (navbar) {
 }
 
 /* ==========================
-   Background Scroll Gradient Position Track Engine
-========================== */
-function updateBackground() {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (scrollHeight > 0) {
-        const percent = (window.scrollY / scrollHeight) * 100;
-        document.documentElement.style.setProperty("--scroll-pos", `0% ${percent}%`);
-    }
-}
-window.addEventListener("scroll", updateBackground);
-updateBackground(); // Initialize immediately on load
-
-/* ==========================
    Particle Engine
 ========================== */
 const particleContainer = document.getElementById("particleContainer");

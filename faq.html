@@ -287,55 +287,11 @@
         © 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a>
     </footer>
 
+    <script src="shared.js"></script>
     <script>
-        /* Page Loader */
-        const loader = document.getElementById("loader");
-        const hideLoader = () => { setTimeout(() => loader.classList.add("fade-out"), 400); };
-        window.addEventListener("load", hideLoader);
-        if (document.readyState === "complete") hideLoader();
-
-        /* Clean URL */
-        if (window.location.protocol !== 'file:' && window.location.pathname.endsWith('faq.html')) {
-            const cleanUrl = window.location.pathname.replace('faq.html', 'faq');
-            window.history.replaceState(null, null, cleanUrl);
-        }
-
-        /* Navbar Scroll */
-        let lastScrollY = window.scrollY;
-        const navbar = document.querySelector('.navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
-            lastScrollY = window.scrollY;
-        });
-
-        /* Back To Top */
         document.getElementById("backToTop").addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-
-        /* Particles */
-        const container = document.getElementById("particleContainer");
-        function generateParticles() {
-            container.innerHTML = '';
-            for(let i = 0; i < 30; i++){
-                const particle = document.createElement("div");
-                particle.classList.add("particle");
-                const size = Math.random()*5+2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.top = `${Math.random()*110 - 5}%`;
-                particle.style.setProperty("--speed", `${Math.random()*10+8}s`);
-                particle.style.setProperty("--y-drift", `${Math.random()*200-100}px`);
-                particle.style.setProperty("--opacity", Math.random()*0.5+0.2);
-                particle.style.animationDelay = `${Math.random()*12}s`;
-                container.appendChild(particle);
-            }
-        }
-        generateParticles();
     </script>
 </body>
 </html>
