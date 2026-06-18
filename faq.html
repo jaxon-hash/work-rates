@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jxnn. | FAQ</title>
     
+    <meta name="description" content="Find answers to frequently asked questions about video editing services by jxnn.">
+    <meta property="og:title" content="jxnn. | FAQ">
+    <meta property="og:image" content="assets/profile.jpg">
+    <meta name="theme-color" content="#ef4444">
+
     <link rel="icon" type="image/png" href="assets/profile.jpg">
     <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
 
@@ -166,11 +171,40 @@
         @keyframes loaderText { 0%, 100% { opacity: 0.8; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
         @keyframes loaderBar { 0% { width: 0; opacity: 0; } 50% { width: 80px; opacity: 1; } 100% { width: 0; opacity: 0; } }
 
+        /* BACK TO TOP */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(24, 24, 24, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .back-to-top:hover {
+            color: #ef4444;
+            border-color: #ef4444;
+            transform: translateY(-3px);
+        }
+
         /* PARTICLES */
         .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
         .particle { position: absolute; left: -50px; border-radius: 50%; background: rgba(239, 68, 68, 0.4); box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); animation: driftAcross var(--speed) linear infinite; will-change: transform, opacity; }
         @keyframes driftAcross { 0% { transform: translateX(0) translateY(0); opacity: 0; } 10% { opacity: var(--opacity); } 90% { opacity: var(--opacity); } 100% { transform: translateX(110vw) translateY(var(--y-drift)); opacity: 0; } }
-    </style>
+        
+        @media (max-width: 768px) {
+            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; }
+        }
+   </style>
 </head>
 <body>
 
@@ -191,6 +225,10 @@
     </nav>
 
     <div class="particle-container" id="particleContainer"></div>
+
+    <div class="back-to-top" id="backToTop" title="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
 
     <div class="faq-container">
         <h1>Frequently Asked Questions</h1>
@@ -247,7 +285,7 @@
     </div>
 
     <footer style="margin-top: 30px; color: #666; font-size: 0.85rem; text-align: center;">
-        © 2026 jxnn. All rights reserved. • <a href="tos.html">Terms of Service</a>
+        © 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a>
     </footer>
 
     <script>
@@ -273,6 +311,11 @@
                 navbar.style.transform = 'translateY(0)';
             }
             lastScrollY = window.scrollY;
+        });
+
+        /* Back To Top */
+        document.getElementById("backToTop").addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
         /* Background Scroll */
