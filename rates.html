@@ -416,7 +416,7 @@
 
     <div class="particle-container" id="particleContainer"></div>
 
-    <div class="back-to-top" id="backToTop" aria-label="Back to top">
+    <div class="back-to-top" id="backToTop" title="Back to Top">
         <i class="fa-solid fa-arrow-up"></i>
     </div>
 
@@ -518,7 +518,7 @@
     </div>
 
     <footer>
-        <div>© 2026 <a href="https://github.com/jaxon-hash">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a></div>
+        <div>© 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a></div>
     </footer>
 
     <script>
@@ -545,7 +545,7 @@
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
         if (scrollHeight > 0) {
             const scrollPercent = (window.scrollY / scrollHeight) * 100;
-            document.body.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
+            document.documentElement.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
         }
     });
 
