@@ -27,17 +27,22 @@
 
         html {
             min-height: 100%;
-            background: #0a0a0a;
+                     background: #0a0a0a;
             background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
-            background-size: 100% 220%;
-            background-position: var(--scroll-pos, 0% 0%);
-            background-attachment: fixed;
-            animation: breatheBackground 12s ease-in-out infinite alternate;
+            background-size: 100% 100%;
+            background-attachment: scroll;
+            animation: breatheBackground 15s ease-in-out infinite alternate;
         }
 
         @keyframes breatheBackground {
-            0% { background-size: 100% 180%; }
-            100% { background-size: 100% 220%; }
+            0% { background-size: 100% 100%; }
+            100% { background-size: 100% 105%; }
+        }
+
+
+        @keyframes breatheBackground {
+            0% { background-size: 100% 100%; }
+            100% { background-size: 100% 105%; }
         }
 
         body {

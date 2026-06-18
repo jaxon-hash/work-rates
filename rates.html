@@ -74,11 +74,9 @@
             min-height: 100%;
             background: #0a0a0a;
             background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
-            background-size: 100% 220%;
-            background-position: var(--scroll-pos, 0% 0%);
-            animation: breatheBackground 12s ease-in-out infinite alternate;
-            background-attachment: fixed;
-            transition: background-position .2s ease-out;
+            background-size: 100% 100%;
+            background-attachment: scroll;
+            animation: breatheBackground 15s ease-in-out infinite alternate;
         }
 
         body {
@@ -165,8 +163,8 @@
         }
 
         @keyframes breatheBackground {
-            0% { background-size: 100% 180%; }
-            100% { background-size: 100% 220%; }
+            0% { background-size: 100% 100%; }
+            100% { background-size: 100% 105%; }
         }
 
         /* ==========================
@@ -432,7 +430,7 @@
             <div class="info-item">
                 <i class="fa-solid fa-calendar-check"></i>
                 <!-- Update this date manually when rates change -->
-                <span><strong>Last Updated:</strong> <span id="lastUpdated">June 15, 2026</span></span>
+                <span><strong>Last Updated:</strong> <span id="lastUpdated">June 18, 2026</span></span>
             </div>
         </div>
 
@@ -535,18 +533,6 @@
     document.getElementById("backToTop")
     .addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    /* ==========================
-       BACKGROUND SCROLL
-    ========================== */
-
-    window.addEventListener('scroll', () => {
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (scrollHeight > 0) {
-            const scrollPercent = (window.scrollY / scrollHeight) * 100;
-            document.documentElement.style.setProperty('--scroll-pos', `0% ${scrollPercent}%`);
-        }
     });
 
     /* ==========================
