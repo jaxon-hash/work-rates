@@ -24,7 +24,6 @@
 
 body {
     background-color: #e2e2e2;
-    /* Creating a subtle paper/cardboard texture base inspired by image_f666e8.jpg & image_f66705.jpg */
     background-image: 
         radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
         radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
@@ -40,7 +39,6 @@ body {
     position: relative;
 }
 
-/* Tactile Grain Overlay */
 body::before {
     content: "";
     position: fixed;
@@ -59,7 +57,6 @@ h1, .logo-text {
     font-weight: 900;
     text-transform: uppercase;
     color: #ffffff;
-    /* Heavy block outline & 3D deep offset shadow inspired by image_f666e8.jpg */
     text-shadow: 
         -2px -2px 0 #000,  2px -2px 0 #000, -2px  2px 0 #000,  2px  2px 0 #000,
         4px 4px 0px #000000, 8px 8px 0px rgba(0,0,0,0.15);
@@ -78,10 +75,9 @@ h1, .logo-text {
     gap: 8px;
 }
 
-/* Y2K Retro 4-Point Star Decorator (inspired by image_f667ba.jpg & image_f66705.jpg) */
 .section-title::before {
     content: "✦";
-    color: #ff2a5f; /* Glossy candy red/pink tone */
+    color: #ff2a5f;
     font-size: 1.4rem;
     text-shadow: 2px 2px 0px #000;
 }
@@ -139,7 +135,6 @@ h1, .logo-text {
     gap: 45px;
 }
 
-/* Header Sticker Row */
 .profile-header {
     display: flex;
     align-items: center;
@@ -165,14 +160,14 @@ h1, .logo-text {
     font-size: 1rem;
     color: #444;
     margin-top: 8px;
-    background: #ffd500; /* Streetwear warning yellow accent */
+    background: #ffd500;
     display: inline-block;
     padding: 2px 6px;
     border: 2px solid #000;
 }
 
 /* ==========================
-   TACTILE STICKER BUTTONS
+   BUTTONS
 ========================== */
 .action-grid {
     display: flex;
@@ -199,7 +194,6 @@ h1, .logo-text {
     transition: transform 0.05s ease, box-shadow 0.05s ease;
 }
 
-/* Tactile push mechanism */
 .sticker-btn:hover {
     transform: translate(-2px, -2px);
     box-shadow: 8px 8px 0px #000000;
@@ -209,9 +203,8 @@ h1, .logo-text {
     box-shadow: 0px 0px 0px #000000;
 }
 
-/* Special High-Contrast Button Colorway (inspired by image_f66744.jpg) */
 .btn-highlight {
-    background: #9dff00; /* Acid green highlight */
+    background: #9dff00;
 }
 
 .social-flex {
@@ -223,8 +216,13 @@ h1, .logo-text {
 }
 
 /* ==========================
-   SHOWREEL DISPLAY FRAME
+   VIDEO CAROUSEL OVERHAUL
 ========================== */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .video-box {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -237,6 +235,45 @@ h1, .logo-text {
     width: 100%;
     height: 100%;
     border: 0;
+}
+
+/* Chunky Streetwear Nav Arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    background: #ffd500; /* Vibrant caution yellow pop */
+    border: 3px solid #000000;
+    color: #000000;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 4px 4px 0px #000000;
+    transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+.carousel-arrow:hover {
+    background: #ffffff;
+    box-shadow: 5px 5px 0px #000000;
+}
+
+.carousel-arrow:active {
+    box-shadow: 0px 0px 0px #000000;
+}
+
+/* Positioning them overlapping the frame borders natively */
+.arrow-left {
+    left: -24px;
+    display: none; /* Hidden on load since we start on video 1 */
+}
+
+.arrow-right {
+    right: -24px;
 }
 
 /* ==========================
@@ -296,7 +333,7 @@ h1, .logo-text {
     font-size: 0.9rem;
 }
 .client-tag:hover {
-    background: #00e1ff; /* Bright cyber-blue pop */
+    background: #00e1ff;
 }
 .client-img {
     width: 24px;
@@ -340,6 +377,10 @@ footer a { color: #000; text-decoration: underline; }
     .profile-header { flex-direction: column; text-align: center; }
     .social-flex { flex-direction: column; gap: 16px; }
     h1 { font-size: 2.6rem; }
+    /* Bring arrows inwards slightly for mobile layouts */
+    .carousel-arrow { width: 38px; height: 38px; }
+    .arrow-left { left: -10px; }
+    .arrow-right { right: -10px; }
 }
 </style>
 </head>
@@ -397,17 +438,29 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </section>
 
-    <!-- Video Box -->
+    <!-- Video Showcase Section with Dual Carousel Links -->
     <section>
-        <div class="section-title">CURRENT SHOWREEL</div>
-        <div class="video-box">
-            <iframe
-                src="https://www.youtube.com/embed/ggtdj-_FzYA"
-                title="jxnn. showreel"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy">
-             </iframe>
+        <div class="section-title" id="video-title">CURRENT SHOWREEL</div>
+        <div class="carousel-wrapper">
+            <!-- Navigation Elements -->
+            <button class="carousel-arrow arrow-left" id="prevVideo" aria-label="Previous Video">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="carousel-arrow arrow-right" id="nextVideo" aria-label="Next Video">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <!-- Video Frame Container -->
+            <div class="video-box">
+                <iframe
+                    id="videoPlayer"
+                    src="https://www.youtube.com/embed/ggtdj-_FzYA"
+                    title="jxnn. studio reel"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy">
+                 </iframe>
+            </div>
         </div>
     </section>
 
@@ -452,6 +505,9 @@ footer a { color: #000; text-decoration: underline; }
 </main>
 
 <script>
+/* ==========================
+   CLIPBOARD UTILITY
+========================== */
 const emailButton = document.getElementById("emailButton");
 const toastNotification = document.getElementById("toast");
 
@@ -461,6 +517,57 @@ emailButton.addEventListener("click", () => {
     setTimeout(() => {
         toastNotification.classList.remove("visible");
     }, 2000);
+});
+
+/* ==========================
+   VIDEO SLIDER ENGINE
+========================== */
+const videoPlayer = document.getElementById("videoPlayer");
+const videoTitle = document.getElementById("video-title");
+const prevBtn = document.getElementById("prevVideo");
+const nextBtn = document.getElementById("nextVideo");
+
+// Array holding your videos. Note the second one uses embed layout + start time conversion (1390s) natively.
+const videoPlaylist = [
+    {
+        title: "CURRENT SHOWREEL",
+        url: "https://www.youtube.com/embed/ggtdj-_FzYA"
+    },
+    {
+        title: "FEATURED WORK",
+        url: "https://www.youtube.com/embed/NONQ_j8San4?start=1390"
+    }
+];
+
+let currentVideoIndex = 0;
+
+function updateVideoDisplay() {
+    // Inject the new source and title instantly
+    videoPlayer.src = videoPlaylist[currentVideoIndex].url;
+    videoTitle.innerText = videoPlaylist[currentVideoIndex].title;
+
+    // Toggle arrow visibilities so you cannot overflow the array bounds
+    if (currentVideoIndex === 0) {
+        prevBtn.style.display = "none";
+        nextBtn.style.display = "flex";
+    } else {
+        prevBtn.style.display = "flex";
+        nextBtn.style.display = "none";
+    }
+}
+
+nextBtn.addEventListener("click", () => {
+    if (currentVideoIndex < videoPlaylist.length - 1) {
+        currentVideoIndex++;
+        updateVideoDisplay();
+    }
+});
+
+prevBtn.addEventListener("click", () => {
+    if (currentVideoIndex > 0) {
+        currentVideoIndex--;
+        updateVideoDisplay();
+    }
 });
 </script>
 
