@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta name="websitelaunches-verification" content="6a4004bc0d650d0c5b98091972105a9b">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jxnn. | Professional Video Editor Portfolio</title>
+    <title>jxnn. | Video Editing</title>
 
     <link rel="preload" as="image" href="assets/profile.jpg">
     <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
@@ -17,1196 +15,438 @@
     <meta property="og:url" content="https://jxnn.store">
     <meta property="og:type" content="website">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="jxnn. | Portfolio Hub">
-    <meta name="twitter:description" content="Professional video editor.">
-    <meta name="twitter:image" content="assets/profile.jpg">
-
-    <meta name="theme-color" content="#ef4444">
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "jxnn",
-      "url": "https://jxnn.store",
-      "jobTitle": "Video Editor",
-      "description": "Professional Video Editor specialising in high-retention YouTube and TikTok content.",
-      "sameAs": [
-        "https://x.com/jxnn122",
-        "https://instagram.com/jaxongarforth1",
-        "https://github.com/jaxon-hash"
-      ],
-      "knowsAbout": ["Video Editing", "Adobe Premiere Pro", "After Effects", "YouTube Growth"],
-      "offers": {
-        "@type": "Service",
-        "serviceType": "Video Editing"
-      }
-    }
-    </script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
 /* ==========================
-   RESET
+   RESET & SYSTEM BASICS
 ========================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    scroll-behavior:smooth;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 
-/* ==========================
-   SELECTION
-========================== */
-
-::selection{
-    background:#ef4444;
-    color:#fff;
+::-webkit-scrollbar {
+    width: 6px;
 }
-
-::-moz-selection{
-    background:#ef4444;
-    color:#fff;
+::-webkit-scrollbar-track {
+    background: #000000;
 }
-
-/* ==========================
-   SCROLLBAR
-========================== */
-
-::-webkit-scrollbar{
-    width:8px;
+::-webkit-scrollbar-thumb {
+    background: #2c2c2e;
+    border-radius: 3px;
 }
-
-::-webkit-scrollbar-track{
-    background:#0a0a0a;
+::-webkit-scrollbar-thumb:hover {
+    background: #48484a;
 }
-
-::-webkit-scrollbar-thumb{
-    background:#222;
-    border-radius:20px;
-    border:2px solid #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#ef4444;
-}
-
-/* ==========================
-   BODY
-========================== */
-
-html {
-    min-height: 100%;
-    background: #0a0a0a;
-    background-image:
-    linear-gradient(
-        180deg,
-        #0a0a0a 0%,
-        #1a0808 50%,
-        #4a0a0a 100%
-    );
-
-    
-
-    background-size: 100% 100%;
-    background-attachment: scroll;
-    animation: breatheBackground 15s ease-in-out infinite alternate;
-}
-
-@keyframes breatheBackground{
-    0%{
-        background-size: 100% 100%;
-    }
-
-    100%{
-        background-size: 100% 105%;
-    }
-}
-
-
 
 body {
-    min-height: 100%;
-    background: transparent;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:100px 20px 40px;
-    overflow-x:hidden;
-    position:relative;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: -1;
-}
-
-@keyframes breatheBackground{
-    0%{
-        background-size:100% 180%;
-    }
-
-    100%{
-        background-size:100% 220%;
-    }
-}
-
-@keyframes fadeInUp{
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    background: #000000;
+    color: #f5f5f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 140px 24px 60px;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================
-   LAST UPDATED BADGE
+   NAVIGATION BAR
 ========================== */
-
-.update-badge{
-    position:absolute;
-    top:110px;
-    right:25px;
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.08);
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-    color:#a3a3a3;
-    padding:6px 12px;
-    border-radius:12px;
-    font-size:.75rem;
-    font-weight:500;
-    letter-spacing:.3px;
-    z-index:10;
-}
-
-.update-badge i{
-    font-size:.8rem;
-    color:#ef4444;
-}
-
-@media(max-width:480px){
-    .update-badge{
-        position:relative;
-        top:auto;
-        right:auto;
-        margin-bottom:20px;
-    }
-}
-
-/* ==========================
-   PARTICLES
-========================== */
-
-.particle-container{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:0;
-}
-
-.particle{
-    position:absolute;
-
-    left:-50px;
-
-    border-radius:50%;
-
-    background:rgba(239,68,68,.4);
-
-    box-shadow:0 0 15px rgba(239,68,68,.3);
-
-    animation:driftAcross var(--speed) linear infinite;
-
-    will-change:transform,opacity;
-}
-
-@keyframes driftAcross{
-    0%{
-        transform:translateX(0) translateY(0);
-        opacity:0;
-    }
-
-    10%{
-        opacity:var(--opacity);
-    }
-
-    90%{
-        opacity:var(--opacity);
-    }
-
-    100%{
-        transform:
-            translateX(110vw)
-            translateY(var(--y-drift));
-
-        opacity:0;
-    }
-}
-
-/* ==========================
-   NAVIGATION
-========================== */
-
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid #1c1c1e;
     z-index: 1000;
-    padding: 15px 0;
-    transition: transform 0.3s ease;
+    padding: 20px 0;
 }
 
 .nav-content {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .nav-logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
     text-decoration: none;
-    letter-spacing: -1.5px;
+    letter-spacing: -0.5px;
 }
 
 .nav-link {
-    color: #a3a3a3;
+    color: #8e8e93;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-    padding: 8px 16px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-    color: #fff;
-    background: rgba(239, 68, 68, 0.1);
-    border-color: rgba(239, 68, 68, 0.2);
+    color: #ffffff;
 }
 
 /* ==========================
-   CARDS
+   MINIMALIST PACKAGING (LAYOUT)
 ========================== */
-
-.card,
-.video-section,
-.portfolio-section{
-    position:relative;
-    z-index:1;
+.container {
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Even spacing between clean rows */
 }
 
-.card{
-    max-width: min(95%, 1200px);
-    width:100%;
+/* Profile Row */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
 
-    background:rgba(24,24,24,.75);
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #1c1c1e;
+}
 
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+.header-info h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
 
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:24px;
-
-    padding:40px;
-
-    text-align:center;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.5);
-
-    margin-bottom:25px;
-
-    animation:fadeInUp .6s cubic-bezier(.16,1,.3,1) forwards;
+.header-info p {
+    font-size: 1rem;
+    color: #8e8e93;
+    font-weight: 400;
 }
 
 /* ==========================
-   PROFILE IMAGE
+   CLEAN ACTIONS & BUTTONS
 ========================== */
-
-.profile-pic{
-    width:120px;
-    height:120px;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-    margin-bottom:25px;
-
-    transition:transform .25s ease;
+.action-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.profile-pic:hover{
-    transform:scale(1.04);
+.minimal-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #0a0a0c;
+    border: 1px solid #1c1c1e;
+    border-radius: 12px;
+    color: #f5f5f7;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.minimal-btn i {
+    font-size: 0.85rem;
+    color: #48484a;
+    transition: color 0.2s ease;
+}
+
+.minimal-btn:hover {
+    background: #121214;
+    border-color: #3a3a3c;
+}
+
+.minimal-btn:hover i {
+    color: #ffffff;
+}
+
+/* Highlight style for rates */
+.btn-highlight {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #000000;
+}
+.btn-highlight i { color: #8e8e93; }
+.btn-highlight:hover {
+    background: #e5e5ea;
+    border-color: #e5e5ea;
+}
+.btn-highlight:hover i { color: #000000; }
+
+.social-flex {
+    display: flex;
+    gap: 12px;
+}
+.social-flex .minimal-btn {
+    flex: 1;
 }
 
 /* ==========================
-   STATUS
+   SHOWREEL DISPLAY
 ========================== */
-
-.status-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    background:rgba(34,197,94,.1);
-
-    border:1px solid rgba(34,197,94,.2);
-
-    color:#4ade80;
-
-    font-size:.8rem;
-    font-weight:600;
-
-    letter-spacing:.5px;
-
-    text-transform:uppercase;
-
-    margin-bottom:20px;
+.section-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #48484a;
+    font-weight: 700;
+    margin-bottom: 16px;
 }
 
-.status-dot{
-    width:8px;
-    height:8px;
-
-    background:#22c55e;
-
-    border-radius:50%;
-
-    box-shadow:0 0 10px #22c55e;
-
-    animation:pulseDot 2s infinite;
-}
-
-@keyframes pulseDot{
-    0%{
-        transform:scale(.95);
-        box-shadow:0 0 0 0 rgba(34,197,94,.7);
-    }
-
-    70%{
-        transform:scale(1);
-        box-shadow:0 0 0 6px rgba(34,197,94,0);
-    }
-
-    100%{
-        transform:scale(.95);
-        box-shadow:0 0 0 0 rgba(34,197,94,0);
-    }
-}
-
-/* ==========================
-   TYPOGRAPHY
-========================== */
-
-h1{
-    font-size:2.5rem;
-    font-weight:700;
-
-    letter-spacing:-0.5px;
-
-    margin-bottom:12px;
-}
-
-.tagline{
-    color:#ffffff;
-
-    font-size:1.1rem;
-
-    font-weight:500;
-
-    margin-bottom:18px;
-
-    line-height:1.6;
-}
-
-p{
-    color:#b5b5b5;
-
-    font-size:1.05rem;
-
-    line-height:1.7;
-
-    margin-bottom:30px;
-}
-
-/* ==========================
-   BUTTONS
-========================== */
-
-.button{
-    width:100%;
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-
-    padding:16px;
-
-    text-decoration:none;
-
-    border-radius:14px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    margin-bottom:15px;
-
-    border:1px solid transparent;
-
-    background:white;
-    color:black;
-
-    transition:
-        transform .2s,
-        opacity .2s,
-        border-color .2s,
-        background-color .2s,
-        box-shadow .2s;
-}
-
-.button:hover{
-    transform:translateY(-2px);
-
-    opacity:.95;
-
-    box-shadow:
-        0 0 25px rgba(239,68,68,.7),
-        0 0 10px rgba(239,68,68,.4);
-}
-
-.secondary{
-    background:transparent;
-
-    color:white;
-
-    border:1px solid #3a3a3a;
-}
-
-.secondary:hover{
-    background:rgba(239,68,68,.08);
-
-    border-color:#ef4444;
-
-    box-shadow:
-        0 0 25px rgba(239,68,68,.6),
-        0 0 10px rgba(239,68,68,.3);
-}
-
-.small-note{
-    color:#8f8f8f;
-
-    font-size:.85rem;
-
-    margin-top:-4px;
-    margin-bottom:20px;
-}
-
-.social-row{
-    display:flex;
-    gap:15px;
-    width:100%;
-}
-
-.social-row .button{
-    flex:1;
-}
-
-/* ==========================
-   VIDEO SECTION
-========================== */
-
-.video-section{
-    max-width: min(95%, 1200px);
-    width:100%;
-
-    background:rgba(24,24,24,.6);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:24px;
-
-    padding:16px;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.4);
-
-    margin-bottom:25px;
-
-    animation:fadeInUp .8s cubic-bezier(.16,1,.3,1) forwards;
-    transition: transform 0.25s ease, border-color 0.25s ease;
-}
-
-.video-section:hover {
-    transform: translateY(-2px);
-    border-color: rgba(239, 68, 68, 0.2);
-}
-
-.video-wrapper{
-    position:relative;
+.video-box {
     width: 100%;
     aspect-ratio: 16 / 9;
-    overflow:hidden;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.05);
+    background: #0a0a0c;
+    border: 1px solid #1c1c1e;
+    border-radius: 14px;
+    overflow: hidden;
 }
 
-.video-wrapper iframe{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+.video-box iframe {
+    width: 100%;
+    height: 100%;
     border: 0;
 }
 
 /* ==========================
-   TRUSTED BY
+   GRID LOGIC (WORKFLOW & TRUST)
 ========================== */
-
-.portfolio-section{
-    max-width: min(95%, 1200px);
-    width:100%;
-
-    background:rgba(24,24,24,.6);
-
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:24px;
-
-    padding:35px 30px;
-
-    text-align:center;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.4);
-
-    animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
+.grid-three {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
 }
 
-.process-section{
-    max-width: min(95%, 1200px);
-    width:100%;
-    background:rgba(24,24,24,.6);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:24px;
-    padding:40px;
-    text-align:center;
-    box-shadow:0 20px 40px rgba(0,0,0,.4);
-    margin-bottom:25px;
-    animation:fadeInUp 1s cubic-bezier(.16,1,.3,1) forwards;
+.info-card {
+    background: #0a0a0c;
+    border: 1px solid #1c1c1e;
+    border-radius: 12px;
+    padding: 20px;
 }
 
-.process-section h2{
-    font-size:1.1rem;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:30px;
-    color:#e5e7eb;
+.info-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 6px;
 }
 
-.process-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-    gap:20px;
+.info-card p {
+    font-size: 0.85rem;
+    color: #8e8e93;
+    line-height: 1.5;
 }
 
-.process-step{
-    padding:30px 20px;
-    background:rgba(255,255,255,.02);
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:18px;
-    transition:transform .3s ease, border-color .3s ease;
-}
-
-.process-step:hover{
-    transform:translateY(-5px);
-    border-color:rgba(239,68,68,.4);
-}
-
-.process-step i{
-    font-size:2rem;
-    color:#ef4444;
-    margin-bottom:20px;
-}
-
-.process-step h3{
-    font-size:1.1rem;
-    margin-bottom:10px;
-    color:#fff;
-}
-
-.process-step p{
-    font-size:.9rem;
-    margin-bottom:0;
-    line-height:1.5;
-}
-
-.portfolio-section h2{
-    font-size:1.1rem;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    margin-bottom:25px;
-
-    color:#e5e7eb;
-}
-
-/* Featured Client */
-
-.featured-client{
-    display:flex;
-    align-items:center;
-    gap:16px;
-
-    text-decoration:none;
-
-    color:white;
-
-    background:rgba(239,68,68,.08);
-
-    border:1px solid rgba(239,68,68,.25);
-
-    border-radius:18px;
-
-    padding:20px;
-
-    margin-bottom:20px;
-
-    transition:.25s;
-}
-
-.featured-client:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 0 25px rgba(239,68,68,.4);
-}
-
-.featured-client img{
-    width:60px;
-    height:60px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-}
-
-.featured-client-text{
-    text-align:left;
-}
-
-.featured-client-text small{
-    color:#9ca3af;
-}
-
-/* Other Clients */
-
-.client-grid{
-    display:grid;
-    gap:15px;
-}
-
-.client-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    padding:14px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    color:#d1d5db;
-
-    background:rgba(255,255,255,.03);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    transition:.25s;
-}
-
-.client-item:hover{
-    transform:translateY(-2px);
-
-    border-color:#ef4444;
-
-    box-shadow:
-        0 0 20px rgba(239,68,68,.3);
-}
-
-.client-avatar{
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-}
-
-/* Footer CTA */
-
-.cta-footer{
-    margin-top:30px;
-
-    color:#d1d5db;
-
-    line-height:1.7;
-}
-
-footer{
-    margin-top:30px;
-
-    text-align:center;
-}
-
-.footer-copyright{
-    color:#666;
-
-    font-size:.85rem;
-
-    margin-top:10px;
-}
-
-footer a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-footer a:hover {
-    color: #ef4444;
-}
-
-/* Toast */
-
-.toast-alert{
-    position:fixed;
-
-    bottom:30px;
-    left:50%;
-
-    transform:translateX(-50%) translateY(100px);
-
-    background:#ef4444;
-
-    color:white;
-
-    padding:12px 24px;
-
-    border-radius:30px;
-
-    font-weight:600;
-
-    opacity:0;
-
-    transition:.3s;
-
-    z-index:100;
-}
-
-.toast-alert.active{
-    opacity:1;
-
-    transform:translateX(-50%) translateY(0);
-}
-
-/* Back To Top */
-
-.bottom-controls {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
+/* Client Lists */
+.client-row {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 12px;
-    z-index: 99;
 }
 
-.back-to-top {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
+.client-tag {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: rgba(24, 24, 24, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    cursor: pointer;
-    transition: transform .2s, color .2s, border-color .2s;
+    gap: 10px;
+    padding: 10px 16px;
+    background: #0a0a0c;
+    border: 1px solid #1c1c1e;
+    border-radius: 30px;
+    color: #f5f5f7;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: border-color 0.2s ease;
 }
 
-.back-to-top:hover {
-    color: #ef4444;
-    border-color: #ef4444;
-    transform: scale(1.05);
+.client-tag:hover {
+    border-color: #3a3a3c;
+}
+
+.client-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 /* ==========================
-   LOADER
+   UTILITY NOTIFICATION TOAST
 ========================== */
-.loader-wrapper {
+.toast {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c1c1e;
+    border: 1px solid #3a3a3c;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2000;
+}
+.toast.visible {
+    bottom: 30px;
 }
 
-.loader-wrapper.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-logo {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -2px;
-    margin-bottom: 10px;
-    animation: loaderText 2s ease-in-out infinite;
+footer {
     text-align: center;
+    font-size: 0.8rem;
+    color: #48484a;
+    margin-top: 20px;
 }
+footer a { color: #8e8e93; text-decoration: none; }
+footer a:hover { color: #ffffff; }
 
-.loader-bar {
-    width: 60px;
-    height: 3px;
-    background: #ef4444;
-    margin: 0 auto;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
-    animation: loaderBar 1.5s infinite ease-in-out;
+@media (max-width: 500px) {
+    .profile-header { flex-direction: column; text-align: center; gap: 14px; }
+    .social-flex { flex-direction: column; gap: 12px; }
+    body { padding-top: 110px; }
 }
-
-@keyframes loaderText {
-    0%, 100% { opacity: 0.8; transform: scale(0.98); }
-    50% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes loaderBar {
-    0% { width: 0; opacity: 0; }
-    50% { width: 80px; opacity: 1; }
-    100% { width: 0; opacity: 0; }
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="loader-wrapper" id="loader">
-    <div>
-        <div class="loader-logo">jxnn.</div>
-        <div class="loader-bar"></div>
-    </div>
-</div>
-
 <nav class="navbar">
     <div class="nav-content">
         <a href="./" class="nav-logo">jxnn.</a>
-        <div style="display: flex; gap: 8px;">
-            <a href="faq.html" class="nav-link">
-                <i class="fa-solid fa-circle-question"></i> FAQ
-            </a>
-        </div>
+        <a href="faq.html" class="nav-link">FAQ</a>
     </div>
 </nav>
 
-<div class="update-badge">
-    <i class="fa-solid fa-clock-rotate-left"></i> Last updated: June 2026
+<div class="toast" id="toast">
+    Email copied to clipboard.
 </div>
 
-<div class="particle-container" id="particleContainer"></div>
+<main class="container">
 
-<div class="toast-alert" id="toastAlert">
-    ✓ Email Address Copied!
-</div>
+    <!-- Profile Header Row -->
+    <header class="profile-header">
+        <img src="assets/profile.jpg" alt="jxnn" class="profile-pic">
+        <div class="header-info">
+            <h1>jxnn</h1>
+            <p>Video Editor & Structural Storyteller</p>
+        </div>
+    </header>
 
-<div class="bottom-controls">
-    <div class="back-to-top" id="backToTop" title="Back to Top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </div>
-</div>
-
-<div class="card">
-
-    <!-- SET TO LOCAL REPO FOLDER -->
-    <img
-        src="assets/profile.jpg"
-        alt="jxnn"
-        width="736"
-        height="736"
-        class="profile-pic">
-
-    <div class="status-badge">
-        <div class="status-dot"></div>
-        Available for Projects
-    </div>
-
-    <h1>jxnn.</h1>
-
-    <div class="tagline">
-        You bring the ideas. I make people watch until the end.
-    </div>
-
-    <p>
-        Video editor specialising in YouTube videos,
-        Shorts and TikTok content.
-    </p>
-
-    <a class="button" href="rates.html">
-        <i class="fa-solid fa-tags"></i>
-        View My Rates
-    </a>
-
-    <div class="small-note">
-        Limited editing slots available each month.
-    </div>
-
-    <button
-        class="button secondary"
-        id="emailBtn"
-        data-email="business.jxnn@gmail.com">
-
-        <i class="fa-solid fa-envelope"></i>
-        Copy Business Email
-    </button>
-
-    <a class="button secondary"
-       href="https://discord.gg/qgJNMFy3F6"
-       target="_blank" rel="noopener noreferrer">
-
-       <i class="fa-brands fa-discord"></i>
-       Join My Discord
-    </a>
-
-    <a class="button secondary"
-       href="https://discord.com/users/1258876319102537799"
-       target="_blank" rel="noopener noreferrer">
-
-        <i class="fa-brands fa-discord"></i>
-        DM Me (jxnn)
-    </a>
-
-    <div class="social-row">
-
-        <a class="button secondary"
-           href="https://instagram.com/jaxongarforth1"
-           target="_blank" rel="noopener noreferrer" aria-label="Follow me on Instagram">
-
-            <i class="fa-brands fa-instagram"></i>
-            Instagram
+    <!-- Navigation Actions -->
+    <section class="action-grid">
+        <a class="minimal-btn btn-highlight" href="rates.html">
+            <span>View Rates & Packages</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
 
-        <a class="button secondary"
-           href="https://x.com/jxnn122"
-           target="_blank" rel="noopener noreferrer" aria-label="Follow me on X (Twitter)">
+        <button class="minimal-btn" id="emailButton" data-email="business.jxnn@gmail.com">
+            <span>Copy Business Email</span>
+            <i class="fa-solid fa-copy"></i>
+        </button>
 
-            <i class="fa-brands fa-x-twitter"></i>
-            X / Twitter
+        <a class="minimal-btn" href="https://discord.gg/qgJNMFy3F6" target="_blank" rel="noopener noreferrer">
+            <span>Join Discord Server</span>
+            <i class="fa-brands fa-discord"></i>
         </a>
 
-    </div>
-
-</div>
-
-<div class="video-section">
-
-    <div class="video-wrapper">
-
-        <iframe
-            src="https://www.youtube.com/embed/ggtdj-_FzYA"
-            title="jxnn. editing showreel"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy">
-         </iframe>
-
-    </div>
-
-</div>
-
-<div class="process-section">
-    <h2>The Workflow</h2>
-    <div class="process-grid">
-        <div class="process-step">
-            <i class="fa-solid fa-comments"></i>
-            <h3>1. Vision</h3>
-            <p>We discuss your goals, style, and references to ensure we're on the same page.</p>
+        <div class="social-flex">
+            <a class="minimal-btn" href="https://instagram.com/jaxongarforth1" target="_blank" rel="noopener noreferrer">
+                <span>Instagram</span>
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="minimal-btn" href="https://x.com/jxnn122" target="_blank" rel="noopener noreferrer">
+                <span>Twitter</span>
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
         </div>
-        <div class="process-step">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <h3>2. The Edit</h3>
-            <p>I craft the story, focus on retention, and add that professional "pop" to your footage.</p>
-        </div>
-        <div class="process-step">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <h3>3. Review</h3>
-            <p>You review the first cut. We tweak and polish until it's exactly what you envisioned.</p>
-        </div>
-        <div class="process-step">
-            <i class="fa-solid fa-rocket"></i>
-            <h3>4. Delivery</h3>
-            <p>Receive your high-quality export ready for upload across all platforms.</p>
-        </div>
-    </div>
-</div>
+    </section>
 
-<div class="portfolio-section">
-
-    <h2>Trusted By</h2>
-
-    <a class="featured-client"
-       href="https://twitch.tv/okharry" target="_blank" rel="noopener noreferrer">
-
-        <img src="assets/okharry.png" alt="OkHarry" width="300" height="300" loading="lazy">
-
-        <div class="featured-client-text">
-
-            <strong>⭐ OkHarry</strong><br>
-
-            <small>Featured Creator Client</small>
-
-        </div>
-
-    </a>
-
-    <div class="client-grid">
-
-        <a class="client-item"
-           href="https://www.youtube.com/@BetaSquad" target="_blank" rel="noopener noreferrer">
-
-            <!-- SET TO LOCAL REPO FOLDER -->
-            <img
-                src="assets/betasquad.png"
-                class="client-avatar"
-                alt="Beta Squad"
-                width="900"
-                height="900"
+    <!-- Main Video Reel Section -->
+    <section>
+        <div class="section-title">Showreel</div>
+        <div class="video-box">
+            <iframe
+                src="https://www.youtube.com/embed/ggtdj-_FzYA"
+                title="jxnn. showreel"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
                 loading="lazy">
-
-            <span>Beta Squad</span>
-
-        </a>
-
-    </div>
-
-    <div class="cta-footer">
-
-        Ready to level up your content?
-
-        <br><br>
-
-        Let's work together.
-
-    </div>
-
-</div>
-
-<footer>
-        <div class="footer-copyright">
-            © 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a>
+             </iframe>
         </div>
+    </section>
 
-</footer>
+    <!-- Editorial Framework Section -->
+    <section>
+        <div class="section-title">The Framework</div>
+        <div class="grid-three">
+            <div class="info-card">
+                <h3>01 / Blueprint</h3>
+                <p>Aligning narrative anchors, audience targets, and pacing metrics before assembly.</p>
+            </div>
+            <div class="info-card">
+                <h3>02 / Retention</h3>
+                <p>Cutting the frame cleanly to maintain seamless, high-engagement viewer attention.</p>
+            </div>
+            <div class="info-card">
+                <h3>03 / Delivery</h3>
+                <p>Polishing audio, adjustments, and final export detailing.</p>
+            </div>
+        </div>
+    </section>
 
-<script src="shared.js"></script>
+    <!-- Client Validation Section -->
+    <section>
+        <div class="section-title">Trusted By</div>
+        <div class="client-row">
+            <a class="client-tag" href="https://twitch.tv/okharry" target="_blank" rel="noopener noreferrer">
+                <img src="assets/okharry.png" alt="OkHarry" class="client-img" loading="lazy">
+                <span>OkHarry</span>
+            </a>
+            <a class="client-tag" href="https://www.youtube.com/@BetaSquad" target="_blank" rel="noopener noreferrer">
+                <img src="assets/betasquad.png" alt="Beta Squad" class="client-img" loading="lazy">
+                <span>Beta Squad</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2026 jxnn. • <a href="tos.html">Terms of Service</a></div>
+    </footer>
+
+</main>
+
 <script>
-/* Copy Email */
-const emailBtn = document.getElementById("emailBtn");
-const toast = document.getElementById("toastAlert");
+const emailButton = document.getElementById("emailButton");
+const toastNotification = document.getElementById("toast");
 
-function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add("active");
+emailButton.addEventListener("click", () => {
+    navigator.clipboard.writeText(emailButton.dataset.email);
+    toastNotification.classList.add("visible");
     setTimeout(() => {
-        toast.classList.remove("active");
-    }, 2500);
-}
-
-emailBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(emailBtn.dataset.email);
-    showToast("✓ Email Address Copied!");
-});
-
-/* Back To Top */
-document.getElementById("backToTop").addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+        toastNotification.classList.remove("visible");
+    }, 2000);
 });
 </script>
 
