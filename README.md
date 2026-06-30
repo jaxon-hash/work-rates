@@ -36,4 +36,4 @@ git add .
 git commit -m "..."
 ```
 
-(The hook lives in `.git/hooks/` and isn't tracked by git, so it won't carry over to a fresh clone — re-add it if you set this up on another machine.)
+
