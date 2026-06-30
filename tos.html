@@ -3,211 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jxnn. | Terms of Service</title>
-    
-    <meta name="description" content="Terms of Service for jxnn.'s video editing services.">
-    <meta property="og:title" content="jxnn. | Terms of Service">
-    <meta property="og:description" content="Understand the terms regarding payments, revisions, turnaround times, and content rights.">
-    <meta property="og:image" content="assets/profile.jpg">
-    <meta name="theme-color" content="#ef4444">
+    <title>jxnn. | TERMS OF SERVICE</title>
 
-    <link rel="icon" type="image/png" href="assets/profile.jpg">
-    <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
+    <link rel="preload" as="image" href="assets/profile.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
 
+    <meta name="description" content="Terms of Service and production contracts for JXNN. STUDIO.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <link rel="stylesheet" href="main.css">
-    <style>
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+<style>
+/* ==========================
+   THEME STYLING & TEXTURES (Y2K / STREETWEAR)
+========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-        ::selection { background: #ef4444; color: #fff; }
+body {
+    background-color: #e2e2e2;
+    background-image: 
+        radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
+        radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 20px 60px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
 
-        html {
-            min-height: 100%;
-                     background: #0a0a0a;
-            background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
-            background-size: 100% 100%;
-            background-attachment: scroll;
-            animation: breatheBackground 15s ease-in-out infinite alternate;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
 
-        @keyframes breatheBackground {
-            0% { background-size: 100% 100%; }
-            100% { background-size: 100% 105%; }
-        }
+/* ==========================
+   NAVIGATION
+========================== */
+.navbar {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    padding: 24px;
+    z-index: 1000;
+}
+.nav-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-logo-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 4px 12px;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    transform: rotate(-3deg);
+    text-decoration: none;
+}
+.nav-logo-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    margin-right: 6px;
+    border-radius: 2px;
+}
+.nav-logo-text {
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 900;
+}
+.nav-link {
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+}
+.nav-link:hover {
+    background: #fff;
+    color: #000;
+}
 
-        body {
-            min-height: 100%;
-            background: transparent;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 100px 20px 40px;
-        }
+/* ==========================
+   CONTAINER & LAYOUT
+========================== */
+.container {
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: -1;
-        }
+.page-title-box {
+    background: #ffffff;
+    border: 4px solid #000000;
+    padding: 24px;
+    box-shadow: 8px 8px 0px #000000;
+    text-align: center;
+}
 
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1000;
-            padding: 15px 0;
-        }
+.page-title-box h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 
+        -2px -2px 0 #000,  2px -2px 0 #000, -2px  2px 0 #000,  2px  2px 0 #000,
+        4px 4px 0px #000000, 8px 8px 0px rgba(0,0,0,0.15);
+    letter-spacing: -1px;
+}
 
-        .nav-content {
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .nav-logo { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -1.5px; }
+.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url('assets/profile.png') center/cover no-repeat;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 0px #000;
+}
 
-        .nav-link {
-            color: #a3a3a3; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            display: flex; align-items: center; gap: 8px;
-            padding: 8px 16px; border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: 0.2s;
-        }
+/* ==========================
+   TERMS CONTENT BLOCKS
+========================== */
+.tos-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-        .nav-link:hover { color: #fff; background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); }
+.tos-card {
+    background: #ffffff;
+    border: 4px solid #000000;
+    padding: 24px;
+    box-shadow: 5px 5px 0px #000000;
+}
 
-        /* Page-specific styles for tos.html */
-        .content-container {
-            max-width: min(95%, 800px);
-            width: 100%;
-            background: rgba(24, 24, 24, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
+.tos-card h3 {
+    font-size: 1.15rem;
+    color: #000000;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-        h1 { font-size: 2.2rem; margin-bottom: 30px; }
-        h2 { font-size: 1.4rem; color: #ef4444; margin: 25px 0 10px 0; }
-        p { color: #b5b5b5; line-height: 1.6; margin-bottom: 15px; }
-        ul { margin-bottom: 15px; padding-left: 20px; color: #b5b5b5; }
-        li { margin-bottom: 8px; }
+.tos-card h3 span {
+    background: #9dff00;
+    border: 2px solid #000;
+    padding: 2px 8px;
+    font-size: 0.9rem;
+    box-shadow: 2px 2px 0px #000;
+}
 
-        .loader-wrapper {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #0a0a0a;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 10000;
-            transition: 0.6s;
-        }
-        .loader-wrapper.fade-out { opacity: 0; visibility: hidden; }
-        .loader-logo { font-size: 3.5rem; font-weight: 900; color: #fff; animation: loaderText 2s infinite; }
-        @keyframes loaderText { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+.tos-card p {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #222222;
+    line-height: 1.5;
+}
 
-        /* BACK TO TOP */
-        .back-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(24, 24, 24, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            cursor: pointer;
-            z-index: 1000;
-            transition: 0.2s;
-        }
-        .back-to-top:hover {
-            color: #ef4444;
-            border-color: #ef4444;
-            transform: translateY(-3px);
-        }
+/* ==========================
+   RETURN BUTTON
+========================== */
+.sticker-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background: #ffffff;
+    border: 4px solid #000000;
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 6px 6px 0px #000000;
+    transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
 
-        .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
-        .particle { position: absolute; left: -50px; border-radius: 50%; background: rgba(239, 68, 68, 0.4); animation: driftAcross var(--speed) linear infinite; }
-        @keyframes driftAcross { 0% { transform: translateX(0); opacity: 0; } 10%, 90% { opacity: var(--opacity); } 100% { transform: translateX(110vw) translateY(var(--y-drift)); opacity: 0; } }
-    </style>
+.sticker-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #000000;
+}
+
+.sticker-btn:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px #000000;
+}
+
+.btn-highlight {
+    background: #9dff00;
+}
+
+footer {
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+footer a { color: #000; text-decoration: underline; }
+
+@media (max-width: 500px) {
+    .page-title-box h1 { font-size: 1.8rem; }
+    .tos-card h3 { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+</style>
 </head>
+
 <body>
-    <div class="loader-wrapper" id="loader">
-        <div class="loader-logo">jxnn.</div>
-    </div>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="./" class="nav-logo">jxnn.</a>
-            <div style="display: flex; gap: 8px;">
-                <a href="faq.html" class="nav-link">
-                    <i class="fa-solid fa-circle-question"></i> FAQ
-                </a>
-                <a href="./" class="nav-link">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Main
-                </a>
-            </div>
+<nav class="navbar">
+    <div class="nav-content">
+        <a href="./" class="nav-logo-wrapper">
+            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
+            <span class="nav-logo-text">JXNN.</span>
+        </a>
+        <a href="./" class="nav-link">BACK</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <!-- Header Frame -->
+    <header class="page-title-box">
+        <h1>TERMS OF SERVICE</h1>
+    </header>
+
+    <!-- TOS Core Content -->
+    <section class="tos-wrapper">
+        <div class="section-title">LEGAL FRAMEWORK</div>
+
+        <!-- Clause 1 -->
+        <div class="tos-card">
+            <h3><span>01</span> ENGAGEMENT & DEPOSITS</h3>
+            <p>By booking a project slot, you agree to these working guidelines. Depending on project scope, upfront deposits or complete layout clearings must be verified before raw footage processing begins.</p>
         </div>
-    </nav>
 
-    <div class="particle-container" id="particleContainer"></div>
+        <!-- Clause 2 -->
+        <div class="tos-card">
+            <h3><span>02</span> MATERIAL DELIVERY</h3>
+            <p>Clients are expected to deliver all required footage, voice assets, graphics, and stylistic dynamic references through structured cloud storage links. Production clocks only commence once all assets are successfully downloaded.</p>
+        </div>
 
-    <div class="back-to-top" id="backToTop" title="Back to Top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </div>
+        <!-- Clause 3 -->
+        <div class="tos-card">
+            <h3><span>03</span> REVISION PROTOCOL</h3>
+            <p>Standard editing packages include structured structural revision rounds. Requests must be provided in structured feedback notes within 72 hours of receiving draft renders. Core conceptual revisions requested post-export will require separate project adjustment fees.</p>
+        </div>
 
-    <div class="content-container">
-        <h1>Terms of Service</h1>
-        <p>Last Updated: June 2026</p>
+        <!-- Clause 4 -->
+        <div class="tos-card">
+            <h3><span>04</span> COPYRIGHT & INTELLECTUAL PROPERTY</h3>
+            <p>Upon final milestone balance confirmation, full distribution rights for the completed video export transfer entirely to the client. JXNN. STUDIO retains the right to present segments of the completed content across public media portfolios and showreels for studio promotion purposes.</p>
+        </div>
 
-        <h2>1. Services</h2>
-        <p>jxnn. provides professional video editing services, including but not limited to YouTube videos, Shorts, TikTok content, and thumbnail design.</p>
+        <!-- Clause 5 -->
+        <div class="tos-card">
+            <h3><span>05</span> TERMINATION POLICIES</h3>
+            <p>If a project contract is canceled midway by the client, any upfront booking deposits are non-refundable to secure the production slot protection. Refunds cannot be authorized once the final high-resolution masters have been processed and distributed.</p>
+        </div>
+    </section>
 
-        <h2>2. Payments & Deposits</h2>
-        <ul>
-            <li>A 50% non-refundable deposit is required to secure your slot for new clients.</li>
-            <li>The remaining balance is due upon approval of the final edit and before the watermark-free file is delivered.</li>
-            <li>Payments are accepted via the methods discussed during the briefing (e.g., PayPal, Bank Transfer).</li>
-        </ul>
+    <!-- Return action sticker -->
+    <a class="sticker-btn btn-highlight" href="./">
+        <span>💼 RETURN TO MAIN HUB</span>
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
 
-        <h2>3. Revisions</h2>
-        <p>I offer 2 rounds of minor revisions per project. Additional revisions or major changes to the original brief after editing has begun may incur extra fees.</p>
-
-        <h2>4. Turnaround Time</h2>
-        <p>Turnaround times are estimates and may vary based on project complexity and current workload. I will communicate any potential delays as early as possible.</p>
-
-        <h2>5. Content Rights</h2>
-        <p>Once full payment is received, you own the rights to the final edited video. I reserve the right to use portions of the work in my portfolio or showreel unless a non-disclosure agreement (NDA) is signed beforehand.</p>
-
-        <h2>6. Communication</h2>
-        <p>Primary communication should happen via Discord or Email to ensure all project details and feedback are tracked properly.</p>
-    </div>
-
-    <footer style="margin-top: 30px; color: #666; font-size: 0.85rem; text-align: center;">
-        © 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved.
+    <footer>
+        <div>© 2026 JXNN. STUDIO • <a href="tos.html">TERMS</a></div>
     </footer>
 
-    <script src="shared.js"></script>
-    <script>
-        document.getElementById("backToTop").addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    </script>
+</main>
+
 </body>
 </html>
