@@ -81,7 +81,7 @@ h1 {
     display: inline-block;
     width: 22px;
     height: 22px;
-    background: url('logo.jpg') center/cover no-repeat;
+    background: url('assets/profile.png') center/cover no-repeat;
     border: 1px solid #000;
     box-shadow: 2px 2px 0px #000;
 }
@@ -161,14 +161,15 @@ h1 {
     position: relative;
 }
 
-/* New Square-Cut Frame for the Logo */
+/* Square-Cut Frame for the Logo */
 .brand-logo-hero {
     width: 100px;
     height: 100px;
     border: 4px solid #000;
-    background: #000; /* Dark foundation accentuates the lightning spray glow */
+    background: #000;
     object-fit: cover;
     box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+    flex-shrink: 0; /* Prevents the image from squeezing on small screens */
 }
 
 .header-info p {
@@ -177,7 +178,7 @@ h1 {
     font-size: 1rem;
     color: #444;
     margin-top: 8px;
-    background: #9dff00; /* Acid Neon Green accent matches your logo.jpg color perfectly! */
+    background: #9dff00;
     display: inline-block;
     padding: 2px 6px;
     border: 2px solid #000;
@@ -221,7 +222,7 @@ h1 {
 }
 
 .btn-highlight {
-    background: #9dff00; /* Matches your lightning motif */
+    background: #9dff00;
 }
 
 .social-flex {
@@ -260,7 +261,7 @@ h1 {
     transform: translateY(-50%);
     width: 46px;
     height: 46px;
-    background: #9dff00; /* Coordinated neon green map triggers */
+    background: #9dff00;
     border: 3px solid #000000;
     color: #000000;
     font-size: 1.2rem;
@@ -396,10 +397,9 @@ footer a { color: #000; text-decoration: underline; }
 
 <nav class="navbar">
     <div class="nav-content">
-        <!-- Integrated Mini Brand Logo Badge -->
         <a href="./" class="nav-logo-wrapper">
-            <img src="assets/profile.png" alt="Profile Image" class="nav-profile-img">
-            <span class="nav-profile-text">JXNN.</span>
+            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
+            <span class="nav-logo-text">JXNN.</span>
         </a>
         <a href="faq.html" class="nav-link">FAQ</a>
     </div>
@@ -411,16 +411,14 @@ footer a { color: #000; text-decoration: underline; }
 
 <main class="container">
 
-    <!-- Profile Header Sticker Box utilizing the new Centerpiece Logo -->
     <header class="profile-header">
-        <img src="assets/profile.png" alt="jxnn profile" class="brand-profile-hero">
+        <img src="assets/profile.png" alt="jxnn logo" class="brand-logo-hero">
         <div class="header-info">
             <h1>jxnn.</h1>
             <p>// CUT DIFFERENT STUDIO</p>
         </div>
     </header>
 
-    <!-- Tactile Button Hub -->
     <section class="action-grid">
         <a class="sticker-btn btn-highlight" href="rates.html">
             <span>⚡ VIEW RATES & PACKAGES</span>
@@ -449,7 +447,6 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </section>
 
-    <!-- Video Showcase Section with Dual Carousel Links -->
     <section>
         <div class="section-title" id="video-title">CURRENT SHOWREEL</div>
         <div class="carousel-wrapper">
@@ -473,7 +470,6 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </section>
 
-    <!-- Editorial Framework Section -->
     <section>
         <div class="section-title">THE METRICS</div>
         <div class="grid-three">
@@ -492,7 +488,6 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </section>
 
-    <!-- Client Row -->
     <section>
         <div class="section-title">TRUSTED ROSTER</div>
         <div class="client-row">
