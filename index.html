@@ -365,11 +365,11 @@ h1 {
 }
 
 /* ==========================
-   TOAST NOTIFICATION
+   TOAST NOTIFICATION (FIXED DEEPER HIDDEN DEPTH FOR MOBILE)
 ========================== */
 .toast {
     position: fixed;
-    bottom: -80px;
+    bottom: -150px; /* Changed from -80px to safely clear mobile address bar zones */
     left: 50%;
     transform: translateX(-50%);
     background: #9dff00;
@@ -381,6 +381,9 @@ h1 {
     box-shadow: 6px 6px 0px #000;
     transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 2000;
+    width: max-content;
+    max-width: 90vw;
+    text-align: center;
 }
 .toast.visible {
     bottom: 40px;
@@ -541,14 +544,13 @@ emailButton.addEventListener("click", () => {
 });
 
 /* ==========================
-   VIDEO SLIDER ENGINE (THUMBNAIL LOAD MODIFIED)
+   VIDEO SLIDER ENGINE
 ========================== */
 const videoPlayer = document.getElementById("videoPlayer");
 const videoTitle = document.getElementById("video-title");
 const prevBtn = document.getElementById("prevVideo");
 const nextBtn = document.getElementById("nextVideo");
 
-// Autoplay parameters removed to stay static on initial thumbnails 
 const videoPlaylist = [
     {
         title: "CURRENT SHOWREEL",
