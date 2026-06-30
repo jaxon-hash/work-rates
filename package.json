@@ -1,0 +1,15 @@
+{
+  "name": "work-rates",
+  "version": "1.0.0",
+  "description": "Professional Video Editor portfolio and rates website",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["portfolio", "video-editing"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.12"
+  }
+}
