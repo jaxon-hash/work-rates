@@ -7,20 +7,54 @@
 
     <link rel="preload" as="image" href="assets/profile.png">
     <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-
     <meta name="description" content="Professional Video Editor specialising in high-retention content.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
 /* ==========================
-   STREETWEAR ENGINE PRELOADER (STYLIZED)
+   MEMORY EFFICIENT CORE LAYOUT
+========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: #e2e2e2;
+    background-image: 
+        radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
+        radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 20px 60px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Static, non-moving texture layer */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ==========================
+   PRELOADER (GPU HARDWARE ACCELERATED)
 ========================== */
 #preloader {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: #e2e2e2;
     background-image: 
         radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
@@ -31,10 +65,11 @@
     justify-content: center;
     align-items: center;
     z-index: 99999;
+    transform: translateZ(0); /* GPU Trigger */
+    will-change: transform;
     transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
-/* Added film-grain aesthetic overlay to match body design */
 #preloader::before {
     content: "";
     position: absolute;
@@ -50,9 +85,8 @@
     padding: 35px 45px;
     box-shadow: 10px 10px 0px #000000;
     text-align: center;
-    transform: rotate(-2deg);
+    transform: rotate(-2deg) translateZ(0);
     max-width: 90vw;
-    position: relative;
 }
 
 .loader-logo {
@@ -60,9 +94,7 @@
     font-weight: 900;
     text-transform: uppercase;
     color: #ffffff;
-    text-shadow: 
-        -2px -2px 0 #000,  2px -2px 0 #000, -2px  2px 0 #000,  2px  2px 0 #000,
-        4px 4px 0px #000000;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 4px 4px 0px #000000;
     letter-spacing: -2px;
     line-height: 0.95;
     margin-bottom: 18px;
@@ -92,62 +124,23 @@
 }
 
 @keyframes blink {
-    0% { opacity: 0.1; transform: scale(0.85); }
-    100% { opacity: 1; transform: scale(1.1); }
+    0% { opacity: 0.15; }
+    100% { opacity: 1; }
 }
 
 #preloader.loaded {
-    transform: translateY(-100vh);
+    transform: translateY(-100vh) translateZ(0);
 }
 
 /* ==========================
-   THEME STYLING & TEXTURES (Y2K / STREETWEAR)
-========================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-body {
-    background-color: #e2e2e2;
-    background-image: 
-        radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
-        radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
-    background-size: 8px 8px;
-    background-position: 0 0, 4px 4px;
-    color: #000000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 120px 20px 60px;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    opacity: 0.04;
-    pointer-events: none;
-    z-index: 9999;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* ==========================
-   STREETWEAR TYPOGRAPHY (CHUNKY & SHADOWED)
+   TYPOGRAPHY & BRANDING
 ========================== */
 h1 {
     font-size: 3.5rem;
     font-weight: 900;
     text-transform: uppercase;
     color: #ffffff;
-    text-shadow: 
-        -2px -2px 0 #000,  2px -2px 0 #000, -2px  2px 0 #000,  2px  2px 0 #000,
-        4px 4px 0px #000000, 8px 8px 0px rgba(0,0,0,0.15);
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 4px 4px 0px #000000, 8px 8px 0px rgba(0,0,0,0.15);
     letter-spacing: -2px;
     transform: rotate(-1.5deg);
 }
@@ -174,7 +167,7 @@ h1 {
 }
 
 /* ==========================
-   NAVIGATION
+   NAVIGATION & CONTAINERS
 ========================== */
 .navbar {
     position: absolute;
@@ -226,9 +219,6 @@ h1 {
     color: #000;
 }
 
-/* ==========================
-   CONTAINER & LAYOUT
-========================== */
 .container {
     max-width: 650px;
     width: 100%;
@@ -251,7 +241,6 @@ h1 {
 .brand-logo-hero {
     width: 120px;
     height: 120px;
-    background: transparent;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -269,7 +258,7 @@ h1 {
 }
 
 /* ==========================
-   BUTTONS
+   BUTTONS & ACTIONS
 ========================== */
 .action-grid {
     display: flex;
@@ -305,26 +294,14 @@ h1 {
     box-shadow: 0px 0px 0px #000000;
 }
 
-.btn-highlight {
-    background: #9dff00;
-}
-
-.social-flex {
-    display: flex;
-    gap: 16px;
-}
-.social-flex .sticker-btn {
-    flex: 1;
-}
+.btn-highlight { background: #9dff00; }
+.social-flex { display: flex; gap: 16px; }
+.social-flex .sticker-btn { flex: 1; }
 
 /* ==========================
-   VIDEO CAROUSEL OVERHAUL
+   VIDEO DISPLAY CAROUSEL
 ========================== */
-.carousel-wrapper {
-    position: relative;
-    width: 100%;
-}
-
+.carousel-wrapper { position: relative; width: 100%; }
 .video-box {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -333,16 +310,12 @@ h1 {
     box-shadow: 8px 8px 0px #000000;
     position: relative;
 }
-.video-box iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
+.video-box iframe { width: 100%; height: 100%; border: 0; }
 
 .carousel-arrow {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateZ(0);
     width: 46px;
     height: 46px;
     background: #9dff00;
@@ -355,36 +328,26 @@ h1 {
     cursor: pointer;
     z-index: 10;
     box-shadow: 4px 4px 0px #000000;
-    transition: transform 0.05s ease, box-shadow 0.05s ease;
 }
-
-.carousel-arrow:hover {
-    background: #ffffff;
-    box-shadow: 5px 5px 0px #000000;
-}
-.carousel-arrow:active {
-    box-shadow: 0px 0px 0px #000000;
-}
-
+.carousel-arrow:hover { background: #ffffff; box-shadow: 5px 5px 0px #000000; }
+.carousel-arrow:active { box-shadow: 0px 0px 0px #000000; }
 .arrow-left { left: -24px; display: none; }
 .arrow-right { right: -24px; }
 
 /* ==========================
-   WORKFLOW GRID CARDS
+   METRICS & WORKFLOW CARDS
 ========================== */
 .grid-three {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
 }
-
 .info-card {
     background: #ffffff;
     border: 3px solid #000000;
     padding: 20px;
     box-shadow: 5px 5px 0px #000000;
 }
-
 .info-card h3 {
     font-size: 1.1rem;
     color: #000000;
@@ -393,7 +356,6 @@ h1 {
     border-bottom: 2px dashed #000;
     padding-bottom: 4px;
 }
-
 .info-card p {
     font-family: monospace;
     font-weight: bold;
@@ -403,14 +365,9 @@ h1 {
 }
 
 /* ==========================
-   CLIENT CAPSULE TAGS
+   ROSTER DESIGN PROTOCOLS
 ========================== */
-.client-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-}
-
+.client-row { display: flex; flex-wrap: wrap; gap: 14px; }
 .client-tag {
     display: flex;
     align-items: center;
@@ -425,10 +382,7 @@ h1 {
     text-transform: uppercase;
     font-size: 0.9rem;
 }
-.client-tag:hover {
-    background: #9dff00;
-}
-
+.client-tag:hover { background: #9dff00; }
 .client-img-frame {
     width: 32px;
     height: 32px;
@@ -440,25 +394,18 @@ h1 {
     background: #000;
     flex-shrink: 0;
 }
-
-.client-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.beta-squad-fix {
-    transform: scale(1.15);
-}
+.client-img { width: 100%; height: 100%; object-fit: cover; }
+.beta-squad-fix { transform: scale(1.15); }
 
 /* ==========================
-   TOAST NOTIFICATION
+   TOAST STYLING (GPU POWERED)
 ========================== */
 .toast {
     position: fixed;
-    bottom: -150px;
+    bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 150px) translateZ(0); /* Optimized GPU default layout position */
+    will-change: transform;
     background: #9dff00;
     border: 4px solid #000;
     color: #000;
@@ -466,23 +413,17 @@ h1 {
     font-weight: 900;
     text-transform: uppercase;
     box-shadow: 6px 6px 0px #000;
-    transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 2000;
     width: max-content;
     max-width: 90vw;
     text-align: center;
 }
 .toast.visible {
-    bottom: 40px;
+    transform: translate(-50%, -40px) translateZ(0);
 }
 
-footer {
-    text-align: center;
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-top: 20px;
-}
+footer { text-align: center; font-family: monospace; font-weight: bold; font-size: 0.85rem; margin-top: 20px; }
 footer a { color: #000; text-decoration: underline; }
 
 @media (max-width: 500px) {
@@ -496,10 +437,8 @@ footer a { color: #000; text-decoration: underline; }
 }
 </style>
 </head>
-
 <body>
 
-<!-- Beautifully Stylized Full Screen Preloader -->
 <div id="preloader">
     <div class="loader-card">
         <div class="loader-logo">JXNN. STUDIO</div>
@@ -520,13 +459,9 @@ footer a { color: #000; text-decoration: underline; }
     </div>
 </nav>
 
-<div class="toast" id="toast">
-    ⚡ EMAIL COPIED TO CLIPBOARD!
-</div>
+<div class="toast" id="toast">⚡ EMAIL COPIED TO CLIPBOARD!</div>
 
 <main class="container">
-
-    <!-- Profile Header Section -->
     <header class="profile-header">
         <img src="assets/profile.png" alt="jxnn logo" class="brand-logo-hero">
         <div class="header-info">
@@ -535,23 +470,19 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </header>
 
-    <!-- Tactile Button Hub -->
     <section class="action-grid">
         <a class="sticker-btn btn-highlight" href="rates.html">
             <span>⚡ VIEW RATES & PACKAGES</span>
             <i class="fa-solid fa-arrow-right"></i>
         </a>
-
         <button class="sticker-btn" id="emailButton" data-email="business.jxnn@gmail.com">
             <span>📥 COPY BUSINESS EMAIL</span>
             <i class="fa-solid fa-copy"></i>
         </button>
-
         <a class="sticker-btn" href="https://discord.gg/qgJNMFy3F6" target="_blank" rel="noopener noreferrer">
             <span>🌐 JOIN THE DISCORD</span>
             <i class="fa-brands fa-discord"></i>
         </a>
-
         <div class="social-flex">
             <a class="sticker-btn" href="https://instagram.com/jaxongarforth1" target="_blank" rel="noopener noreferrer">
                 <span>IG</span>
@@ -564,7 +495,6 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </section>
 
-    <!-- Video Showcase Section -->
     <section>
         <div class="section-title" id="video-title">CURRENT SHOWREEL</div>
         <div class="carousel-wrapper">
@@ -574,21 +504,12 @@ footer a { color: #000; text-decoration: underline; }
             <button class="carousel-arrow arrow-right" id="nextVideo" aria-label="Next Video">
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
-
             <div class="video-box">
-                <iframe
-                    id="videoPlayer"
-                    src="https://www.youtube.com/embed/ggtdj-_FzYA"
-                    title="jxnn. studio reel"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    loading="lazy">
-                 </iframe>
+                <iframe id="videoPlayer" src="https://www.youtube.com/embed/ggtdj-_FzYA" title="jxnn. studio reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Editorial Framework Section -->
     <section>
         <div class="section-title">THE METRICS</div>
         <div class="grid-three">
@@ -607,114 +528,68 @@ footer a { color: #000; text-decoration: underline; }
         </div>
     </section>
 
-    <!-- Client Roster Section -->
     <section>
         <div class="section-title">TRUSTED ROSTER</div>
         <div class="client-row">
             <a class="client-tag" href="https://twitch.tv/okharry" target="_blank" rel="noopener noreferrer">
-                <div class="client-img-frame">
-                    <img src="assets/okharry.png" alt="OkHarry" class="client-img" loading="lazy">
-                </div>
+                <div class="client-img-frame"><img src="assets/okharry.png" alt="OkHarry" class="client-img" loading="lazy"></div>
                 <span>OkHarry</span>
             </a>
             <a class="client-tag" href="https://www.youtube.com/@BetaSquad" target="_blank" rel="noopener noreferrer">
-                <div class="client-img-frame">
-                    <img src="assets/betasquad.png" alt="Beta Squad" class="client-img beta-squad-fix" loading="lazy">
-                </div>
+                <div class="client-img-frame"><img src="assets/betasquad.png" alt="Beta Squad" class="client-img beta-squad-fix" loading="lazy"></div>
                 <span>Beta Squad</span>
             </a>
         </div>
     </section>
 
     <footer>
-        <div>© 2026 JXNN. STUDIO • <a href="tos.html">TERMS</a></div>
+        <div>© 2026 JXNN. STUDIO • <a href="tos.html?v=100">TERMS</a></div>
     </footer>
-
 </main>
 
 <script>
-/* ==========================
-   PRELOADER DISMISSAL ENGINE
-========================== */
+// Highly Efficient Passive DOM Execution
 window.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
-    
-    // Smooth timing execution parameters
     setTimeout(() => {
         preloader.classList.add("loaded");
         setTimeout(() => {
-            preloader.remove();
+            preloader.remove(); // Destroys the preloader completely out of system memory
         }, 600);
-    }, 1300);
-});
+    }, 1100);
+}, { passive: true });
 
-/* ==========================
-   CLIPBOARD UTILITY
-========================== */
 const emailButton = document.getElementById("emailButton");
 const toastNotification = document.getElementById("toast");
 
 emailButton.addEventListener("click", () => {
     navigator.clipboard.writeText(emailButton.dataset.email);
     toastNotification.classList.add("visible");
-    setTimeout(() => {
-        toastNotification.classList.remove("visible");
-    }, 2000);
-});
+    setTimeout(() => { toastNotification.classList.remove("visible"); }, 2000);
+}, { passive: true });
 
-/* ==========================
-   VIDEO SLIDER ENGINE
-========================== */
 const videoPlayer = document.getElementById("videoPlayer");
 const videoTitle = document.getElementById("video-title");
 const prevBtn = document.getElementById("prevVideo");
 const nextBtn = document.getElementById("nextVideo");
 
 const videoPlaylist = [
-    {
-        title: "CURRENT SHOWREEL",
-        url: "https://www.youtube.com/embed/ggtdj-_FzYA"
-    },
-    {
-        title: "FEATURED WORK",
-        url: "https://www.youtube.com/embed/NONQ_j8San4"
-    }
+    { title: "CURRENT SHOWREEL", url: "https://www.youtube.com/embed/ggtdj-_FzYA" },
+    { title: "FEATURED WORK", url: "https://www.youtube.com/embed/NONQ_j8San4" }
 ];
-
 let currentVideoIndex = 0;
 
 function updateVideoDisplay() {
     videoPlayer.style.visibility = "hidden";
     videoPlayer.src = videoPlaylist[currentVideoIndex].url;
     videoTitle.innerText = videoPlaylist[currentVideoIndex].title;
-
-    if (currentVideoIndex === 0) {
-        prevBtn.style.display = "none";
-        nextBtn.style.display = "flex";
-    } else {
-        prevBtn.style.display = "flex";
-        nextBtn.style.display = "none";
-    }
+    prevBtn.style.display = currentVideoIndex === 0 ? "none" : "flex";
+    nextBtn.style.display = currentVideoIndex === videoPlaylist.length - 1 ? "none" : "flex";
 }
 
-videoPlayer.addEventListener("load", () => {
-    videoPlayer.style.visibility = "visible";
-});
-
-nextBtn.addEventListener("click", () => {
-    if (currentVideoIndex < videoPlaylist.length - 1) {
-        currentVideoIndex++;
-        updateVideoDisplay();
-    }
-});
-
-prevBtn.addEventListener("click", () => {
-    if (currentVideoIndex > 0) {
-        currentVideoIndex--;
-        updateVideoDisplay();
-    }
-});
+videoPlayer.addEventListener("load", () => { videoPlayer.style.visibility = "visible"; }, { passive: true });
+nextBtn.addEventListener("click", () => { if (currentVideoIndex < videoPlaylist.length - 1) { currentVideoIndex++; updateVideoDisplay(); } }, { passive: true });
+prevBtn.addEventListener("click", () => { if (currentVideoIndex > 0) { currentVideoIndex--; updateVideoDisplay(); } }, { passive: true });
 </script>
-
 </body>
 </html>
