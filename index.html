@@ -87,7 +87,7 @@ h1 {
 }
 
 /* ==========================
-   NAVIGATION (UPDATED TO ABSOLUTE PARKING)
+   NAVIGATION
 ========================== */
 .navbar {
     position: absolute;
@@ -541,29 +541,28 @@ emailButton.addEventListener("click", () => {
 });
 
 /* ==========================
-   VIDEO SLIDER ENGINE (UPDATED INSTANT LOAD)
+   VIDEO SLIDER ENGINE (THUMBNAIL LOAD MODIFIED)
 ========================== */
 const videoPlayer = document.getElementById("videoPlayer");
 const videoTitle = document.getElementById("video-title");
 const prevBtn = document.getElementById("prevVideo");
 const nextBtn = document.getElementById("nextVideo");
 
-// Added embed query configurations to enforce immediate stream source switching
+// Autoplay parameters removed to stay static on initial thumbnails 
 const videoPlaylist = [
     {
         title: "CURRENT SHOWREEL",
-        url: "https://www.youtube.com/embed/ggtdj-_FzYA?autoplay=1&enablejsapi=1"
+        url: "https://www.youtube.com/embed/ggtdj-_FzYA"
     },
     {
         title: "FEATURED WORK",
-        url: "https://www.youtube.com/embed/NONQ_j8San4?start=1390&autoplay=1&enablejsapi=1"
+        url: "https://www.youtube.com/embed/NONQ_j8San4"
     }
 ];
 
 let currentVideoIndex = 0;
 
 function updateVideoDisplay() {
-    // Hide player instantly while loading to completely eliminate background residue
     videoPlayer.style.visibility = "hidden";
     videoPlayer.src = videoPlaylist[currentVideoIndex].url;
     videoTitle.innerText = videoPlaylist[currentVideoIndex].title;
@@ -577,7 +576,6 @@ function updateVideoDisplay() {
     }
 }
 
-// Bring back the visibility configuration fluidly the split-second it receives content
 videoPlayer.addEventListener("load", () => {
     videoPlayer.style.visibility = "visible";
 });
