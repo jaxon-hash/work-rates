@@ -4,294 +4,408 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jxnn. | FAQ</title>
-    
-    <meta name="description" content="Find answers to frequently asked questions about video editing services by jxnn.">
-    <meta property="og:title" content="jxnn. | FAQ">
-    <meta property="og:image" content="assets/profile.jpg">
-    <meta name="theme-color" content="#ef4444">
 
-    <link rel="icon" type="image/png" href="assets/profile.jpg">
-    <link rel="shortcut icon" type="image/png" href="assets/favicon.jpg">
+    <link rel="preload" as="image" href="assets/profile.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
 
+    <meta name="description" content="Frequently asked questions about editing turnarounds, revisions, and workflows.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <style>
-        /* RESET & BASE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            scroll-behavior: smooth;
-        }
+<style>
+/* ==========================
+   THEME STYLING & TEXTURES (Y2K / STREETWEAR)
+========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-        ::selection { background: #ef4444; color: #fff; }
+body {
+    background-color: #e2e2e2;
+    background-image: 
+        radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
+        radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 20px 60px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
 
-        html {
-            min-height: 100%;
-            background: #0a0a0a;
-            background-image: linear-gradient(180deg, #0a0a0a 0%, #1a0808 50%, #4a0a0a 100%);
-            background-size: 100% 100%;
-            background-attachment: scroll;
-            animation: breatheBackground 15s ease-in-out infinite alternate;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
 
-        @keyframes breatheBackground {
-            0% { background-size: 100% 100%; }
-            100% { background-size: 100% 105%; }
-        }
+/* ==========================
+   NAVIGATION
+========================== */
+.navbar {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    padding: 24px;
+    z-index: 1000;
+}
+.nav-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-logo-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 4px 12px;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0px #000;
+    transform: rotate(-3deg);
+    text-decoration: none;
+}
+.nav-logo-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    margin-right: 6px;
+    border-radius: 2px;
+}
+.nav-logo-text {
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 900;
+}
+.nav-link {
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+}
+.nav-link:hover {
+    background: #fff;
+    color: #000;
+}
 
-        body {
-            min-height: 100%;
-            background: transparent;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 100px 20px 40px;
-        }
+/* ==========================
+   CONTAINER & LAYOUT
+========================== */
+.container {
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: -1;
-        }
+.page-title-box {
+    background: #ffffff;
+    border: 4px solid #000000;
+    padding: 24px;
+    box-shadow: 8px 8px 0px #000000;
+    text-align: center;
+}
 
-        /* NAVIGATION */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1000;
-            padding: 15px 0;
-            transition: transform 0.3s ease;
-        }
+.page-title-box h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 
+        -2px -2px 0 #000,  2px -2px 0 #000, -2px  2px 0 #000,  2px  2px 0 #000,
+        4px 4px 0px #000000, 8px 8px 0px rgba(0,0,0,0.15);
+    letter-spacing: -1px;
+}
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .nav-logo { font-size: 1.5rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: -1.5px; }
+.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: url('assets/profile.png') center/cover no-repeat;
+    border: 1px solid #000;
+    box-shadow: 2px 2px 0px #000;
+}
 
-        .nav-link {
-            color: #a3a3a3;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-            padding: 8px 16px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+/* ==========================
+   ACCORDION SYSTEM
+========================== */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
 
-        .nav-link:hover {
-            color: #fff;
-            background: rgba(239, 68, 68, 0.1);
-            border-color: rgba(239, 68, 68, 0.2);
-        }
+.faq-item {
+    background: #ffffff;
+    border: 4px solid #000000;
+    box-shadow: 5px 5px 0px #000000;
+    transition: transform 0.1s ease;
+}
 
-        /* CONTAINER */
-        .faq-container {
-            max-width: min(95%, 800px);
-            width: 100%;
-            background: rgba(24, 24, 24, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
+.faq-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #000000;
+    gap: 15px;
+}
 
-        h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; letter-spacing: -0.5px; }
+.faq-icon-box {
+    width: 32px;
+    height: 32px;
+    background: #9dff00;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0px #000;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-        .faq-item {
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+}
 
-        .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.faq-content-inner {
+    padding: 0 20px 20px 20px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #222222;
+    line-height: 1.5;
+    border-top: 2px dashed transparent;
+}
 
-        .faq-question {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+/* Active Open States */
+.faq-item.active .faq-icon-box {
+    transform: rotate(45deg);
+    background: #ffffff;
+}
 
-        .faq-question i { color: #ef4444; font-size: 1rem; }
+.faq-item.active .faq-content-inner {
+    border-top-color: #000000;
+}
 
-        .faq-answer {
-            font-size: 1rem;
-            color: #b5b5b5;
-            line-height: 1.6;
-        }
+/* ==========================
+   RETURN BUTTON
+========================== */
+.sticker-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background: #ffffff;
+    border: 4px solid #000000;
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 6px 6px 0px #000000;
+    transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
 
-        footer a { color: inherit; text-decoration: none; transition: color 0.2s; }
-        footer a:hover { color: #ef4444; }
+.sticker-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #000000;
+}
 
-        /* LOADER */
-        .loader-wrapper {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #0a0a0a;
-            display: flex; justify-content: center; align-items: center;
-            z-index: 10000;
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
-        }
+.sticker-btn:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px #000000;
+}
 
-        .loader-wrapper.fade-out { opacity: 0; visibility: hidden; }
-        .loader-logo { font-size: 3.5rem; font-weight: 900; color: #fff; letter-spacing: -2px; margin-bottom: 10px; animation: loaderText 2s ease-in-out infinite; text-align: center; }
-        .loader-bar { width: 60px; height: 3px; background: #ef4444; margin: 0 auto; border-radius: 10px; box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); animation: loaderBar 1.5s infinite ease-in-out; }
+.btn-highlight {
+    background: #9dff00;
+}
 
-        @keyframes loaderText { 0%, 100% { opacity: 0.8; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
-        @keyframes loaderBar { 0% { width: 0; opacity: 0; } 50% { width: 80px; opacity: 1; } 100% { width: 0; opacity: 0; } }
+footer {
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+footer a { color: #000; text-decoration: underline; }
 
-        /* BACK TO TOP */
-        .back-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(24, 24, 24, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            cursor: pointer;
-            z-index: 1000;
-            transition: transform 0.2s, color 0.2s, border-color 0.2s;
-        }
-
-        .back-to-top:hover {
-            color: #ef4444;
-            border-color: #ef4444;
-            transform: translateY(-3px);
-        }
-
-        /* PARTICLES */
-        .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
-        .particle { position: absolute; left: -50px; border-radius: 50%; background: rgba(239, 68, 68, 0.4); box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); animation: driftAcross var(--speed) linear infinite; will-change: transform, opacity; }
-        @keyframes driftAcross { 0% { transform: translateX(0) translateY(0); opacity: 0; } 10% { opacity: var(--opacity); } 90% { opacity: var(--opacity); } 100% { transform: translateX(110vw) translateY(var(--y-drift)); opacity: 0; } }
-        
-        @media (max-width: 768px) {
-            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; }
-        }
-   </style>
+@media (max-width: 500px) {
+    .page-title-box h1 { font-size: 2.2rem; }
+    .faq-trigger { font-size: 0.95rem; padding: 16px; }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="loader-wrapper" id="loader">
-        <div>
-            <div class="loader-logo">jxnn.</div>
-            <div class="loader-bar"></div>
-        </div>
+<nav class="navbar">
+    <div class="nav-content">
+        <a href="./" class="nav-logo-wrapper">
+            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
+            <span class="nav-logo-text">JXNN.</span>
+        </a>
+        <a href="./" class="nav-link">BACK</a>
     </div>
+</nav>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="./" class="nav-logo">jxnn.</a>
-            <a href="./" class="nav-link">
-                <i class="fa-solid fa-arrow-left"></i> Back to Main
-            </a>
-        </div>
-    </nav>
+<main class="container">
 
-    <div class="particle-container" id="particleContainer"></div>
+    <!-- Header Frame -->
+    <header class="page-title-box">
+        <h1>QUESTIONS // FAQ</h1>
+    </header>
 
-    <div class="back-to-top" id="backToTop" title="Back to Top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </div>
+    <!-- FAQ Accordion Layout -->
+    <section class="faq-list">
+        <div class="section-title">PRODUCTION INTEL</div>
 
-    <div class="faq-container">
-        <h1>Frequently Asked Questions</h1>
-
+        <!-- Q1 -->
         <div class="faq-item">
-            <div class="faq-question">
-                <i class="fa-solid fa-clock"></i>
-                What is your average turnaround time?
-            </div>
-            <div class="faq-answer">
-                Standard edits typically take 2-5 business days depending on complexity, this varies depending on how big your channel is. Shorts and TikToks are usually delivered within 24-48 hours.
+            <button class="faq-trigger">
+                <span>What software do you use?</span>
+                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+            </button>
+            <div class="faq-content">
+                <div class="faq-content-inner">
+                    Everything is engineered inside Adobe Premiere Pro and After Effects for advanced dynamic styling, tracking, and composition rendering. Audio profiling is handled natively alongside professional leveling tools.
+                </div>
             </div>
         </div>
 
+        <!-- Q2 -->
         <div class="faq-item">
-            <div class="faq-question">
-                <i class="fa-solid fa-laptop-code"></i>
-                What software do you use for editing?
-            </div>
-            <div class="faq-answer">
-                I primarily use Adobe Premiere Pro for the main assembly and After Effects for advanced motion graphics and visual effects.
+            <button class="faq-trigger">
+                <span>How do revisions work?</span>
+                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+            </button>
+            <div class="faq-content">
+                <div class="faq-content-inner">
+                    Every project contract includes structured structural review rounds. Minor pacing modifications, cut adaptations, and asset replacements are addressed quickly to keep timelines clean.
+                </div>
             </div>
         </div>
 
+        <!-- Q3 -->
         <div class="faq-item">
-            <div class="faq-question">
-                <i class="fa-solid fa-rotate-left"></i>
-                How many revisions do I get?
-            </div>
-            <div class="faq-answer">
-                I offer 2 rounds of minor revisions for free to ensure the final product matches your vision perfectly.
+            <button class="faq-trigger">
+                <span>What is your typical turnaround time?</span>
+                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+            </button>
+            <div class="faq-content">
+                <div class="faq-content-inner">
+                    Turnaround times directly depend on your channel's scale model. Short-form edits typically wrap within 24–72 hours, while complex YouTube long-form sequences range from 2–5 days. Speed upgrades can be arranged if specified early.
+                </div>
             </div>
         </div>
 
+        <!-- Q4 -->
         <div class="faq-item">
-            <div class="faq-question">
-                <i class="fa-solid fa-file-import"></i>
-                How should I send my footage?
-            </div>
-            <div class="faq-answer">
-                You can send files via Google Drive, WeTransfer, or Dropbox. Please ensure the link is set to "Anyone with the link can view/download."
+            <button class="faq-trigger">
+                <span>How should I send over project files?</span>
+                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+            </button>
+            <div class="faq-content">
+                <div class="faq-content-inner">
+                    Raw assets, screen captures, voice tracks, and custom overlays should be bundled and transmitted through organized cloud portals like Google Drive, Dropbox, or Frame.io links.
+                </div>
             </div>
         </div>
 
+        <!-- Q5 -->
         <div class="faq-item">
-            <div class="faq-question">
-                <i class="fa-solid fa-credit-card"></i>
-                How do payments work?
-            </div>
-            <div class="faq-answer">
-                I usually require a 50% deposit upfront for new clients, with the remaining balance due upon final approval of the edit.
+            <button class="faq-trigger">
+                <span>Do you offer long-term monthly retainers?</span>
+                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
+            </button>
+            <div class="faq-content">
+                <div class="faq-content-inner">
+                    Yes. Creators seeking consistent scheduling can secure locked-in monthly turnaround queues. This ensures priority scheduling slots for high-volume asset output.
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <footer style="margin-top: 30px; color: #666; font-size: 0.85rem; text-align: center;">
-        © 2026 <a href="https://github.com/jaxon-hash" target="_blank" rel="noopener noreferrer">jxnn</a>. All rights reserved. • <a href="tos.html">Terms of Service</a>
+    <!-- Return action sticker -->
+    <a class="sticker-btn btn-highlight" href="./">
+        <span>💼 RETURN TO MAIN HUB</span>
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+    <footer>
+        <div>© 2026 JXNN. STUDIO • <a href="tos.html">TERMS</a></div>
     </footer>
 
-    <script src="shared.js"></script>
-    <script>
-        document.getElementById("backToTop").addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+</main>
+
+<script>
+/* ==========================
+   ACCORDION SCRIPT
+========================== */
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+        const currentItem = trigger.parentElement;
+        const content = currentItem.querySelector('.faq-content');
+        
+        // Close any other open FAQ boxes for a clean dashboard transition
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== currentItem && item.classList.contains('active')) {
+                item.classList.remove('active');
+                item.querySelector('.faq-content').style.maxHeight = '0';
+            }
         });
-    </script>
+
+        // Toggle active view configuration on clicked element
+        currentItem.classList.toggle('active');
+
+        if (currentItem.classList.contains('active')) {
+            content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+            content.style.maxHeight = "0";
+        }
+    });
+});
+</script>
+
 </body>
 </html>
