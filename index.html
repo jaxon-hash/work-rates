@@ -43,7 +43,6 @@ body {
     position: relative;
 }
 
-/* Static, non-moving texture layer */
 body::before {
     content: "";
     position: fixed;
@@ -55,24 +54,19 @@ body::before {
 }
 
 /* ==========================
-   PRELOADER (GPU HARDWARE ACCELERATED)
+   PRELOADER
 ========================== */
 #preloader {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: #e2e2e2;
-    background-image: 
-        radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
-        radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
-    background-size: 8px 8px;
-    background-position: 0 0, 4px 4px;
+    z-index: 99999;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
-    transform: translateZ(0); /* GPU Trigger */
-    will-change: transform;
-    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
 #preloader::before {
@@ -314,8 +308,41 @@ h1 {
     border: 4px solid #000;
     box-shadow: 8px 8px 0px #000000;
     position: relative;
+    overflow: hidden;
 }
 .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+/* Direct Link Mode elements */
+.direct-link-container {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}
+.direct-link-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.direct-link-container:hover .direct-link-img {
+    transform: scale(1.03);
+}
+.play-overlay-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #9dff00;
+    border: 3px solid #000;
+    padding: 16px 24px;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0px #9dff00;
+    pointer-events: none;
+}
 
 .carousel-arrow {
     position: absolute;
@@ -340,7 +367,7 @@ h1 {
 .arrow-right { right: -24px; }
 
 /* ==========================
-   METRICS & WORKFLOW CARDS
+   METRICS & WORKFLOW
 ========================== */
 .grid-three {
     display: grid;
@@ -370,7 +397,7 @@ h1 {
 }
 
 /* ==========================
-   ROSTER DESIGN PROTOCOLS
+   ROSTER DESIGN
 ========================== */
 .client-row { display: flex; flex-wrap: wrap; gap: 14px; }
 .client-tag {
@@ -403,13 +430,13 @@ h1 {
 .beta-squad-fix { transform: scale(1.15); }
 
 /* ==========================
-   TOAST STYLING (GPU POWERED)
+   TOAST STYLING
 ========================== */
 .toast {
     position: fixed;
     bottom: 0;
     left: 50%;
-    transform: translate(-50%, 150px) translateZ(0); /* Optimized GPU default layout position */
+    transform: translate(-50%, 150px) translateZ(0);
     will-change: transform;
     background: #9dff00;
     border: 4px solid #000;
@@ -443,7 +470,6 @@ footer a { color: #000; text-decoration: underline; }
 </style>
 </head>
 <body>
-</div>
 <div id="preloader">
     <div class="loader-card">
         <div class="loader-logo">JXNN. STUDIO</div>
@@ -474,6 +500,20 @@ footer a { color: #000; text-decoration: underline; }
             <p>// CUT DIFFERENT STUDIO</p>
         </div>
     </header>
+    
+    <nav class="navbar">
+    <div class="nav-content">
+        <a href="./" class="nav-logo-wrapper">
+            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
+            <span class="nav-logo-text">JXNN.</span>
+        </a>
+        <div class="nav-links-group">
+            <a href="./" class="nav-link active">HOME</a>
+            <a href="thumbnails.html" class="nav-link">THUMBNAILS</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </div>
+    </div>
+</nav>
 
     <section class="action-grid">
         <a class="sticker-btn btn-highlight" href="rates.html">
@@ -510,7 +550,14 @@ footer a { color: #000; text-decoration: underline; }
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
             <div class="video-box">
+                <!-- Standard Iframe Player Structure -->
                 <iframe id="videoPlayer" src="https://www.youtube.com/embed/ggtdj-_FzYA" title="jxnn. studio reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                
+                <!-- Direct Link Structure for Embed-Blocked Content -->
+                <a id="directLink" class="direct-link-container" href="#" target="_blank" rel="noopener noreferrer">
+                    <img id="directLinkImg" class="direct-link-img" src="" alt="Video Thumbnail">
+                    <div class="play-overlay-icon">⚡ Watch on YouTube</div>
+                </a>
             </div>
         </div>
     </section>
@@ -553,14 +600,11 @@ footer a { color: #000; text-decoration: underline; }
 </main>
 
 <script>
-// Highly Efficient Passive DOM Execution
 window.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
     setTimeout(() => {
         preloader.classList.add("loaded");
-        setTimeout(() => {
-            preloader.remove(); // Destroys the preloader completely out of system memory
-        }, 600);
+        setTimeout(() => { preloader.remove(); }, 600);
     }, 1100);
 }, { passive: true });
 
@@ -577,20 +621,37 @@ const videoPlayer = document.getElementById("videoPlayer");
 const videoTitle = document.getElementById("video-title");
 const prevBtn = document.getElementById("prevVideo");
 const nextBtn = document.getElementById("nextVideo");
+const directLink = document.getElementById("directLink");
+const directLinkImg = document.getElementById("directLinkImg");
 
 const videoPlaylist = [
-    { title: "CURRENT SHOWREEL", url: "https://www.youtube.com/embed/ggtdj-_FzYA" },
-    { title: "FEATURED WORK", url: "https://www.youtube.com/embed/NONQ_j8San4" },
-    { title: "BETA SQUAD\n*SUBTITLES ONLY*", url: "https://www.youtube.com/embed/qyTBSJyDLlQ?start=388" }
+    { title: "FEATURED WORK", url: "https://www.youtube.com/embed/ggtdj-_FzYA", isDirect: false },
+    { title: "FEATURED WORK", url: "https://www.youtube.com/embed/NONQ_j8San4", isDirect: false },
+    { title: "FEATURED WORK", url: "https://www.youtube.com/watch?v=ApeCWRt1sIY&t=", thumb: "https://img.youtube.com/vi/ApeCWRt1sIY/maxresdefault.jpg", isDirect: true },
+    { title: "BETA SQUAD\n*SUBTITLES ONLY*", url: "https://www.youtube.com/embed/qyTBSJyDLlQ?", isDirect: false }
 ];
 let currentVideoIndex = 0;
 
 function updateVideoDisplay() {
-    videoPlayer.style.visibility = "hidden";
-    videoPlayer.src = videoPlaylist[currentVideoIndex].url;
-    videoTitle.innerText = videoPlaylist[currentVideoIndex].title;
+    const currentVideo = videoPlaylist[currentVideoIndex];
+    
+    videoTitle.innerText = currentVideo.title;
     prevBtn.style.display = currentVideoIndex === 0 ? "none" : "flex";
     nextBtn.style.display = currentVideoIndex === videoPlaylist.length - 1 ? "none" : "flex";
+
+    if (currentVideo.isDirect) {
+        // Toggle elements to showcase Direct Link Mode with the fixed raw image thumb
+        videoPlayer.style.display = "none";
+        directLink.style.display = "block";
+        directLink.href = currentVideo.url;
+        directLinkImg.src = currentVideo.thumb;
+    } else {
+        // Fall back to standard native embedded frame system
+        directLink.style.display = "none";
+        videoPlayer.style.display = "block";
+        videoPlayer.style.visibility = "hidden";
+        videoPlayer.src = currentVideo.url;
+    }
 }
 
 videoPlayer.addEventListener("load", () => { videoPlayer.style.visibility = "visible"; }, { passive: true });
