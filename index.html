@@ -37,7 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 120px 20px 60px;
+    padding: 140px 20px 60px; /* Slight bump for navigation headroom */
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -203,6 +203,10 @@ h1 {
     color: #000;
     font-weight: 900;
 }
+.nav-links-group {
+    display: flex;
+    gap: 12px;
+}
 .nav-link {
     background: #000;
     color: #fff;
@@ -213,8 +217,8 @@ h1 {
     border: 2px solid #000;
     box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
 }
-.nav-link:hover {
-    background: #fff;
+.nav-link:hover, .nav-link.active {
+    background: #9dff00;
     color: #000;
 }
 
@@ -312,7 +316,6 @@ h1 {
 }
 .video-box iframe { width: 100%; height: 100%; border: 0; }
 
-/* Direct Link Mode elements */
 .direct-link-container {
     display: none;
     position: absolute;
@@ -367,7 +370,7 @@ h1 {
 .arrow-right { right: -24px; }
 
 /* ==========================
-   METRICS & WORKFLOW
+   METRICS & WORKFLOW CARDS
 ========================== */
 .grid-three {
     display: grid;
@@ -397,7 +400,7 @@ h1 {
 }
 
 /* ==========================
-   ROSTER DESIGN
+   ROSTER DESIGN PROTOCOLS
 ========================== */
 .client-row { display: flex; flex-wrap: wrap; gap: 14px; }
 .client-tag {
@@ -430,7 +433,7 @@ h1 {
 .beta-squad-fix { transform: scale(1.15); }
 
 /* ==========================
-   TOAST STYLING
+   TOAST STYLING (GPU POWERED)
 ========================== */
 .toast {
     position: fixed;
@@ -458,7 +461,9 @@ h1 {
 footer { text-align: center; font-family: monospace; font-weight: bold; font-size: 0.85rem; margin-top: 20px; }
 footer a { color: #000; text-decoration: underline; }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+    .nav-content { flex-direction: column; gap: 14px; }
+    body { padding-top: 180px; }
     .profile-header { flex-direction: column; text-align: center; }
     .social-flex { flex-direction: column; gap: 16px; }
     h1 { font-size: 2.6rem; }
@@ -486,7 +491,11 @@ footer a { color: #000; text-decoration: underline; }
             <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
             <span class="nav-logo-text">JXNN.</span>
         </a>
-        <a href="faq.html" class="nav-link">FAQ</a>
+        <div class="nav-links-group">
+            <a href="./" class="nav-link active">HOME</a>
+            <a href="thumbnail.html" class="nav-link">THUMBNAILS</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </div>
     </div>
 </nav>
 
@@ -500,20 +509,6 @@ footer a { color: #000; text-decoration: underline; }
             <p>// CUT DIFFERENT STUDIO</p>
         </div>
     </header>
-    
-    <nav class="navbar">
-    <div class="nav-content">
-        <a href="./" class="nav-logo-wrapper">
-            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
-            <span class="nav-logo-text">JXNN.</span>
-        </a>
-        <div class="nav-links-group">
-            <a href="./" class="nav-link active">HOME</a>
-            <a href="thumbnails.html" class="nav-link">THUMBNAILS</a>
-            <a href="faq.html" class="nav-link">FAQ</a>
-        </div>
-    </div>
-</nav>
 
     <section class="action-grid">
         <a class="sticker-btn btn-highlight" href="rates.html">
@@ -550,10 +545,8 @@ footer a { color: #000; text-decoration: underline; }
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
             <div class="video-box">
-                <!-- Standard Iframe Player Structure -->
                 <iframe id="videoPlayer" src="https://www.youtube.com/embed/ggtdj-_FzYA" title="jxnn. studio reel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                 
-                <!-- Direct Link Structure for Embed-Blocked Content -->
                 <a id="directLink" class="direct-link-container" href="#" target="_blank" rel="noopener noreferrer">
                     <img id="directLinkImg" class="direct-link-img" src="" alt="Video Thumbnail">
                     <div class="play-overlay-icon">⚡ Watch on YouTube</div>
@@ -625,10 +618,10 @@ const directLink = document.getElementById("directLink");
 const directLinkImg = document.getElementById("directLinkImg");
 
 const videoPlaylist = [
-    { title: "FEATURED WORK", url: "https://www.youtube.com/embed/ggtdj-_FzYA", isDirect: false },
+    { title: "CURRENT SHOWREEL", url: "https://www.youtube.com/embed/ggtdj-_FzYA", isDirect: false },
     { title: "FEATURED WORK", url: "https://www.youtube.com/embed/NONQ_j8San4", isDirect: false },
-    { title: "FEATURED WORK", url: "https://www.youtube.com/watch?v=ApeCWRt1sIY&t=", thumb: "https://img.youtube.com/vi/ApeCWRt1sIY/maxresdefault.jpg", isDirect: true },
-    { title: "BETA SQUAD\n*SUBTITLES ONLY*", url: "https://www.youtube.com/embed/qyTBSJyDLlQ?", isDirect: false }
+    { title: "SHOWCASE REEL", url: "https://www.youtube.com/watch?v=ApeCWRt1sIY&t=566s", thumb: "https://img.youtube.com/vi/ApeCWRt1sIY/maxresdefault.jpg", isDirect: true },
+    { title: "BETA SQUAD\n*SUBTITLES ONLY*", url: "https://www.youtube.com/embed/qyTBSJyDLlQ?start=388", isDirect: false }
 ];
 let currentVideoIndex = 0;
 
@@ -640,13 +633,11 @@ function updateVideoDisplay() {
     nextBtn.style.display = currentVideoIndex === videoPlaylist.length - 1 ? "none" : "flex";
 
     if (currentVideo.isDirect) {
-        // Toggle elements to showcase Direct Link Mode with the fixed raw image thumb
         videoPlayer.style.display = "none";
         directLink.style.display = "block";
         directLink.href = currentVideo.url;
         directLinkImg.src = currentVideo.thumb;
     } else {
-        // Fall back to standard native embedded frame system
         directLink.style.display = "none";
         videoPlayer.style.display = "block";
         videoPlayer.style.visibility = "hidden";
