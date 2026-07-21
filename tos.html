@@ -1,78 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Programmatic Anti-Cache Engine -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
-    <title>jxnn. | TERMS OF SERVICE</title>
-    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial Black', -apple-system, sans-serif; }
-body {
-    background-color: #e2e2e2;
-    background-image: radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0), radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
-    background-size: 8px 8px; background-position: 0 0, 4px 4px;
-    color: #000; display: flex; flex-direction: column; align-items: center; padding: 120px 20px 60px; min-height: 100vh;
-}
-body::before {
-    content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; opacity: 0.04; pointer-events: none; z-index: 9999;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-.navbar { position: absolute; top: 0; left: 0; width: 100%; padding: 24px; z-index: 1000; }
-.nav-content { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.nav-logo-wrapper { display: flex; align-items: center; background: #fff; padding: 4px 12px; border: 3px solid #000; box-shadow: 4px 4px 0px #000; transform: rotate(-3deg); text-decoration: none; }
-.nav-logo-img { width: 24px; height: 24px; object-fit: cover; margin-right: 6px; border-radius: 2px; }
-.nav-logo-text { font-size: 1.4rem; color: #000; font-weight: 900; }
-.nav-link { background: #000; color: #fff; text-decoration: none; padding: 8px 16px; font-size: 0.9rem; text-transform: uppercase; border: 2px solid #000; }
-.nav-link:hover { background: #fff; color: #000; }
-
-.container { max-width: 650px; width: 100%; display: flex; flex-direction: column; gap: 30px; }
-.tos-header { background: #fff; border: 4px solid #000; padding: 24px; box-shadow: 8px 8px 0px #000; text-align: center; }
-h1 { font-size: 2.8rem; text-transform: uppercase; color: #fff; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 4px 4px 0px #000; letter-spacing: -1px; }
-.info-card { background: #ffffff; border: 3px solid #000000; padding: 24px; box-shadow: 6px 6px 0px #000000; }
-.info-card h2 { font-size: 1.2rem; margin-bottom: 10px; border-bottom: 2px dashed #000; padding-bottom: 4px; text-transform: uppercase; }
-.info-card p { font-family: monospace; font-weight: bold; font-size: 0.9rem; color: #222; line-height: 1.5; }
-footer { text-align: center; font-family: monospace; font-weight: bold; font-size: 0.85rem; margin-top: 20px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JXNN. Studio terms covering revisions, payments and delivery.">
+  <meta name="theme-color" content="#070709">
+  <title>Terms — JXNN. Studio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
 </head>
 <body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Primary navigation"><div class="nav-inner">
+    <a class="brand" href="./"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
+    <div class="nav-links"><a href="./#work">Work</a><a href="thumbnail.html">Thumbnails</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a><a class="nav-cta" href="mailto:business.jxnn@gmail.com">Start a project ↗</a></div>
+  </div></nav>
 
-<nav class="navbar">
-    <div class="nav-content">
-        <a href="./" class="nav-logo-wrapper">
-            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
-            <span class="nav-logo-text">JXNN.</span>
-        </a>
-        <a href="./" class="nav-link">BACK</a>
-    </div>
-</nav>
-
-<main class="container">
-    <header class="tos-header">
-        <h1>TERMS OF SERVICE</h1>
+  <main class="page-main">
+    <header class="page-hero shell">
+      <div><div class="eyebrow">The working agreement</div><h1>TERMS OF <span class="outline">SERVICE.</span></h1><p class="hero-copy">A straightforward outline of revisions, payments and delivery for projects completed by JXNN. Studio.</p><div class="button-row"><a class="button primary" href="#terms">Read the terms ↓</a><a class="button" href="mailto:business.jxnn@gmail.com">Ask a question ↗</a></div></div>
+      <div class="scene" aria-hidden="true"><div class="scene-glow"></div><div class="scene-ring"></div><div class="document-stack"><div class="document-page"></div><div class="document-page"></div><div class="document-page"><small>JXNN / SERVICE AGREEMENT</small><div class="document-title"></div><div class="document-rule"></div><div class="document-copy"><i></i><i></i><i></i><i></i></div><div class="document-sign"></div></div></div></div>
     </header>
 
-    <div class="info-card">
-        <h2>1. WORKFLOW & REVISIONS</h2>
-        <p>All production projects follow the unified Blueprint-Hooks-Grade development architecture. Standard packages include specified revision loops. Additional post-production requests outside asset guidelines incur standard scaling rates.</p>
-    </div>
+    <section class="content-section shell" id="terms">
+      <div class="terms-layout">
+        <aside class="terms-aside reveal"><div class="section-label">TERMS / JXNN. STUDIO</div><p>Please read these terms before starting a project. Any project-specific agreement or invoice may add further details.</p></aside>
+        <div class="terms-list">
+          <article class="term-card reveal"><div class="term-number">01</div><div class="term-copy"><h2>Workflow & revisions</h2><p>All production projects follow the Blueprint–Hooks–Grade workflow. Standard packages include the specified revision rounds. Additional post-production requests outside the agreed asset guidelines may incur additional charges.</p></div></article>
+          <article class="term-card reveal"><div class="term-number">02</div><div class="term-copy"><h2>Payments & delivery</h2><p>Production begins after the initial invoice has been confirmed. Completed master files are delivered securely after the remaining balance has cleared. Transactions are handled through the studio’s primary communication channels.</p></div></article>
+        </div>
+      </div>
+    </section>
 
-    <div class="info-card">
-        <h2>2. PAYMENTS & DELIVERY</h2>
-        <p>Production execution parameters launch immediately following initial invoice verification cycles. Completed structural masters are dispatched securely upon secondary clearance. All transactions handled directly via primary brand communication chains.</p>
-    </div>
+    <section class="shell"><div class="cta-card reveal"><div class="eyebrow">Need clarification?</div><h2>Ask before we <em>hit export.</em></h2><p>If anything here is unclear, get in touch before the project begins and we can confirm the exact arrangement in writing.</p><div class="button-row"><a class="button primary" href="mailto:business.jxnn@gmail.com">Contact the studio ↗</a><a class="button" href="./">Return home</a></div></div></section>
+  </main>
 
-    <footer>
-        <div>© 2026 JXNN. STUDIO • ALL RIGHTS RESERVED</div>
-    </footer>
-</main>
-
+  <footer class="site-footer shell"><div>© 2026 JXNN. STUDIO — ALL RIGHTS RESERVED.</div><div class="footer-links"><a href="./">Home</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a></div></footer>
+  <script src="shared.js"></script>
 </body>
 </html>

@@ -1,398 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jxnn. | FAQ</title>
-
-    <link rel="preload" as="image" href="assets/profile.png">
-    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
-
-    <meta name="description" content="Frequently asked questions about editing turnarounds, revisions, and workflows.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<style>
-/* ==========================
-   THEME STYLING & TEXTURES (Y2K / STREETWEAR)
-========================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial Black', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-body {
-    background-color: #e2e2e2;
-    background-image: 
-        radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0),
-        radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
-    background-size: 8px 8px;
-    background-position: 0 0, 4px 4px;
-    color: #000000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 120px 20px 60px;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    opacity: 0.04;
-    pointer-events: none;
-    z-index: 9999;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* ==========================
-   NAVIGATION
-========================== */
-.navbar {
-    position: absolute;
-    top: 0; left: 0; width: 100%;
-    padding: 24px;
-    z-index: 1000;
-}
-.nav-content {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.nav-logo-wrapper {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 4px 12px;
-    border: 3px solid #000;
-    box-shadow: 4px 4px 0px #000;
-    transform: rotate(-3deg);
-    text-decoration: none;
-}
-.nav-logo-img {
-    width: 24px;
-    height: 24px;
-    object-fit: cover;
-    margin-right: 6px;
-    border-radius: 2px;
-}
-.nav-logo-text {
-    font-size: 1.4rem;
-    color: #000;
-    font-weight: 900;
-}
-.nav-link {
-    background: #000;
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    border: 2px solid #000;
-    box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
-}
-.nav-link:hover {
-    background: #fff;
-    color: #000;
-}
-
-/* ==========================
-   CONTAINER & LAYOUT
-========================== */
-.container {
-    max-width: 650px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-}
-
-.page-title-box {
-    background: #ffffff;
-    border: 4px solid #000000;
-    padding: 24px;
-    box-shadow: 8px 8px 0px #000000;
-    text-align: center;
-}
-
-.page-title-box h1 {
-    font-size: 2.8rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: #ffffff;
-    text-shadow: 
-        -2px -2px 0 #000,  2px -2px 0 #000, -2px  2px 0 #000,  2px  2px 0 #000,
-        4px 4px 0px #000000, 8px 8px 0px rgba(0,0,0,0.15);
-    letter-spacing: -1px;
-}
-
-.section-title {
-    font-size: 1.2rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: #000000;
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.section-title::before {
-    content: "";
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    background: url('assets/profile.png') center/cover no-repeat;
-    border: 1px solid #000;
-    box-shadow: 2px 2px 0px #000;
-}
-
-/* ==========================
-   ACCORDION SYSTEM
-========================== */
-.faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.faq-item {
-    background: #ffffff;
-    border: 4px solid #000000;
-    box-shadow: 5px 5px 0px #000000;
-    transition: transform 0.1s ease;
-}
-
-.faq-trigger {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    cursor: pointer;
-    font-size: 1.05rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: #000000;
-    gap: 15px;
-}
-
-.faq-icon-box {
-    width: 32px;
-    height: 32px;
-    background: #9dff00;
-    border: 2px solid #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 2px 2px 0px #000;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.faq-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.25s ease-out;
-}
-
-.faq-content-inner {
-    padding: 0 20px 20px 20px;
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #222222;
-    line-height: 1.5;
-    border-top: 2px dashed transparent;
-}
-
-/* Active Open States */
-.faq-item.active .faq-icon-box {
-    transform: rotate(45deg);
-    background: #ffffff;
-}
-
-.faq-item.active .faq-content-inner {
-    border-top-color: #000000;
-}
-
-/* ==========================
-   RETURN BUTTON
-========================== */
-.sticker-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 24px;
-    background: #ffffff;
-    border: 4px solid #000000;
-    color: #000000;
-    font-size: 1.1rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    position: relative;
-    box-shadow: 6px 6px 0px #000000;
-    transition: transform 0.05s ease, box-shadow 0.05s ease;
-}
-
-.sticker-btn:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0px #000000;
-}
-
-.sticker-btn:active {
-    transform: translate(6px, 6px);
-    box-shadow: 0px 0px 0px #000000;
-}
-
-.btn-highlight {
-    background: #9dff00;
-}
-
-footer {
-    text-align: center;
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-top: 10px;
-}
-footer a { color: #000; text-decoration: underline; }
-
-@media (max-width: 500px) {
-    .page-title-box h1 { font-size: 2.2rem; }
-    .faq-trigger { font-size: 0.95rem; padding: 16px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Answers about JXNN. Studio revisions, turnaround, file delivery and retainers.">
+  <meta name="theme-color" content="#070709">
+  <title>FAQ — JXNN. Studio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
 </head>
-
 <body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Primary navigation"><div class="nav-inner">
+    <a class="brand" href="./"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
+    <div class="nav-links"><a href="./#work">Work</a><a href="thumbnail.html">Thumbnails</a><a href="rates.html">Rates</a><a class="active" href="faq.html">FAQ</a><a class="nav-cta" href="mailto:business.jxnn@gmail.com">Start a project ↗</a></div>
+  </div></nav>
 
-<nav class="navbar">
-    <div class="nav-content">
-        <a href="./" class="nav-logo-wrapper">
-            <img src="assets/profile.png" alt="Logo Icon" class="nav-logo-img">
-            <span class="nav-logo-text">JXNN.</span>
-        </a>
-        <a href="./" class="nav-link">BACK</a>
-    </div>
-</nav>
-
-<main class="container">
-
-    <!-- Header Frame -->
-    <header class="page-title-box">
-        <h1>QUESTIONS // FAQ</h1>
+  <main class="page-main">
+    <header class="page-hero shell">
+      <div><div class="eyebrow">Production intel · Straight answers</div><h1>QUESTIONS <span class="outline">ANSWERED.</span></h1><p class="hero-copy">Everything you need to know about revisions, turnaround, sending footage and working together long-term.</p><div class="button-row"><a class="button primary" href="#answers">Read the answers ↓</a><a class="button" href="mailto:business.jxnn@gmail.com">Ask something else ↗</a></div></div>
+      <div class="scene" aria-hidden="true"><div class="scene-glow"></div><div class="scene-ring"></div><div class="question-cube"><div class="cube-face cube-front">?</div><div class="cube-face cube-back">!</div><div class="cube-face cube-right">+</div><div class="cube-face cube-left">→</div><div class="cube-face cube-top">?</div><div class="cube-face cube-bottom">•</div></div></div>
     </header>
 
-    <!-- FAQ Accordion Layout -->
-    <section class="faq-list">
-        <div class="section-title">PRODUCTION INTEL</div>
-
-        <!-- Q1 -->
-        <div class="faq-item">
-            <button class="faq-trigger">
-                <span>How do revisions work?</span>
-                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
-            </button>
-            <div class="faq-content">
-                <div class="faq-content-inner">
-                    Every project contract includes structured structural review rounds. Minor pacing modifications, cut adaptations, and asset replacements are addressed quickly to keep timelines clean.
-                </div>
-            </div>
-        </div>
-
-        <!-- Q2 -->
-        <div class="faq-item">
-            <button class="faq-trigger">
-                <span>What is your typical turnaround time?</span>
-                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
-            </button>
-            <div class="faq-content">
-                <div class="faq-content-inner">
-                    Turnaround times directly depend on your channel's scale model. Short-form edits typically wrap within 24–72 hours, while complex YouTube long-form sequences range from 2–5 days. Speed upgrades can be arranged if specified early.
-                </div>
-            </div>
-        </div>
-
-        <!-- Q3 -->
-        <div class="faq-item">
-            <button class="faq-trigger">
-                <span>How should I send over project files?</span>
-                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
-            </button>
-            <div class="faq-content">
-                <div class="faq-content-inner">
-                    Raw assets, screen captures, voice tracks, and custom overlays should be bundled and transmitted through organized cloud portals like Google Drive, Dropbox, or Frame.io links.
-                </div>
-            </div>
-        </div>
-
-        <!-- Q4 -->
-        <div class="faq-item">
-            <button class="faq-trigger">
-                <span>Do you offer long-term monthly retainers?</span>
-                <div class="faq-icon-box"><i class="fa-solid fa-plus"></i></div>
-            </button>
-            <div class="faq-content">
-                <div class="faq-content-inner">
-                    Yes. Creators seeking consistent scheduling can secure locked-in monthly turnaround queues. This ensures priority scheduling slots for high-volume asset output.
-                </div>
-            </div>
-        </div>
+    <section class="content-section shell" id="answers">
+      <div class="section-heading reveal"><div class="section-label">01 / PRODUCTION INTEL</div><h2>The useful stuff, <em>without the waffle.</em></h2></div>
+      <div class="faq-list">
+        <details class="faq-item reveal"><summary><span class="faq-number">01</span><span class="faq-question">How do revisions work?</span><span class="faq-toggle">+</span></summary><div class="faq-answer">Every project includes structured review rounds. Minor pacing changes, cut adaptations and asset replacements are handled quickly to keep the production timeline clean.</div></details>
+        <details class="faq-item reveal"><summary><span class="faq-number">02</span><span class="faq-question">What is your typical turnaround time?</span><span class="faq-toggle">+</span></summary><div class="faq-answer">Turnaround depends on your channel scale and the complexity of the edit. Short-form edits typically wrap within 24–72 hours, while more involved YouTube videos usually take 2–5 days. Faster delivery can be arranged when discussed early.</div></details>
+        <details class="faq-item reveal"><summary><span class="faq-number">03</span><span class="faq-question">How should I send over project files?</span><span class="faq-toggle">+</span></summary><div class="faq-answer">Bundle raw footage, screen captures, voice tracks, logos and custom overlays in organised folders. Google Drive, Dropbox or Frame.io links all work well.</div></details>
+        <details class="faq-item reveal"><summary><span class="faq-number">04</span><span class="faq-question">Do you offer long-term monthly retainers?</span><span class="faq-toggle">+</span></summary><div class="faq-answer">Yes. Creators who need consistent output can reserve a monthly editing schedule, giving them priority production slots and more predictable turnaround times.</div></details>
+      </div>
     </section>
 
-    <!-- Return action sticker -->
-    <a class="sticker-btn btn-highlight" href="./">
-        <span>💼 RETURN TO MAIN HUB</span>
-        <i class="fa-solid fa-arrow-left"></i>
-    </a>
+    <section class="shell"><div class="cta-card reveal"><div class="eyebrow">Still need an answer?</div><h2>Tell me what you’re <em>planning.</em></h2><p>Send a short project outline and I’ll reply with the most useful next step.</p><div class="button-row"><a class="button primary" href="mailto:business.jxnn@gmail.com">Email the studio ↗</a><a class="button" href="rates.html">View rates</a></div></div></section>
+  </main>
 
-    <footer>
-        <div>© 2026 JXNN. STUDIO • <a href="tos.html?v=2">TERMS</a></div>
-    </footer>
-
-</main>
-
-<script>
-/* ==========================
-   ACCORDION SCRIPT
-========================== */
-document.querySelectorAll('.faq-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-        const currentItem = trigger.parentElement;
-        const content = currentItem.querySelector('.faq-content');
-        
-        // Close any other open FAQ boxes for a clean dashboard transition
-        document.querySelectorAll('.faq-item').forEach(item => {
-            if (item !== currentItem && item.classList.contains('active')) {
-                item.classList.remove('active');
-                item.querySelector('.faq-content').style.maxHeight = '0';
-            }
-        });
-
-        // Toggle active view configuration on clicked element
-        currentItem.classList.toggle('active');
-
-        if (currentItem.classList.contains('active')) {
-            content.style.maxHeight = content.scrollHeight + "px";
-        } else {
-            content.style.maxHeight = "0";
-        }
-    });
-});
-</script>
-
+  <footer class="site-footer shell"><div>© 2026 JXNN. STUDIO — CUT DIFFERENT.</div><div class="footer-links"><a href="./">Home</a><a href="thumbnail.html">Thumbnails</a><a href="rates.html">Rates</a><a href="tos.html">Terms</a></div></footer>
+  <script src="shared.js"></script>
 </body>
 </html>
