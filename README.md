@@ -66,6 +66,7 @@ work-rates/
 ├── 404.html            # Custom missing-sequence page
 ├── theme.css           # Shared secondary-page design system
 ├── shared.js           # Scroll, reveal, gallery and mobile-menu interactions
+├── site-notifications.js # Same-device Client Room ready alerts
 ├── contact.js          # Verified enquiry submission
 ├── analytics.js        # Anonymous first-party event tracking
 ├── admin.js            # Enquiry, notes and analytics controls
@@ -84,7 +85,7 @@ Keep `theme.css`, `shared.js` and every HTML page in the same folder. The `asset
 
 The enquiry form uses Cloudflare Turnstile and a Supabase Edge Function to verify each submission before storing it. Server-side request limits and duplicate detection add a second layer of spam protection. The site also records anonymous page and interaction totals for the private dashboard without cookies or stored IP addresses.
 
-Accepted projects can be given a private **Client Room**. The admin dashboard creates a unique capability link that keeps the access token in the URL fragment, while the database stores only a salted hash. Clients can send messages, request revisions, ask to talk or approve a cut without creating an account. New client signals alert the studio through Discord; studio replies remain organised in the private dashboard and appear in the client timeline. Clients can also opt in to private Discord bot alerts for replies and project-status changes, then disconnect those alerts whenever they like.
+Accepted projects can be given a private **Client Room**. New enquiries receive a random same-device notification token; only its salted hash is stored. When the studio creates a room, the client sees a themed website notification in the browser they used for the enquiry and can open the private conversation immediately. The room link keeps its access token in the URL fragment. Clients can send messages, request revisions, ask to talk or approve a cut without creating an account. New client signals alert the studio through Discord; studio replies remain organised in the private dashboard and appear in the client timeline. Clients can also opt in to private Discord bot alerts for replies and project-status changes, then disconnect those alerts whenever they like.
 
 The Edge Functions expect `TURNSTILE_SECRET_KEY` and `RATE_LIMIT_SALT` as private Supabase secrets. `DISCORD_WEBHOOK_URL` enables private studio alerts. Discord client DMs also use `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN`, `DISCORD_GUILD_ID` and `DISCORD_REDIRECT_URI`; private values must stay in Supabase Edge Function Secrets. Direct public database inserts are disabled, and the dashboard remains restricted to the approved studio email. Never place a Supabase `service_role`, Turnstile secret, Discord credential or any other private key in this repository.
 

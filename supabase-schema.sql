@@ -23,7 +23,10 @@ create table if not exists public.enquiries (
   internal_notes text check (internal_notes is null or char_length(internal_notes) <= 4000),
   quoted_price text check (quoted_price is null or char_length(quoted_price) <= 80),
   follow_up_on date,
-  outcome text not null default 'pending' check (outcome in ('pending', 'won', 'lost', 'paused'))
+  outcome text not null default 'pending' check (outcome in ('pending', 'won', 'lost', 'paused')),
+  website_notification_token_hash text unique check (
+    website_notification_token_hash is null or char_length(website_notification_token_hash) = 64
+  )
 );
 
 alter table public.enquiries
@@ -43,6 +46,10 @@ alter table public.enquiries add column if not exists follow_up_on date;
 alter table public.enquiries
 add column if not exists outcome text not null default 'pending'
 check (outcome in ('pending', 'won', 'lost', 'paused'));
+
+alter table public.enquiries
+add column if not exists website_notification_token_hash text unique
+check (website_notification_token_hash is null or char_length(website_notification_token_hash) = 64);
 
 alter table public.enquiries drop constraint if exists enquiries_email_check;
 alter table public.enquiries add constraint enquiries_email_check check (

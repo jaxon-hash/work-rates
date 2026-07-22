@@ -360,7 +360,7 @@ async function createClientRoom(enquiry, titleInput, button, status) {
     roomAccessLinks.set(data.room.id, data.access_url);
     await copyText(clientInviteText(data.room, data.access_url));
     await loadClientRooms();
-    setText(dashboardStatus, "Client Room created. The private invite message is copied and ready to send.");
+    setText(dashboardStatus, "Client Room created. Their website notification is now live, and the private invite is copied.");
     renderEnquiries();
   } catch (error) {
     status.textContent = error.message || "The Client Room could not be created.";

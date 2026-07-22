@@ -7,6 +7,20 @@ const success = document.getElementById("formSuccess");
 
 form?.addEventListener("input", () => window.jxnnTrack?.("form_start", { once: true }), { once: true });
 const anotherButton = document.getElementById("anotherEnquiry");
+const notificationStorageKey = "jxnn_enquiry_notification_tokens";
+
+function rememberNotificationToken(token) {
+  if (!/^[0-9a-f]{64}$/i.test(token)) return;
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(notificationStorageKey) || "[]");
+    const tokens = Array.isArray(saved) ? saved.filter((item) => /^[0-9a-f]{64}$/i.test(item)) : [];
+    localStorage.setItem(notificationStorageKey, JSON.stringify([token, ...tokens.filter((item) => item !== token)].slice(0, 4)));
+    window.dispatchEvent(new CustomEvent("jxnn:notification-token"));
+  } catch {
+    // The enquiry still succeeds if private browsing blocks local storage.
+  }
+}
 
 function setStatus(message, isError = false) {
   if (!status) return;
@@ -73,6 +87,13 @@ form?.addEventListener("submit", async (event) => {
     return;
   }
 
+  let result = {};
+  try {
+    result = await response.json();
+  } catch {
+    result = {};
+  }
+
   if (!response.ok) {
     setSubmitting(false);
     const messages = {
@@ -84,6 +105,8 @@ form?.addEventListener("submit", async (event) => {
     window.turnstile?.reset();
     return;
   }
+
+  rememberNotificationToken(String(result.website_notification_token || ""));
 
   form.reset();
   window.turnstile?.reset();

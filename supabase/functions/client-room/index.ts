@@ -322,10 +322,16 @@ Deno.serve(async (request) => {
         .from("client_rooms")
         .update({ token_hash: tokenHash, updated_at: new Date().toISOString(), archived: false })
         .eq("id", roomId)
-        .select("id, client_name, project_title, status, archived, last_activity_at")
+        .select("id, enquiry_id, client_name, project_title, status, archived, last_activity_at")
         .single();
 
       if (error || !room) return json(origin, { error: "Room not found" }, 404);
+      if (room.enquiry_id) {
+        await supabase
+          .from("enquiries")
+          .update({ website_notification_token_hash: null })
+          .eq("id", room.enquiry_id);
+      }
       return json(origin, { room, access_url: clientLink(origin, token) });
     }
 
@@ -472,17 +478,65 @@ Deno.serve(async (request) => {
     return json(origin, { error: "Invalid or expired room link" }, 401);
   }
 
+  if (action === "check_enquiry_notification") {
+    const notificationHash = await sha256(`${rateLimitSalt}:website-notification:${token}`);
+    const { data: enquiry, error: enquiryError } = await supabase
+      .from("enquiries")
+      .select("id")
+      .eq("website_notification_token_hash", notificationHash)
+      .maybeSingle();
+
+    if (enquiryError || !enquiry) return json(origin, { room_ready: false });
+
+    const { data: notificationRoom, error: notificationRoomError } = await supabase
+      .from("client_rooms")
+      .select("project_title, status")
+      .eq("enquiry_id", enquiry.id)
+      .eq("archived", false)
+      .maybeSingle();
+
+    if (notificationRoomError || !notificationRoom) return json(origin, { room_ready: false });
+
+    return json(origin, {
+      room_ready: true,
+      project_title: notificationRoom.project_title,
+      status: notificationRoom.status,
+      access_url: clientLink(origin, token),
+    });
+  }
+
   const tokenHash = await sha256(`${rateLimitSalt}:client-room:${token}`);
-  const { data: room, error: roomError } = await supabase
+  const roomFields = "id, enquiry_id, client_name, project_title, status, archived, created_at, updated_at, last_activity_at, discord_user_id, discord_display_name";
+  const { data: directRoom, error: directRoomError } = await supabase
     .from("client_rooms")
-    .select("id, client_name, project_title, status, archived, created_at, updated_at, last_activity_at, discord_user_id, discord_display_name")
+    .select(roomFields)
     .eq("token_hash", tokenHash)
     .eq("archived", false)
     .maybeSingle();
 
-  if (roomError || !room) {
-    return json(origin, { error: "Invalid or expired room link" }, 401);
+  if (directRoomError) return json(origin, { error: "Invalid or expired room link" }, 401);
+
+  let room = directRoom;
+  if (!room) {
+    const notificationHash = await sha256(`${rateLimitSalt}:website-notification:${token}`);
+    const { data: enquiry } = await supabase
+      .from("enquiries")
+      .select("id")
+      .eq("website_notification_token_hash", notificationHash)
+      .maybeSingle();
+
+    if (enquiry) {
+      const { data: notificationRoom } = await supabase
+        .from("client_rooms")
+        .select(roomFields)
+        .eq("enquiry_id", enquiry.id)
+        .eq("archived", false)
+        .maybeSingle();
+      room = notificationRoom;
+    }
   }
+
+  if (!room) return json(origin, { error: "Invalid or expired room link" }, 401);
 
   if (action === "discord_authorize") {
     const clientId = Deno.env.get("DISCORD_CLIENT_ID") || "";

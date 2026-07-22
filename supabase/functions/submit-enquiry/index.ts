@@ -52,6 +52,11 @@ async function sha256(value: string) {
     .join("");
 }
 
+function createAccessToken() {
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  return Array.from(bytes).map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
 function discordValue(value: string | null, fallback = "Not supplied") {
   return (value || fallback).slice(0, 900);
 }
@@ -255,6 +260,11 @@ Deno.serve(async (request) => {
     return json(origin, { error: "Duplicate enquiry" }, 409);
   }
 
+  const websiteNotificationToken = createAccessToken();
+  const websiteNotificationTokenHash = await sha256(
+    `${rateLimitSalt}:website-notification:${websiteNotificationToken}`,
+  );
+
   const { error } = await supabase.from("enquiries").insert({
     name,
     email,
@@ -266,6 +276,7 @@ Deno.serve(async (request) => {
     footage_link: footageLink,
     details,
     status: "new",
+    website_notification_token_hash: websiteNotificationTokenHash,
   });
 
   if (error) {
@@ -288,5 +299,5 @@ Deno.serve(async (request) => {
     });
   }
 
-  return json(origin, { ok: true }, 201);
+  return json(origin, { ok: true, website_notification_token: websiteNotificationToken }, 201);
 });
