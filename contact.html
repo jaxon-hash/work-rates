@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="theme.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -137,6 +138,14 @@
             <div class="form-trap" aria-hidden="true">
               <label for="website">Leave this field empty</label>
               <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-field full verification-field">
+              <label>Verification *</label>
+              <div class="turnstile-frame">
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAD7Yn6ZcbvughtqN" data-theme="dark" data-size="flexible" data-action="project_enquiry"></div>
+              </div>
+              <p>Cloudflare checks that this enquiry comes from a real visitor.</p>
             </div>
           </div>
 

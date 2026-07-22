@@ -3,3 +3,4 @@
 export const SUPABASE_URL = "https://fafkzhoqorjqtjpmidcr.supabase.co";
 export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KVz0tRbNGI4PpRjdyNo6rw_k8tjyHAD";
 export const ADMIN_EMAIL = "business.jxnn@gmail.com";
+export const SUBMIT_ENQUIRY_URL = `${SUPABASE_URL}/functions/v1/submit-enquiry`;

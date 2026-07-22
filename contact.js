@@ -1,7 +1,5 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
+import { SUBMIT_ENQUIRY_URL } from "./supabase-config.js";
 
-const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const form = document.getElementById("projectForm");
 const submitButton = document.getElementById("submitProject");
 const status = document.getElementById("formStatus");
@@ -47,18 +45,43 @@ form?.addEventListener("submit", async (event) => {
     budget: String(data.get("budget") || "").trim(),
     deadline: data.get("deadline") || null,
     footage_link: String(data.get("footageLink") || "").trim() || null,
-    details: String(data.get("details") || "").trim()
+    details: String(data.get("details") || "").trim(),
+    website: String(data.get("website") || "").trim(),
+    turnstile_token: String(data.get("cf-turnstile-response") || "").trim()
   };
 
-  const { error } = await client.from("enquiries").insert(enquiry);
+  if (!enquiry.turnstile_token) {
+    setSubmitting(false);
+    setStatus("Please complete the verification check before sending.", true);
+    return;
+  }
 
-  if (error) {
+  let response;
+
+  try {
+    response = await fetch(SUBMIT_ENQUIRY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(enquiry)
+    });
+  } catch {
     setSubmitting(false);
     setStatus("That didn’t send. Please try again, or email business.jxnn@gmail.com.", true);
+    window.turnstile?.reset();
+    return;
+  }
+
+  if (!response.ok) {
+    setSubmitting(false);
+    setStatus(response.status === 422
+      ? "Verification expired. Please complete the check again."
+      : "That didn’t send. Please try again, or email business.jxnn@gmail.com.", true);
+    window.turnstile?.reset();
     return;
   }
 
   form.reset();
+  window.turnstile?.reset();
   form.hidden = true;
   success.hidden = false;
   success.focus();

@@ -65,10 +65,11 @@ work-rates/
 ├── 404.html            # Custom missing-sequence page
 ├── theme.css           # Shared secondary-page design system
 ├── shared.js           # Scroll, reveal, gallery and mobile-menu interactions
-├── contact.js          # Secure Supabase enquiry submission
+├── contact.js          # Verified enquiry submission
 ├── admin.js            # Private enquiry dashboard controls
 ├── supabase-config.js  # Browser-safe project connection values
 ├── supabase-schema.sql # Enquiry table and access policies
+├── supabase/           # Server-side Turnstile validation function
 └── assets/             # Logos, social card, client images and portfolio artwork
 ```
 
@@ -78,7 +79,7 @@ Open the project folder in VS Code and select **Go Live**, or open `index.html` 
 
 Keep `theme.css`, `shared.js` and every HTML page in the same folder. The `assets` directory should remain beside them.
 
-The enquiry form stores briefs in Supabase. Database row-level security allows public inserts but restricts reading and updating to the approved studio email. Never place a Supabase `service_role` or secret key in this repository.
+The enquiry form uses Cloudflare Turnstile and a Supabase Edge Function to verify each submission before storing it. Direct public inserts are disabled; the private dashboard remains restricted to the approved studio email. Never place a Supabase `service_role`, Turnstile secret or any other private key in this repository.
 
 ## Contact
 
