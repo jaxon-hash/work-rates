@@ -1320,6 +1320,8 @@ img {
 .admin-client-room-head > div { display: grid; gap: 9px; }
 .admin-client-room-head small { color: var(--violet); font: 500 .57rem/1 "DM Mono", monospace; letter-spacing: .09em; }
 .admin-client-room-head strong { font-size: 1.05rem; font-weight: 600; }
+.admin-discord-badge { width: fit-content; padding: 7px 9px; border: 1px solid var(--line); border-radius: 999px; color: #777681; font: 500 .54rem/1 "DM Mono", monospace; text-transform: uppercase; }
+.admin-discord-badge.connected { border-color: rgba(141,104,255,.42); background: rgba(141,104,255,.09); color: #b9a9ff; }
 .admin-room-create { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 18px; }
 .admin-room-create input,
 .admin-room-composer textarea {
@@ -1428,6 +1430,20 @@ img {
 .client-quick-actions button > span { grid-row: 1 / 3; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(141,104,255,.35); border-radius: 12px; color: var(--acid); font-size: 1.1rem; }
 .client-quick-actions strong { font-size: .86rem; }
 .client-quick-actions small { color: var(--muted); font-size: .7rem; }
+.client-discord-card { margin-top: 23px; padding: 20px; border: 1px solid rgba(141,104,255,.34); border-radius: 16px; background: linear-gradient(145deg, rgba(141,104,255,.09), rgba(255,255,255,.02)); }
+.client-discord-head { display: flex; align-items: center; gap: 13px; }
+.client-discord-head > div { display: grid; gap: 7px; }
+.client-discord-head small { color: #aa94ff; font: 500 .54rem/1 "DM Mono", monospace; letter-spacing: .08em; }
+.client-discord-head strong { font-size: .9rem; }
+.client-discord-mark { display: grid; place-items: center; flex: 0 0 39px; width: 39px; height: 39px; border: 1px solid rgba(141,104,255,.45); border-radius: 12px; background: #5865f2; color: #fff; font: 700 .78rem/1 "DM Mono", monospace; box-shadow: 0 12px 30px rgba(88,101,242,.2); }
+.client-discord-card > p { margin-top: 15px; color: #9a98a4; font-size: .76rem; line-height: 1.6; }
+.client-discord-actions { display: flex; align-items: center; gap: 13px; margin-top: 16px; }
+.client-discord-actions .button { border-color: rgba(141,104,255,.46); background: rgba(141,104,255,.12); }
+.client-discord-actions .button:hover { border-color: #8d68ff; background: rgba(141,104,255,.2); }
+.client-disconnect { border: 0; background: transparent; color: #898791; font: 500 .62rem/1 "DM Mono", monospace; text-decoration: underline; cursor: pointer; }
+.client-discord-card .client-discord-help { font-size: .68rem; }
+.client-discord-help a { color: #c4b8ff; }
+.client-discord-status { display: block; min-height: 1.1em; margin-top: 12px; color: var(--acid); font-size: .68rem; line-height: 1.5; }
 .client-room-note { margin-top: 23px; padding: 20px; border: 1px dashed rgba(141,104,255,.3); border-radius: 14px; }
 .client-room-note small { color: var(--violet); font: 500 .55rem/1 "DM Mono", monospace; }
 .client-room-note p { margin-top: 11px; color: #8f8e98; font-size: .75rem; line-height: 1.65; }
@@ -1652,6 +1668,8 @@ img {
   .client-message { width: 94%; }
   .client-composer > div { align-items: stretch; flex-direction: column; }
   .client-composer .button { width: 100%; }
+  .client-discord-actions { align-items: stretch; flex-direction: column; }
+  .client-discord-actions .button { width: 100%; }
   .privacy-lock { width: 150px; height: 135px; }
   .privacy-lock::before { top: -58px; width: 82px; height: 86px; border-width: 10px; }
   .broken-timeline { height: 210px; padding: 18px; }

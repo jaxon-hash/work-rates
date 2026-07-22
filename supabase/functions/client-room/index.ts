@@ -16,6 +16,15 @@ const roomStatuses = new Set([
   "complete",
 ]);
 
+const statusLabels: Record<string, string> = {
+  active: "Room open",
+  waiting_client: "Waiting for you",
+  waiting_studio: "With JXNN Studio",
+  revision: "Revision round",
+  approved: "Cut approved",
+  complete: "Project complete",
+};
+
 function corsHeaders(origin: string) {
   return {
     "Access-Control-Allow-Origin": origin,
@@ -64,7 +73,15 @@ function discordValue(value: string, fallback = "Not supplied") {
   return (value || fallback).slice(0, 900);
 }
 
-async function notifyDiscord(webhookUrl: string, details: {
+async function ownerIsAuthorised(request: Request, supabase: ReturnType<typeof createClient>) {
+  const authHeader = request.headers.get("authorization") || "";
+  const accessToken = authHeader.replace(/^Bearer\s+/i, "").trim();
+  if (!accessToken) return false;
+  const { data, error } = await supabase.auth.getUser(accessToken);
+  return !error && data.user?.email?.toLowerCase() === "business.jxnn@gmail.com";
+}
+
+async function notifyStudioDiscord(webhookUrl: string, details: {
   clientName: string;
   projectTitle: string;
   message: string;
@@ -104,9 +121,61 @@ async function notifyDiscord(webhookUrl: string, details: {
       }),
     });
 
-    if (!response.ok) console.error("Discord notification failed", response.status);
+    if (!response.ok) console.error("Discord studio notification failed", response.status);
   } catch (error) {
-    console.error("Discord notification unavailable", error instanceof Error ? error.name : "unknown");
+    console.error("Discord studio notification unavailable", error instanceof Error ? error.name : "unknown");
+  }
+}
+
+async function sendClientDiscordDm(botToken: string, discordUserId: string, message: string, knownChannelId = "") {
+  if (!/^\d{17,20}$/.test(discordUserId) || botToken.length < 50) return { delivered: false, channelId: "" };
+
+  try {
+    let channelId = knownChannelId;
+    if (!/^\d{17,20}$/.test(channelId)) {
+      const channelResponse = await fetch("https://discord.com/api/v10/users/@me/channels", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bot ${botToken}`,
+          "Content-Type": "application/json",
+        },
+        signal: AbortSignal.timeout(5000),
+        body: JSON.stringify({ recipient_id: discordUserId }),
+      });
+
+      if (!channelResponse.ok) {
+        console.error("Discord DM channel unavailable", channelResponse.status);
+        return { delivered: false, channelId: "" };
+      }
+
+      const channel = await channelResponse.json();
+      channelId = cleanText(channel.id, 20);
+    }
+
+    if (!/^\d{17,20}$/.test(channelId)) return { delivered: false, channelId: "" };
+
+    const messageResponse = await fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bot ${botToken}`,
+        "Content-Type": "application/json",
+      },
+      signal: AbortSignal.timeout(5000),
+      body: JSON.stringify({
+        content: message.slice(0, 1900),
+        allowed_mentions: { parse: [] },
+      }),
+    });
+
+    if (!messageResponse.ok) {
+      console.error("Discord client notification failed", messageResponse.status);
+      return { delivered: false, channelId };
+    }
+
+    return { delivered: true, channelId };
+  } catch (error) {
+    console.error("Discord client notification unavailable", error instanceof Error ? error.name : "unknown");
+    return { delivered: false, channelId: "" };
   }
 }
 
@@ -146,13 +215,100 @@ Deno.serve(async (request) => {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  if (action === "create_room" || action === "rotate_link") {
-    const authHeader = request.headers.get("authorization") || "";
-    const accessToken = authHeader.replace(/^Bearer\s+/i, "").trim();
-    const { data: userData, error: userError } = await supabase.auth.getUser(accessToken);
-
-    if (userError || userData.user?.email?.toLowerCase() !== "business.jxnn@gmail.com") {
+  const ownerActions = new Set(["create_room", "rotate_link", "studio_reply", "studio_status"]);
+  if (ownerActions.has(action)) {
+    if (!await ownerIsAuthorised(request, supabase)) {
       return json(origin, { error: "Owner access required" }, 401);
+    }
+
+    if (action === "studio_reply") {
+      const roomId = cleanText(body.room_id, 36);
+      const message = cleanText(body.message, 4000);
+      if (!validUuid(roomId) || !message || message.length > 4000) {
+        return json(origin, { error: "Invalid reply" }, 400);
+      }
+
+      const { data: room, error: roomError } = await supabase
+        .from("client_rooms")
+        .select("id, client_name, project_title, discord_user_id, discord_dm_channel_id")
+        .eq("id", roomId)
+        .eq("archived", false)
+        .maybeSingle();
+
+      if (roomError || !room) return json(origin, { error: "Room not found" }, 404);
+
+      const now = new Date().toISOString();
+      const { data: newMessage, error: messageError } = await supabase
+        .from("client_messages")
+        .insert({ room_id: room.id, sender: "studio", message_type: "message", message })
+        .select("id, room_id, created_at, sender, message_type, message")
+        .single();
+
+      if (messageError || !newMessage) return json(origin, { error: "Unable to send reply" }, 500);
+
+      await supabase.from("client_rooms").update({
+        status: "waiting_client",
+        updated_at: now,
+        last_activity_at: now,
+      }).eq("id", room.id);
+
+      let discordDelivered = false;
+      const botToken = Deno.env.get("DISCORD_BOT_TOKEN") || "";
+      if (room.discord_user_id && botToken) {
+        const dm = await sendClientDiscordDm(
+          botToken,
+          room.discord_user_id,
+          `New reply from JXNN Studio — ${room.project_title}\n\n${message}\n\nOpen your existing private Client Room link to reply.`,
+          room.discord_dm_channel_id || "",
+        );
+        discordDelivered = dm.delivered;
+        if (dm.channelId && dm.channelId !== room.discord_dm_channel_id) {
+          await supabase.from("client_rooms").update({ discord_dm_channel_id: dm.channelId }).eq("id", room.id);
+        }
+      }
+
+      return json(origin, {
+        ok: true,
+        message: newMessage,
+        status: "waiting_client",
+        discord_connected: Boolean(room.discord_user_id),
+        discord_delivered: discordDelivered,
+      }, 201);
+    }
+
+    if (action === "studio_status") {
+      const roomId = cleanText(body.room_id, 36);
+      const nextStatus = cleanText(body.status, 30);
+      if (!validUuid(roomId) || !roomStatuses.has(nextStatus)) {
+        return json(origin, { error: "Invalid project signal" }, 400);
+      }
+
+      const { data: room, error } = await supabase
+        .from("client_rooms")
+        .update({ status: nextStatus, updated_at: new Date().toISOString(), last_activity_at: new Date().toISOString() })
+        .eq("id", roomId)
+        .eq("archived", false)
+        .select("id, project_title, discord_user_id, discord_dm_channel_id")
+        .maybeSingle();
+
+      if (error || !room) return json(origin, { error: "Room not found" }, 404);
+
+      let discordDelivered = false;
+      const botToken = Deno.env.get("DISCORD_BOT_TOKEN") || "";
+      if (room.discord_user_id && botToken) {
+        const dm = await sendClientDiscordDm(
+          botToken,
+          room.discord_user_id,
+          `Project update from JXNN Studio — ${room.project_title}\n\nStatus: ${statusLabels[nextStatus] || nextStatus}`,
+          room.discord_dm_channel_id || "",
+        );
+        discordDelivered = dm.delivered;
+        if (dm.channelId && dm.channelId !== room.discord_dm_channel_id) {
+          await supabase.from("client_rooms").update({ discord_dm_channel_id: dm.channelId }).eq("id", room.id);
+        }
+      }
+
+      return json(origin, { ok: true, status: nextStatus, discord_delivered: discordDelivered });
     }
 
     const token = createAccessToken();
@@ -226,6 +382,91 @@ Deno.serve(async (request) => {
     return json(origin, { room, access_url: clientLink(origin, token) }, 201);
   }
 
+  if (action === "discord_callback") {
+    const code = cleanText(body.code, 300);
+    const state = cleanText(body.state, 128);
+    if (!code || !/^[0-9a-f]{64}$/i.test(state)) {
+      return json(origin, { error: "This Discord connection link is invalid." }, 400);
+    }
+
+    const clientId = Deno.env.get("DISCORD_CLIENT_ID") || "";
+    const clientSecret = Deno.env.get("DISCORD_CLIENT_SECRET") || "";
+    const redirectUri = Deno.env.get("DISCORD_REDIRECT_URI") || "";
+    const botToken = Deno.env.get("DISCORD_BOT_TOKEN") || "";
+    if (!clientId || !clientSecret || !redirectUri || !botToken) {
+      return json(origin, { error: "Discord connection is temporarily unavailable." }, 503);
+    }
+
+    const stateHash = await sha256(`${rateLimitSalt}:discord-link:${state}`);
+    const { data: linkSession } = await supabase
+      .from("discord_link_sessions")
+      .select("room_id, expires_at")
+      .eq("state_hash", stateHash)
+      .maybeSingle();
+
+    if (!linkSession) return json(origin, { error: "This Discord connection has expired." }, 401);
+    await supabase.from("discord_link_sessions").delete().eq("state_hash", stateHash);
+    if (new Date(linkSession.expires_at).getTime() <= Date.now()) {
+      return json(origin, { error: "This Discord connection has expired." }, 401);
+    }
+
+    const tokenResponse = await fetch("https://discord.com/api/v10/oauth2/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      signal: AbortSignal.timeout(7000),
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: redirectUri,
+      }),
+    });
+
+    if (!tokenResponse.ok) return json(origin, { error: "Discord could not verify this connection." }, 400);
+    const oauthToken = await tokenResponse.json();
+    const discordAccessToken = cleanText(oauthToken.access_token, 300);
+    if (!discordAccessToken) return json(origin, { error: "Discord did not return an access token." }, 400);
+
+    const userResponse = await fetch("https://discord.com/api/v10/users/@me", {
+      headers: { "Authorization": `Bearer ${discordAccessToken}` },
+      signal: AbortSignal.timeout(7000),
+    });
+    if (!userResponse.ok) return json(origin, { error: "Discord identity could not be loaded." }, 400);
+
+    const discordUser = await userResponse.json();
+    const discordUserId = cleanText(discordUser.id, 20);
+    const username = cleanText(discordUser.username, 100);
+    const displayName = cleanText(discordUser.global_name, 100) || username;
+    if (!/^\d{17,20}$/.test(discordUserId) || !username) {
+      return json(origin, { error: "Discord returned an invalid identity." }, 400);
+    }
+
+    const dm = await sendClientDiscordDm(
+      botToken,
+      discordUserId,
+      "JXNN Client Room alerts are connected. You’ll receive a private Discord message whenever the studio replies or changes your project status.",
+    );
+
+    const { data: connectedRoom, error: updateError } = await supabase.from("client_rooms").update({
+      discord_user_id: discordUserId,
+      discord_username: username,
+      discord_display_name: displayName,
+      discord_connected_at: new Date().toISOString(),
+      discord_dm_channel_id: dm.channelId || null,
+    }).eq("id", linkSession.room_id).eq("archived", false).select("id").maybeSingle();
+
+    if (updateError || !connectedRoom) {
+      return json(origin, { error: "The Client Room is no longer available." }, 404);
+    }
+
+    return json(origin, {
+      ok: true,
+      display_name: displayName,
+      discord_delivered: dm.delivered,
+    });
+  }
+
   const token = cleanText(body.token, 128);
   if (!/^[0-9a-f]{64}$/i.test(token)) {
     return json(origin, { error: "Invalid or expired room link" }, 401);
@@ -234,7 +475,7 @@ Deno.serve(async (request) => {
   const tokenHash = await sha256(`${rateLimitSalt}:client-room:${token}`);
   const { data: room, error: roomError } = await supabase
     .from("client_rooms")
-    .select("id, client_name, project_title, status, archived, created_at, updated_at, last_activity_at")
+    .select("id, client_name, project_title, status, archived, created_at, updated_at, last_activity_at, discord_user_id, discord_display_name")
     .eq("token_hash", tokenHash)
     .eq("archived", false)
     .maybeSingle();
@@ -242,6 +483,58 @@ Deno.serve(async (request) => {
   if (roomError || !room) {
     return json(origin, { error: "Invalid or expired room link" }, 401);
   }
+
+  if (action === "discord_authorize") {
+    const clientId = Deno.env.get("DISCORD_CLIENT_ID") || "";
+    const redirectUri = Deno.env.get("DISCORD_REDIRECT_URI") || "";
+    if (!clientId || !redirectUri) return json(origin, { error: "Discord connection is temporarily unavailable." }, 503);
+
+    const state = createAccessToken();
+    const stateHash = await sha256(`${rateLimitSalt}:discord-link:${state}`);
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000).toISOString();
+    await supabase.from("discord_link_sessions").delete().lt("expires_at", new Date().toISOString());
+    const { error } = await supabase.from("discord_link_sessions").insert({
+      state_hash: stateHash,
+      room_id: room.id,
+      expires_at: expiresAt,
+    });
+    if (error) return json(origin, { error: "Discord connection could not be started." }, 500);
+
+    const authorizeUrl = new URL("https://discord.com/oauth2/authorize");
+    authorizeUrl.search = new URLSearchParams({
+      client_id: clientId,
+      response_type: "code",
+      redirect_uri: redirectUri,
+      scope: "identify",
+      state,
+      prompt: "consent",
+    }).toString();
+    return json(origin, { authorize_url: authorizeUrl.toString() });
+  }
+
+  if (action === "discord_disconnect") {
+    const { error } = await supabase.from("client_rooms").update({
+      discord_user_id: null,
+      discord_username: null,
+      discord_display_name: null,
+      discord_connected_at: null,
+      discord_dm_channel_id: null,
+    }).eq("id", room.id);
+    if (error) return json(origin, { error: "Discord could not be disconnected." }, 500);
+    return json(origin, { ok: true });
+  }
+
+  const publicRoom = {
+    id: room.id,
+    client_name: room.client_name,
+    project_title: room.project_title,
+    status: room.status,
+    created_at: room.created_at,
+    updated_at: room.updated_at,
+    last_activity_at: room.last_activity_at,
+    discord_connected: Boolean(room.discord_user_id),
+    discord_display_name: room.discord_display_name || "",
+  };
 
   if (action === "get_room") {
     const { data: messages, error } = await supabase
@@ -252,7 +545,7 @@ Deno.serve(async (request) => {
       .limit(250);
 
     if (error) return json(origin, { error: "Unable to load messages" }, 500);
-    return json(origin, { room, messages: messages || [] });
+    return json(origin, { room: publicRoom, messages: messages || [] });
   }
 
   if (action !== "send_message" && action !== "quick_action") {
@@ -318,7 +611,7 @@ Deno.serve(async (request) => {
 
   const webhookUrl = Deno.env.get("DISCORD_WEBHOOK_URL");
   if (webhookUrl) {
-    await notifyDiscord(webhookUrl, {
+    await notifyStudioDiscord(webhookUrl, {
       clientName: room.client_name,
       projectTitle: room.project_title,
       message,

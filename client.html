@@ -82,9 +82,22 @@
               <button type="button" data-client-action="revision"><span>↻</span><strong>Request changes</strong><small>Open a revision round</small></button>
               <button type="button" data-client-action="talk"><span>↗</span><strong>Talk it through</strong><small>Ask JXNN to contact you</small></button>
             </div>
+            <div class="client-discord-card" id="clientDiscordCard">
+              <div class="client-discord-head">
+                <span class="client-discord-mark" aria-hidden="true">D</span>
+                <div><small>PRIVATE DISCORD ALERTS</small><strong id="discordConnectionTitle">Never miss a reply</strong></div>
+              </div>
+              <p id="discordConnectionCopy">Connect once and the JXNN bot will DM you whenever the studio replies or changes your project status.</p>
+              <div class="client-discord-actions">
+                <button class="button compact" id="connectDiscordButton" type="button">Connect Discord ↗</button>
+                <button class="client-disconnect" id="disconnectDiscordButton" type="button" hidden>Disconnect</button>
+              </div>
+              <p class="client-discord-help">For reliable delivery, <a href="https://discord.gg/qgJNMFy3F6" target="_blank" rel="noopener noreferrer">join the JXNN Discord server ↗</a> and allow direct messages.</p>
+              <span class="client-discord-status" id="discordConnectionStatus" role="status" aria-live="polite"></span>
+            </div>
             <div class="client-room-note">
               <small>HOW THIS WORKS</small>
-              <p>This link is your key. Keep it private. New messages alert JXNN directly, and replies appear here automatically.</p>
+              <p>This link is your key. Keep it private. New messages alert JXNN directly, replies appear here automatically, and Discord alerts are always optional.</p>
             </div>
           </aside>
         </div>

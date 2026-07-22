@@ -310,7 +310,7 @@ async function ownerRoomRequest(action, details) {
 async function loadClientRooms({ render = false } = {}) {
   const { data: rooms, error } = await client
     .from("client_rooms")
-    .select("id, enquiry_id, created_at, updated_at, last_activity_at, client_name, project_title, status, archived")
+    .select("id, enquiry_id, created_at, updated_at, last_activity_at, client_name, project_title, status, archived, discord_user_id, discord_display_name, discord_connected_at")
     .eq("archived", false)
     .order("last_activity_at", { ascending: false });
 
@@ -401,55 +401,45 @@ async function sendStudioReply(room, textarea, button, status) {
   button.disabled = true;
   status.textContent = "Sending to the room…";
 
-  const now = new Date().toISOString();
-  const { data, error } = await client
-    .from("client_messages")
-    .insert({ room_id: room.id, sender: "studio", message_type: "message", message })
-    .select("id, room_id, created_at, sender, message_type, message")
-    .single();
-
-  if (error || !data) {
-    status.textContent = "That reply didn’t send.";
+  try {
+    const data = await ownerRoomRequest("studio_reply", { room_id: room.id, message });
+    textarea.value = "";
+    const roomItems = clientMessages.get(room.id) || [];
+    roomItems.push(data.message);
+    clientMessages.set(room.id, roomItems);
+    room.status = data.status;
+    room.last_activity_at = data.message.created_at;
+    const deliveryStatus = data.discord_connected
+      ? data.discord_delivered
+        ? "Reply is live and the client was alerted on Discord."
+        : "Reply is live. Discord could not deliver the alert; ask the client to join the server and allow DMs."
+      : "Reply is live in the client’s room. Discord alerts are not connected.";
+    setText(dashboardStatus, deliveryStatus);
+    renderEnquiries();
+  } catch (error) {
+    status.textContent = error.message || "That reply didn’t send.";
+  } finally {
     button.disabled = false;
-    return;
   }
-
-  await client.from("client_rooms").update({
-    status: "waiting_client",
-    updated_at: now,
-    last_activity_at: now
-  }).eq("id", room.id);
-
-  textarea.value = "";
-  const roomItems = clientMessages.get(room.id) || [];
-  roomItems.push(data);
-  clientMessages.set(room.id, roomItems);
-  room.status = "waiting_client";
-  room.last_activity_at = now;
-  status.textContent = "Reply is live in the client’s room.";
-  button.disabled = false;
-  renderEnquiries();
 }
 
 async function updateRoomStatus(room, value, select, status) {
   select.disabled = true;
-  const now = new Date().toISOString();
-  const { error } = await client.from("client_rooms").update({
-    status: value,
-    updated_at: now,
-    last_activity_at: now
-  }).eq("id", room.id);
-  select.disabled = false;
-
-  if (error) {
+  try {
+    const data = await ownerRoomRequest("studio_status", { room_id: room.id, status: value });
+    room.status = value;
+    room.last_activity_at = new Date().toISOString();
+    status.textContent = room.discord_user_id
+      ? data.discord_delivered
+        ? "Project signal updated and the client was alerted on Discord."
+        : "Project signal updated. Discord could not deliver the alert."
+      : "Project signal updated.";
+  } catch (error) {
     select.value = room.status;
-    status.textContent = "The project signal could not be updated.";
-    return;
+    status.textContent = error.message || "The project signal could not be updated.";
+  } finally {
+    select.disabled = false;
   }
-
-  room.status = value;
-  room.last_activity_at = now;
-  status.textContent = "Project signal updated.";
 }
 
 async function archiveClientRoom(room, button) {
@@ -507,7 +497,12 @@ function createClientRoomPanel(enquiry) {
   const project = document.createElement("strong");
   label.textContent = "CLIENT ROOM · LIVE";
   project.textContent = room.project_title;
-  title.append(label, project);
+  const discordBadge = document.createElement("span");
+  discordBadge.className = `admin-discord-badge${room.discord_user_id ? " connected" : ""}`;
+  discordBadge.textContent = room.discord_user_id
+    ? `Discord alerts · ${room.discord_display_name || "Connected"}`
+    : "Discord alerts · Not connected";
+  title.append(label, project, discordBadge);
 
   const roomState = document.createElement("select");
   roomState.className = `room-state room-state-${room.status}`;

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Securely connect Discord alerts to a JXNN Studio Client Room.">
+  <meta name="theme-color" content="#070709">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Connecting Discord — JXNN. Studio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="client-room-page">
+  <div class="client-room-shell">
+    <header class="client-room-topbar">
+      <a class="brand" href="./" aria-label="JXNN Studio home"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
+      <span class="client-private"><i></i> Secure Discord link</span>
+    </header>
+    <main>
+      <section class="client-gate discord-callback-gate" id="discordCallbackPanel" tabindex="-1">
+        <div class="client-orbit" id="discordCallbackOrbit" aria-hidden="true"><i></i><span>D</span></div>
+        <div class="eyebrow" id="discordCallbackEyebrow">Verifying with Discord</div>
+        <h1 id="discordCallbackTitle">LINKING YOUR <span class="outline">ALERTS.</span></h1>
+        <p id="discordCallbackMessage" role="status" aria-live="polite">Creating your private notification line…</p>
+        <a class="button primary" id="discordReturnButton" href="client.html" hidden>Return to Client Room ↗</a>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="discord-callback.js"></script>
+</body>
+</html>

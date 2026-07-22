@@ -14,6 +14,11 @@ const messageInput = document.getElementById("clientMessage");
 const sendButton = document.getElementById("sendClientMessage");
 const messageStatus = document.getElementById("clientMessageStatus");
 const quickButtons = [...document.querySelectorAll("[data-client-action]")];
+const discordConnectionTitle = document.getElementById("discordConnectionTitle");
+const discordConnectionCopy = document.getElementById("discordConnectionCopy");
+const discordConnectionStatus = document.getElementById("discordConnectionStatus");
+const connectDiscordButton = document.getElementById("connectDiscordButton");
+const disconnectDiscordButton = document.getElementById("disconnectDiscordButton");
 
 const accessToken = new URLSearchParams(window.location.hash.slice(1)).get("access") || "";
 const statusLabels = {
@@ -29,6 +34,7 @@ let room = null;
 let messages = [];
 let polling = null;
 let busy = false;
+let discordBusy = false;
 
 function showError(message) {
   loadingPanel.hidden = true;
@@ -89,6 +95,16 @@ function renderRoom() {
     item.classList.toggle("complete", index + 1 < activePhase);
     item.classList.toggle("active", index + 1 === activePhase);
   });
+
+  const connected = Boolean(room.discord_connected);
+  discordConnectionTitle.textContent = connected
+    ? `Connected as ${room.discord_display_name || "Discord user"}`
+    : "Never miss a reply";
+  discordConnectionCopy.textContent = connected
+    ? "Private alerts are active. The JXNN bot will DM you when the studio replies or changes your project status."
+    : "Connect once and the JXNN bot will DM you whenever the studio replies or changes your project status.";
+  connectDiscordButton.hidden = connected;
+  disconnectDiscordButton.hidden = !connected;
 }
 
 function renderMessages(scroll = false) {
@@ -188,10 +204,55 @@ quickButtons.forEach((button) => {
   });
 });
 
+connectDiscordButton?.addEventListener("click", async () => {
+  if (discordBusy) return;
+  discordBusy = true;
+  connectDiscordButton.disabled = true;
+  discordConnectionStatus.textContent = "Opening Discord securely…";
+
+  try {
+    sessionStorage.setItem("jxnnClientRoomReturn", window.location.href);
+    const data = await callRoom("discord_authorize");
+    const authorizeUrl = new URL(data.authorize_url);
+    if (authorizeUrl.protocol !== "https:" || authorizeUrl.hostname !== "discord.com") {
+      throw new Error("Invalid Discord destination");
+    }
+    window.location.assign(authorizeUrl.href);
+  } catch {
+    sessionStorage.removeItem("jxnnClientRoomReturn");
+    discordConnectionStatus.textContent = "Discord could not be opened. Please try again.";
+    discordBusy = false;
+    connectDiscordButton.disabled = false;
+  }
+});
+
+disconnectDiscordButton?.addEventListener("click", async () => {
+  if (discordBusy || !window.confirm("Disconnect Discord alerts from this Client Room?")) return;
+  discordBusy = true;
+  disconnectDiscordButton.disabled = true;
+  discordConnectionStatus.textContent = "Disconnecting Discord alerts…";
+
+  try {
+    await callRoom("discord_disconnect");
+    discordConnectionStatus.textContent = "Discord alerts disconnected.";
+    await loadRoom({ quiet: true });
+  } catch {
+    discordConnectionStatus.textContent = "Discord could not be disconnected. Please try again.";
+  } finally {
+    discordBusy = false;
+    disconnectDiscordButton.disabled = false;
+  }
+});
+
 if (!/^[0-9a-f]{64}$/i.test(accessToken)) {
   showError("This page needs a private Client Room link from JXNN Studio.");
 } else {
   await loadRoom();
+  const discordFlash = sessionStorage.getItem("jxnnDiscordFlash");
+  if (discordFlash) {
+    discordConnectionStatus.textContent = discordFlash;
+    sessionStorage.removeItem("jxnnDiscordFlash");
+  }
   polling = window.setInterval(() => {
     if (!document.hidden && !busy) loadRoom({ quiet: true });
   }, 7000);
