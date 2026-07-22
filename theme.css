@@ -625,6 +625,21 @@ img {
   color: #09090a;
 }
 
+.button.compact {
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 11px;
+  font-size: .73rem;
+}
+
+.button:disabled {
+  opacity: .55;
+  cursor: wait;
+  transform: none;
+}
+
+[hidden] { display: none !important; }
+
 /* Rates */
 .rate-groups {
   display: grid;
@@ -1001,6 +1016,32 @@ img {
   line-height: 1.55;
 }
 
+.form-note a { color: var(--text); }
+.form-status.error { color: #ff8c72; }
+
+.form-trap {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.form-success {
+  padding: clamp(34px, 6vw, 70px);
+  border: 1px solid rgba(200,255,50,.34);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 88% 15%, rgba(200,255,50,.15), transparent 21rem),
+    linear-gradient(145deg, rgba(21,21,26,.98), rgba(10,10,13,.98));
+  box-shadow: 0 35px 90px rgba(0,0,0,.32);
+  outline: none;
+}
+
+.form-success small { color: var(--acid); font: 500 .64rem/1 "DM Mono", monospace; }
+.form-success h2 { max-width: 650px; margin-top: 24px; font-size: clamp(2.4rem, 5.5vw, 5rem); font-weight: 500; line-height: .98; letter-spacing: -.06em; }
+.form-success p { max-width: 650px; margin-top: 22px; color: var(--muted); line-height: 1.7; }
+
 .form-status {
   min-height: 1.3em;
   margin-top: 15px;
@@ -1025,6 +1066,167 @@ img {
 .brief-aside-card h3 { margin-top: 14px; font-size: 1.12rem; font-weight: 600; }
 .brief-aside-card p { margin-top: 10px; color: var(--muted); font-size: .86rem; line-height: 1.65; }
 .brief-aside-card a { color: var(--text); }
+
+/* Private enquiries dashboard */
+.admin-page {
+  background:
+    radial-gradient(circle at 8% 5%, rgba(141,104,255,.17), transparent 33rem),
+    radial-gradient(circle at 88% 24%, rgba(200,255,50,.08), transparent 30rem),
+    var(--bg);
+}
+
+.admin-shell {
+  width: min(calc(100% - 40px), 1320px);
+  min-height: 100vh;
+  margin-inline: auto;
+  padding-bottom: 70px;
+}
+
+.admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 84px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(7,7,9,.82);
+  backdrop-filter: blur(18px);
+}
+
+.admin-top-actions,
+.admin-private {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-private {
+  color: var(--muted);
+  font: 500 .64rem/1 "DM Mono", monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.admin-private i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 14px var(--acid);
+}
+
+.admin-login {
+  width: min(100%, 780px);
+  margin: clamp(70px, 12vh, 150px) auto 0;
+  padding: clamp(36px, 7vw, 78px);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 86% 12%, rgba(141,104,255,.18), transparent 22rem),
+    linear-gradient(145deg, rgba(21,21,27,.98), rgba(10,10,13,.98));
+  box-shadow: 0 50px 120px rgba(0,0,0,.4);
+}
+
+.admin-login h1,
+.admin-heading h1 {
+  margin-top: 25px;
+  font-size: clamp(3.4rem, 8vw, 7.8rem);
+  font-weight: 600;
+  line-height: .84;
+  letter-spacing: -.075em;
+}
+
+.admin-login p:not(.form-status) { max-width: 590px; margin: 28px 0; color: var(--muted); line-height: 1.75; }
+
+.admin-lock {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 64px;
+  margin-bottom: 34px;
+  border: 1px solid rgba(200,255,50,.34);
+  border-radius: 17px;
+  background: rgba(200,255,50,.08);
+}
+
+.admin-lock::before {
+  content: "";
+  position: absolute;
+  top: -23px;
+  width: 38px;
+  height: 38px;
+  border: 6px solid var(--acid);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+}
+
+.admin-lock span { width: 9px; height: 17px; border-radius: 8px; background: var(--acid); box-shadow: 0 0 16px rgba(200,255,50,.6); }
+
+.admin-dashboard { padding-top: clamp(60px, 8vw, 110px); }
+.admin-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding-bottom: 55px; border-bottom: 1px solid var(--line); }
+.admin-user { display: grid; gap: 10px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.035); }
+.admin-user small { color: var(--acid); font: 500 .59rem/1 "DM Mono", monospace; }
+.admin-user span { color: #c9c7cf; font-size: .8rem; }
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 30px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(15,15,19,.75);
+}
+
+.admin-stats article { min-height: 150px; padding: 26px; border-right: 1px solid var(--line); }
+.admin-stats article:last-child { border-right: 0; }
+.admin-stats small { color: var(--muted); font: 500 .61rem/1 "DM Mono", monospace; }
+.admin-stats strong { display: block; margin-top: 27px; color: var(--text); font-size: 3.2rem; font-weight: 500; line-height: 1; }
+
+.admin-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 34px 0 22px; }
+.admin-toolbar label { display: flex; align-items: center; gap: 12px; color: var(--muted); font: 500 .62rem/1 "DM Mono", monospace; text-transform: uppercase; }
+.admin-toolbar select,
+.status-select {
+  min-height: 40px;
+  padding: 0 35px 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #121216;
+  color: var(--text);
+  font: 600 .72rem/1 "Manrope", sans-serif;
+  color-scheme: dark;
+}
+
+.enquiry-list { display: grid; gap: 18px; }
+.enquiry-card { padding: clamp(24px, 4vw, 42px); border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(145deg, rgba(20,20,25,.95), rgba(11,11,14,.96)); box-shadow: 0 24px 65px rgba(0,0,0,.2); }
+.enquiry-card-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.enquiry-card-heading small { color: var(--acid); font: 500 .61rem/1 "DM Mono", monospace; }
+.enquiry-card-heading h2 { margin-top: 13px; font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 500; letter-spacing: -.05em; }
+.status-select.status-new { border-color: rgba(200,255,50,.4); }
+.status-select.status-contacted { border-color: rgba(141,104,255,.5); }
+.status-select.status-archived { color: var(--muted); }
+
+.enquiry-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin-top: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--line); }
+.enquiry-meta > div { display: grid; gap: 9px; min-height: 86px; padding: 17px; background: #111115; }
+.enquiry-meta small { color: var(--muted); font: 500 .56rem/1 "DM Mono", monospace; }
+.enquiry-meta span { overflow-wrap: anywhere; color: #d2d0d7; font-size: .82rem; }
+.enquiry-details { margin-top: 27px; padding-left: 18px; border-left: 2px solid var(--violet); color: #c2c0c8; line-height: 1.75; white-space: pre-wrap; }
+.enquiry-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.admin-empty { padding: 70px 30px; border: 1px dashed var(--line); border-radius: 22px; color: var(--muted); text-align: center; }
+.admin-empty strong { color: var(--text); font-size: 1.25rem; }
+.admin-empty p { margin-top: 10px; }
+
+/* Privacy page */
+.privacy-hero { min-height: 510px; }
+.privacy-lock { position: relative; z-index: 2; width: 190px; height: 165px; border: 1px solid rgba(200,255,50,.35); border-radius: 34px; background: linear-gradient(145deg, rgba(31,35,25,.96), rgba(10,10,13,.98)); box-shadow: 0 45px 80px rgba(0,0,0,.55), 0 0 70px rgba(200,255,50,.08); transform: rotate(-8deg); }
+.privacy-lock::before { content: ""; position: absolute; left: 50%; top: -76px; width: 105px; height: 110px; border: 13px solid var(--violet); border-bottom: 0; border-radius: 65px 65px 0 0; transform: translateX(-50%); box-shadow: 0 -12px 40px rgba(141,104,255,.22); }
+.privacy-lock span { position: absolute; top: 55px; left: 50%; width: 28px; height: 54px; border-radius: 15px; background: var(--acid); box-shadow: 0 0 28px rgba(200,255,50,.5); transform: translateX(-50%); }
+.privacy-lock i { position: absolute; inset: 17px; border: 1px solid rgba(255,255,255,.1); border-radius: 23px; }
+.terms-aside a { color: var(--text); }
 
 /* Shared CTA and footer */
 .cta-card {
@@ -1098,6 +1300,8 @@ img {
   .terms-aside { position: static; }
   .form-shell { grid-template-columns: 1fr; }
   .brief-aside { position: static; grid-template-columns: repeat(2, 1fr); }
+  .admin-heading { align-items: flex-start; flex-direction: column; }
+  .enquiry-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .error-layout { grid-template-columns: 1fr; }
   .error-code { line-height: .7; }
   .price-stack { width: min(68vw, 340px); }
@@ -1185,6 +1389,20 @@ img {
   .form-grid { grid-template-columns: 1fr; }
   .form-field.full { grid-column: auto; }
   .brief-aside { grid-template-columns: 1fr; }
+  .admin-shell { width: min(calc(100% - 28px), 1320px); }
+  .admin-topbar { min-height: 70px; }
+  .admin-private { display: none; }
+  .admin-login { margin-top: 45px; padding: 30px 23px; border-radius: 23px; }
+  .admin-login h1,
+  .admin-heading h1 { font-size: clamp(3.1rem, 17vw, 5.5rem); }
+  .admin-stats article { min-height: 118px; padding: 20px 15px; }
+  .admin-stats strong { margin-top: 20px; font-size: 2.4rem; }
+  .admin-toolbar { align-items: flex-start; flex-direction: column; }
+  .enquiry-card-heading { flex-direction: column; }
+  .enquiry-meta { grid-template-columns: 1fr; }
+  .enquiry-actions .button { width: 100%; }
+  .privacy-lock { width: 150px; height: 135px; }
+  .privacy-lock::before { top: -58px; width: 82px; height: 86px; border-width: 10px; }
   .broken-timeline { height: 210px; padding: 18px; }
   .object-card { min-height: 180px; padding: 18px; }
   .object-line { height: 25px; margin-top: 10px; }

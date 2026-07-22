@@ -59,10 +59,16 @@ work-rates/
 ├── thumbnail.html      # Thumbnail portfolio and lightbox
 ├── faq.html            # Production questions and answers
 ├── contact.html        # Structured project enquiry form
+├── admin.html          # Private authenticated enquiries dashboard
+├── privacy.html        # Project-form privacy notice
 ├── tos.html            # Terms of service
 ├── 404.html            # Custom missing-sequence page
 ├── theme.css           # Shared secondary-page design system
-├── shared.js           # Scroll, reveal and gallery interactions
+├── shared.js           # Scroll, reveal, gallery and mobile-menu interactions
+├── contact.js          # Secure Supabase enquiry submission
+├── admin.js            # Private enquiry dashboard controls
+├── supabase-config.js  # Browser-safe project connection values
+├── supabase-schema.sql # Enquiry table and access policies
 └── assets/             # Logos, social card, client images and portfolio artwork
 ```
 
@@ -71,6 +77,8 @@ work-rates/
 Open the project folder in VS Code and select **Go Live**, or open `index.html` directly in a browser.
 
 Keep `theme.css`, `shared.js` and every HTML page in the same folder. The `assets` directory should remain beside them.
+
+The enquiry form stores briefs in Supabase. Database row-level security allows public inserts but restricts reading and updating to the approved studio email. Never place a Supabase `service_role` or secret key in this repository.
 
 ## Contact
 

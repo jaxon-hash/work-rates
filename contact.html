@@ -126,16 +126,28 @@
 
             <div class="form-field full">
               <label for="details">Project details *</label>
-              <textarea id="details" name="details" placeholder="What are you making? Tell me about the audience, style, footage and anything the edit needs to achieve." required></textarea>
+              <textarea id="details" name="details" minlength="20" maxlength="4000" placeholder="What are you making? Tell me about the audience, style, footage and anything the edit needs to achieve." required></textarea>
+            </div>
+
+            <div class="form-trap" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
             </div>
           </div>
 
           <div class="form-actions">
-            <button class="button primary" type="submit">Prepare my enquiry ↗</button>
-            <p class="form-note">This opens your email app with the full brief ready to send.</p>
+            <button class="button primary" id="submitProject" type="submit">Send project enquiry ↗</button>
+            <p class="form-note">Your details are sent securely to the private studio dashboard. Read the <a href="privacy.html">privacy notice</a>.</p>
           </div>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
+
+        <div class="form-success" id="formSuccess" hidden tabindex="-1">
+          <small>BRIEF RECEIVED / 01</small>
+          <h2>Your project is now in the queue.</h2>
+          <p>Thanks for the detail. I’ll review everything and reply to the email address you supplied with availability and the clearest next step.</p>
+          <div class="button-row"><a class="button primary" href="./">Back to the studio ↗</a><button class="button" id="anotherEnquiry" type="button">Send another</button></div>
+        </div>
 
         <aside class="brief-aside reveal" aria-label="What happens next">
           <article class="brief-aside-card">
@@ -155,9 +167,10 @@
 
   <footer class="site-footer shell">
     <div>© 2026 JXNN. STUDIO — CUT DIFFERENT.</div>
-    <div class="footer-links"><a href="./">Home</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a><a href="tos.html">Terms</a></div>
+    <div class="footer-links"><a href="./">Home</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="tos.html">Terms</a></div>
   </footer>
 
   <script src="shared.js"></script>
+  <script type="module" src="contact.js"></script>
 </body>
 </html>

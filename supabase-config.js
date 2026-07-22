@@ -1,0 +1,5 @@
+// This file contains only Supabase's browser-safe publishable key.
+// Never place a service_role or secret key in this website.
+export const SUPABASE_URL = "https://fafkzhoqorjqtjpmidcr.supabase.co";
+export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KVz0tRbNGI4PpRjdyNo6rw_k8tjyHAD";
+export const ADMIN_EMAIL = "business.jxnn@gmail.com";

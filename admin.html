@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Private JXNN. Studio project enquiries dashboard.">
+  <meta name="theme-color" content="#070709">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Enquiries — JXNN. Studio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="admin-page">
+  <div class="admin-shell">
+    <header class="admin-topbar">
+      <a class="brand" href="./" aria-label="JXNN Studio home"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
+      <div class="admin-top-actions">
+        <span class="admin-private"><i></i> Private studio</span>
+        <button class="button compact" id="signOutButton" type="button" hidden>Sign out</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="admin-login" id="loginPanel">
+        <div class="admin-lock" aria-hidden="true"><span></span></div>
+        <div class="eyebrow">Owner access only</div>
+        <h1>PRIVATE <span class="outline">ENQUIRIES.</span></h1>
+        <p>Your project briefs are protected by email sign-in and database permissions. A secure login link will be sent only to the approved studio email.</p>
+        <button class="button primary" id="sendLoginButton" type="button">Email me a sign-in link ↗</button>
+        <p class="form-status" id="loginStatus" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-dashboard" id="adminDashboard" hidden>
+        <div class="admin-heading">
+          <div>
+            <div class="eyebrow">Private production desk</div>
+            <h1>PROJECT <span class="outline">ENQUIRIES.</span></h1>
+          </div>
+          <div class="admin-user"><small>SIGNED IN AS</small><span id="adminUserEmail"></span></div>
+        </div>
+
+        <div class="admin-stats" aria-label="Enquiry summary">
+          <article><small>ALL ENQUIRIES</small><strong id="totalCount">0</strong></article>
+          <article><small>NEW</small><strong id="newCount">0</strong></article>
+          <article><small>THIS MONTH</small><strong id="monthCount">0</strong></article>
+        </div>
+
+        <div class="admin-toolbar">
+          <div><span class="availability"><span></span>Live enquiry feed</span></div>
+          <label for="statusFilter">Show
+            <select id="statusFilter">
+              <option value="all">All enquiries</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="archived">Archived</option>
+            </select>
+          </label>
+        </div>
+
+        <p class="form-status" id="dashboardStatus" role="status" aria-live="polite"></p>
+        <div class="enquiry-list" id="enquiryList"></div>
+        <div class="admin-empty" id="emptyState" hidden><strong>No enquiries here yet.</strong><p>New project briefs will appear in this private dashboard.</p></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
