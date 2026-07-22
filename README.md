@@ -58,11 +58,12 @@ work-rates/
 ├── rates.html          # Editing and thumbnail pricing
 ├── thumbnail.html      # Thumbnail portfolio and lightbox
 ├── faq.html            # Production questions and answers
+├── contact.html        # Structured project enquiry form
 ├── tos.html            # Terms of service
 ├── 404.html            # Custom missing-sequence page
 ├── theme.css           # Shared secondary-page design system
 ├── shared.js           # Scroll, reveal and gallery interactions
-└── assets/             # Logos, client images and portfolio artwork
+└── assets/             # Logos, social card, client images and portfolio artwork
 ```
 
 ## Run locally
@@ -75,7 +76,7 @@ Keep `theme.css`, `shared.js` and every HTML page in the same folder. The `asset
 
 <div align="center">
 
-[![Email](https://img.shields.io/badge/EMAIL-BUSINESS.JXNN%40GMAIL.COM-c8ff32?style=for-the-badge&labelColor=070709&color=c8ff32)](mailto:business.jxnn@gmail.com)
+[![Project form](https://img.shields.io/badge/START-A_PROJECT-c8ff32?style=for-the-badge&labelColor=070709&color=c8ff32)](https://jxnn.store/contact.html)
 [![Discord](https://img.shields.io/badge/DISCORD-JOIN_THE_STUDIO-8d68ff?style=for-the-badge&labelColor=070709&color=8d68ff)](https://discord.gg/qgJNMFy3F6)
 [![Instagram](https://img.shields.io/badge/INSTAGRAM-%40JAXONGARFORTH1-f4f2eb?style=for-the-badge&labelColor=070709&color=f4f2eb)](https://instagram.com/jaxongarforth1)
 [![X](https://img.shields.io/badge/X-%40JXNN122-f4f2eb?style=for-the-badge&labelColor=070709&color=f4f2eb)](https://x.com/jxnn122)

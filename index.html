@@ -5,12 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="JXNN. Studio — cinematic, high-retention video editing for creators and brands.">
   <meta name="theme-color" content="#070709">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jxnn.store/">
+  <meta property="og:title" content="JXNN. Studio — Video Editor">
+  <meta property="og:description" content="Cinematic, high-retention video editing for creators and brands.">
+  <meta property="og:image" content="https://jxnn.store/assets/og-jxnn.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JXNN. Studio — Video Editor">
+  <meta name="twitter:description" content="Cinematic, high-retention video editing for creators and brands.">
+  <meta name="twitter:image" content="https://jxnn.store/assets/og-jxnn.png">
   <title>JXNN. Studio — Video Editor</title>
 
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -152,6 +163,45 @@
       background: var(--text);
       color: #08080a;
       font-weight: 700;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 19px;
+      height: 2px;
+      border-radius: 10px;
+      background: var(--text);
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+
+    .menu-toggle:hover,
+    .menu-toggle:focus-visible {
+      border-color: rgba(200, 255, 50, 0.5);
+      background: rgba(200, 255, 50, 0.1);
+      outline: none;
+    }
+
+    .nav.menu-open .menu-toggle span:first-child {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    .nav.menu-open .menu-toggle span:last-child {
+      transform: translateY(-4px) rotate(-45deg);
     }
 
     main { position: relative; }
@@ -695,9 +745,59 @@
     @media (max-width: 680px) {
       .section-shell { width: min(calc(100% - 28px), var(--max)); }
       .nav { top: 10px; width: calc(100% - 20px); }
-      .nav-inner { min-height: 58px; padding-left: 12px; }
+      .nav-inner { position: relative; min-height: 58px; padding: 7px 8px 7px 12px; }
       .brand img { width: 30px; height: 30px; }
-      .nav-links a:not(.nav-cta) { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(9, 9, 12, 0.96);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(20px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-10px) scale(0.98);
+        transform-origin: top;
+        transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+      }
+      .nav.menu-open .nav-links {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+      .nav-links a,
+      .nav-links a:not(.nav-cta) {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 12px 14px;
+        font-size: 0.85rem;
+      }
+      .nav-links a::after {
+        content: "↗";
+        margin-left: auto;
+        color: var(--acid);
+        font-family: "DM Mono", monospace;
+      }
+      .nav-links .nav-cta {
+        justify-content: space-between;
+        margin: 6px 0 0;
+        background: var(--acid);
+        color: #08080a;
+      }
+      .nav-links .nav-cta::after { color: #08080a; }
+      body.menu-open { overflow: hidden; }
       .hero { padding-top: 115px; padding-bottom: 35px; }
       h1 { font-size: clamp(3.7rem, 18.4vw, 6rem); }
       .hero-copy { margin-top: 24px; }
@@ -726,18 +826,21 @@
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <nav class="nav" aria-label="Primary navigation">
+  <nav class="nav" id="mainNav" aria-label="Primary navigation">
     <div class="nav-inner">
       <a class="brand" href="#top" aria-label="JXNN Studio home">
         <img src="assets/profile.png" alt="">
         JXNN.<span>STUDIO</span>
       </a>
-      <div class="nav-links">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span></button>
+      <div class="nav-links" id="navLinks">
         <a href="#work">Work</a>
         <a href="#process">Process</a>
         <a href="#clients">Clients</a>
+        <a href="thumbnail.html">Thumbnails</a>
         <a href="rates.html">Rates</a>
-        <a class="nav-cta" href="mailto:business.jxnn@gmail.com">Start a project ↗</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-cta" href="contact.html">Start a project ↗</a>
       </div>
     </div>
   </nav>
@@ -810,11 +913,11 @@
             <img src="https://img.youtube.com/vi/NONQ_j8San4/maxresdefault.jpg" alt="Featured JXNN video editing project" loading="lazy">
             <div class="work-card-body"><small>EDITING / STORY</small><h3>Featured work ↗</h3><p>Fast pacing, sound design and retention-led structure.</p></div>
           </a>
-          <a class="work-card reveal" href="https://www.youtube.com/watch?v=ApeCWRt1sIY&t=566s" target="_blank" rel="noopener noreferrer">
+          <a class="work-card reveal" href="https://www.youtube.com/watch?v=ApeCWRt1sIY&amp;t=566s" target="_blank" rel="noopener noreferrer">
             <img src="https://img.youtube.com/vi/ApeCWRt1sIY/maxresdefault.jpg" alt="JXNN showcase reel project" loading="lazy">
             <div class="work-card-body"><small>SHOWCASE / CREATOR</small><h3>Showcase reel ↗</h3><p>A creator-first edit built to hold attention.</p></div>
           </a>
-          <a class="work-card reveal" href="https://www.youtube.com/watch?v=qyTBSJyDLlQ&t=388s" target="_blank" rel="noopener noreferrer">
+          <a class="work-card reveal" href="https://www.youtube.com/watch?v=qyTBSJyDLlQ&amp;t=388s" target="_blank" rel="noopener noreferrer">
             <img src="https://img.youtube.com/vi/qyTBSJyDLlQ/maxresdefault.jpg" alt="Beta Squad subtitle editing project" loading="lazy">
             <div class="work-card-body"><small>SUBTITLES / BETA SQUAD</small><h3>Beta Squad ↗</h3><p>Clear, energetic subtitles designed for the format.</p></div>
           </a>
@@ -864,7 +967,7 @@
           <h2>Let’s make something people <em>finish watching.</em></h2>
           <p>Tell me what you’re making, where it will live and when you need it. I’ll come back with the clearest next step.</p>
           <div class="hero-actions">
-            <a class="button primary" href="mailto:business.jxnn@gmail.com">business.jxnn@gmail.com <span class="arrow">↗</span></a>
+            <a class="button primary" href="contact.html">Send your project brief <span class="arrow">↗</span></a>
             <a class="button" href="https://discord.gg/qgJNMFy3F6" target="_blank" rel="noopener noreferrer">Join Discord</a>
           </div>
         </div>
@@ -923,6 +1026,44 @@
       element.style.transitionDelay = `${Math.min((index % 3) * 90, 180)}ms`;
       observer.observe(element);
     });
+
+    (() => {
+      const nav = document.getElementById("mainNav");
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      if (!nav || !menuToggle || !navLinks) return;
+
+      function setMenu(open) {
+        nav.classList.toggle("menu-open", open);
+        document.body.classList.toggle("menu-open", open);
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        setMenu(!nav.classList.contains("menu-open"));
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenu(false));
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!nav.contains(event.target)) setMenu(false);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && nav.classList.contains("menu-open")) {
+          setMenu(false);
+          menuToggle.focus();
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 680) setMenu(false);
+      });
+    })();
   </script>
 </body>
 </html>

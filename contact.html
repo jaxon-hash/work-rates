@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Send JXNN. Studio a structured brief for video editing, motion design or thumbnail work.">
+  <meta name="theme-color" content="#070709">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jxnn.store/contact.html">
+  <meta property="og:title" content="Start a Project — JXNN. Studio">
+  <meta property="og:description" content="Tell JXNN. Studio what you are making and receive a clear next step.">
+  <meta property="og:image" content="https://jxnn.store/assets/og-jxnn.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Start a Project — JXNN. Studio">
+  <meta name="twitter:description" content="Tell JXNN. Studio what you are making and receive a clear next step.">
+  <meta name="twitter:image" content="https://jxnn.store/assets/og-jxnn.png">
+  <title>Start a Project — JXNN. Studio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <nav class="nav" id="mainNav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <a class="brand" href="./" aria-label="JXNN Studio home"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span></button>
+      <div class="nav-links" id="navLinks">
+        <a href="./#work">Work</a>
+        <a href="./#process">Process</a>
+        <a href="./#clients">Clients</a>
+        <a href="thumbnail.html">Thumbnails</a>
+        <a href="rates.html">Rates</a>
+        <a href="faq.html">FAQ</a>
+        <a class="nav-cta active" href="contact.html">Start a project ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-main">
+    <header class="page-hero contact-hero shell">
+      <div>
+        <div class="eyebrow">New project · Clear brief · Fast reply</div>
+        <h1>START THE <span class="outline">CUT.</span></h1>
+        <p class="hero-copy">Tell me what you’re making, where it will live and what success looks like. I’ll reply with availability, a clear scope and the next step.</p>
+        <div class="button-row"><a class="button primary" href="#project-brief">Build your brief ↓</a><a class="button" href="rates.html">Check starting rates</a></div>
+      </div>
+
+      <div class="scene" aria-hidden="true">
+        <div class="scene-glow"></div>
+        <div class="scene-ring"></div>
+        <div class="brief-stack">
+          <div class="brief-sheet back"></div>
+          <div class="brief-sheet front">
+            <small>JXNN / PROJECT BRIEF</small>
+            <strong>READY FOR THE TIMELINE.</strong>
+            <div class="brief-lines"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-section shell" id="project-brief">
+      <div class="section-heading reveal">
+        <div class="section-label">01 / YOUR PROJECT</div>
+        <h2>Give me the context. <em>I’ll shape the plan.</em></h2>
+      </div>
+
+      <div class="form-shell">
+        <form class="project-form reveal" id="projectForm">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Your name *</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email address *</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-field">
+              <label for="projectType">Project type *</label>
+              <select id="projectType" name="projectType" required>
+                <option value="" disabled selected>Choose a service</option>
+                <option>Short-form edit</option>
+                <option>Long-form edit</option>
+                <option>Thumbnail design</option>
+                <option>Monthly retainer</option>
+                <option>Something else</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="runtime">Finished length *</label>
+              <input id="runtime" name="runtime" type="text" placeholder="e.g. 12-minute YouTube video" required>
+            </div>
+
+            <div class="form-field">
+              <label for="budget">Budget range *</label>
+              <select id="budget" name="budget" required>
+                <option value="" disabled selected>Choose a range</option>
+                <option>Under £100</option>
+                <option>£100–£300</option>
+                <option>£300–£750</option>
+                <option>£750–£1,500</option>
+                <option>£1,500+</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="deadline">Ideal deadline</label>
+              <input id="deadline" name="deadline" type="date">
+            </div>
+
+            <div class="form-field full">
+              <label for="footageLink">Footage or reference link</label>
+              <input id="footageLink" name="footageLink" type="url" inputmode="url" placeholder="https://">
+            </div>
+
+            <div class="form-field full">
+              <label for="details">Project details *</label>
+              <textarea id="details" name="details" placeholder="What are you making? Tell me about the audience, style, footage and anything the edit needs to achieve." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="button primary" type="submit">Prepare my enquiry ↗</button>
+            <p class="form-note">This opens your email app with the full brief ready to send.</p>
+          </div>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="brief-aside reveal" aria-label="What happens next">
+          <article class="brief-aside-card">
+            <small>01 / REVIEW</small>
+            <h3>I read the full brief</h3>
+            <p>I’ll check the scope, footage, deadline and creative direction before recommending the right package.</p>
+          </article>
+          <article class="brief-aside-card">
+            <small>02 / REPLY</small>
+            <h3>You get a clear next step</h3>
+            <p>Expect availability, a tailored quote and any useful questions. You can also email <a href="mailto:business.jxnn@gmail.com">business.jxnn@gmail.com</a>.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <div>© 2026 JXNN. STUDIO — CUT DIFFERENT.</div>
+    <div class="footer-links"><a href="./">Home</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a><a href="tos.html">Terms</a></div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>
