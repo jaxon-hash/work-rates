@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Private JXNN Studio client communication room.">
+  <meta name="theme-color" content="#070709">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Client Room — JXNN. Studio</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body class="client-room-page">
+  <div class="client-room-shell">
+    <header class="client-room-topbar">
+      <a class="brand" href="./" aria-label="JXNN Studio home"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
+      <span class="client-private"><i></i> Private studio line</span>
+    </header>
+
+    <main>
+      <section class="client-gate" id="loadingPanel">
+        <div class="client-orbit" aria-hidden="true"><i></i><span>JXNN</span></div>
+        <div class="eyebrow">Opening your private room</div>
+        <h1>LOADING THE <span class="outline">TIMELINE.</span></h1>
+        <p>Connecting to your project conversation…</p>
+      </section>
+
+      <section class="client-gate" id="errorPanel" hidden>
+        <div class="client-orbit error" aria-hidden="true"><i></i><span>404</span></div>
+        <div class="eyebrow">Link unavailable</div>
+        <h1>THIS ROOM IS <span class="outline">OFFLINE.</span></h1>
+        <p id="errorMessage">This private link is invalid, expired or has been replaced. Ask JXNN Studio for a fresh invite.</p>
+        <a class="button primary" href="contact.html">Contact the studio ↗</a>
+      </section>
+
+      <section class="client-room" id="clientRoom" hidden>
+        <header class="client-room-hero">
+          <div>
+            <div class="eyebrow">The Cut Room · <span id="roomClientName"></span></div>
+            <h1 id="roomProjectTitle"></h1>
+          </div>
+          <div class="client-room-state">
+            <small>PROJECT SIGNAL</small>
+            <strong id="roomStatus">Live</strong>
+            <span><i></i> Synced privately</span>
+          </div>
+        </header>
+
+        <ol class="client-progress" id="projectProgress" aria-label="Project progress">
+          <li data-phase="active"><span>01</span>Brief</li>
+          <li data-phase="waiting_client"><span>02</span>Edit</li>
+          <li data-phase="revision"><span>03</span>Review</li>
+          <li data-phase="approved"><span>04</span>Locked</li>
+        </ol>
+
+        <div class="client-room-grid">
+          <section class="client-conversation" aria-labelledby="conversationTitle">
+            <div class="client-section-head">
+              <div><small>PROJECT TRANSMISSION</small><h2 id="conversationTitle">The timeline</h2></div>
+              <span class="client-live"><i></i> Live</span>
+            </div>
+            <div class="client-messages" id="clientMessages" aria-live="polite"></div>
+
+            <form class="client-composer" id="clientMessageForm">
+              <label for="clientMessage">Send JXNN a message</label>
+              <textarea id="clientMessage" maxlength="2000" rows="4" placeholder="Feedback, a question, a timestamp or a new idea…" required></textarea>
+              <div>
+                <span id="clientMessageStatus" role="status" aria-live="polite"></span>
+                <button class="button primary" id="sendClientMessage" type="submit">Transmit message ↗</button>
+              </div>
+            </form>
+          </section>
+
+          <aside class="client-actions-panel">
+            <div class="client-section-head"><div><small>ONE-TAP SIGNALS</small><h2>Make the call</h2></div></div>
+            <p>Skip the formal email. Send a clear project decision in one tap.</p>
+            <div class="client-quick-actions">
+              <button type="button" data-client-action="approve"><span>✓</span><strong>Lock this cut</strong><small>Approve the current edit</small></button>
+              <button type="button" data-client-action="revision"><span>↻</span><strong>Request changes</strong><small>Open a revision round</small></button>
+              <button type="button" data-client-action="talk"><span>↗</span><strong>Talk it through</strong><small>Ask JXNN to contact you</small></button>
+            </div>
+            <div class="client-room-note">
+              <small>HOW THIS WORKS</small>
+              <p>This link is your key. Keep it private. New messages alert JXNN directly, and replies appear here automatically.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="client.js"></script>
+</body>
+</html>

@@ -60,6 +60,7 @@ work-rates/
 ├── faq.html            # Production questions and answers
 ├── contact.html        # Structured project enquiry form
 ├── admin.html          # Private enquiries, notes and analytics dashboard
+├── client.html         # Token-protected project conversation and approvals
 ├── privacy.html        # Project-form privacy notice
 ├── tos.html            # Terms of service
 ├── 404.html            # Custom missing-sequence page
@@ -68,6 +69,7 @@ work-rates/
 ├── contact.js          # Verified enquiry submission
 ├── analytics.js        # Anonymous first-party event tracking
 ├── admin.js            # Enquiry, notes and analytics controls
+├── client.js           # Private Client Room messages and project signals
 ├── supabase-config.js  # Browser-safe project connection values
 ├── supabase-schema.sql # Enquiry table and access policies
 ├── supabase/           # Verified submissions, analytics and rate limiting
@@ -81,6 +83,8 @@ Open the project folder in VS Code and select **Go Live**, or open `index.html` 
 Keep `theme.css`, `shared.js` and every HTML page in the same folder. The `assets` directory should remain beside them.
 
 The enquiry form uses Cloudflare Turnstile and a Supabase Edge Function to verify each submission before storing it. Server-side request limits and duplicate detection add a second layer of spam protection. The site also records anonymous page and interaction totals for the private dashboard without cookies or stored IP addresses.
+
+Accepted projects can be given a private **Client Room**. The admin dashboard creates a unique capability link that keeps the access token in the URL fragment, while the database stores only a salted hash. Clients can send messages, request revisions, ask to talk or approve a cut without creating an account. New client signals alert the studio through Discord; studio replies remain organised in the private dashboard and appear in the client timeline.
 
 The Edge Functions expect `TURNSTILE_SECRET_KEY` and `RATE_LIMIT_SALT` as private Supabase secrets. `DISCORD_WEBHOOK_URL` is optional and enables private new-enquiry alerts. Direct public database inserts are disabled; the dashboard remains restricted to the approved studio email. Never place a Supabase `service_role`, Turnstile secret, Discord webhook or any other private key in this repository.
 

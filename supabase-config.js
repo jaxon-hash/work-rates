@@ -5,3 +5,4 @@ export const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_KVz0tRbNGI4PpRjdyNo6rw_k
 export const ADMIN_EMAIL = "business.jxnn@gmail.com";
 export const SUBMIT_ENQUIRY_URL = `${SUPABASE_URL}/functions/v1/submit-enquiry`;
 export const TRACK_EVENT_URL = `${SUPABASE_URL}/functions/v1/track-event`;
+export const CLIENT_ROOM_URL = `${SUPABASE_URL}/functions/v1/client-room`;

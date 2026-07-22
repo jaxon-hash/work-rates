@@ -1,5 +1,5 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-import { ADMIN_EMAIL, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
+import { ADMIN_EMAIL, CLIENT_ROOM_URL, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
 
 const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const loginPanel = document.getElementById("loginPanel");
@@ -15,6 +15,7 @@ const adminUserEmail = document.getElementById("adminUserEmail");
 const totalCount = document.getElementById("totalCount");
 const newCount = document.getElementById("newCount");
 const monthCount = document.getElementById("monthCount");
+const roomCount = document.getElementById("roomCount");
 const analyticsRange = document.getElementById("analyticsRange");
 const pageViewCount = document.getElementById("pageViewCount");
 const ctaClickCount = document.getElementById("ctaClickCount");
@@ -26,6 +27,9 @@ const deviceBreakdown = document.getElementById("deviceBreakdown");
 
 let enquiries = [];
 let siteEvents = [];
+let clientRooms = [];
+const clientMessages = new Map();
+const roomAccessLinks = new Map();
 
 function setText(element, value) {
   if (element) element.textContent = value;
@@ -265,6 +269,329 @@ function createAdminNotes(enquiry) {
   return section;
 }
 
+async function copyText(value) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const input = document.createElement("textarea");
+  input.value = value;
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  document.body.append(input);
+  input.select();
+  document.execCommand("copy");
+  input.remove();
+}
+
+function clientInviteText(room, url) {
+  return `Hey ${room.client_name} — I’ve opened your private JXNN Client Room for ${room.project_title}. Use it for updates, feedback and one-tap approvals: ${url}`;
+}
+
+async function ownerRoomRequest(action, details) {
+  const { data } = await client.auth.getSession();
+  const accessToken = data.session?.access_token;
+  if (!accessToken) throw new Error("Your admin session has expired.");
+
+  const response = await fetch(CLIENT_ROOM_URL, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ action, ...details })
+  });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(body.error || "Client Room request failed.");
+  return body;
+}
+
+async function loadClientRooms({ render = false } = {}) {
+  const { data: rooms, error } = await client
+    .from("client_rooms")
+    .select("id, enquiry_id, created_at, updated_at, last_activity_at, client_name, project_title, status, archived")
+    .eq("archived", false)
+    .order("last_activity_at", { ascending: false });
+
+  if (error) {
+    setText(dashboardStatus, "Client Rooms could not be loaded.");
+    return;
+  }
+
+  clientRooms = rooms || [];
+  clientMessages.clear();
+
+  if (clientRooms.length) {
+    const ids = clientRooms.map((room) => room.id);
+    const { data: messages } = await client
+      .from("client_messages")
+      .select("id, room_id, created_at, sender, message_type, message")
+      .in("room_id", ids)
+      .order("created_at", { ascending: true })
+      .limit(2000);
+
+    (messages || []).forEach((message) => {
+      const roomItems = clientMessages.get(message.room_id) || [];
+      roomItems.push(message);
+      clientMessages.set(message.room_id, roomItems);
+    });
+  }
+
+  setText(roomCount, String(clientRooms.length));
+  if (render) renderEnquiries();
+}
+
+async function createClientRoom(enquiry, titleInput, button, status) {
+  const projectTitle = titleInput.value.trim();
+  if (!projectTitle) {
+    status.textContent = "Add a project title first.";
+    titleInput.focus();
+    return;
+  }
+
+  button.disabled = true;
+  status.textContent = "Building the private room…";
+  try {
+    const data = await ownerRoomRequest("create_room", {
+      enquiry_id: enquiry.id,
+      project_title: projectTitle
+    });
+    roomAccessLinks.set(data.room.id, data.access_url);
+    await copyText(clientInviteText(data.room, data.access_url));
+    await loadClientRooms();
+    setText(dashboardStatus, "Client Room created. The private invite message is copied and ready to send.");
+    renderEnquiries();
+  } catch (error) {
+    status.textContent = error.message || "The Client Room could not be created.";
+    button.disabled = false;
+  }
+}
+
+async function copyOrReplaceRoomLink(room, button, status) {
+  button.disabled = true;
+  let accessUrl = roomAccessLinks.get(room.id);
+
+  try {
+    if (!accessUrl) {
+      const confirmed = window.confirm("Create a fresh private link? The client’s previous link will stop working.");
+      if (!confirmed) {
+        button.disabled = false;
+        return;
+      }
+      status.textContent = "Replacing the private link…";
+      const data = await ownerRoomRequest("rotate_link", { room_id: room.id });
+      accessUrl = data.access_url;
+      roomAccessLinks.set(room.id, accessUrl);
+    }
+
+    await copyText(clientInviteText(room, accessUrl));
+    status.textContent = "Private invite copied. Paste it into Discord or email.";
+    button.textContent = "Copy invite again";
+  } catch (error) {
+    status.textContent = error.message || "The invite could not be copied.";
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function sendStudioReply(room, textarea, button, status) {
+  const message = textarea.value.trim();
+  if (!message) return;
+  button.disabled = true;
+  status.textContent = "Sending to the room…";
+
+  const now = new Date().toISOString();
+  const { data, error } = await client
+    .from("client_messages")
+    .insert({ room_id: room.id, sender: "studio", message_type: "message", message })
+    .select("id, room_id, created_at, sender, message_type, message")
+    .single();
+
+  if (error || !data) {
+    status.textContent = "That reply didn’t send.";
+    button.disabled = false;
+    return;
+  }
+
+  await client.from("client_rooms").update({
+    status: "waiting_client",
+    updated_at: now,
+    last_activity_at: now
+  }).eq("id", room.id);
+
+  textarea.value = "";
+  const roomItems = clientMessages.get(room.id) || [];
+  roomItems.push(data);
+  clientMessages.set(room.id, roomItems);
+  room.status = "waiting_client";
+  room.last_activity_at = now;
+  status.textContent = "Reply is live in the client’s room.";
+  button.disabled = false;
+  renderEnquiries();
+}
+
+async function updateRoomStatus(room, value, select, status) {
+  select.disabled = true;
+  const now = new Date().toISOString();
+  const { error } = await client.from("client_rooms").update({
+    status: value,
+    updated_at: now,
+    last_activity_at: now
+  }).eq("id", room.id);
+  select.disabled = false;
+
+  if (error) {
+    select.value = room.status;
+    status.textContent = "The project signal could not be updated.";
+    return;
+  }
+
+  room.status = value;
+  room.last_activity_at = now;
+  status.textContent = "Project signal updated.";
+}
+
+async function archiveClientRoom(room, button) {
+  const confirmed = window.confirm(`Close ${room.client_name}’s Client Room? Their private link will stop working.`);
+  if (!confirmed) return;
+  button.disabled = true;
+  const { error } = await client.from("client_rooms").update({ archived: true }).eq("id", room.id);
+  if (error) {
+    button.disabled = false;
+    setText(dashboardStatus, "That Client Room could not be closed.");
+    return;
+  }
+  clientRooms = clientRooms.filter((item) => item.id !== room.id);
+  roomAccessLinks.delete(room.id);
+  setText(roomCount, String(clientRooms.length));
+  setText(dashboardStatus, "Client Room closed and its private link disabled.");
+  renderEnquiries();
+}
+
+function createClientRoomPanel(enquiry) {
+  const section = document.createElement("section");
+  section.className = "admin-client-room";
+  const room = clientRooms.find((item) => item.enquiry_id === enquiry.id);
+
+  if (!room) {
+    const heading = document.createElement("div");
+    heading.className = "admin-client-room-head";
+    const title = document.createElement("div");
+    title.innerHTML = "<small>THE CUT ROOM</small><strong>Open a private client line</strong>";
+    const status = document.createElement("span");
+    status.className = "admin-room-status";
+    heading.append(title, status);
+
+    const creator = document.createElement("div");
+    creator.className = "admin-room-create";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.maxLength = 140;
+    input.value = `${enquiry.project_type} — ${enquiry.name}`;
+    input.setAttribute("aria-label", `Project title for ${enquiry.name}`);
+    const button = document.createElement("button");
+    button.className = "button primary compact";
+    button.type = "button";
+    button.textContent = "Create Client Room ↗";
+    button.addEventListener("click", () => createClientRoom(enquiry, input, button, status));
+    creator.append(input, button);
+    section.append(heading, creator);
+    return section;
+  }
+
+  const heading = document.createElement("div");
+  heading.className = "admin-client-room-head";
+  const title = document.createElement("div");
+  const label = document.createElement("small");
+  const project = document.createElement("strong");
+  label.textContent = "CLIENT ROOM · LIVE";
+  project.textContent = room.project_title;
+  title.append(label, project);
+
+  const roomState = document.createElement("select");
+  roomState.className = `room-state room-state-${room.status}`;
+  roomState.setAttribute("aria-label", `Client Room status for ${enquiry.name}`);
+  [
+    ["active", "Room open"],
+    ["waiting_client", "Waiting for client"],
+    ["waiting_studio", "Waiting for studio"],
+    ["revision", "Revision round"],
+    ["approved", "Approved"],
+    ["complete", "Complete"]
+  ].forEach(([value, text]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = text;
+    option.selected = room.status === value;
+    roomState.append(option);
+  });
+  heading.append(title, roomState);
+
+  const timeline = document.createElement("div");
+  timeline.className = "admin-room-timeline";
+  const roomItems = clientMessages.get(room.id) || [];
+  roomItems.slice(-8).forEach((item) => {
+    const message = document.createElement("article");
+    message.className = `admin-room-message from-${item.sender}`;
+    const meta = document.createElement("div");
+    const sender = document.createElement("strong");
+    const time = document.createElement("time");
+    sender.textContent = item.sender === "studio" ? "You" : item.sender === "client" ? room.client_name : "Room signal";
+    time.textContent = formatDate(item.created_at);
+    meta.append(sender, time);
+    const body = document.createElement("p");
+    body.textContent = item.message;
+    message.append(meta, body);
+    timeline.append(message);
+  });
+
+  const composer = document.createElement("div");
+  composer.className = "admin-room-composer";
+  const textarea = document.createElement("textarea");
+  textarea.maxLength = 4000;
+  textarea.rows = 3;
+  textarea.placeholder = `Reply privately to ${room.client_name}…`;
+  const controls = document.createElement("div");
+  const status = document.createElement("span");
+  status.className = "admin-room-status";
+  status.setAttribute("role", "status");
+  const send = document.createElement("button");
+  send.className = "button primary compact";
+  send.type = "button";
+  send.textContent = "Send to room ↗";
+  send.addEventListener("click", () => sendStudioReply(room, textarea, send, status));
+  controls.append(status, send);
+  composer.append(textarea, controls);
+
+  const actions = document.createElement("div");
+  actions.className = "admin-room-actions";
+  const invite = document.createElement("button");
+  invite.className = "button compact";
+  invite.type = "button";
+  invite.textContent = roomAccessLinks.has(room.id) ? "Copy private invite" : "Replace access link";
+  invite.addEventListener("click", () => copyOrReplaceRoomLink(room, invite, status));
+  const refresh = document.createElement("button");
+  refresh.className = "button compact";
+  refresh.type = "button";
+  refresh.textContent = "Refresh messages";
+  refresh.addEventListener("click", async () => {
+    refresh.disabled = true;
+    await loadClientRooms({ render: true });
+    setText(dashboardStatus, "Client Rooms refreshed.");
+  });
+  const close = document.createElement("button");
+  close.className = "button compact danger";
+  close.type = "button";
+  close.textContent = "Close room";
+  close.addEventListener("click", () => archiveClientRoom(room, close));
+  actions.append(invite, refresh, close);
+
+  roomState.addEventListener("change", () => updateRoomStatus(room, roomState.value, roomState, status));
+  section.append(heading, timeline, composer, actions);
+  return section;
+}
+
 async function updateStatus(id, nextStatus, select) {
   select.disabled = true;
   setText(dashboardStatus, "Updating enquiry…");
@@ -290,7 +617,10 @@ async function updateStatus(id, nextStatus, select) {
 }
 
 async function deleteEnquiry(id, name, button) {
-  const confirmed = window.confirm(`Permanently delete ${name}'s enquiry? This cannot be undone.`);
+  const hasRoom = clientRooms.some((room) => room.enquiry_id === id);
+  const confirmed = window.confirm(hasRoom
+    ? `Permanently delete ${name}'s enquiry and Client Room conversation? This cannot be undone.`
+    : `Permanently delete ${name}'s enquiry? This cannot be undone.`);
   if (!confirmed) return;
 
   button.disabled = true;
@@ -308,6 +638,8 @@ async function deleteEnquiry(id, name, button) {
   }
 
   enquiries = enquiries.filter((enquiry) => enquiry.id !== id);
+  clientRooms = clientRooms.filter((room) => room.enquiry_id !== id);
+  setText(roomCount, String(clientRooms.length));
   setText(dashboardStatus, "Enquiry permanently deleted.");
   renderEnquiries();
 }
@@ -381,8 +713,9 @@ function createEnquiryCard(enquiry) {
   deleteButton.addEventListener("click", () => deleteEnquiry(enquiry.id, enquiry.name, deleteButton));
   actions.append(deleteButton);
 
+  const clientRoomPanel = createClientRoomPanel(enquiry);
   const adminNotes = createAdminNotes(enquiry);
-  card.append(heading, meta, details, actions, adminNotes);
+  card.append(heading, meta, details, actions, clientRoomPanel, adminNotes);
   return card;
 }
 
@@ -440,7 +773,8 @@ async function handleSession(session) {
   }
 
   showDashboard(email);
-  await Promise.all([loadEnquiries(), loadAnalytics()]);
+  await Promise.all([loadEnquiries(), loadAnalytics(), loadClientRooms()]);
+  renderEnquiries();
 }
 
 sendLoginButton?.addEventListener("click", async () => {
