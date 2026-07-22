@@ -593,10 +593,16 @@ img {
 }
 
 .rate-group {
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--panel);
+}
+
+.rate-group.featured {
+  border-color: rgba(200,255,50,.32);
+  box-shadow: 0 30px 80px rgba(0,0,0,.24), inset 0 1px rgba(200,255,50,.06);
 }
 
 .rate-group-head {
@@ -620,22 +626,60 @@ img {
   letter-spacing: .06em;
 }
 
+.package-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  margin-left: 9px;
+  border: 1px solid rgba(200,255,50,.28);
+  border-radius: 999px;
+  background: rgba(200,255,50,.08);
+  color: var(--acid);
+  font: 500 .56rem/1 "DM Mono", monospace;
+  letter-spacing: .05em;
+  vertical-align: middle;
+}
+
 .rate-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
 .rate-card {
-  min-height: 235px;
+  min-height: 330px;
   padding: 25px 28px;
   border-right: 1px solid var(--line);
 }
 
 .rate-card:last-child { border-right: 0; }
 .rate-card small { color: var(--muted); font: 400 .63rem/1 "DM Mono", monospace; }
-.rate-card h4 { margin-top: 30px; font-size: 1rem; font-weight: 600; }
+.rate-card h4 { margin-top: 27px; font-size: 1.08rem; font-weight: 600; }
 .rate-card .price { margin-top: 8px; font-size: clamp(1.8rem, 3.3vw, 3.1rem); font-weight: 600; letter-spacing: -.06em; }
-.rate-card .turnaround { margin-top: 22px; color: var(--muted); font-size: .74rem; }
+.rate-card .turnaround { margin-top: 14px; color: var(--acid); font: 400 .64rem/1.5 "DM Mono", monospace; }
+
+.rate-card ul {
+  display: grid;
+  gap: 9px;
+  margin-top: 23px;
+  list-style: none;
+}
+
+.rate-card li {
+  position: relative;
+  padding-left: 17px;
+  color: var(--muted);
+  font-size: .76rem;
+  line-height: 1.5;
+}
+
+.rate-card li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  color: var(--acid);
+  font-family: "DM Mono", monospace;
+}
 
 .rate-note {
   margin-top: 24px;
@@ -647,6 +691,24 @@ img {
   font-size: .84rem;
   line-height: 1.65;
 }
+
+.scope-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.scope-card {
+  min-height: 210px;
+  padding: 26px;
+  border-right: 1px solid var(--line);
+}
+
+.scope-card:last-child { border-right: 0; }
+.scope-card small { color: var(--acid); font: 400 .62rem/1 "DM Mono", monospace; }
+.scope-card h3 { margin-top: 55px; font-size: 1.08rem; font-weight: 600; letter-spacing: -.03em; }
+.scope-card p { margin-top: 10px; color: var(--muted); font-size: .78rem; line-height: 1.6; }
 
 /* FAQ */
 .faq-list {
@@ -799,6 +861,9 @@ img {
   .rate-cards { grid-template-columns: 1fr; }
   .rate-card { min-height: 190px; border-right: 0; border-bottom: 1px solid var(--line); }
   .rate-card:last-child { border-bottom: 0; }
+  .scope-grid { grid-template-columns: repeat(2, 1fr); }
+  .scope-card:nth-child(2) { border-right: 0; }
+  .scope-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .terms-layout { grid-template-columns: 1fr; }
   .terms-aside { position: static; }
   .error-layout { grid-template-columns: 1fr; }
@@ -837,6 +902,10 @@ img {
   .object-line { height: 25px; margin-top: 10px; }
   .content-section { padding: 80px 0; }
   .rate-group-head { align-items: start; flex-direction: column; }
+  .scope-grid { grid-template-columns: 1fr; }
+  .scope-card { min-height: 180px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .scope-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .scope-card:last-child { border-bottom: 0; }
   .gallery-grid { grid-template-columns: 1fr; }
   .gallery-card:first-child { grid-column: auto; }
   .faq-item summary { grid-template-columns: 42px 1fr 30px; min-height: 98px; }
