@@ -1216,6 +1216,8 @@ img {
 .enquiry-meta span { overflow-wrap: anywhere; color: #d2d0d7; font-size: .82rem; }
 .enquiry-details { margin-top: 27px; padding-left: 18px; border-left: 2px solid var(--violet); color: #c2c0c8; line-height: 1.75; white-space: pre-wrap; }
 .enquiry-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.button.danger { margin-left: auto; border-color: rgba(255,92,112,.35); color: #ff8b9a; }
+.button.danger:hover { border-color: #ff5c70; background: rgba(255,92,112,.12); color: #fff; }
 .admin-empty { padding: 70px 30px; border: 1px dashed var(--line); border-radius: 22px; color: var(--muted); text-align: center; }
 .admin-empty strong { color: var(--text); font-size: 1.25rem; }
 .admin-empty p { margin-top: 10px; }
@@ -1401,6 +1403,7 @@ img {
   .enquiry-card-heading { flex-direction: column; }
   .enquiry-meta { grid-template-columns: 1fr; }
   .enquiry-actions .button { width: 100%; }
+  .button.danger { margin-left: 0; }
   .privacy-lock { width: 150px; height: 135px; }
   .privacy-lock::before { top: -58px; width: 82px; height: 86px; border-width: 10px; }
   .broken-timeline { height: 210px; padding: 18px; }

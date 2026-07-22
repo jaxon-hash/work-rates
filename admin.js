@@ -93,6 +93,29 @@ async function updateStatus(id, nextStatus, select) {
   renderEnquiries();
 }
 
+async function deleteEnquiry(id, name, button) {
+  const confirmed = window.confirm(`Permanently delete ${name}'s enquiry? This cannot be undone.`);
+  if (!confirmed) return;
+
+  button.disabled = true;
+  setText(dashboardStatus, "Deleting enquiry…");
+
+  const { error } = await client
+    .from("enquiries")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    button.disabled = false;
+    setText(dashboardStatus, "Couldn’t delete that enquiry. Please try again.");
+    return;
+  }
+
+  enquiries = enquiries.filter((enquiry) => enquiry.id !== id);
+  setText(dashboardStatus, "Enquiry permanently deleted.");
+  renderEnquiries();
+}
+
 function createEnquiryCard(enquiry) {
   const card = document.createElement("article");
   card.className = "enquiry-card";
@@ -153,6 +176,14 @@ function createEnquiryCard(enquiry) {
     footage.textContent = "Open footage / reference ↗";
     actions.append(footage);
   }
+
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "button compact danger";
+  deleteButton.type = "button";
+  deleteButton.textContent = "Delete enquiry";
+  deleteButton.setAttribute("aria-label", `Delete ${enquiry.name}'s enquiry`);
+  deleteButton.addEventListener("click", () => deleteEnquiry(enquiry.id, enquiry.name, deleteButton));
+  actions.append(deleteButton);
 
   card.append(heading, meta, details, actions);
   return card;

@@ -46,6 +46,7 @@ alter table public.enquiries enable row level security;
 drop policy if exists "Public can submit enquiries" on public.enquiries;
 drop policy if exists "Admin can read enquiries" on public.enquiries;
 drop policy if exists "Admin can update enquiries" on public.enquiries;
+drop policy if exists "Admin can delete enquiries" on public.enquiries;
 
 create policy "Public can submit enquiries"
 on public.enquiries
@@ -66,7 +67,13 @@ to authenticated
 using (lower(coalesce(auth.jwt() ->> 'email', '')) = 'business.jxnn@gmail.com')
 with check (lower(coalesce(auth.jwt() ->> 'email', '')) = 'business.jxnn@gmail.com');
 
+create policy "Admin can delete enquiries"
+on public.enquiries
+for delete
+to authenticated
+using (lower(coalesce(auth.jwt() ->> 'email', '')) = 'business.jxnn@gmail.com');
+
 revoke all on table public.enquiries from anon, authenticated;
 grant insert on table public.enquiries to anon, authenticated;
-grant select, update on table public.enquiries to authenticated;
+grant select, update, delete on table public.enquiries to authenticated;
 grant usage, select on sequence public.enquiries_id_seq to anon, authenticated;
