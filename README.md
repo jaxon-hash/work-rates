@@ -54,22 +54,23 @@ The site is built with semantic HTML, modern CSS and lightweight vanilla JavaScr
 
 ```text
 work-rates/
-├── index.html          # Main studio portfolio and showreel
+├── index.html          # Portfolio, showreel and detailed case studies
 ├── rates.html          # Editing and thumbnail pricing
 ├── thumbnail.html      # Thumbnail portfolio and lightbox
 ├── faq.html            # Production questions and answers
 ├── contact.html        # Structured project enquiry form
-├── admin.html          # Private authenticated enquiries dashboard
+├── admin.html          # Private enquiries, notes and analytics dashboard
 ├── privacy.html        # Project-form privacy notice
 ├── tos.html            # Terms of service
 ├── 404.html            # Custom missing-sequence page
 ├── theme.css           # Shared secondary-page design system
 ├── shared.js           # Scroll, reveal, gallery and mobile-menu interactions
 ├── contact.js          # Verified enquiry submission
-├── admin.js            # Private enquiry dashboard controls
+├── analytics.js        # Anonymous first-party event tracking
+├── admin.js            # Enquiry, notes and analytics controls
 ├── supabase-config.js  # Browser-safe project connection values
 ├── supabase-schema.sql # Enquiry table and access policies
-├── supabase/           # Server-side Turnstile validation function
+├── supabase/           # Verified submissions, analytics and rate limiting
 └── assets/             # Logos, social card, client images and portfolio artwork
 ```
 
@@ -79,7 +80,9 @@ Open the project folder in VS Code and select **Go Live**, or open `index.html` 
 
 Keep `theme.css`, `shared.js` and every HTML page in the same folder. The `assets` directory should remain beside them.
 
-The enquiry form uses Cloudflare Turnstile and a Supabase Edge Function to verify each submission before storing it. Direct public inserts are disabled; the private dashboard remains restricted to the approved studio email. Never place a Supabase `service_role`, Turnstile secret or any other private key in this repository.
+The enquiry form uses Cloudflare Turnstile and a Supabase Edge Function to verify each submission before storing it. Server-side request limits and duplicate detection add a second layer of spam protection. The site also records anonymous page and interaction totals for the private dashboard without cookies or stored IP addresses.
+
+The Edge Functions expect `TURNSTILE_SECRET_KEY` and `RATE_LIMIT_SALT` as private Supabase secrets. `DISCORD_WEBHOOK_URL` is optional and enables private new-enquiry alerts. Direct public database inserts are disabled; the dashboard remains restricted to the approved studio email. Never place a Supabase `service_role`, Turnstile secret, Discord webhook or any other private key in this repository.
 
 ## Contact
 

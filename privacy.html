@@ -17,7 +17,7 @@
   <nav class="nav" id="mainNav" aria-label="Primary navigation"><div class="nav-inner">
     <a class="brand" href="./" aria-label="JXNN Studio home"><img src="assets/profile.png" alt="">JXNN.<span>STUDIO</span></a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span></button>
-    <div class="nav-links" id="navLinks"><a href="./#work">Work</a><a href="./#process">Process</a><a href="./#clients">Clients</a><a href="thumbnail.html">Thumbnails</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a><a class="nav-cta" href="contact.html">Start a project ↗</a></div>
+    <div class="nav-links" id="navLinks"><a href="./#work">Work</a><a href="./#process">Process</a><a href="./#clients">Clients</a><a href="thumbnail.html">Thumbnails</a><a href="rates.html">Rates</a><a href="faq.html">FAQ</a><a class="nav-cta" href="contact.html" data-track="cta_click">Start a project ↗</a></div>
   </div></nav>
 
   <main class="page-main">
@@ -32,9 +32,10 @@
         <div class="terms-list">
           <article class="term-card reveal"><div class="term-number">01</div><div class="term-copy"><h2>Information collected</h2><p>The project form collects the name, email address, project requirements, budget range, deadline, optional Discord username and links that you choose to provide.</p></div></article>
           <article class="term-card reveal"><div class="term-number">02</div><div class="term-copy"><h2>How it is used</h2><p>This information is used to review your enquiry, prepare a quote, reply to you and—if you decide to proceed—help organise the project.</p></div></article>
-          <article class="term-card reveal"><div class="term-number">03</div><div class="term-copy"><h2>Storage and access</h2><p>Enquiries are protected by Cloudflare Turnstile, checked securely on the server and stored using Supabase. They can only be viewed through the studio’s authenticated private dashboard. They are not displayed publicly or sold to third parties.</p></div></article>
-          <article class="term-card reveal"><div class="term-number">04</div><div class="term-copy"><h2>Retention and removal</h2><p>Enquiry details are kept only while reasonably needed to discuss, manage or document the potential project. You can request access, correction or deletion by emailing the studio.</p></div></article>
-          <article class="term-card reveal"><div class="term-number">05</div><div class="term-copy"><h2>Links and sensitive information</h2><p>Please do not submit passwords, payment-card details or other sensitive personal information. Any external footage or reference link remains subject to the access settings chosen on its original service.</p></div></article>
+          <article class="term-card reveal"><div class="term-number">03</div><div class="term-copy"><h2>Storage and access</h2><p>Enquiries are protected by Cloudflare Turnstile, checked securely on the server and stored using Supabase. They can only be viewed through the studio’s authenticated private dashboard. A summary may also be sent to the studio’s private Discord channel so new enquiries are not missed. Enquiries are not displayed publicly or sold.</p></div></article>
+          <article class="term-card reveal"><div class="term-number">04</div><div class="term-copy"><h2>Anonymous website analytics</h2><p>The site records anonymous page views and interactions such as showreel plays, project-link clicks and completed forms. These records may include the page, broad device category and referring website. They do not contain form answers, names, email addresses, cookies or stored IP addresses.</p></div></article>
+          <article class="term-card reveal"><div class="term-number">05</div><div class="term-copy"><h2>Retention and removal</h2><p>Enquiry details are kept only while reasonably needed to discuss, manage or document the potential project. You can request access, correction or deletion by emailing the studio.</p></div></article>
+          <article class="term-card reveal"><div class="term-number">06</div><div class="term-copy"><h2>Links and sensitive information</h2><p>Please do not submit passwords, payment-card details or other sensitive personal information. Any external footage or reference link remains subject to the access settings chosen on its original service.</p></div></article>
         </div>
       </div>
     </section>
@@ -42,5 +43,6 @@
 
   <footer class="site-footer shell"><div>© 2026 JXNN. STUDIO — CUT DIFFERENT.</div><div class="footer-links"><a href="./">Home</a><a href="contact.html">Start a project</a><a href="tos.html">Terms</a></div></footer>
   <script src="shared.js"></script>
+  <script type="module" src="analytics.js"></script>
 </body>
 </html>

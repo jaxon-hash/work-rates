@@ -45,6 +45,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
       background: var(--bg);
     }
 
@@ -576,6 +577,57 @@
     .video-wrap { position: relative; aspect-ratio: 16 / 9; background: #000; }
     .video-wrap iframe { width: 100%; height: 100%; border: 0; }
 
+    .video-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      overflow: hidden;
+      border: 0;
+      background: #050506;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .video-poster::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.52));
+      transition: background 220ms ease;
+    }
+
+    .video-poster > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.86) contrast(1.06);
+      transition: transform 600ms cubic-bezier(.2,.8,.2,1), filter 250ms ease;
+    }
+
+    .video-poster:hover > img,
+    .video-poster:focus-visible > img { transform: scale(1.035); filter: saturate(1); }
+    .video-poster:hover::after,
+    .video-poster:focus-visible::after { background: linear-gradient(180deg, transparent, rgba(0,0,0,.36)); }
+    .video-poster:focus-visible { outline: 2px solid var(--acid); outline-offset: -2px; }
+
+    .video-play {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      display: grid;
+      place-items: center;
+      width: clamp(68px, 9vw, 104px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      background: rgba(8,8,10,.74);
+      box-shadow: 0 18px 60px rgba(0,0,0,.38);
+      backdrop-filter: blur(15px);
+      transform: translate(-50%, -50%);
+      font-size: 1.35rem;
+    }
+
     .showreel-meta {
       display: flex;
       align-items: center;
@@ -627,6 +679,50 @@
     .work-card-body small { color: var(--acid); font: 400 0.61rem/1 "DM Mono", monospace; letter-spacing: 0.08em; }
     .work-card-body h3 { margin-top: 12px; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.025em; }
     .work-card-body p { margin-top: 6px; color: var(--muted); font-size: 0.8rem; }
+
+    .case-study-head { margin: clamp(80px, 10vw, 130px) 0 34px; }
+    .case-study-head p { max-width: 620px; margin-top: 18px; color: var(--muted); line-height: 1.7; }
+
+    .case-study-grid { display: grid; gap: 22px; }
+
+    .case-study-card {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      min-height: 470px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(22,22,27,.98), rgba(10,10,13,.98));
+      box-shadow: 0 32px 90px rgba(0,0,0,.2);
+    }
+
+    .case-study-card:nth-child(even) .case-study-media { order: 2; }
+
+    .case-study-media { position: relative; min-height: 360px; overflow: hidden; background: #09090b; }
+    .case-study-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(145deg, transparent 45%, rgba(141,104,255,.23)); pointer-events: none; }
+    .case-study-media img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.78) contrast(1.08); transition: transform 600ms cubic-bezier(.2,.8,.2,1), filter 260ms ease; }
+    .case-study-card:hover .case-study-media img { transform: scale(1.025); filter: saturate(.96); }
+
+    .case-study-copy { display: flex; flex-direction: column; padding: clamp(28px, 5vw, 58px); }
+    .case-study-copy small { color: var(--acid); font: 500 .62rem/1 "DM Mono", monospace; letter-spacing: .1em; }
+    .case-study-copy h3 { max-width: 590px; margin-top: 22px; font-size: clamp(2rem, 4vw, 4.4rem); font-weight: 500; line-height: .98; letter-spacing: -.055em; }
+    .case-study-copy > p { max-width: 620px; margin-top: 22px; color: #aaa8b1; line-height: 1.75; }
+
+    .case-study-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: auto;
+      padding-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .case-study-facts div { display: grid; gap: 10px; padding-right: 16px; }
+    .case-study-facts span { color: var(--muted); font: 500 .55rem/1 "DM Mono", monospace; letter-spacing: .08em; }
+    .case-study-facts strong { color: #dad8df; font-size: .77rem; font-weight: 600; line-height: 1.45; }
+    .case-study-link { align-self: flex-start; margin-top: 30px; color: var(--text); font: 500 .68rem/1 "DM Mono", monospace; letter-spacing: .06em; text-decoration: none; }
+    .case-study-link:hover,
+    .case-study-link:focus-visible { color: var(--acid); }
 
     .process {
       border-block: 1px solid var(--line);
@@ -737,6 +833,9 @@
       .work-grid, .process-grid { grid-template-columns: 1fr; }
       .work-card { min-height: 0; }
       .work-card img { height: auto; aspect-ratio: 16 / 9; }
+      .case-study-card { grid-template-columns: 1fr; }
+      .case-study-card:nth-child(even) .case-study-media { order: 0; }
+      .case-study-media { min-height: 330px; }
       .process-card { min-height: 240px; border-right: 0; border-bottom: 1px solid var(--line); }
       .process-card:last-child { border-bottom: 0; }
       .process-card h3 { margin-top: 55px; }
@@ -811,6 +910,9 @@
       .client-card { min-height: 126px; padding: 20px; }
       .client-card img { width: 62px; height: 62px; }
       .showreel-meta { align-items: flex-start; flex-direction: column; }
+      .case-study-media { min-height: 230px; }
+      .case-study-facts { grid-template-columns: 1fr; gap: 20px; }
+      .case-study-facts div { padding-right: 0; }
       .cta-card { border-radius: 24px; }
       footer { align-items: flex-start; flex-direction: column; }
     }
@@ -840,7 +942,7 @@
         <a href="thumbnail.html">Thumbnails</a>
         <a href="rates.html">Rates</a>
         <a href="faq.html">FAQ</a>
-        <a class="nav-cta" href="contact.html">Start a project ↗</a>
+        <a class="nav-cta" href="contact.html" data-track="cta_click">Start a project ↗</a>
       </div>
     </div>
   </nav>
@@ -858,8 +960,8 @@
           clean sound, motion design and the kind of details that keep people watching.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#work">Watch the work <span class="arrow">↓</span></a>
-          <a class="button" href="rates.html">View rates <span class="arrow">↗</span></a>
+          <a class="button primary" href="#work" data-track="cta_click">Watch the work <span class="arrow">↓</span></a>
+          <a class="button" href="rates.html" data-track="cta_click">View rates <span class="arrow">↗</span></a>
         </div>
         <div class="availability"><span></span>Now booking new projects</div>
       </div>
@@ -900,7 +1002,10 @@
 
         <article class="showreel-card reveal">
           <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/ggtdj-_FzYA" title="JXNN Studio current showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <button class="video-poster" type="button" data-video-id="ggtdj-_FzYA" data-video-title="JXNN Studio current showreel" data-track="showreel_play" data-track-label="showreel" aria-label="Play the JXNN Studio showreel">
+              <img src="https://img.youtube.com/vi/ggtdj-_FzYA/maxresdefault.jpg" alt="JXNN Studio showreel preview" loading="lazy">
+              <span class="video-play" aria-hidden="true">▶</span>
+            </button>
           </div>
           <div class="showreel-meta">
             <div><h3>Current showreel</h3><p>A selection of recent edits and motion work.</p></div>
@@ -909,18 +1014,60 @@
         </article>
 
         <div class="work-grid">
-          <a class="work-card reveal" href="https://www.youtube.com/watch?v=NONQ_j8San4" target="_blank" rel="noopener noreferrer">
+          <a class="work-card reveal" href="https://www.youtube.com/watch?v=NONQ_j8San4" target="_blank" rel="noopener noreferrer" data-track="work_open" data-track-label="featured_story">
             <img src="https://img.youtube.com/vi/NONQ_j8San4/maxresdefault.jpg" alt="Featured JXNN video editing project" loading="lazy">
             <div class="work-card-body"><small>EDITING / STORY</small><h3>Featured work ↗</h3><p>Fast pacing, sound design and retention-led structure.</p></div>
           </a>
-          <a class="work-card reveal" href="https://www.youtube.com/watch?v=ApeCWRt1sIY&amp;t=566s" target="_blank" rel="noopener noreferrer">
+          <a class="work-card reveal" href="https://www.youtube.com/watch?v=ApeCWRt1sIY&amp;t=566s" target="_blank" rel="noopener noreferrer" data-track="work_open" data-track-label="okharry_showcase">
             <img src="https://img.youtube.com/vi/ApeCWRt1sIY/maxresdefault.jpg" alt="JXNN showcase reel project" loading="lazy">
             <div class="work-card-body"><small>SHOWCASE / CREATOR</small><h3>Showcase reel ↗</h3><p>A creator-first edit built to hold attention.</p></div>
           </a>
-          <a class="work-card reveal" href="https://www.youtube.com/watch?v=qyTBSJyDLlQ&amp;t=388s" target="_blank" rel="noopener noreferrer">
+          <a class="work-card reveal" href="https://www.youtube.com/watch?v=qyTBSJyDLlQ&amp;t=388s" target="_blank" rel="noopener noreferrer" data-track="work_open" data-track-label="beta_squad_subtitles">
             <img src="https://img.youtube.com/vi/qyTBSJyDLlQ/maxresdefault.jpg" alt="Beta Squad subtitle editing project" loading="lazy">
             <div class="work-card-body"><small>SUBTITLES / BETA SQUAD</small><h3>Beta Squad ↗</h3><p>Clear, energetic subtitles designed for the format.</p></div>
           </a>
+        </div>
+
+        <div class="case-study-head reveal" id="case-studies">
+          <div class="section-index">02 / INSIDE THE TIMELINE</div>
+          <h2>Not just the finish. <em>The thinking.</em></h2>
+          <p>Two closer looks at how raw creator footage becomes a clear, deliberate edit—from the brief and pacing strategy through to final delivery.</p>
+        </div>
+
+        <div class="case-study-grid">
+          <article class="case-study-card reveal">
+            <div class="case-study-media">
+              <img src="https://img.youtube.com/vi/ApeCWRt1sIY/maxresdefault.jpg" alt="Long-form creator editing case study" loading="lazy">
+            </div>
+            <div class="case-study-copy">
+              <small>CASE STUDY 01 / OKHARRY LONG-FORM</small>
+              <h3>Turning a long recording into a clean story.</h3>
+              <p>The priority was momentum without making the video feel rushed. The cut was shaped around clear story beats, purposeful reactions and visual resets that keep the viewer oriented.</p>
+              <div class="case-study-facts">
+                <div><span>BRIEF</span><strong>Make the footage feel tighter and easier to follow</strong></div>
+                <div><span>EDIT SYSTEM</span><strong>Hook, pacing passes, sound design and visual emphasis</strong></div>
+                <div><span>DELIVERY</span><strong>Platform-ready long-form master</strong></div>
+              </div>
+              <a class="case-study-link" href="https://www.youtube.com/watch?v=ApeCWRt1sIY&amp;t=566s" target="_blank" rel="noopener noreferrer" data-track="case_study_open" data-track-label="okharry_longform">WATCH THE FINISHED CUT ↗</a>
+            </div>
+          </article>
+
+          <article class="case-study-card reveal">
+            <div class="case-study-media">
+              <img src="https://img.youtube.com/vi/qyTBSJyDLlQ/maxresdefault.jpg" alt="Beta Squad subtitle editing case study" loading="lazy">
+            </div>
+            <div class="case-study-copy">
+              <small>CASE STUDY 02 / BETA SQUAD</small>
+              <h3>Subtitles that add energy without stealing focus.</h3>
+              <p>The subtitle treatment was built for entertainment pacing: readable at speed, timed to the delivery and visually consistent with a busy group format.</p>
+              <div class="case-study-facts">
+                <div><span>BRIEF</span><strong>Keep fast dialogue clear across a group video</strong></div>
+                <div><span>EDIT SYSTEM</span><strong>Speaker timing, concise line breaks and consistent emphasis</strong></div>
+                <div><span>DELIVERY</span><strong>Integrated subtitle pass for the final edit</strong></div>
+              </div>
+              <a class="case-study-link" href="https://www.youtube.com/watch?v=qyTBSJyDLlQ&amp;t=388s" target="_blank" rel="noopener noreferrer" data-track="case_study_open" data-track-label="beta_squad_subtitles">WATCH THE FINISHED CUT ↗</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -928,7 +1075,7 @@
     <section class="process content-section" id="process">
       <div class="section-shell">
         <div class="section-head reveal">
-          <div class="section-index">02 / HOW I WORK</div>
+          <div class="section-index">03 / HOW I WORK</div>
           <h2>Less friction. <em>Better cuts.</em></h2>
         </div>
         <div class="process-grid">
@@ -942,7 +1089,7 @@
     <section class="content-section" id="clients">
       <div class="section-shell">
         <div class="section-head reveal">
-          <div class="section-index">03 / TRUSTED BY</div>
+          <div class="section-index">04 / TRUSTED BY</div>
           <h2>Creators who care about <em>the cut.</em></h2>
         </div>
         <div class="clients-grid">
@@ -967,8 +1114,8 @@
           <h2>Let’s make something people <em>finish watching.</em></h2>
           <p>Tell me what you’re making, where it will live and when you need it. I’ll come back with the clearest next step.</p>
           <div class="hero-actions">
-            <a class="button primary" href="contact.html">Send your project brief <span class="arrow">↗</span></a>
-            <a class="button" href="https://discord.gg/qgJNMFy3F6" target="_blank" rel="noopener noreferrer">Join Discord</a>
+            <a class="button primary" href="contact.html" data-track="cta_click">Send your project brief <span class="arrow">↗</span></a>
+            <a class="button" href="https://discord.gg/qgJNMFy3F6" target="_blank" rel="noopener noreferrer" data-track="cta_click">Join Discord</a>
           </div>
         </div>
 
@@ -987,6 +1134,7 @@
     </section>
   </main>
 
+  <script type="module" src="analytics.js"></script>
   <script>
     const progress = document.getElementById("scrollProgress");
     const timeline = document.getElementById("timeline3d");
@@ -1000,6 +1148,18 @@
 
     window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
+
+    document.querySelectorAll("[data-video-id]").forEach((poster) => {
+      poster.addEventListener("click", () => {
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube-nocookie.com/embed/${poster.dataset.videoId}?autoplay=1&rel=0`;
+        iframe.title = poster.dataset.videoTitle || "JXNN Studio video";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        poster.replaceWith(iframe);
+      }, { once: true });
+    });
 
     if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
       visual.addEventListener("pointermove", (event) => {

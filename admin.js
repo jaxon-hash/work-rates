@@ -15,8 +15,17 @@ const adminUserEmail = document.getElementById("adminUserEmail");
 const totalCount = document.getElementById("totalCount");
 const newCount = document.getElementById("newCount");
 const monthCount = document.getElementById("monthCount");
+const analyticsRange = document.getElementById("analyticsRange");
+const pageViewCount = document.getElementById("pageViewCount");
+const ctaClickCount = document.getElementById("ctaClickCount");
+const workPlayCount = document.getElementById("workPlayCount");
+const formSuccessCount = document.getElementById("formSuccessCount");
+const topPages = document.getElementById("topPages");
+const popularWork = document.getElementById("popularWork");
+const deviceBreakdown = document.getElementById("deviceBreakdown");
 
 let enquiries = [];
+let siteEvents = [];
 
 function setText(element, value) {
   if (element) element.textContent = value;
@@ -67,6 +76,193 @@ function safeHttpUrl(value) {
 function safeEmail(value) {
   const email = String(value || "").trim().toLowerCase();
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : null;
+}
+
+function countEvents(events, eventName) {
+  return events.filter((event) => event.event_name === eventName).length;
+}
+
+function groupEvents(events, key) {
+  return events.reduce((groups, event) => {
+    const value = event[key] || "Unknown";
+    groups.set(value, (groups.get(value) || 0) + 1);
+    return groups;
+  }, new Map());
+}
+
+function renderBars(container, entries) {
+  container.replaceChildren();
+
+  if (!entries.length) {
+    const empty = document.createElement("p");
+    empty.className = "analytics-empty";
+    empty.textContent = "No activity in this range yet.";
+    container.append(empty);
+    return;
+  }
+
+  const maximum = Math.max(...entries.map(([, count]) => count), 1);
+  entries.slice(0, 6).forEach(([label, count]) => {
+    const row = document.createElement("div");
+    row.className = "analytics-bar";
+    const name = document.createElement("span");
+    const bar = document.createElement("i");
+    const total = document.createElement("strong");
+    const displayLabel = String(label).startsWith("/")
+      ? String(label)
+      : String(label).replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+    name.textContent = displayLabel;
+    name.title = label;
+    bar.style.width = `${Math.max((count / maximum) * 100, 5)}%`;
+    total.textContent = String(count);
+    row.append(name, bar, total);
+    container.append(row);
+  });
+}
+
+function renderAnalytics() {
+  const days = Number(analyticsRange?.value || 30);
+  const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
+  const visible = siteEvents.filter((event) => new Date(event.created_at).getTime() >= cutoff);
+
+  setText(pageViewCount, String(countEvents(visible, "page_view")));
+  setText(ctaClickCount, String(countEvents(visible, "cta_click")));
+  setText(workPlayCount, String(countEvents(visible, "showreel_play") + countEvents(visible, "work_open")));
+  setText(formSuccessCount, String(countEvents(visible, "form_success")));
+
+  const pageEntries = [...groupEvents(visible.filter((event) => event.event_name === "page_view"), "path").entries()]
+    .sort((a, b) => b[1] - a[1]);
+  const workEntries = [...groupEvents(visible.filter((event) => (
+    event.event_name === "showreel_play" ||
+    event.event_name === "work_open" ||
+    event.event_name === "case_study_open"
+  )), "event_label").entries()].sort((a, b) => b[1] - a[1]);
+  const deviceEntries = [...groupEvents(visible, "device_type").entries()]
+    .sort((a, b) => b[1] - a[1]);
+
+  renderBars(topPages, pageEntries);
+  renderBars(popularWork, workEntries);
+  renderBars(deviceBreakdown, deviceEntries);
+}
+
+async function loadAnalytics() {
+  const cutoff = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
+  const { data, error } = await client
+    .from("site_events")
+    .select("created_at, event_name, event_label, path, device_type")
+    .gte("created_at", cutoff)
+    .order("created_at", { ascending: false })
+    .limit(5000);
+
+  if (error) {
+    siteEvents = [];
+    renderAnalytics();
+    return;
+  }
+
+  siteEvents = data || [];
+  renderAnalytics();
+}
+
+function createNoteField(labelText, control, full = false) {
+  const field = document.createElement("div");
+  field.className = `admin-note-field${full ? " full" : ""}`;
+  const label = document.createElement("label");
+  label.textContent = labelText;
+  label.htmlFor = control.id;
+  field.append(label, control);
+  return field;
+}
+
+async function saveAdminNotes(enquiry, controls, button, saveStatus) {
+  button.disabled = true;
+  saveStatus.textContent = "Saving…";
+
+  const changes = {
+    internal_notes: controls.notes.value.trim() || null,
+    quoted_price: controls.price.value.trim() || null,
+    follow_up_on: controls.followUp.value || null,
+    outcome: controls.outcome.value
+  };
+
+  const { error } = await client
+    .from("enquiries")
+    .update(changes)
+    .eq("id", enquiry.id);
+
+  button.disabled = false;
+
+  if (error) {
+    saveStatus.textContent = "Couldn’t save these private notes.";
+    return;
+  }
+
+  Object.assign(enquiry, changes);
+  saveStatus.textContent = "Private notes saved.";
+}
+
+function createAdminNotes(enquiry) {
+  const section = document.createElement("section");
+  section.className = "enquiry-admin-notes";
+  const heading = document.createElement("small");
+  heading.textContent = "PRIVATE PROJECT NOTES";
+
+  const grid = document.createElement("div");
+  grid.className = "admin-note-grid";
+
+  const price = document.createElement("input");
+  price.id = `quoted-price-${enquiry.id}`;
+  price.type = "text";
+  price.maxLength = 80;
+  price.placeholder = "e.g. £450";
+  price.value = enquiry.quoted_price || "";
+
+  const followUp = document.createElement("input");
+  followUp.id = `follow-up-${enquiry.id}`;
+  followUp.type = "date";
+  followUp.value = enquiry.follow_up_on || "";
+
+  const outcome = document.createElement("select");
+  outcome.id = `outcome-${enquiry.id}`;
+  ["pending", "won", "lost", "paused"].forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value.charAt(0).toUpperCase() + value.slice(1);
+    option.selected = (enquiry.outcome || "pending") === value;
+    outcome.append(option);
+  });
+
+  const notes = document.createElement("textarea");
+  notes.id = `internal-notes-${enquiry.id}`;
+  notes.maxLength = 4000;
+  notes.placeholder = "Creative direction, agreed scope, next step…";
+  notes.value = enquiry.internal_notes || "";
+
+  grid.append(
+    createNoteField("Quoted price", price),
+    createNoteField("Follow up", followUp),
+    createNoteField("Outcome", outcome),
+    createNoteField("Internal notes", notes, true)
+  );
+
+  const actions = document.createElement("div");
+  actions.className = "admin-note-actions";
+  const saveButton = document.createElement("button");
+  saveButton.className = "button compact";
+  saveButton.type = "button";
+  saveButton.textContent = "Save private notes";
+  const saveStatus = document.createElement("span");
+  saveStatus.className = "admin-note-status";
+  saveStatus.setAttribute("role", "status");
+  saveButton.addEventListener("click", () => saveAdminNotes(
+    enquiry,
+    { notes, price, followUp, outcome },
+    saveButton,
+    saveStatus
+  ));
+  actions.append(saveButton, saveStatus);
+  section.append(heading, grid, actions);
+  return section;
 }
 
 async function updateStatus(id, nextStatus, select) {
@@ -185,7 +381,8 @@ function createEnquiryCard(enquiry) {
   deleteButton.addEventListener("click", () => deleteEnquiry(enquiry.id, enquiry.name, deleteButton));
   actions.append(deleteButton);
 
-  card.append(heading, meta, details, actions);
+  const adminNotes = createAdminNotes(enquiry);
+  card.append(heading, meta, details, actions, adminNotes);
   return card;
 }
 
@@ -215,7 +412,7 @@ async function loadEnquiries() {
 
   const { data, error } = await client
     .from("enquiries")
-    .select("id, created_at, name, email, discord_username, project_type, runtime, budget, deadline, footage_link, details, status")
+    .select("id, created_at, name, email, discord_username, project_type, runtime, budget, deadline, footage_link, details, status, internal_notes, quoted_price, follow_up_on, outcome")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -243,7 +440,7 @@ async function handleSession(session) {
   }
 
   showDashboard(email);
-  await loadEnquiries();
+  await Promise.all([loadEnquiries(), loadAnalytics()]);
 }
 
 sendLoginButton?.addEventListener("click", async () => {
@@ -270,6 +467,7 @@ signOutButton?.addEventListener("click", async () => {
 });
 
 statusFilter?.addEventListener("change", renderEnquiries);
+analyticsRange?.addEventListener("change", renderAnalytics);
 
 const { data: initialSession } = await client.auth.getSession();
 await handleSession(initialSession.session);

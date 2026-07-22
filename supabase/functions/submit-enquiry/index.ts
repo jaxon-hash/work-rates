@@ -44,6 +44,65 @@ function text(value: unknown, max: number) {
   return typeof value === "string" ? value.trim().slice(0, max + 1) : "";
 }
 
+async function sha256(value: string) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function discordValue(value: string | null, fallback = "Not supplied") {
+  return (value || fallback).slice(0, 900);
+}
+
+async function notifyDiscord(webhookUrl: string, enquiry: {
+  name: string;
+  email: string;
+  discordUsername: string | null;
+  projectType: string;
+  runtime: string;
+  budget: string;
+  deadline: string | null;
+  details: string;
+}) {
+  if (!/^https:\/\/(?:canary\.|ptb\.)?discord(?:app)?\.com\/api\/webhooks\//.test(webhookUrl)) {
+    console.error("DISCORD_WEBHOOK_URL is not a valid Discord webhook");
+    return;
+  }
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(4000),
+      body: JSON.stringify({
+        username: "JXNN Enquiries",
+        allowed_mentions: { parse: [] },
+        embeds: [{
+          title: `New ${enquiry.projectType} enquiry`,
+          description: discordValue(enquiry.details),
+          color: 13172530,
+          fields: [
+            { name: "Name", value: discordValue(enquiry.name), inline: true },
+            { name: "Email", value: discordValue(enquiry.email), inline: true },
+            { name: "Discord", value: discordValue(enquiry.discordUsername), inline: true },
+            { name: "Budget", value: discordValue(enquiry.budget), inline: true },
+            { name: "Finished length", value: discordValue(enquiry.runtime), inline: true },
+            { name: "Deadline", value: discordValue(enquiry.deadline, "Flexible"), inline: true },
+          ],
+          footer: { text: "Open the private JXNN dashboard for the complete brief." },
+          timestamp: new Date().toISOString(),
+        }],
+      }),
+    });
+
+    if (!response.ok) console.error("Discord notification failed", response.status);
+  } catch (error) {
+    console.error("Discord notification unavailable", error instanceof Error ? error.name : "unknown");
+  }
+}
+
 Deno.serve(async (request) => {
   const origin = request.headers.get("origin") ?? "";
 
@@ -82,6 +141,7 @@ Deno.serve(async (request) => {
   const footageLink = text(body.footage_link, 1000) || null;
   const details = text(body.details, 4000);
   const turnstileToken = text(body.turnstile_token, 2048);
+  const visitorIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const validDeadline = !deadline || /^\d{4}-\d{2}-\d{2}$/.test(deadline);
@@ -116,8 +176,7 @@ Deno.serve(async (request) => {
   verificationForm.set("secret", turnstileSecret);
   verificationForm.set("response", turnstileToken);
 
-  const visitorIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  if (visitorIp) verificationForm.set("remoteip", visitorIp);
+  if (visitorIp !== "unknown") verificationForm.set("remoteip", visitorIp);
 
   let verification: {
     success?: boolean;
@@ -143,8 +202,9 @@ Deno.serve(async (request) => {
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  const rateLimitSalt = Deno.env.get("RATE_LIMIT_SALT");
 
-  if (!supabaseUrl || !serviceRoleKey) {
+  if (!supabaseUrl || !serviceRoleKey || !rateLimitSalt) {
     console.error("Supabase server credentials are unavailable");
     return json(origin, { error: "Submission service unavailable" }, 503);
   }
@@ -152,6 +212,48 @@ Deno.serve(async (request) => {
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
+
+  const [ipKey, emailKey, duplicateKey] = await Promise.all([
+    sha256(`${rateLimitSalt}:enquiry-ip:${visitorIp}`),
+    sha256(`${rateLimitSalt}:enquiry-email:${email}`),
+    sha256(`${rateLimitSalt}:duplicate:${email}:${projectType}:${details.toLowerCase()}`),
+  ]);
+
+  const [ipLimit, emailLimit] = await Promise.all([
+    supabase.rpc("check_request_rate_limit", {
+      p_key_hash: ipKey,
+      p_max_requests: 5,
+      p_window_seconds: 3600,
+    }),
+    supabase.rpc("check_request_rate_limit", {
+      p_key_hash: emailKey,
+      p_max_requests: 3,
+      p_window_seconds: 3600,
+    }),
+  ]);
+
+  if (ipLimit.error || emailLimit.error) {
+    console.error("Enquiry rate limit unavailable");
+    return json(origin, { error: "Submission service unavailable" }, 503);
+  }
+
+  if (!ipLimit.data || !emailLimit.data) {
+    return json(origin, { error: "Too many enquiries" }, 429);
+  }
+
+  const { data: fingerprintReserved, error: fingerprintError } = await supabase.rpc(
+    "reserve_submission_fingerprint",
+    { p_key_hash: duplicateKey, p_window_seconds: 600 },
+  );
+
+  if (fingerprintError) {
+    console.error("Duplicate protection unavailable");
+    return json(origin, { error: "Submission service unavailable" }, 503);
+  }
+
+  if (!fingerprintReserved) {
+    return json(origin, { error: "Duplicate enquiry" }, 409);
+  }
 
   const { error } = await supabase.from("enquiries").insert({
     name,
@@ -167,8 +269,23 @@ Deno.serve(async (request) => {
   });
 
   if (error) {
+    await supabase.rpc("release_submission_fingerprint", { p_key_hash: duplicateKey });
     console.error("Enquiry insert failed", error.code);
     return json(origin, { error: "Unable to save enquiry" }, 500);
+  }
+
+  const discordWebhookUrl = Deno.env.get("DISCORD_WEBHOOK_URL");
+  if (discordWebhookUrl) {
+    await notifyDiscord(discordWebhookUrl, {
+      name,
+      email,
+      discordUsername,
+      projectType,
+      runtime,
+      budget,
+      deadline,
+      details,
+    });
   }
 
   return json(origin, { ok: true }, 201);

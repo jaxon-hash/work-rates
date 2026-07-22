@@ -61,6 +61,37 @@
         </div>
 
         <p class="form-status" id="dashboardStatus" role="status" aria-live="polite"></p>
+
+        <section class="admin-analytics" aria-labelledby="analyticsTitle">
+          <div class="admin-section-head">
+            <div><small>PRIVATE PERFORMANCE VIEW</small><h2 id="analyticsTitle">Studio analytics</h2></div>
+            <label for="analyticsRange">Range
+              <select id="analyticsRange">
+                <option value="7">Last 7 days</option>
+                <option value="30" selected>Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="analytics-stats" aria-label="Website performance summary">
+            <article><small>PAGE VIEWS</small><strong id="pageViewCount">0</strong></article>
+            <article><small>CTA CLICKS</small><strong id="ctaClickCount">0</strong></article>
+            <article><small>WORK PLAYS</small><strong id="workPlayCount">0</strong></article>
+            <article><small>FORM COMPLETIONS</small><strong id="formSuccessCount">0</strong></article>
+          </div>
+
+          <div class="analytics-breakdown">
+            <article><small>TOP PAGES</small><div class="analytics-bars" id="topPages"></div></article>
+            <article><small>POPULAR WORK</small><div class="analytics-bars" id="popularWork"></div></article>
+            <article><small>DEVICES</small><div class="analytics-bars" id="deviceBreakdown"></div></article>
+          </div>
+          <p class="analytics-note">Anonymous totals only—no cookies, names, email addresses or stored IP addresses.</p>
+        </section>
+
+        <div class="admin-section-head enquiry-section-head">
+          <div><small>PROJECT PIPELINE</small><h2>Enquiry workspace</h2></div>
+        </div>
         <div class="enquiry-list" id="enquiryList"></div>
         <div class="admin-empty" id="emptyState" hidden><strong>No enquiries here yet.</strong><p>New project briefs will appear in this private dashboard.</p></div>
       </section>

@@ -4,6 +4,8 @@ const form = document.getElementById("projectForm");
 const submitButton = document.getElementById("submitProject");
 const status = document.getElementById("formStatus");
 const success = document.getElementById("formSuccess");
+
+form?.addEventListener("input", () => window.jxnnTrack?.("form_start", { once: true }), { once: true });
 const anotherButton = document.getElementById("anotherEnquiry");
 
 function setStatus(message, isError = false) {
@@ -73,15 +75,19 @@ form?.addEventListener("submit", async (event) => {
 
   if (!response.ok) {
     setSubmitting(false);
-    setStatus(response.status === 422
-      ? "Verification expired. Please complete the check again."
-      : "That didn’t send. Please try again, or email business.jxnn@gmail.com.", true);
+    const messages = {
+      409: "That enquiry was already received. Check your inbox or wait a few minutes before trying again.",
+      422: "Verification expired. Please complete the check again.",
+      429: "Too many enquiries were sent recently. Please wait before trying again."
+    };
+    setStatus(messages[response.status] || "That didn’t send. Please try again, or email business.jxnn@gmail.com.", true);
     window.turnstile?.reset();
     return;
   }
 
   form.reset();
   window.turnstile?.reset();
+  window.jxnnTrack?.("form_success");
   form.hidden = true;
   success.hidden = false;
   success.focus();

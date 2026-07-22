@@ -1,2 +1,5 @@
 [functions.submit-enquiry]
 verify_jwt = false
+
+[functions.track-event]
+verify_jwt = false
