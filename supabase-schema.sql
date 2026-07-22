@@ -9,6 +9,7 @@ create table if not exists public.enquiries (
     char_length(email) between 3 and 254
     and email ~* '^[^[:space:]@]+@[^[:space:]@]+\.[^[:space:]@]+$'
   ),
+  discord_username text check (discord_username is null or char_length(discord_username) <= 100),
   project_type text not null check (char_length(project_type) between 1 and 80),
   runtime text not null check (char_length(runtime) between 1 and 120),
   budget text not null check (char_length(budget) between 1 and 80),
@@ -20,6 +21,10 @@ create table if not exists public.enquiries (
   details text not null check (char_length(details) between 20 and 4000),
   status text not null default 'new' check (status in ('new', 'contacted', 'archived'))
 );
+
+alter table public.enquiries
+add column if not exists discord_username text
+check (discord_username is null or char_length(discord_username) <= 100);
 
 alter table public.enquiries drop constraint if exists enquiries_email_check;
 alter table public.enquiries add constraint enquiries_email_check check (

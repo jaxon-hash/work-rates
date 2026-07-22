@@ -126,6 +126,7 @@ function createEnquiryCard(enquiry) {
   addMeta(meta, "FINISHED LENGTH", enquiry.runtime);
   addMeta(meta, "BUDGET", enquiry.budget);
   addMeta(meta, "DEADLINE", enquiry.deadline ? new Date(`${enquiry.deadline}T12:00:00`).toLocaleDateString("en-GB", { dateStyle: "medium" }) : "Flexible");
+  addMeta(meta, "DISCORD", enquiry.discord_username);
 
   const details = document.createElement("p");
   details.className = "enquiry-details";
@@ -183,7 +184,7 @@ async function loadEnquiries() {
 
   const { data, error } = await client
     .from("enquiries")
-    .select("id, created_at, name, email, project_type, runtime, budget, deadline, footage_link, details, status")
+    .select("id, created_at, name, email, discord_username, project_type, runtime, budget, deadline, footage_link, details, status")
     .order("created_at", { ascending: false });
 
   if (error) {

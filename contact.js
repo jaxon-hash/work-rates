@@ -41,6 +41,7 @@ form?.addEventListener("submit", async (event) => {
   const enquiry = {
     name: String(data.get("name") || "").trim(),
     email: String(data.get("email") || "").trim().toLowerCase(),
+    discord_username: String(data.get("discordUsername") || "").trim() || null,
     project_type: String(data.get("projectType") || "").trim(),
     runtime: String(data.get("runtime") || "").trim(),
     budget: String(data.get("budget") || "").trim(),
